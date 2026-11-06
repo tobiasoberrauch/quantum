@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "92be791d4e374b926ca416b6dda006fe26f89036e4258cfb6398e3fa4cd7e637",
+ "sources": [
+  "k__rishabhbafnaiiitd__quantum-circuit-compilation-multi-task-sota"
+ ],
+ "status": "PASS",
+ "score": 312417142.6805707,
+ "lambda_eff": 47.01749404496376,
+ "toffoli_count": 15525.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 275,
+ "num_ops": 662277,
+ "verified_shots": 87232,
+ "submission_sha256": "cf6af816043fc1d1d0205b05d9cfc70f381898daa2904623fd27b2f0c7a1f5b0",
+ "seconds": 13.1,
+ "ratio": 10.740766526203245
+}

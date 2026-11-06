@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "a5645031f476173c6d51e0ffb0d4bd865f21359ef61de77d781b61ed7c8f3b01",
+ "sources": [
+  "d__iwanttorungemma9b__vqcc-optimized-submission"
+ ],
+ "status": "PASS",
+ "score": 2309230101.6294045,
+ "lambda_eff": 47.873768372534656,
+ "toffoli_count": 65095.563054105885,
+ "num_qubits": 741,
+ "brot": 10,
+ "batch_size": 11,
+ "num_circuits": 7,
+ "reaction_depth": 70,
+ "num_ops": 2199686,
+ "verified_shots": 254464,
+ "submission_sha256": "7b79a311bfb66d9e9573cb8b12023ad1b852ed07ae7dae75f79037fde98171ea",
+ "seconds": 88.1,
+ "ratio": 1.4531248254332945
+}

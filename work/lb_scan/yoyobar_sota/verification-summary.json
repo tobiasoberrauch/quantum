@@ -1,0 +1,43 @@
+{
+  "dqi_candidate_sha256": "e3928244a1c18b48972349314711427e67e9cc53a023296f57524d2cb67c3adb",
+  "dqi": {
+    "partial-default": {
+      "score": 377372994802.8662,
+      "mean_toffoli": 398138.68788085936,
+      "value_errors": 0,
+      "phase_errors": 0,
+      "repetition_factor": 1.1912604648115832,
+      "verified_shots": 102400
+    },
+    "partial-paired": {
+      "score": 377373179224.98785,
+      "mean_toffoli": 398138.88245117187,
+      "value_errors": 0,
+      "phase_errors": 0,
+      "repetition_factor": 1.1912604648115832,
+      "verified_shots": 102400
+    },
+    "partial-holdout": {
+      "score": 379106320723.59247,
+      "mean_toffoli": 398138.88361328124,
+      "value_errors": 1,
+      "phase_errors": 0,
+      "repetition_factor": 1.1967314991687559,
+      "verified_shots": 102400
+    }
+  },
+  "dqi_verifier_sha256": "f14274bc0943fb9769ddb01131be6063191a15009fe1caf1d4bdd9fd25194e65",
+  "dqi_sdk_sha256": "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e",
+  "chemistry": {
+    "npz_sha256": "aabde751afac561647aa71bfaf2b49512aae944d22ed514d5e952324ef1d6da4",
+    "score": 326800029.87183845,
+    "scope": "one local official verifier run, narrow margin"
+  },
+  "invsqrt": {
+    "sha256": "bce2948ff24e20fe59666d131f7fc4316a905103937272c52fdd39d494b6fe47",
+    "scope": "public baseline, historical full64"
+  },
+  "combined_default_sample_estimate": 23.946685173852565,
+  "combined_one_error_sample_estimate": 23.910133571471064,
+  "scope": "Kaggle score unknown; finite DQI samples; candidate includes approximate rare branches"
+}

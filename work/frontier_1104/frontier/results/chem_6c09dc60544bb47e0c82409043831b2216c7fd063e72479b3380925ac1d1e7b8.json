@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "6c09dc60544bb47e0c82409043831b2216c7fd063e72479b3380925ac1d1e7b8",
+ "sources": [
+  "k__kirilltym__quantum-circuits-exact-gauge-5-word-qrom"
+ ],
+ "status": "PASS",
+ "score": 339728082.3378603,
+ "lambda_eff": 48.55963784649452,
+ "toffoli_count": 16270.0,
+ "num_qubits": 430,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 580822,
+ "verified_shots": 78080,
+ "submission_sha256": "ba9b9c2bf27daa338beefda5959288b5343c225b131a7ed1cd84e3ec1fcc47e3",
+ "seconds": 21.2,
+ "ratio": 9.877310009887221
+}

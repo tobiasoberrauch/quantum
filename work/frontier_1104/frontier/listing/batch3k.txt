@@ -1,0 +1,7 @@
+k ahmedberatozer/quantum-ai-df-thc-group-compression
+k heliosli/quantum-ai-v1
+k kirilltym/quantum-circuits-exact-gauge-5-word-qrom
+k isabe11am00re/qcc-v66s33w-submission
+k isabe11am00re/qcc-v65wqq-submission
+k busyaprime/lb-23-91003-exact-dqi-rewrites-at-892-qubits
+k saddamaditya/narrowed-877q-dqi-and-progressive-r10-chemistry

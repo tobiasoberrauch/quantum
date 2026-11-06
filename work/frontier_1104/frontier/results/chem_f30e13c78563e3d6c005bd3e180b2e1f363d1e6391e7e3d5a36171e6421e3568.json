@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "f30e13c78563e3d6c005bd3e180b2e1f363d1e6391e7e3d5a36171e6421e3568",
+ "sources": [
+  "k__alexchilton__24-59-lb-verified-three-task-portfolio",
+  "k__leotang09__vqcc-t7421-submission"
+ ],
+ "status": "PASS",
+ "score": 311465857.0666053,
+ "lambda_eff": 47.184697373047555,
+ "toffoli_count": 15459.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 196,
+ "num_ops": 607298,
+ "verified_shots": 78080,
+ "submission_sha256": "4c2fe44e0ae4289e50a37428a5770b7ecbde184da0fa2aaed0b844ee15cc94b0",
+ "seconds": 14.7,
+ "ratio": 10.773571202695132
+}

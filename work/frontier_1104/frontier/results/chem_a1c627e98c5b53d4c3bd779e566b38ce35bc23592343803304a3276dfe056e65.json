@@ -1,0 +1,24 @@
+{
+ "component": "chem",
+ "key": "a1c627e98c5b53d4c3bd779e566b38ce35bc23592343803304a3276dfe056e65",
+ "sources": [
+  "d5__yoyobar__qcc-local-sota-20261031",
+  "k5__emmanuelmirekumensah__ax-24-72-portfolio",
+  "k5__qiuqiuh__qcc-refresh-v70z-k5-ay3-bound-dqi",
+  "k5__yoyobar__lb-22-99-invsqrt-101-62-qubits"
+ ],
+ "status": "PASS",
+ "score": 306708201.9559123,
+ "lambda_eff": 47.017489510399955,
+ "toffoli_count": 15277.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 612056,
+ "verified_shots": 78080,
+ "submission_sha256": "2af7d22dc720052e2f1c837b38d0225caf10908410d14a25ab07f44a36b4274d",
+ "seconds": 15.9,
+ "ratio": 10.940690750741277
+}

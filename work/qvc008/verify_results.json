@@ -1,0 +1,38 @@
+{
+  "dqi": {
+    "status": "PASS",
+    "score": 375374152177.88104,
+    "num_qubits": 891,
+    "toffoli_count": 396919.3097558594,
+    "value_errors": 0,
+    "phase_errors": 0,
+    "repetition_factor": 1.1912604648115832,
+    "seconds": 144.7,
+    "ratio": 65.10694314426753
+  },
+  "dfthcsos": {
+    "status": "PASS",
+    "score": 312443243.84047496,
+    "lambda_eff": 47.021422162095355,
+    "toffoli_count": 15525.0,
+    "num_qubits": 428,
+    "error_2": null,
+    "verified_shots": 87232,
+    "seconds": 13.8,
+    "ratio": 10.739869254554327
+  },
+  "invsqrt": {
+    "status": "PASS",
+    "score": 98185.11378958142,
+    "num_qubits": 62,
+    "toffoli_equivalent": 1583.6308675738937,
+    "seconds": 142.9,
+    "ratio": 21.151620174988807
+  },
+  "ratios": {
+    "invsqrt": 21.151620174988807,
+    "dqi": 65.10694314426753,
+    "dfthcsos": 10.739869254554327
+  },
+  "gm": 24.546522789672476
+}

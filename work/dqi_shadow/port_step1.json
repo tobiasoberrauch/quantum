@@ -1,0 +1,33 @@
+{
+  "task": "port_step1_tower_field_mul",
+  "target_site": "ixor_gf2_mul (lines 351/362, dqi_reference_circuit.py)",
+  "site_description": "Highest-frequency non-linear GF(2^12) multiply: controlled variable×variable XOR-mul in EEA sweep_positions",
+  "calls_in_circuit": 31524,
+  "current_cost_per_call_T": 75,
+  "current_total_T": 2364300,
+  "tower_mul_uncontrolled_T": 54,
+  "tower_mul_controlled_T_estimate": [72, 108],
+  "tower_controlled_ancilla_requirement": "2 scratch qubits per Karatsuba term × 18 terms = 36 scratch (or shared pool of ~6)",
+  "verdict": "NOT_BENEFICIAL",
+  "correctness_gate": "NOT_RUN (port not attempted — analysis shows net-negative)",
+  "blocking_factors": [
+    "Control overhead: each Karatsuba AND term (1 CCX) becomes 4C-X (3-6 CCX with ancillas), negating the 54T→75T advantage",
+    "Representation mismatch: division.py uses 24-qubit GF(2^24) registers; reference decoder uses 12-qubit GF(2^12) standard basis",
+    "Missing field module: mul_xor, extension_columns(), tower(), bits() all in absent private module",
+    "mul24_xor105 source not visible: only mul24_xor126 (126T variant) is in division.py; the 105T schedule is in the missing field module",
+    "Basis conversion matrices unknown: need kickmix primitive element (α=x, poly x^12+x^6+x^4+x+1) ↔ tower structure mapping"
+  ],
+  "key_insight": "Tower-field advantage for GF(2^12) is in INVERSE (315T→~100-150T) and DIVISION (378T→~200T), NOT multiplication (75T→72-108T). gf2_phase_by_product is already 0T (CZ-only).",
+  "recommended_next_target": "init_gf2_inverse_with_scaffold (315T × 4095 calls = 1,289,925T = 22.5% of static T)",
+  "measured_kickmix_costs": {
+    "ixor_gf2_mul_uncontrolled": 63,
+    "ixor_gf2_mul_controlled": 75,
+    "init_gf2_inverse_with_scaffold": 315,
+    "init_gf2_div_with_scaffold": 378,
+    "gf2_phase_by_product": 0,
+    "gf2_imul_constant": 0,
+    "gf2_iadd": 0
+  },
+  "total_nonlinear_T_in_circuit": 3989889,
+  "pct_of_static_T": 69.7
+}

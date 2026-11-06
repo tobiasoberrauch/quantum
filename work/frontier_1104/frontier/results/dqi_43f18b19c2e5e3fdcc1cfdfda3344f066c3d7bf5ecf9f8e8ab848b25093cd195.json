@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "43f18b19c2e5e3fdcc1cfdfda3344f066c3d7bf5ecf9f8e8ab848b25093cd195",
+ "sources": [
+  "d__iwanttorungemma9b__vqcc-optimized-submission"
+ ],
+ "status": "PASS",
+ "score": 17673728080221.07,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 4179839.859550781,
+ "max_toffoli_count": 4179942,
+ "reaction_depth": 124285,
+ "num_ops": 84686099,
+ "num_qubits": 1884,
+ "num_bits": 49154,
+ "circuit_sha256": "43f18b19c2e5e3fdcc1cfdfda3344f066c3d7bf5ecf9f8e8ab848b25093cd195",
+ "seconds": 171.6,
+ "ratio": 1.3828131491410403
+}

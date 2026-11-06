@@ -1,0 +1,8 @@
+[k11] padding satisfied planes [0, 1, 2, 3, 4]
+[k11] start products 188 missing 1 pairs 187 cands 561
+[k11] plan best (188, 1) pairs 187 filled [75, 75, 74, 75, 75] need [75, 75, 75, 75, 75]
+[k11] shipped LSB products kept: 10
+[k11] total products 198
+[k11] section ops 166..38309 of 40073; nonword changed []; D rev==fwd True
+[k11] source wires 91 dim 92
+[k11] emitted T=274 Q=126

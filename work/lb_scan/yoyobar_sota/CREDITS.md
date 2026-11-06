@@ -1,0 +1,7 @@
+# Sources and credits
+
+- Invsqrt: Ehan Mallick's 62Q circuit builds on yoyobar and GPT-6 Astra's 62Q work and public contributions from mrmeows / team selenium, busyaprime, Ahmed Berat Özer and manwithacat. https://www.kaggle.com/code/ehanmallick/invsqrt-20-65-two-3-to-2-and-merges-on-y6225
+- DQI: an intermediate composition on SomeJoint's public q26 892Q decoder and manwithacat's HW-08 edits, with selected local tensor, lead-product, rare-case and product-caching work. Product caching builds on Busya PRIME's public work. This candidate retains approximate rare branches; see the Notebook for verification scope. https://www.kaggle.com/code/somejoint/quantum-circuits-23-85-local-gm-892-qubit-dqi and https://www.kaggle.com/code/manwithacat/vqcc-hedge-wizardry-notebook
+- Chemistry: Heliosli weights on Lera's (9,143,40) factorization and loaders by Lera and Dmitrii Gluzdov, with contributions across the public lineage. https://www.kaggle.com/code/heliosli/the-dataset-is-public-now-enjoy and https://www.kaggle.com/code/marculera/df-thc-10x-compact-groups-from-the-hamiltonian
+- Retain all applicable upstream copyright/license/NOTICE terms. DQI's earlier decoder lineage includes https://github.com/jday96314/QuantumAI, for which the inherited notice reports no explicit source license. This release does not assert that downstream labels relicense every ancestor.
+- Organizers: Google Quantum AI / Qualtran for task definitions and verifiers.

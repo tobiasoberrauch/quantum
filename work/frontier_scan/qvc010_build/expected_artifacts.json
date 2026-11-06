@@ -1,0 +1,74 @@
+{
+  "dfthcsos/angle_k_0.kmb": {
+    "bytes": 390615,
+    "sha256": "d3aab7479fe3b8510e3af3797a14ec8d9bfa226d7aa7717ae4e93f496d2d9538"
+  },
+  "dfthcsos/angle_k_1.kmb": {
+    "bytes": 381353,
+    "sha256": "4595e5dcc982295db2520c8497219e1768757edf3aa9e706fa44b1716f996ed2"
+  },
+  "dfthcsos/angle_k_10.kmb": {
+    "bytes": 340218,
+    "sha256": "f28f2ead2b7eb3d45aadf4e0bb9f9399c7d8f016247d7020ae39dbd9c062cace"
+  },
+  "dfthcsos/angle_k_11.kmb": {
+    "bytes": 337990,
+    "sha256": "7b9094ddc215c6c7db223fe319e6d2a6f67c1669f412e4d3281c280723df5b81"
+  },
+  "dfthcsos/angle_k_12.kmb": {
+    "bytes": 337720,
+    "sha256": "d49dfbfdb8cff3c3d680e4ef65a3d1a01db7a2fc666f49a522d7f58f50305e78"
+  },
+  "dfthcsos/angle_k_13.kmb": {
+    "bytes": 336880,
+    "sha256": "cb7e48a7029323a6ec11c0f6dede5f5e0443f67da92e0e6554ff9120b8279efd"
+  },
+  "dfthcsos/angle_k_14.kmb": {
+    "bytes": 336049,
+    "sha256": "07fcdcb75d3a9e7f2573e057376ec20b7a56bf9a53fe7d7f00fb351614c2003f"
+  },
+  "dfthcsos/angle_k_2.kmb": {
+    "bytes": 385773,
+    "sha256": "77dec28c5ebffe723fb58717a31c017d66c44cbec220bc3cc5a15a2fff051aa3"
+  },
+  "dfthcsos/angle_k_3.kmb": {
+    "bytes": 383561,
+    "sha256": "8e137a014a1325450eaf9ec15bc824475b757b3a05bbc542eed9cccfd6b5ec53"
+  },
+  "dfthcsos/angle_k_4.kmb": {
+    "bytes": 337382,
+    "sha256": "d9f2a0d739142a1d20789352c617cccc702a8f0b4b17f91971e4e4ef3e6f6c3f"
+  },
+  "dfthcsos/angle_k_5.kmb": {
+    "bytes": 338559,
+    "sha256": "bd0886bb6c3d5c04f5e1fd29dbd2562d1c7e5b1a7406bc1abde6819093a0880e"
+  },
+  "dfthcsos/angle_k_6.kmb": {
+    "bytes": 338608,
+    "sha256": "12c0c6f92d708ff7d852f2c6f36a40ecf4369249fa1f0ab4527b08e0152e7558"
+  },
+  "dfthcsos/angle_k_7.kmb": {
+    "bytes": 335389,
+    "sha256": "93dc9742392a0dd6e754aebbbea1519014292a56b6908dfce5ae417f2cde73d6"
+  },
+  "dfthcsos/angle_k_8.kmb": {
+    "bytes": 337289,
+    "sha256": "d43bd96b88e6ef38c7ea9e697856646af4259889b75d1bc67a94a1768670b5a6"
+  },
+  "dfthcsos/angle_k_9.kmb": {
+    "bytes": 342755,
+    "sha256": "a5960a572c39a3996b3919eb8bc18066b8aa78d3fc83bc7435d7e5550de3a2a6"
+  },
+  "dfthcsos/submission.npz": {
+    "bytes": 1851004,
+    "sha256": "1025cce6767c82dc5804b77e95e5066abfbf783832aa5879ca47b40e7bdfd244"
+  },
+  "dqi.kmb": {
+    "bytes": 529240394,
+    "sha256": "b4bbf86d504e2452c8185ec882e0cf7a8ba9401a4bfa69f71f18b4fc6d9c599c"
+  },
+  "invsqrt.kmb": {
+    "bytes": 466095,
+    "sha256": "c17971aff984830dc68f4f1459cdc549fd2637dc656bc7d3d70aeabc7c8eb775"
+  }
+}

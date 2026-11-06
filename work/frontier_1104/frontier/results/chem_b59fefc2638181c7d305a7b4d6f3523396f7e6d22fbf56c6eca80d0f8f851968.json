@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "b59fefc2638181c7d305a7b4d6f3523396f7e6d22fbf56c6eca80d0f8f851968",
+ "sources": [
+  "d__ahoirg__qcc-reproducible-circuit-assets"
+ ],
+ "status": "PASS",
+ "score": 331076721.7501548,
+ "lambda_eff": 47.05253907584573,
+ "toffoli_count": 16440.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 240,
+ "num_ops": 688585,
+ "verified_shots": 87232,
+ "submission_sha256": "1a1f07cc90edc19c5b89c44eb68bf7ad7fbf970ef4f487c20de39662c2aff1f8",
+ "seconds": 25.7,
+ "ratio": 10.135413841773575
+}

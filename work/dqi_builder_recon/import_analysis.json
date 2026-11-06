@@ -1,0 +1,2245 @@
+{
+ "sources_dir": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/dqi_sources",
+ "delta_file_count": 26,
+ "delta_files": [
+  "audit.py",
+  "blocked_three_noscratch.py",
+  "companion.py",
+  "conversion.py",
+  "convert.py",
+  "direct_converter.py",
+  "direct_forney.py",
+  "division.py",
+  "frozen_chart.py",
+  "inverse20.py",
+  "inverse_character_width.py",
+  "local_norm.py",
+  "lowwidth.py",
+  "narrow_gauge.py",
+  "no_clean_source12.py",
+  "nonzero_consume16.py",
+  "norm_deferred_flag_return.py",
+  "overlap_prefix.py",
+  "packed_chart.py",
+  "paired_coefficient.py",
+  "retired_top_block.py",
+  "reverse_fusion.py",
+  "scalar_compact_v3.py",
+  "shrinking.py",
+  "synthesis_noflag.py",
+  "width_liveness.py"
+ ],
+ "imports_by_file": {
+  "audit.py": [
+   [
+    "import",
+    "argparse",
+    [
+     "argparse"
+    ]
+   ],
+   [
+    "import",
+    "json",
+    [
+     "json"
+    ]
+   ],
+   [
+    "import",
+    "random",
+    [
+     "random"
+    ]
+   ],
+   [
+    "import",
+    "time",
+    [
+     "time"
+    ]
+   ],
+   [
+    "from",
+    "collections",
+    [
+     "Counter"
+    ]
+   ]
+  ],
+  "blocked_three_noscratch.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "ported",
+    [
+     "p"
+    ]
+   ],
+   [
+    "from",
+    "rebind_graph",
+    [
+     "private_rebind"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.phase36",
+    [
+     "phase_classical_parity"
+    ]
+   ],
+   [
+    "import",
+    "local_norm",
+    [
+     "local_norm"
+    ]
+   ]
+  ],
+  "companion.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "decode_q8q9",
+    [
+     "base"
+    ]
+   ],
+   [
+    "import",
+    "scalar_projection_multi",
+    [
+     "walk"
+    ]
+   ],
+   [
+    "import",
+    "exact_subs",
+    [
+     "xs"
+    ]
+   ],
+   [
+    "import",
+    "frozen_chart",
+    [
+     "frozen"
+    ]
+   ],
+   [
+    "from",
+    "replay_erase",
+    [
+     "scalar_erase_second24"
+    ]
+   ]
+  ],
+  "conversion.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "types",
+    [
+     "SimpleNamespace"
+    ]
+   ],
+   [
+    "from",
+    "contextlib",
+    [
+     "contextmanager"
+    ]
+   ],
+   [
+    "from",
+    "exp.convert_short_hankel",
+    [
+     "base"
+    ]
+   ],
+   [
+    "from",
+    "types",
+    [
+     "FunctionType"
+    ]
+   ],
+   [
+    "from",
+    "exp.fold_cached_norm.phase34",
+    [
+     "phase_inverse34"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.common",
+    [
+     "ar"
+    ]
+   ]
+  ],
+  "convert.py": [
+   [
+    "from",
+    "contextlib",
+    [
+     "contextmanager"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "kernels",
+    [
+     "ar",
+     "cx",
+     "convolution_xor",
+     "hankel"
+    ]
+   ],
+   [
+    "from",
+    "lowwidth",
+    [
+     "phase_inverse36"
+    ]
+   ]
+  ],
+  "direct_converter.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "direct_kernels",
+    [
+     "dk"
+    ]
+   ],
+   [
+    "import",
+    "measured_heads",
+    [
+     "mh"
+    ]
+   ],
+   [
+    "from",
+    "converter",
+    [
+     "clone"
+    ]
+   ],
+   [
+    "from",
+    "types",
+    [
+     "SimpleNamespace"
+    ]
+   ],
+   [
+    "from",
+    "final_decoder",
+    [
+     "stable"
+    ]
+   ]
+  ],
+  "direct_forney.py": [
+   [
+    "from",
+    "functools",
+    [
+     "lru_cache"
+    ]
+   ],
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.common",
+    [
+     "ar",
+     "gf",
+     "mul",
+     "inv",
+     "power",
+     "scale",
+     "zero_hold",
+     "zero_free"
+    ]
+   ],
+   [
+    "from",
+    "exp.jet24.kernel",
+    [
+     "phase_inverse12_quantum64"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.extract",
+    [
+     "constants"
+    ]
+   ]
+  ],
+  "division.py": [
+   [
+    "from",
+    "field",
+    [
+     "*"
+    ]
+   ],
+   [
+    "import",
+    "field",
+    [
+     "ar"
+    ]
+   ],
+   [
+    "import",
+    "field",
+    [
+     "ar"
+    ]
+   ],
+   [
+    "import",
+    "field",
+    [
+     "ar"
+    ]
+   ]
+  ],
+  "frozen_chart.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "functools",
+    [
+     "lru_cache"
+    ]
+   ],
+   [
+    "from",
+    "types",
+    [
+     "FunctionType"
+    ]
+   ],
+   [
+    "from",
+    "final_decoder",
+    [
+     "ref"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.common",
+    [
+     "*"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.schedules",
+    [
+     "inverse_stream_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.phase36",
+    [
+     "phase_inverse36_pivot"
+    ]
+   ],
+   [
+    "from",
+    "final_decoder.conversion",
+    [
+     "clear_flag"
+    ]
+   ]
+  ],
+  "inverse20.py": [
+   [
+    "from",
+    "contextlib",
+    [
+     "contextmanager"
+    ]
+   ],
+   [
+    "import",
+    "json",
+    [
+     "json"
+    ]
+   ],
+   [
+    "from",
+    "baseline",
+    [
+     "*"
+    ]
+   ],
+   [
+    "from",
+    "baseline",
+    [
+     "*"
+    ]
+   ]
+  ],
+  "inverse_character_width.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "types",
+    [
+     "CodeType",
+     "FunctionType",
+     "ModuleType",
+     "SimpleNamespace"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "exact_subs",
+    [
+     "xs"
+    ]
+   ],
+   [
+    "from",
+    "rebind_graph",
+    [
+     "private_rebind"
+    ]
+   ]
+  ],
+  "local_norm.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "contextlib",
+    [
+     "contextmanager"
+    ]
+   ],
+   [
+    "import",
+    "inspect",
+    [
+     "inspect"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "ported_exact_cycle",
+    [
+     "baseline"
+    ]
+   ],
+   [
+    "import",
+    "exact_subs",
+    [
+     "xs"
+    ]
+   ],
+   [
+    "import",
+    "norm_cache",
+    [
+     "nc"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.schedules",
+    [
+     "norm_xor_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.kernels",
+    [
+     "mul_xor_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "rebind_graph",
+    [
+     "private_rebind"
+    ]
+   ]
+  ],
+  "lowwidth.py": [
+   [
+    "import",
+    "field",
+    [
+     "ar"
+    ]
+   ],
+   [
+    "from",
+    "field",
+    [
+     "*"
+    ]
+   ],
+   [
+    "from",
+    "division",
+    [
+     "mul24_xor",
+     "phase_product24",
+     "multiply_forward"
+    ]
+   ]
+  ],
+  "narrow_gauge.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "column_hole",
+    [
+     "paired_source"
+    ]
+   ],
+   [
+    "from",
+    "lowclean",
+    [
+     "zero_toggle",
+     "chart",
+     "chart_data"
+    ]
+   ],
+   [
+    "from",
+    "streamed",
+    [
+     "inverse6_unitary29"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.common",
+    [
+     "ar",
+     "K"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.schedules",
+    [
+     "norm_xor_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "exp.inverse19_joint.kernel",
+    [
+     "inverse_initialized"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.phase36",
+    [
+     "phase_inverse36_pivot"
+    ]
+   ],
+   [
+    "from",
+    "exp.arithmetic.division",
+    [
+     "phase_zero",
+     "phase_product24",
+     "zero_flag"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.schedules",
+    [
+     "multiply_forward99"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.schedules",
+    [
+     "inverse_stream_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "retained_core_safe27",
+    [
+     "linear_inverse_character"
+    ]
+   ],
+   [
+    "from",
+    "core90",
+    [
+     "affine_inverse_g_character"
+    ]
+   ]
+  ],
+  "no_clean_source12.py": [
+   [
+    "from",
+    "contextlib",
+    [
+     "contextmanager"
+    ]
+   ],
+   [
+    "from",
+    "functools",
+    [
+     "lru_cache"
+    ]
+   ],
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "virtual_norm",
+    [
+     "ar",
+     "encoded_norm6",
+     "regular_matrix12",
+     "mul_xor_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "structured_log65",
+    [
+     "logarithm"
+    ]
+   ],
+   [
+    "from",
+    "lowclean",
+    [
+     "mcx_dirty",
+     "controlled_linear"
+    ]
+   ],
+   [
+    "from",
+    "constant_scale",
+    [
+     "factor"
+    ]
+   ]
+  ],
+  "nonzero_consume16.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "types",
+    [
+     "FunctionType",
+     "SimpleNamespace",
+     "ModuleType",
+     "CodeType"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "json",
+    [
+     "json"
+    ]
+   ],
+   [
+    "import",
+    "decode_combo",
+    [
+     "combo"
+    ]
+   ],
+   [
+    "import",
+    "frozen_chart",
+    [
+     "frozen_chart"
+    ]
+   ],
+   [
+    "import",
+    "retained_core_safe27",
+    [
+     "retained"
+    ]
+   ],
+   [
+    "import",
+    "norm_cache",
+    [
+     "norm_cache"
+    ]
+   ],
+   [
+    "from",
+    "exp.jet24",
+    [
+     "jet"
+    ]
+   ],
+   [
+    "from",
+    "exp.inverse_search",
+    [
+     "ref"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch",
+    [
+     "schedules"
+    ]
+   ],
+   [
+    "from",
+    "exp.arithmetic",
+    [
+     "ar"
+    ]
+   ]
+  ],
+  "norm_deferred_flag_return.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "padded_fused_return",
+    [
+     "previous"
+    ]
+   ],
+   [
+    "from",
+    "exp.arithmetic.division",
+    [
+     "zero_flag"
+    ]
+   ]
+  ],
+  "overlap_prefix.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "column_double_tail",
+    [
+     "old",
+     "combine",
+     "cx",
+     "mul",
+     "inv",
+     "scalepair",
+     "K",
+     "phase_zero",
+     "mul24_xor99",
+     "divide_pair_and_invert",
+     "second_return"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.common",
+    [
+     "ar"
+    ]
+   ],
+   [
+    "from",
+    "exp.arithmetic.division",
+    [
+     "zero_flag"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.schedules",
+    [
+     "multiply_forward99",
+     "divide_lowwidth369"
+    ]
+   ]
+  ],
+  "packed_chart.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "lowclean_norm5",
+    [
+     "permutation3",
+     "ar"
+    ]
+   ],
+   [
+    "import",
+    "logscale7",
+    [
+     "logscale7"
+    ]
+   ]
+  ],
+  "paired_coefficient.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "functools",
+    [
+     "lru_cache"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "schur_scalar",
+    [
+     "inverse_apply",
+     "scale",
+     "ar"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.common",
+    [
+     "combine",
+     "cx",
+     "linear_words",
+     "divmodp"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.kernels",
+    [
+     "mul24_xor99"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.schedules",
+    [
+     "divide_zero_bridge414",
+     "multiply_zero_forward99"
+    ]
+   ],
+   [
+    "from",
+    "exp.arithmetic.lowwidth",
+    [
+     "classical_transpose"
+    ]
+   ],
+   [
+    "from",
+    "jet_character",
+    [
+     "close_canonical"
+    ]
+   ]
+  ],
+  "retired_top_block.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "overlap_prefix",
+    [
+     "*"
+    ]
+   ],
+   [
+    "from",
+    "gauge_return",
+    [
+     "close_inverse_character"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.schedules",
+    [
+     "classical_transpose"
+    ]
+   ],
+   [
+    "from",
+    "block_phase",
+    [
+     "close_inverse_debts"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.schedules",
+    [
+     "norm_xor_noscratch",
+     "inverse_stream_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.phase36",
+    [
+     "phase_inverse36_pivot"
+    ]
+   ],
+   [
+    "from",
+    "exp.arithmetic.division",
+    [
+     "phase_product24"
+    ]
+   ]
+  ],
+  "reverse_fusion.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "types",
+    [
+     "FunctionType"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "scalar_compact_v3",
+    [
+     "scalar"
+    ]
+   ],
+   [
+    "import",
+    "reverse_root_lifetime",
+    [
+     "reverse_root_lifetime"
+    ]
+   ]
+  ],
+  "scalar_compact_v3.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "contextlib",
+    [
+     "contextmanager"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "ported",
+    [
+     "p"
+    ]
+   ],
+   [
+    "from",
+    "rebind_graph",
+    [
+     "private_rebind"
+    ]
+   ],
+   [
+    "import",
+    "exact_subs",
+    [
+     "xs"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.schedules",
+    [
+     "norm_xor_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "exp.noscratch.kernels",
+    [
+     "mul_xor_noscratch"
+    ]
+   ],
+   [
+    "from",
+    "exp.arithmetic.lowwidth",
+    [
+     "classical_transpose"
+    ]
+   ]
+  ],
+  "shrinking.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "from",
+    "functools",
+    [
+     "lru_cache"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "homogeneous_pivot",
+    [
+     "first"
+    ]
+   ],
+   [
+    "import",
+    "homogeneous_update",
+    [
+     "h"
+    ]
+   ],
+   [
+    "from",
+    "pivot_bridge",
+    [
+     "divide_pair",
+     "rotated_affine_conjugate",
+     "divide_zero_bridge414"
+    ]
+   ],
+   [
+    "from",
+    "pivot_rotate",
+    [
+     "projective_scale"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder.common",
+    [
+     "linear_words",
+     "mul",
+     "inv",
+     "emul",
+     "einv",
+     "eev",
+     "pmul"
+    ]
+   ]
+  ],
+  "synthesis_noflag.py": [
+   [
+    "from",
+    "pathlib",
+    [
+     "Path"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "from",
+    "common",
+    [
+     "*"
+    ]
+   ],
+   [
+    "from",
+    "extract",
+    [
+     "constants"
+    ]
+   ],
+   [
+    "from",
+    "exp.decoder",
+    [
+     "base"
+    ]
+   ],
+   [
+    "from",
+    "exp.partial_gauge",
+    [
+     "pg"
+    ]
+   ],
+   [
+    "from",
+    "exp.partial_gauge.scalar",
+    [
+     "divide117"
+    ]
+   ],
+   [
+    "from",
+    "exp.partial_gauge.tail",
+    [
+     "divide_safe138",
+     "multiply_safe165",
+     "controlled_linear_xor"
+    ]
+   ],
+   [
+    "from",
+    "exp.mul99.schedules",
+    [
+     "divide_zero_bridge414"
+    ]
+   ],
+   [
+    "import",
+    "division",
+    [
+     "dv"
+    ]
+   ]
+  ],
+  "width_liveness.py": [
+   [
+    "from",
+    "__future__",
+    [
+     "annotations"
+    ]
+   ],
+   [
+    "import",
+    "argparse",
+    [
+     "argparse"
+    ]
+   ],
+   [
+    "import",
+    "json",
+    [
+     "json"
+    ]
+   ],
+   [
+    "import",
+    "mmap",
+    [
+     "mmap"
+    ]
+   ],
+   [
+    "import",
+    "os",
+    [
+     "os"
+    ]
+   ],
+   [
+    "import",
+    "struct",
+    [
+     "struct"
+    ]
+   ],
+   [
+    "import",
+    "sys",
+    [
+     "sys"
+    ]
+   ],
+   [
+    "import",
+    "time",
+    [
+     "time"
+    ]
+   ],
+   [
+    "import",
+    "numpy",
+    [
+     "np"
+    ]
+   ],
+   [
+    "import",
+    "hashlib",
+    [
+     "hashlib"
+    ]
+   ]
+  ]
+ },
+ "missing_modules": {
+  "baseline": {
+   "files": [
+    "inverse20.py"
+   ],
+   "from_imports": [
+    "*"
+   ],
+   "call_sites": []
+  },
+  "block_phase": {
+   "files": [
+    "retired_top_block.py"
+   ],
+   "from_imports": [
+    "close_inverse_debts"
+   ],
+   "call_sites": []
+  },
+  "column_double_tail": {
+   "files": [
+    "overlap_prefix.py"
+   ],
+   "from_imports": [
+    "K",
+    "combine",
+    "cx",
+    "divide_pair_and_invert",
+    "inv",
+    "mul",
+    "mul24_xor99",
+    "old",
+    "phase_zero",
+    "scalepair",
+    "second_return"
+   ],
+   "call_sites": []
+  },
+  "column_hole": {
+   "files": [
+    "narrow_gauge.py"
+   ],
+   "from_imports": [
+    "paired_source"
+   ],
+   "call_sites": []
+  },
+  "common": {
+   "files": [
+    "synthesis_noflag.py"
+   ],
+   "from_imports": [
+    "*"
+   ],
+   "call_sites": []
+  },
+  "constant_scale": {
+   "files": [
+    "no_clean_source12.py"
+   ],
+   "from_imports": [
+    "factor"
+   ],
+   "call_sites": []
+  },
+  "converter": {
+   "files": [
+    "direct_converter.py"
+   ],
+   "from_imports": [
+    "clone"
+   ],
+   "call_sites": []
+  },
+  "core90": {
+   "files": [
+    "narrow_gauge.py"
+   ],
+   "from_imports": [
+    "affine_inverse_g_character"
+   ],
+   "call_sites": []
+  },
+  "decode_combo": {
+   "files": [
+    "nonzero_consume16.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "decode",
+    "decode.__globals__",
+    "xsub",
+    "xsub.clone",
+    "xsub.private_rebind"
+   ]
+  },
+  "decode_q8q9": {
+   "files": [
+    "companion.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "decode"
+   ]
+  },
+  "direct_kernels": {
+   "files": [
+    "direct_converter.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "selected",
+    "selected_dot",
+    "shifted_conv",
+    "shifted_product"
+   ]
+  },
+  "exact_subs": {
+   "files": [
+    "companion.py",
+    "inverse_character_width.py",
+    "local_norm.py",
+    "scalar_compact_v3.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "SCALES",
+    "UNSCALES",
+    "classical_equal",
+    "clone",
+    "expose_pair",
+    "inverse6_joint18_12extra",
+    "linear_inplace",
+    "phase_inverse12_virtual_nonzero",
+    "phase_inverse12_virtual_nonzero.__globals__",
+    "phase_inverse6_quad4",
+    "private_rebind"
+   ]
+  },
+  "exp.arithmetic": {
+   "files": [
+    "nonzero_consume16.py"
+   ],
+   "from_imports": [
+    "ar"
+   ],
+   "call_sites": [
+    "linear_inplace",
+    "linear_xor"
+   ]
+  },
+  "exp.arithmetic.division": {
+   "files": [
+    "narrow_gauge.py",
+    "norm_deferred_flag_return.py",
+    "overlap_prefix.py",
+    "retired_top_block.py"
+   ],
+   "from_imports": [
+    "phase_product24",
+    "phase_zero",
+    "zero_flag"
+   ],
+   "call_sites": []
+  },
+  "exp.arithmetic.lowwidth": {
+   "files": [
+    "paired_coefficient.py",
+    "scalar_compact_v3.py"
+   ],
+   "from_imports": [
+    "classical_transpose"
+   ],
+   "call_sites": []
+  },
+  "exp.convert_short_hankel": {
+   "files": [
+    "conversion.py"
+   ],
+   "from_imports": [
+    "base"
+   ],
+   "call_sites": [
+    "_private",
+    "_private.q_inverse",
+    "_private.q_inverse.__wrapped__",
+    "_short_scope"
+   ]
+  },
+  "exp.decoder": {
+   "files": [
+    "synthesis_noflag.py"
+   ],
+   "from_imports": [
+    "base"
+   ],
+   "call_sites": [
+    "ck",
+    "embedding_matrix",
+    "evaluation_coefficients",
+    "expose_eval",
+    "quotient_terms",
+    "vandermonde",
+    "zero_free",
+    "zero_hold"
+   ]
+  },
+  "exp.decoder.common": {
+   "files": [
+    "conversion.py",
+    "direct_forney.py",
+    "frozen_chart.py",
+    "narrow_gauge.py",
+    "overlap_prefix.py",
+    "paired_coefficient.py",
+    "shrinking.py"
+   ],
+   "from_imports": [
+    "*",
+    "K",
+    "ar",
+    "combine",
+    "cx",
+    "divmodp",
+    "eev",
+    "einv",
+    "emul",
+    "gf",
+    "inv",
+    "linear_words",
+    "mul",
+    "pmul",
+    "power",
+    "scale",
+    "zero_free",
+    "zero_hold"
+   ],
+   "call_sites": [
+    "_erase_norm",
+    "_phase_norm",
+    "bits",
+    "extension_columns",
+    "field",
+    "inverse_columns",
+    "linear_inplace",
+    "linear_xor",
+    "mul_xor",
+    "mul_xor0",
+    "phase_linear",
+    "phase_product",
+    "primitive_element",
+    "square_columns",
+    "tensor",
+    "tower"
+   ]
+  },
+  "exp.decoder.extract": {
+   "files": [
+    "direct_forney.py"
+   ],
+   "from_imports": [
+    "constants"
+   ],
+   "call_sites": []
+  },
+  "exp.fold_cached_norm.phase34": {
+   "files": [
+    "conversion.py"
+   ],
+   "from_imports": [
+    "phase_inverse34"
+   ],
+   "call_sites": []
+  },
+  "exp.inverse19_joint.kernel": {
+   "files": [
+    "narrow_gauge.py"
+   ],
+   "from_imports": [
+    "inverse_initialized"
+   ],
+   "call_sites": []
+  },
+  "exp.inverse_search": {
+   "files": [
+    "nonzero_consume16.py"
+   ],
+   "from_imports": [
+    "ref"
+   ],
+   "call_sites": [
+    "expose_pair",
+    "inverse3_virtual",
+    "norm_forms"
+   ]
+  },
+  "exp.jet24": {
+   "files": [
+    "nonzero_consume16.py"
+   ],
+   "from_imports": [
+    "jet"
+   ],
+   "call_sites": [
+    "RAW",
+    "TO6"
+   ]
+  },
+  "exp.jet24.kernel": {
+   "files": [
+    "direct_forney.py"
+   ],
+   "from_imports": [
+    "phase_inverse12_quantum64"
+   ],
+   "call_sites": []
+  },
+  "exp.mul99.kernels": {
+   "files": [
+    "paired_coefficient.py"
+   ],
+   "from_imports": [
+    "mul24_xor99"
+   ],
+   "call_sites": []
+  },
+  "exp.mul99.phase36": {
+   "files": [
+    "blocked_three_noscratch.py",
+    "frozen_chart.py",
+    "narrow_gauge.py",
+    "retired_top_block.py"
+   ],
+   "from_imports": [
+    "phase_classical_parity",
+    "phase_inverse36_pivot"
+   ],
+   "call_sites": []
+  },
+  "exp.mul99.schedules": {
+   "files": [
+    "narrow_gauge.py",
+    "overlap_prefix.py",
+    "paired_coefficient.py",
+    "synthesis_noflag.py"
+   ],
+   "from_imports": [
+    "divide_lowwidth369",
+    "divide_zero_bridge414",
+    "multiply_forward99",
+    "multiply_zero_forward99"
+   ],
+   "call_sites": []
+  },
+  "exp.noscratch": {
+   "files": [
+    "nonzero_consume16.py"
+   ],
+   "from_imports": [
+    "schedules"
+   ],
+   "call_sites": [
+    "inverse_stream_noscratch",
+    "inverse_stream_noscratch.__globals__"
+   ]
+  },
+  "exp.noscratch.kernels": {
+   "files": [
+    "local_norm.py",
+    "scalar_compact_v3.py"
+   ],
+   "from_imports": [
+    "mul_xor_noscratch"
+   ],
+   "call_sites": []
+  },
+  "exp.noscratch.schedules": {
+   "files": [
+    "frozen_chart.py",
+    "local_norm.py",
+    "narrow_gauge.py",
+    "retired_top_block.py",
+    "scalar_compact_v3.py"
+   ],
+   "from_imports": [
+    "classical_transpose",
+    "inverse_stream_noscratch",
+    "norm_xor_noscratch"
+   ],
+   "call_sites": []
+  },
+  "exp.partial_gauge": {
+   "files": [
+    "synthesis_noflag.py"
+   ],
+   "from_imports": [
+    "pg"
+   ],
+   "call_sites": [
+    "boundary_forward",
+    "boundary_reverse",
+    "forward",
+    "reverse_compact",
+    "zero_compact",
+    "zero_compact_free"
+   ]
+  },
+  "exp.partial_gauge.scalar": {
+   "files": [
+    "synthesis_noflag.py"
+   ],
+   "from_imports": [
+    "divide117"
+   ],
+   "call_sites": []
+  },
+  "exp.partial_gauge.tail": {
+   "files": [
+    "synthesis_noflag.py"
+   ],
+   "from_imports": [
+    "controlled_linear_xor",
+    "divide_safe138",
+    "multiply_safe165"
+   ],
+   "call_sites": []
+  },
+  "extract": {
+   "files": [
+    "synthesis_noflag.py"
+   ],
+   "from_imports": [
+    "constants"
+   ],
+   "call_sites": []
+  },
+  "field": {
+   "files": [
+    "division.py",
+    "lowwidth.py"
+   ],
+   "from_imports": [
+    "*"
+   ],
+   "call_sites": [
+    "_erase_inverse_with_norm",
+    "_erase_norm",
+    "_inverse_keep_norm",
+    "_norm_xor",
+    "_phase_norm"
+   ]
+  },
+  "final_decoder": {
+   "files": [
+    "direct_converter.py",
+    "frozen_chart.py"
+   ],
+   "from_imports": [
+    "ref",
+    "stable"
+   ],
+   "call_sites": [
+    "_bez_monic",
+    "base",
+    "base._short_scope",
+    "external_chain_step",
+    "external_scalar_step",
+    "external_square24",
+    "groups",
+    "guarded",
+    "guarded.fresh_zero_flag",
+    "guarded.zero_toggle",
+    "ks"
+   ]
+  },
+  "final_decoder.conversion": {
+   "files": [
+    "frozen_chart.py"
+   ],
+   "from_imports": [
+    "clear_flag"
+   ],
+   "call_sites": []
+  },
+  "gauge_return": {
+   "files": [
+    "retired_top_block.py"
+   ],
+   "from_imports": [
+    "close_inverse_character"
+   ],
+   "call_sites": []
+  },
+  "homogeneous_pivot": {
+   "files": [
+    "shrinking.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "k_columns",
+    "view"
+   ]
+  },
+  "homogeneous_update": {
+   "files": [
+    "shrinking.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "ar",
+    "closed_inverse",
+    "gamma_xor",
+    "inverse_apply",
+    "mul24_xor99_zero",
+    "scale",
+    "source_product"
+   ]
+  },
+  "jet_character": {
+   "files": [
+    "paired_coefficient.py"
+   ],
+   "from_imports": [
+    "close_canonical"
+   ],
+   "call_sites": []
+  },
+  "kernels": {
+   "files": [
+    "convert.py"
+   ],
+   "from_imports": [
+    "ar",
+    "convolution_xor",
+    "cx",
+    "hankel"
+   ],
+   "call_sites": [
+    "erase_product",
+    "field",
+    "inverse",
+    "linear_inplace",
+    "mul_xor"
+   ]
+  },
+  "logscale7": {
+   "files": [
+    "packed_chart.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "COMPILED",
+    "GATES",
+    "scale"
+   ]
+  },
+  "lowclean": {
+   "files": [
+    "narrow_gauge.py",
+    "no_clean_source12.py"
+   ],
+   "from_imports": [
+    "chart",
+    "chart_data",
+    "controlled_linear",
+    "mcx_dirty",
+    "zero_toggle"
+   ],
+   "call_sites": []
+  },
+  "lowclean_norm5": {
+   "files": [
+    "packed_chart.py"
+   ],
+   "from_imports": [
+    "ar",
+    "permutation3"
+   ],
+   "call_sites": [
+    "apply",
+    "field",
+    "linear_inplace",
+    "tower"
+   ]
+  },
+  "measured_heads": {
+   "files": [
+    "direct_converter.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "make_converter"
+   ]
+  },
+  "norm_cache": {
+   "files": [
+    "local_norm.py",
+    "nonzero_consume16.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "layout",
+    "rebuild"
+   ]
+  },
+  "padded_fused_return": {
+   "files": [
+    "norm_deferred_flag_return.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "K",
+    "combine",
+    "consume_synthesis",
+    "controlled_linear_xor",
+    "frames_for",
+    "prior",
+    "prior.constant_qadic",
+    "prior.rr",
+    "prior.rr.clone",
+    "prior.rr.tail",
+    "prior.rr.tail.heads_from_banks",
+    "qadic",
+    "qframe",
+    "rank",
+    "rank.bodies",
+    "route_words"
+   ]
+  },
+  "pivot_bridge": {
+   "files": [
+    "shrinking.py"
+   ],
+   "from_imports": [
+    "divide_pair",
+    "divide_zero_bridge414",
+    "rotated_affine_conjugate"
+   ],
+   "call_sites": []
+  },
+  "pivot_rotate": {
+   "files": [
+    "shrinking.py"
+   ],
+   "from_imports": [
+    "projective_scale"
+   ],
+   "call_sites": []
+  },
+  "ported": {
+   "files": [
+    "blocked_three_noscratch.py",
+    "scalar_compact_v3.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "ROOT",
+    "ar",
+    "base",
+    "base.replacements",
+    "clone",
+    "convert_safe",
+    "decode",
+    "install_base_zero",
+    "install_child_inverse",
+    "install_dot_cache",
+    "install_factorized_boundary",
+    "install_retained_gaps",
+    "install_undo_zeros",
+    "make_converter",
+    "triple_square_phase"
+   ]
+  },
+  "ported_exact_cycle": {
+   "files": [
+    "local_norm.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "convert_safe",
+    "decode",
+    "p"
+   ]
+  },
+  "rebind_graph": {
+   "files": [
+    "blocked_three_noscratch.py",
+    "inverse_character_width.py",
+    "local_norm.py",
+    "scalar_compact_v3.py"
+   ],
+   "from_imports": [
+    "private_rebind"
+   ],
+   "call_sites": []
+  },
+  "replay_erase": {
+   "files": [
+    "companion.py"
+   ],
+   "from_imports": [
+    "scalar_erase_second24"
+   ],
+   "call_sites": []
+  },
+  "retained_core_safe27": {
+   "files": [
+    "narrow_gauge.py",
+    "nonzero_consume16.py"
+   ],
+   "from_imports": [
+    "linear_inverse_character"
+   ],
+   "call_sites": [
+    "linear_inverse_character",
+    "linear_inverse_character.__code__",
+    "normalize_early",
+    "normalize_early.__code__"
+   ]
+  },
+  "reverse_root_lifetime": {
+   "files": [
+    "reverse_fusion.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "install"
+   ]
+  },
+  "scalar_projection_multi": {
+   "files": [
+    "companion.py"
+   ],
+   "from_imports": [],
+   "call_sites": [
+    "functions"
+   ]
+  },
+  "schur_scalar": {
+   "files": [
+    "paired_coefficient.py"
+   ],
+   "from_imports": [
+    "ar",
+    "inverse_apply",
+    "scale"
+   ],
+   "call_sites": [
+    "extension_columns",
+    "inverse_columns",
+    "linear_inplace",
+    "mul_xor0",
+    "phase_product",
+    "square_columns"
+   ]
+  },
+  "streamed": {
+   "files": [
+    "narrow_gauge.py"
+   ],
+   "from_imports": [
+    "inverse6_unitary29"
+   ],
+   "call_sites": []
+  },
+  "structured_log65": {
+   "files": [
+    "no_clean_source12.py"
+   ],
+   "from_imports": [
+    "logarithm"
+   ],
+   "call_sites": []
+  },
+  "virtual_norm": {
+   "files": [
+    "no_clean_source12.py"
+   ],
+   "from_imports": [
+    "ar",
+    "encoded_norm6",
+    "mul_xor_noscratch",
+    "regular_matrix12"
+   ],
+   "call_sites": [
+    "bits",
+    "field",
+    "inverse_columns",
+    "linear_inplace",
+    "tower"
+   ]
+  }
+ },
+ "total_missing_modules": 61
+}

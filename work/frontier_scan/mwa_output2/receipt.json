@@ -1,0 +1,95 @@
+{
+ "gates": {
+  "G1 every file matches its listed SHA-256": true,
+  "G2 all three passed (this run: kickmix-engine or the official verifier; or an earlier official-verifier report for the exact bytes)": true,
+  "G3 every cost verified this run within 1e-9 of its source record (0/3 verified this run)": true,
+  "G4 notebook wall time under 2 hours": true
+ },
+ "verification": {
+  "invsqrt": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 9cf1a6e445ddd4ad\u2026",
+  "dqi": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 df02471d746671ed\u2026",
+  "chemistry": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 f08aba3496ed1f46\u2026"
+ },
+ "geometric_mean_local": 24.485245309767492,
+ "headroom": [
+  {
+   "task": "DQI decoder",
+   "check": "failed shots on this file's draw (value / phase)",
+   "value": "unavailable (reused report)",
+   "margin": "see the headline's error bounds",
+   "tight": false
+  },
+  {
+   "task": "Chemistry (dfthcsos)",
+   "check": "error_1 (must stay \u2264 20 mHa)",
+   "value": "10.27047 mHa",
+   "margin": "9.72953 mHa",
+   "tight": false
+  },
+  {
+   "task": "Chemistry (dfthcsos)",
+   "check": "error_2 (must stay \u2264 20 mHa)",
+   "value": "19.99965 mHa",
+   "margin": "0.00035 mHa",
+   "tight": true
+  },
+  {
+   "task": "Chemistry (dfthcsos)",
+   "check": "E_gap (must stay above 3.914898)",
+   "value": "3.9148992",
+   "margin": "1.20e-06",
+   "tight": true
+  }
+ ],
+ "dqi_salt_check": null,
+ "dqi_risk": {
+  "failures_per_draw": 0.19011695774066695,
+  "p_none": 0.8268624203272457,
+  "p_one_or_more": 0.17313757967275434,
+  "p_two_or_more": 0.01593701185005378,
+  "gm_lucky": 24.485245309767492,
+  "gm_one": 24.447882698487206,
+  "gm_two": 24.416231929144853,
+  "basis": "Poisson fit to the 48-draw expected cost / zero-failure cost (manifest)"
+ },
+ "wall_seconds": 155.50420754199996,
+ "relative_cost_difference": {},
+ "submission_sha256": "7d28a944a6efb20bc4c6f8f7e8b3a01e6e4e05c344efb68d946bcf62b2f4886a",
+ "manifest_sha256": "c6d5c41b916060b2b0b3e2d694de46b4c569dab5ea16226b315f8d33546427e5",
+ "rows": [
+  {
+   "task": "Inverse square root",
+   "circuit": "e4ed188b6163",
+   "sha256": "e4ed188b61634d61\u2026",
+   "published by": "Kirill Tymchishin",
+   "version": "2",
+   "verdict": "PASS",
+   "verification": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 9cf1a6e445ddd4ad\u2026",
+   "times cheaper than reference": 21.076754468288893,
+   "link": "https://www.kaggle.com/code/kirilltym/quantum-circuits-four-loaders-eight-toffolis"
+  },
+  {
+   "task": "DQI decoder",
+   "circuit": "fc3ba81614e1",
+   "sha256": "fc3ba81614e1016f\u2026",
+   "published by": "Syed Asad Ali",
+   "version": "1",
+   "verdict": "PASS",
+   "verification": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 df02471d746671ed\u2026",
+   "times cheaper than reference": 65.1065812007368,
+   "link": "https://www.kaggle.com/code/syed3000/vqcc-24-43-portfolio"
+  },
+  {
+   "task": "Chemistry (dfthcsos)",
+   "circuit": "4a9adf368a10",
+   "sha256": "4a9adf368a108364\u2026",
+   "published by": "Agniv Banerjee",
+   "version": "4",
+   "verdict": "PASS",
+   "verification": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 f08aba3496ed1f46\u2026",
+   "times cheaper than reference": 10.697560497774584,
+   "link": "https://www.kaggle.com/datasets/somejoint/qcc-ladder-parts"
+  }
+ ],
+ "chemistry_parts": null
+}

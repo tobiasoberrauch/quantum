@@ -1,0 +1,14 @@
+{
+  "id": "tobeetaylor/constseed-invsqrt-reconstruction",
+  "title": "Reconstructing the constant-seed invsqrt model (QVC mid-milestone)",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_internet": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "code_file": "constseed-invsqrt-reconstruction.ipynb",
+  "competition_sources": [
+    "google-verifiable-quantum-circuit-compilation"
+  ]
+}

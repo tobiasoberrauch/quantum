@@ -1,0 +1,4 @@
+task,circuit,status,verification,cost,source cost,cost / source,times cheaper than reference,qubits,Toffolis (mean),value errors,phase errors,wall s,peak MB
+invsqrt,e4ed188b6163,PASS,reused,98533.87232080253,98533.87232080253,1.0,21.076754468288893,62,,,,,
+dqi,fc3ba81614e1,PASS,reused,375376238975.30585,375376238975.30585,1.0,65.1065812007368,891,,,,,
+chemistry,4a9adf368a10,PASS,reused,313678954.0955252,313678954.0955252,1.0,10.697560497774584,428,15585.0,,,,

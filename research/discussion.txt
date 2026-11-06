@@ -1,0 +1,40 @@
+menu
+Skip to
+content
+
+Create
+
+Home
+
+Competitions
+
+Benchmarks
+
+Arenas
+
+Game Arena
+
+Data Hub
+
+More
+
+​
+Login
+Sign Up
+Kaggle uses cookies from Google to deliver and enhance the quality of its services and to analyze traffic.
+Learn more
+OK, Got it.
+Google Quantum AI · Featured Prediction Competition · 3 months to go
+Join Competition
+more_horiz
+Google Quantum AI - Verifiable Quantum Circuit Compilation
+
+Reducing the resources required for quantum applications
+
+Overview
+Data
+Code
+Models
+Discussion
+Leaderboard
+Rules

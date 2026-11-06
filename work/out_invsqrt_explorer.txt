@@ -1,0 +1,454 @@
+==============================================================================
+1. OFFIZIELLER INVSQRT-VERIFIER & COSTS.PY: WIE WIRD GEZAHLT?
+==============================================================================
+
+>>> DATEI: data/verifiers/invsqrt/verify_submission_invsqrt.py <<<
+"""Verifier for Benchmark I: phasing by `beta / sqrt(x)` (arXiv:2308.12352).
+
+A submission is a kickmix circuit implementing, for every `x` in `[1, max_x]`,
+
+    |x>|0...0>  ->  exp(2 pi i beta / sqrt(x)) |x>|0...0>
+
+The benchmark instance has `n_p = 10` bits per momentum component: `x = |nu - nu'|^2` with
+`max_x = 3 (2^n_p - 2)^2 = 3,133,452`, `width = 2 n_p + 2 = 22`, and `beta = 1`.
+
+Registers:
+    x               `width` qubits, little-endian. Must be restored.
+`x` must consist of distinct qubits (not classical bits). All other qubits are scratch and
+must return to |0>. No other registers are allowed.
+
+Check: each shot is simulated from a basis state `|x>|0>`. `x` must be restored, scratch must
+return to |0>, and the tracked phase `theta` (in turns) must be within
+`tol(x) = 2^-24 * beta / sqrt(x)` of `beta / sqrt(x)` (mod 1). Phases are compared in 64-bit
+fixed point (units of 2^-64 turns): rounding the tracked phase and the target moves the
+pass/fail boundary by less than 2^-63 turns, a negligible fraction of `tol(max_x)` (which must
+be at least 2^-48 turns).
+
+Every `x` in `[1, max_x]` is run `shots_per_x` times (64 by default, 200M shots for the
+benchmark instance), in passes over `x = 1..max_x`. Repeated shots of each `x` probe the seeded
+outcomes of measurement-based uncomputation (`HMR` and `R`). `HMR` and `R` outcomes in
+`km.Simulator` are seeded with the SHA-256 of the circuit's `.kmb` binary representation
+(merged with `--salt` when given). Shots are simulated across CPU cores in batches of
+`batch_size`.
+
+Cost (counted across simulated shots in `km.Simulator`):
+    Toffolis     Mean Toffoli-like (`CCX`, `CCZ`, `CSWAP`) gates executed per shot.
+    Z_POW        Clifford angles are free, T angles cost 1 T, other angles cost
+                 `0.56 log2(1/eps) + 5.3` T each (mixed fallback synthesis,
+                 arXiv:2203.10064), with `eps` the synthesis error in operator norm up
+                 to global phase. That allows a relative phase error of up to `2 eps`
+                 radians per rotation. Synthesis error isn't simulated, so the
+                 worst case `n_rot * 2 eps` must fit in the tolerance left over by the
+                 simulated error, `2 pi min_x (tol(x) - |error(x)|)` radians. The
+                 verifier uses the largest `eps` that fits, split evenly.
+    C            Toffolis + T / 4.
+    Q            `circuit.num_qubits`.
+    score        Q * C.
+
+Usage:
+    python invsqrt/verify_submission_invsqrt.py submission.kmb [--shots-per-x N] [--salt STR] [--seed N]
+"""
+
+from __future__ import annotations
+
+import argparse
+import concurrent.futures
+import dataclasses
+import hashlib
+import io
+import json
+import math
+import multiprocessing as mp
+import os
+import sys
+from fractions import Fraction
+
+import numpy as np
+
+import kickmix as km
+
+T_PER_TOFFOLI = 4
+ETA = 218  # Electrons in the benchmark system.
+N_P = 10  # Bits per momentum component in the benchmark instance.
+MASK64 = (1 << 64) - 1  # The check works in units of 2^-64 turns, as uint64 (mod 1 turn).
+DEFAULT_BATCH_SIZE = 256
+DEFAULT_SHOTS_PER_X = 64
+BATCHES_PER_CHUNK = 64
+
+
+# Problem specification.
+
+
+@dataclasses.dataclass(frozen=True)
+class ProblemSpecInvSqrt:
+    """Specification of the Benchmark I problem instance."""
+    width: int
+    max_x: int
+    beta: Fraction
+    precision_bits: int
+    shots_per_x: int
+    system_qubits: int
+
+    @classmethod
+    def for_n_p(
+        cls,
+        n_p: int,
+        *,
+        beta: Fraction = Fraction(1),
+        precision_bits: int = 24,
+        shots_per_x: int = DEFAULT_SHOTS_PER_X,
+        eta: int = ETA,
+    ) -> ProblemSpecInvSqrt:
+        """`x = |nu - nu'|^2` for momenta with components in `[-(2^(n_p-1) - 1), 2^(n_p-1) - 1]`,
+        so `x <= 3 (2^n_p - 2)^2 < 2^(2 n_p + 2)`."""
+        return cls(
+            width=2 * n_p + 2,
+            max_x=3 * (2**n_p - 2)**2,
+            beta=beta,
+            precision_bits=precision_bits,
+            shots_per_x=shots_per_x,
+            system_qubits=3 * eta * n_p,
+        )
+
+    @property
+    def num_shots(self) -> int:
+        return self.shots_per_x * self.max_x
+
+
+
+# Mathematical and cost helpers.
+
+
+def reference_values(spec: ProblemSpecInvSqrt, xs: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """`target mod 1` and `tol(x)` for each `x` in `xs`.
+
+    Both are uint64 in units of 2^-64 turns, and come exactly from
+    `r = floor(2^65 |beta| / sqrt(x)) = isqrt(floor(2^130 beta^2 / x))`: the target is `r`
+    rounded to nearest a
+[!] Datei nicht gefunden: /Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/starter_kit/verifier/costs.py
+
+>>> AKTUELLES VERIFIER-LOG (work/frontier_scan/mwa_verify_invsqrt.log) <<<
+{
+  "status": "PASS",
+  "score": 98533.87232080253,
+  "toffoli_equivalent": 1589.2560051742344,
+  "toffoli_count": 1289.2906508091953,
+  "max_toffoli_count": 1487,
+  "t_count": 20.498121904572017,
+  "rotation_count": 41.0,
+  "rotation_eps": 2.434041480874084e-13,
+  "num_qubits": 62,
+  "reaction_depth": 757,
+  "num_ops": 47535,
+  "verified_shots": 200540928,
+  "worst_error_over_tolerance": 0.9993237694056958,
+  "worst_x": 161,
+  "circuit_sha256": "e4ed188b61634d6131e024c07926251deecb1fd1d4753f491dab60741aa75f90"
+}
+
+
+==============================================================================
+2. GEWICHTUNG DER 22 BIT-BEREICHE (BUCKETS) VON x = 1 BIS 3.133.452
+==============================================================================
+Gesamte Zahlen: 3,133,452 | Aktueller Mean Toffolis: 1289.29 (Max: 1487)
+Differenz Max - Mean = 197.71 Toffolis werden bereits jetzt im Schnitt uebersprungen!
+
+Bucket b |  Bereich [2^b .. 2^(b+1)-1] |   Anzahl x | Anteil Preis | Kumuliert ab b
+------------------------------------------------------------------------------
+       0 |                      1 .. 1 |          1 |      0.0000% |      100.0000%
+       1 |                      2 .. 3 |          2 |      0.0001% |      100.0000%
+       2 |                      4 .. 7 |          4 |      0.0001% |       99.9999%
+       3 |                     8 .. 15 |          8 |      0.0003% |       99.9998%
+       4 |                    16 .. 31 |         16 |      0.0005% |       99.9995%
+       5 |                    32 .. 63 |         32 |      0.0010% |       99.9990%
+       6 |                   64 .. 127 |         64 |      0.0020% |       99.9980%
+       7 |                  128 .. 255 |        128 |      0.0041% |       99.9959% <-- x=161 (Limit 0.99932!)
+       8 |                  256 .. 511 |        256 |      0.0082% |       99.9919%
+       9 |                512 .. 1,023 |        512 |      0.0163% |       99.9837%
+      10 |              1,024 .. 2,047 |      1,024 |      0.0327% |       99.9674%
+      11 |              2,048 .. 4,095 |      2,048 |      0.0654% |       99.9347%
+      12 |              4,096 .. 8,191 |      4,096 |      0.1307% |       99.8693%
+      13 |             8,192 .. 16,383 |      8,192 |      0.2614% |       99.7386%
+      14 |            16,384 .. 32,767 |     16,384 |      0.5229% |       99.4772%
+      15 |            32,768 .. 65,535 |     32,768 |      1.0457% |       98.9543%
+      16 |           65,536 .. 131,071 |     65,536 |      2.0915% |       97.9085%
+      17 |          131,072 .. 262,143 |    131,072 |      4.1830% |       95.8170%
+      18 |          262,144 .. 524,287 |    262,144 |      8.3660% |       91.6341%
+      19 |        524,288 .. 1,048,575 |    524,288 |     16.7320% |       83.2681%
+      20 |      1,048,576 .. 2,097,151 |  1,048,576 |     33.4639% |       66.5361%
+      21 |      2,097,152 .. 3,133,452 |  1,036,301 |     33.0722% |       33.0722%
+
+--- HEBEL-RECHNUNG FUER DIE ABKUERZUNG ---
+  Sparen wir 100 Toffolis fuer x >= 65.536 (97.9% der Zahlen): Mean_Toff -> 1191.38 | Ratio:  22.46x | Gesamt-Score: 24.98205 (+0.524)
+  Sparen wir 200 Toffolis fuer x >= 65.536 (97.9% der Zahlen): Mean_Toff -> 1093.47 | Ratio:  24.04x | Gesamt-Score: 25.55397 (+1.096)
+  Sparen wir 300 Toffolis fuer x >= 65.536 (97.9% der Zahlen): Mean_Toff ->  995.56 | Ratio:  25.86x | Gesamt-Score: 26.18214 (+1.724)
+  Sparen wir 450 Toffolis fuer x >= 65.536 (97.9% der Zahlen): Mean_Toff ->  848.70 | Ratio:  29.16x | Gesamt-Score: 27.25354 (+2.795)
+
+==============================================================================
+3. VORHANDENE INVSQRT-SKRIPTE & KICKMIX-SCHALTKREIS-TOOLS IM REPO
+==============================================================================
+
+Verzeichnis work/invsqrt_caching: 4 Python-Dateien
+  - work/invsqrt_caching/diag.py (81 Zeilen)
+  - work/invsqrt_caching/diag2.py (82 Zeilen)
+  - work/invsqrt_caching/spotcheck.py (55 Zeilen)
+      L  6: import kickmix as km
+      L 12: def prefix_circuit(n):
+      L 13: return km.Circuit('\n'.join(LINES[:n]))
+      L 15: def read_controls(circuit, ctrl, xs, seed):
+      L 17: sim.use_same_registers_as(circuit)
+      L 20: sim.do(circuit)
+  - work/invsqrt_caching/symbolic_pass.py (222 Zeilen)
+      L 11: Toffolis cacheable (one copy CCX + k CNOTs + free del_and clear), provided operands are
+
+Verzeichnis work/constseed_build: 4 Python-Dateien
+  - work/constseed_build/build_constseed_circuit.py (512 Zeilen)
+      L  2: """Build the RAW constant-seed (pwq3) invsqrt circuit for Benchmark I.
+      L  6: ``n1_frac=16, n2_guard=24, out_frac=26``) as a kickmix circuit, following the
+      L  8: ``data/verifiers/invsqrt/nr_reference_circuit.py``.
+      L 19: 5. denormalize: y1=P2<<s (F=37 bits); phase y1/2^37 turns.
+      L 24: Uncomputed in reverse (measurement-based HMR) so x is restored and every
+  - work/constseed_build/find_cutoffs.py (110 Zeilen)
+      L  2: """Comprehensive circuit emulator + joint cutoff optimizer (target worst/tol <= 0.6)."""
+  - work/constseed_build/make_rom.py (114 Zeilen)
+      L  4: Replicates the CURRENT circuit's exact integer arithmetic (AB=18 magnitude+subtraction
+      L 18: # Circuit coefficient magnitudes (same as build_constseed_circuit.py)
+      L 25: def S_circuit(inter, k):
+  - work/constseed_build/measure_lookup_cost.py (44 Zeilen)
+      L  2: """Measure the static CCX / T / ops cost of kickmix init_lookup+del_lookup on the
+      L  7: import kickmix as km
+      L 16: def S_circuit(inter, k):
+      L 25: table = [S_circuit(i, k) for i in range(4) for k in range(128)]
+
+Verzeichnis sota_mrmeows: 1506 Python-Dateien
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/ensemble_coalescence.py (88 Zeilen)
+      L  3: A pair is rotated so its second identity offset is zero, then that column
+      L 18: from dfthcsos.verify import heuristic_costs
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/metric_preflight.py (125 Zeilen)
+      L 19: ALLOWED_INSTRUCTIONS = {'X', 'CX', 'CCX', 'Z', 'CZ', 'CCZ', 'Z_POW', 'NEG', 'SWAP', 'CSWAP', 'R', 'H
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/protected_refit.py (81 Zeilen)
+      L  1: """GPU refit of coalesced ensembles with an exactly protected one-body contraction."""
+      L 19: w0,o0=de.native(p);R,B,C=w0.shape;words=p['angle_words'];brot=int(p['brot']);edges=p['tree_edges']
+      L 20: P=Problem(edges);u=de.decode(words[76:],edges,brot).reshape(R,B,76)
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/rank_refit.py (85 Zeilen)
+      L  2: New contribution: protected-offset pair coalescence followed by a bounded
+      L  3: physical refit. The original quantum lookup circuits are unchanged.
+      L 22: w0,o0=de.native(p);R,B,C=w0.shape;words=p['angle_words'];edges=p['tree_edges'];brot=int(p['brot'])
+      L 24: u=de.decode(words[76:],edges,brot).reshape(R,B,76);M=u[:,:,il[0]]*u[:,:,il[1]]*cw
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/run_recipe.py (23 Zeilen)
+      L  6: COMP=next(p.parents[2] for p in INPUT.rglob('verify_submission_invsqrt.py'))
+      L  8: os.environ['PYTHONPATH']=os.pathsep.join([str(COMP/'kickmix'),str(COMP/'verifiers'),os.environ.get('
+      L  9: source=next(INPUT.rglob('dfthc_r10_b129_c60_brot8.npz'))
+      L 16: run('protected_refit.py',r('coalesced_C59.npz'),r('refit_C59.npz'),'--steps',1600)
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/upstream/dft_eval.py (103 Zeilen)
+      L  1: """Local dfthcsos metrics using the verifier's own numpy code (no kickmix).
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/upstream/gauge.py (70 Zeilen)
+      L  1: """Gram-preserving column rotations of a factorization's weights to lower the LCU one-norm.
+      L  7: an angle where some entry of the rotated pair is zero; all those candidate angles are checked.
+      L 24: def rotate(a, sweeps=40, seed=0):
+      L 25: """a: (R, B+1, C). Returns rotated copy and number of accepted moves."""
+  - sota_mrmeows/sources/dfthcsos_7p73_research_toolkit/chem_7p73/research_toolkit/upstream/qat.py (182 Zeilen)
+      L  1: """Quantization-aware refit of a dfthcsos factorization at a target brot (torch, CUDA, float64).
+      L  4: Angles enter through a straight-through round to the brot grid, so the loss is always that of the wo
+      L  7: python src/qat.py IN.npz OUT.npz --brot 7 --steps 4000
+  - sota_mrmeows/sources/dfthcsos_8p5558_complete_with_compiler/dfthcsos_verified_8p555840/compiler/audit_affine_hmr.py (54 Zeilen)
+      L  1: """Exact all-address, arbitrary-target, all-HMR-outcome symbolic audit."""
+      L 12: addresses=values[:n].copy();phase=[];classical={};ccx=0
+      L 22: if name not in ['CZ','Z','NEG']:assert condition is None,('conditioned nonphase gate',line)
+  - sota_mrmeows/sources/dfthcsos_8p5558_complete_with_compiler/dfthcsos_verified_8p555840/compiler/borrowed_prefix.py (277 Zeilen)
+  - sota_mrmeows/sources/dfthcsos_8p5558_complete_with_compiler/dfthcsos_verified_8p555840/compiler/certificate_rebuild.py (87 Zeilen)
+      L  5: streamed_native, overlap_native, audit_affine_hmr and native_checks. No research
+      L 13: import kickmix as km
+      L 17: from audit_affine_hmr import audit
+  - sota_mrmeows/sources/dfthcsos_8p5558_complete_with_compiler/dfthcsos_verified_8p555840/compiler/native_checks.py (31 Zeilen)
+      L  2: import kickmix as km
+      L  4: def check(circuit, delta, *, brot=11, repeats=4, seed=127813):
+      L  5: """Check every valid address with arbitrary targets, phase and scratch."""
+      L 10: initial = rng.integers(0, 1 << brot, size=(len(addresses), word_count))
+      L 13: initial[count:2*count] = (1 << brot) - 1
+      L 15: sim.use_same_registers_as(circuit)
+      L 18: sim.write_across_shots(f"word_{j}", ((initial[:, j][None, :] >> np.arange(brot)[:, None]) & 1).astyp
+      L 19: powers = np.int64(1) << np.arange(brot)
+      L 21: sim.do(circuit)
+  - sota_mrmeows/sources/dfthcsos_8p5558_complete_with_compiler/dfthcsos_verified_8p555840/compiler/overlap_native.py (123 Zeilen)
+      L  4: Only measurement-conditioned Clifford phase corrections are emitted.
+      L  8: import kickmix as km
+      L 12: def build_overlap(delta, ac, stage_terms, *, brot=8):
+      L 13: delta=require_redundant_sign_bit(delta,brot)
+      L 15: if J != 4 or brot != 8:
+      L 21: builder=km.CircuitBuilder()
+      L 23: for j in range(J): qs+=list(builder.create_quantum_register(brot,f'word_{j}'))
+  - sota_mrmeows/sources/dfthcsos_8p5558_complete_with_compiler/dfthcsos_verified_8p555840/compiler/rank_parity.py (417 Zeilen)
+      L  5: candidate data is imported. The optional organizer subset is a circuit fixture,
+  - sota_mrmeows/sources/dfthcsos_8p5558_complete_with_compiler/dfthcsos_verified_8p555840/compiler/streamed_native.py (123 Zeilen)
+      L  4: Only measurement-conditioned Clifford phase corrections are emitted.
+      L  8: import kickmix as km
+      L 12: def build_streamed(delta, ac, stage_terms, *, brot=8):
+      L 13: delta=require_redundant_sign_bit(delta,brot)
+      L 15: if J != 4 or brot != 8:
+      L 21: builder=km.CircuitBuilder()
+      L 23: for j in range(J): qs+=list(builder.create_quantum_register(brot,f'word_{j}'))
+
+Verzeichnis sota_yoyobar: 0 Python-Dateien
+
+>>> CODE-AUSZUG: work/invsqrt_caching/diag.py <<<
+"""Diagnostic: distribution of ANF size/degree on CCX/CCZ/CSWAP control wires."""
+import sys
+from collections import defaultdict, Counter
+sys.path.insert(0, 'work/invsqrt_caching')
+import importlib.util
+spec = importlib.util.spec_from_file_location('sp', 'work/invsqrt_caching/symbolic_pass.py')
+# reuse parse + core by re-implementing minimal walk with NO cap, measuring only
+from symbolic_pass import parse_ops, ZERO, ONE
+
+def _x(a,b):
+    if a is None or b is None: return None
+    return a ^ b
+def _a(a,b):
+    if a is None or b is None: return None
+    if len(a)*len(b) > 400000: return None   # guard: too big to expand
+    out=defaultdict(int)
+    for m1 in a:
+        for m2 in b: out[m1|m2]+=1
+    return frozenset(m for m,c in out.items() if c%2)
+
+ops = parse_ops('work/invsqrt_caching/invsqrt.kmx')
+val = {}
+def get(w): return val.get(w, ZERO)
+def setw(w,a): val[w]=a
+next_var=0
+for i in range(22):
+    w=f'q{i}'; next_var+=1; setw(w, frozenset({frozenset([next_var-1])}))
+cond_stack=[]
+def eff(cb):
+    a=ONE
+    for s in cond_stack:
+        a=_a(a,s)
+        if a is None: return None
+    if cb is not None: a=_a(a,get(cb))
+    return a
+
+ccx_ctrl_sizes=Counter(); ccz_ctrl_sizes=Counter(); cswap_ctrl_sizes=Counter()
+cond_sizes=Counter()
+maxsize=0
+def sz(a): return 0 if a is None else len(a)
+def deg(a): return 0 if a is None else max((len(m) for m in a), default=0)
+
+for idx,(op,args,cb) in enumerate(ops):
+    if op=='PUSH_CONDITION':
+        c=cb if cb is not None else (args[0] if args else None)
+        cond_stack.append(get(c) if c is not None else ONE); continue
+    if op=='POP_CONDITION': cond_stack.pop(); continue
+    if op in ('APPEND_TO_REGISTER','REGISTER'): continue
+    cond=eff(cb)
+    if op=='X': t=args[0]; setw(t,_x(get(t),ONE))
+    elif op in ('Z','NEG','Z_POW'): pass
+    elif op=='CX': c,t=args; setw(t,_x(get(t),get(c)))
+    elif op=='CZ': pass
+    elif op=='CCX':
+        c1,c2,t=args
+        ccx_ctrl_sizes[(sz(get(c1)),sz(get(c2)))]+=1
+        prod=_a(get(c1),get(c2)); setw(t,_x(get(t),prod))
+        maxsize=max(maxsize,sz(get(c1)),sz(get(c2)),sz(prod))
+    elif op=='CCZ':
+        c1,c2,c3=args
+        ccz_ctrl_sizes[(sz(get(c1)),sz(get(c2)),sz(get(c3)))]+=1
+    elif op=='SWAP':
+        a,b=args; va,vb=get(a),get(b); setw(a,vb); setw(b,va)
+    elif op=='CSWAP':
+        c,a,b=args
+        cswap_ctrl_sizes[(sz(get(c)),sz(get(a)),sz(get(b)))]+=1
+        d=_x(get(a),get(b)); prod=_a(get(c),d); setw(a,_x(get(a),prod)); setw(b,_x(get(b),prod))
+    elif op=='HMR':
+        q,b=args; next_var+=1; setw(b,frozenset({frozenset([next_var-1])})); setw(q,ZERO)
+    elif op=='R': setw(args[0],ZERO)
+    elif op=='BIT_STORE0': setw(args[0],ZERO)
+    elif op=='BIT_STORE1': setw(args[0],ONE)
+    elif op=='BIT_INVERT': b=args[0]; setw(b,_x(get(b),ONE))
+
+print('max ANF size seen:', maxsize)
+print('\nCCX control-size pairs (|c1|,|c2|) : count   [top 25]')
+for k,v in ccx_ctrl_sizes.most_common(25): print(f'  {k}: {v}')
+print('\nCCZ control-size triples (|c1|,|c2|
+
+>>> CODE-AUSZUG: work/invsqrt_caching/diag2.py <<<
+"""Refined diagnostic: distinguish ZERO vs COMPLEX(None); dump simple CCX gates."""
+from collections import defaultdict, Counter
+from symbolic_pass import parse_ops, ZERO, ONE
+
+def _x(a,b):
+    if a is None or b is None: return None
+    return a ^ b
+def _a(a,b):
+    if a is None or b is None: return None
+    if len(a)*len(b) > 400000: return None
+    out=defaultdict(int)
+    for m1 in a:
+        for m2 in b: out[m1|m2]+=1
+    return frozenset(m for m,c in out.items() if c%2)
+def kind(a):
+    if a is None: return 'C'
+    if a == ZERO: return '0'
+    return str(len(a))
+def canon(anf):
+    if anf is None: return None
+    return tuple(sorted(tuple(sorted(m)) for m in anf))
+
+ops = parse_ops('work/invsqrt_caching/invsqrt.kmx')
+val={}
+def get(w): return val.get(w,ZERO)
+def setw(w,a): val[w]=a
+nv=0
+for i in range(22):
+    w=f'q{i}'; nv+=1; setw(w,frozenset({frozenset([nv-1])}))
+stack=[]
+def eff(cb):
+    a=ONE
+    for s in stack:
+        a=_a(a,s)
+        if a is None: return None
+    if cb is not None: a=_a(a,get(cb))
+    return a
+
+ccx_kind=Counter(); simple_ccx=[]
+for idx,(op,args,cb) in enumerate(ops):
+    if op=='PUSH_CONDITION':
+        c=cb if cb is not None else (args[0] if args else None)
+        stack.append(get(c) if c is not None else ONE); continue
+    if op=='POP_CONDITION': stack.pop(); continue
+    if op in ('APPEND_TO_REGISTER','REGISTER'): continue
+    cond=eff(cb)
+    if op=='X': t=args[0]; setw(t,_x(get(t),ONE))
+    elif op in ('Z','NEG','Z_POW'): pass
+    elif op=='CX': c,t=args; setw(t,_x(get(t),get(c)))
+    elif op=='CZ': pass
+    elif op=='CCX':
+        c1,c2,t=args
+        ccx_kind[(kind(get(c1)),kind(get(c2)),kind(cond))]+=1
+        a1,a2=get(c1),get(c2)
+        if a1 is not None and a2 is not None and len(a1)<=8 and len(a2)<=8:
+            simple_ccx.append((idx,c1,c2,t,cond,canon(a1),canon(a2)))
+    elif op=='CCZ': pass
+    elif op=='SWAP':
+        a,b=args; va,vb=get(a),get(b); setw(a,vb); setw(b,va)
+    elif op=='CSWAP':
+        c,a,b=args; d=_x(get(a),get(b)); p=_a(get(c),d); setw(a,_x(get(a),p)); setw(b,_x(get(b),p))
+    elif op=='HMR':
+        q,b=args; nv+=1; setw(b,frozenset({frozenset([nv-1])})); setw(q,ZERO)
+    elif op=='R': setw(args[0],ZERO)
+    elif op=='BIT_STORE0': setw(args[0],ZERO)
+    elif op=='BIT_STORE1': setw(args[0],ONE)
+    elif op=='BIT_INVERT': b=args[0]; setw(b,_x(get(b),ONE))
+
+print('CCX (kind(c1), kind(c2), kind(cond)) : count   [C=complex, 0=zero, N=size]')
+for k,v in sorted(ccx_kind.items(), key=lambda kv:-kv[1]): print(f'  {k}: {v}')
+print(f'\nSIMPLE CCX gates (both controls size<=8): {len(simple_ccx)}')
+for idx,c1,c2,t,cond,a1c,a2c in simple_ccx:
+    print(f'  idx={idx:5d} {c1:>4} {c2:>4} -> {t:<4} cond={kind(cond)} | c1={a1c} | c2={a2c}')
+
+# group by unordered control-ANF pair + cond
+grp=defaultdict(list)
+for idx,c1,c2,t,cond,a1c,a2c in simple_ccx:
+    key=(tuple(sorted([a1c,a2c])), canon(cond))
+    grp[key].append(idx)
+print(f'\nDistinct simple-product signatures: {len(grp)}; repeated (size>=2):

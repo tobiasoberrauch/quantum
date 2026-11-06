@@ -1,0 +1,24 @@
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 31, "g": 26, "line": 49, "raw": "CCX q23 q19 q24", "p_and": 0.16733311972794673, "fire": 1.0, "sec": 0.36}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 31, "g": 27, "line": 50, "raw": "CCX q24 q18 q25", "p_and": 0.08367469771859234, "fire": 1.0, "sec": 0.31}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 31, "g": 28, "line": 51, "raw": "CCX q25 q17 q26", "p_and": 0.04184548671391516, "fire": 1.0, "sec": 0.37}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 31, "g": 29, "line": 52, "raw": "CCX q26 q16 q27", "p_and": 0.02093088121157656, "fire": 1.0, "sec": 0.31}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 155, "g": 34, "line": 57, "raw": "CCX q31 q11 q32", "p_and": 0.000669857131186046, "fire": 1.0, "sec": 0.37}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 155, "g": 35, "line": 58, "raw": "CCX q32 q10 q33", "p_and": 0.0003430664202120055, "fire": 1.0, "sec": 0.31}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 31, "g": 30, "line": 53, "raw": "CCX q27 q15 q28", "p_and": 0.010473578460407263, "fire": 1.0, "sec": 0.35}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 43, "g": 31, "line": 54, "raw": "CCX q28 q14 q29", "p_and": 0.005244927084822614, "fire": 1.0, "sec": 0.36}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 67, "g": 32, "line": 55, "raw": "CCX q29 q13 q30", "p_and": 0.0026306013970302895, "fire": 1.0, "sec": 0.42}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 87, "g": 33, "line": 56, "raw": "CCX q30 q12 q31", "p_and": 0.0013234385531341272, "fire": 1.0, "sec": 0.46}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 155, "g": 36, "line": 59, "raw": "CCX q33 q9 q34", "p_and": 0.0001796710647249852, "fire": 1.0, "sec": 0.34}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 155, "g": 37, "line": 60, "raw": "CCX q34 q8 q35", "p_and": 9.797338698147505e-05, "fire": 1.0, "sec": 0.62}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 155, "g": 38, "line": 61, "raw": "CCX q35 q7 q36", "p_and": 5.712454810971998e-05, "fire": 1.0, "sec": 0.47}
+{"res": "unpatched", "at": 119, "wire": 38, "nd": 155, "g": 40, "line": 63, "raw": "CCX q36 q6 q37", "p_and": 3.6700128673842446e-05, "fire": 1.0, "sec": 0.73}
+{"res": "unpatched", "at": 217, "wire": 22, "nd": 71, "g": 148, "line": 171, "raw": "CSWAP q46 q6 q21", "p_and": 0.22309593349809032, "fire": 1.0, "sec": 0.13}
+{"res": "unpatched", "at": 217, "wire": 22, "nd": 675, "g": 150, "line": 173, "raw": "CSWAP q46 q7 q20", "p_and": 0.22307550907865445, "fire": 1.0, "sec": 0.18}
+{"res": "unpatched", "at": 14106, "wire": 41, "nd": 437, "g": 151, "line": 174, "raw": "CSWAP q46 q8 q19", "p_and": 0.22311635791752618, "fire": 1.0, "sec": 0.86}
+{"res": "unpatched", "at": 217, "wire": 22, "nd": 694, "g": 152, "line": 175, "raw": "CSWAP q46 q9 q18", "p_and": 0.2230346602397827, "fire": 1.0, "sec": 0.21}
+{"res": "unpatched", "at": 14106, "wire": 41, "nd": 371, "g": 153, "line": 176, "raw": "CSWAP q46 q10 q17", "p_and": 0.2231980555952697, "fire": 1.0, "sec": 0.38}
+{"res": "unpatched_phase", "at": 218, "nd": 14, "g": 154, "line": 177, "raw": "CSWAP q46 q11 q16", "p_and": 0.22287126488429565, "fire": 1.0, "sec": 0.14}
+{"res": "unpatched_phase", "at": 14231, "nd": 4, "g": 155, "line": 178, "raw": "CSWAP q46 q12 q15", "p_and": 0.22352484630624375, "fire": 1.0, "sec": 92.96}
+{"res": "unpatched", "at": 14106, "wire": 41, "nd": 324, "g": 156, "line": 179, "raw": "CSWAP q46 q13 q14", "p_and": 0.22221768346234758, "fire": 1.0, "sec": 0.98}
+{"res": "unpatched_phase", "at": 14555, "nd": 128, "g": 145, "line": 168, "raw": "CSWAP q46 q1 q4", "p_and": 0.2230921039194461, "fire": 1.0, "sec": 320.49}
+{"res": "unpatched", "at": 14106, "wire": 41, "nd": 286, "g": 146, "line": 169, "raw": "CSWAP q46 q2 q3", "p_and": 0.22309338044566082, "fire": 1.0, "sec": 1.34}

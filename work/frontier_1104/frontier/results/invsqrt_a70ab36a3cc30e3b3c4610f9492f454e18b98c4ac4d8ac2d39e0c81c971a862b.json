@@ -1,0 +1,24 @@
+{
+ "component": "invsqrt",
+ "key": "a70ab36a3cc30e3b3c4610f9492f454e18b98c4ac4d8ac2d39e0c81c971a862b",
+ "sources": [
+  "k__coralfil__atlantis-vqcc-apex-quantum-circuit-portfolio"
+ ],
+ "status": "PASS",
+ "score": 98192.89334888912,
+ "toffoli_equivalent": 1583.7563443369213,
+ "toffoli_count": 1285.2903320812397,
+ "max_toffoli_count": 1483,
+ "t_count": 14.500753467142628,
+ "rotation_count": 41.0,
+ "rotation_eps": 2.434041480874084e-13,
+ "num_qubits": 62,
+ "reaction_depth": 760,
+ "num_ops": 47500,
+ "verified_shots": 200540928,
+ "worst_error_over_tolerance": 0.9993237694056958,
+ "worst_x": 161,
+ "circuit_sha256": "a70ab36a3cc30e3b3c4610f9492f454e18b98c4ac4d8ac2d39e0c81c971a862b",
+ "seconds": 356.7,
+ "ratio": 21.149944388911084
+}

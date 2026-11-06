@@ -1,0 +1,26 @@
+# DF-THC lower-rank GPU training package — dependencies.
+#
+# Install on a fresh CUDA box (from the repo root):
+#   pip install -r work/chem_gpu/requirements.txt
+#   pip install -e <repo>/qualtran          # provides qualtran AND kickmix (editable, ships with repo)
+#
+# The two circuit libraries (qualtran, kickmix) are NOT on PyPI at these dev
+# versions; they live in <repo>/qualtran/ and must be installed editable. They are
+# required for the compile + official-verify stages (Stages 0 and GO), not for the
+# pure-JAX training math.
+#
+# Tested against: jax 0.12.0.1, optax 0.2.8, numpy 2.5.4, scipy 1.18.1.
+
+# --- core training (JAX + CUDA) --------------------------------------------
+jax[cuda]>=0.4.30,<1.0
+jaxlib[cuda]>=0.4.30,<1.0
+optax>=0.2.1
+
+# --- numerics ---------------------------------------------------------------
+numpy>=1.26,<3
+scipy>=1.11
+
+# --- circuit compile + official verify (installed editable from the repo) ---
+# qualtran  -> pip install -e <repo>/qualtran
+# kickmix   -> subpackage of the same checkout (<repo>/qualtran/kickmix)
+# (not pinned here: not published to PyPI at the required dev versions)

@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "fdcae860d5ddb8a17264a10c0df9b09fcfc8713c1750d29289127c22a7806007",
+ "sources": [
+  "d5__busyaprime__33-qcc-v8-members",
+  "k5__busyaprime__lb-24-73387-top-30-qcc-notebooks-re-verified"
+ ],
+ "status": "PASS",
+ "score": 306230171.24607325,
+ "lambda_eff": 46.944208770784336,
+ "toffoli_count": 15277.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 612056,
+ "verified_shots": 78080,
+ "submission_sha256": "bc7d0f8587f94e4e62a70dc4de6b6fe3004b81d50370c3c6cab80d4c829c64c2",
+ "seconds": 16.0,
+ "ratio": 10.957769362376522
+}

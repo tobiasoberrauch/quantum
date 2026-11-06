@@ -1,0 +1,133 @@
+{
+  "schema": "friends-frontier-commentary-facts-v1",
+  "manifest_sha256": "c6d5c41b916060b2b0b3e2d694de46b4c569dab5ea16226b315f8d33546427e5",
+  "source_output": "working",
+  "latest_public_step_utc": "2026-11-03T15:50:00",
+  "recent_window": "24 hours before the latest public frontier step, not the notebook run time",
+  "recent_step_limit_per_task": 2,
+  "recent_steps_omitted": 10,
+  "current_portfolio": {
+    "invsqrt": {
+      "sha12": "e4ed188b6163",
+      "author": "Kirill Tymchishin",
+      "source_notebook": "https://www.kaggle.com/code/kirilltym/quantum-circuits-four-loaders-eight-toffolis"
+    },
+    "dqi": {
+      "sha12": "fc3ba81614e1",
+      "author": "Syed Asad Ali",
+      "source_notebook": "https://www.kaggle.com/code/syed3000/vqcc-24-43-portfolio"
+    },
+    "chemistry": {
+      "sha12": "4a9adf368a10",
+      "author": "Agniv Banerjee",
+      "source_notebook": "https://www.kaggle.com/datasets/somejoint/qcc-ladder-parts"
+    }
+  },
+  "hedge_blend": {},
+  "current_frontier_records": [
+    {
+      "task": "Inverse square root",
+      "public_since_utc": "2026-11-03 14:53",
+      "sha12": "e4ed188b6163",
+      "author": "Kirill Tymchishin",
+      "source_notebook": "https://www.kaggle.com/code/kirilltym/quantum-circuits-four-loaders-eight-toffolis",
+      "qubits": 62,
+      "ratio_to_reference": 21.076754468288893,
+      "previous_sha12": "04900d11e231",
+      "task_cost_reduction_pct_vs_previous": 0.313593,
+      "source_change_summary": "Per the notebook: five contiguous three-product windows rewritten as two-product windows via the XOR identity g = u(n+b) + v(n+u+a) = (u+v)(n+b+v) + f + v, reusing f = v(a+b) already computed for a later target (the seven wires may start dirty); 5 fewer static Toffolis. Cost 98,533.87: -0.314% vs 04900d11e231 (21.0768x the reference)"
+    },
+    {
+      "task": "DQI decoder",
+      "public_since_utc": "2026-11-03 12:32",
+      "sha12": "fc3ba81614e1",
+      "author": "Syed Asad Ali",
+      "source_notebook": "https://www.kaggle.com/code/syed3000/vqcc-24-43-portfolio",
+      "qubits": 891,
+      "ratio_to_reference": 65.05057232005011,
+      "previous_sha12": "e3928244a1c1",
+      "task_cost_reduction_pct_vs_previous": 0.510156,
+      "source_change_summary": "Per the notebook: pole flags X-measured going forward, rebuilt on the way back and repaid with a CZ (width 902 -> 891); measurement-based erasure of recompute steps and flag uncomputes; conditionally clean AND ladders (Khattar & Gidney, 2024); exact product caching on idle wires. The notebook says one rare high-weight error class is handled approximately at a small priced failure rate. Zero-failure cost -0.596% vs e3928244a1c1 (65.1066x the reference)"
+    },
+    {
+      "task": "Chemistry (dfthcsos)",
+      "public_since_utc": "2026-11-03 15:50",
+      "sha12": "4a9adf368a10",
+      "author": "Agniv Banerjee",
+      "source_notebook": "https://www.kaggle.com/datasets/somejoint/qcc-ladder-parts",
+      "qubits": 428,
+      "ratio_to_reference": 10.697560497774584,
+      "previous_sha12": "cef141d17b4d",
+      "task_cost_reduction_pct_vs_previous": 0.331874,
+      "source_change_summary": "Loaders rebuilt (15,585 Toffolis, -44 vs b9b05e14dbdb/cef141d17b4d) with new weights (lambda_eff 47.025650 vs cef141d17b4d's 47.049404): cost 313,678,954.10, -0.332% vs cef141d17b4d (10.6976x the reference)"
+    }
+  ],
+  "recent_frontier_steps": [
+    {
+      "task": "DQI decoder",
+      "public_since_utc": "2026-11-03 12:32",
+      "sha12": "fc3ba81614e1",
+      "author": "Syed Asad Ali",
+      "source_notebook": "https://www.kaggle.com/code/syed3000/vqcc-24-43-portfolio",
+      "qubits": 891,
+      "ratio_to_reference": 65.05057232005011,
+      "previous_sha12": "e3928244a1c1",
+      "task_cost_reduction_pct_vs_previous": 0.510156,
+      "source_change_summary": "Per the notebook: pole flags X-measured going forward, rebuilt on the way back and repaid with a CZ (width 902 -> 891); measurement-based erasure of recompute steps and flag uncomputes; conditionally clean AND ladders (Khattar & Gidney, 2024); exact product caching on idle wires. The notebook says one rare high-weight error class is handled approximately at a small priced failure rate. Zero-failure cost -0.596% vs e3928244a1c1 (65.1066x the reference)"
+    },
+    {
+      "task": "Inverse square root",
+      "public_since_utc": "2026-11-03 12:32",
+      "sha12": "04900d11e231",
+      "author": "Syed Asad Ali",
+      "source_notebook": "https://www.kaggle.com/code/syed3000/vqcc-24-43-portfolio",
+      "qubits": 62,
+      "ratio_to_reference": 21.01065927946587,
+      "previous_sha12": "bce2948ff24e",
+      "task_cost_reduction_pct_vs_previous": 1.71491,
+      "source_change_summary": "Per the notebook: a deferred fan-in lookup (algebraic 3-product coefficient decodes, 169 ANDs); adder carries erased by X-measurement plus a conditional CZ instead of reverse ripples; carry-save merges in the reverse decoders and R-rows, ancilla-free top-of-ripple steps, pruned S1 helpers. Cost 98,843.84 (62 Q x 1,594.26): -1.715% vs bce2948ff24e (21.0107x the reference)"
+    },
+    {
+      "task": "Chemistry (dfthcsos)",
+      "public_since_utc": "2026-11-03 13:34",
+      "sha12": "cef141d17b4d",
+      "author": "Heliosli",
+      "source_notebook": "https://www.kaggle.com/code/heliosli/the-dataset-is-public-now-enjoy",
+      "qubits": 428,
+      "ratio_to_reference": 10.6620580719989,
+      "previous_sha12": "b9b05e14dbdb",
+      "task_cost_reduction_pct_vs_previous": 0.005319,
+      "source_change_summary": "Weights-only refit (lambda_eff 47.049404 vs b9b05e14dbdb's 47.051907; words and loaders unchanged): cost 314,723,439.48, -0.005% vs b9b05e14dbdb (10.6621x the reference)"
+    },
+    {
+      "task": "Inverse square root",
+      "public_since_utc": "2026-11-03 14:53",
+      "sha12": "e4ed188b6163",
+      "author": "Kirill Tymchishin",
+      "source_notebook": "https://www.kaggle.com/code/kirilltym/quantum-circuits-four-loaders-eight-toffolis",
+      "qubits": 62,
+      "ratio_to_reference": 21.076754468288893,
+      "previous_sha12": "04900d11e231",
+      "task_cost_reduction_pct_vs_previous": 0.313593,
+      "source_change_summary": "Per the notebook: five contiguous three-product windows rewritten as two-product windows via the XOR identity g = u(n+b) + v(n+u+a) = (u+v)(n+b+v) + f + v, reusing f = v(a+b) already computed for a later target (the seven wires may start dirty); 5 fewer static Toffolis. Cost 98,533.87: -0.314% vs 04900d11e231 (21.0768x the reference)"
+    },
+    {
+      "task": "Chemistry (dfthcsos)",
+      "public_since_utc": "2026-11-03 15:50",
+      "sha12": "4a9adf368a10",
+      "author": "Agniv Banerjee",
+      "source_notebook": "https://www.kaggle.com/datasets/somejoint/qcc-ladder-parts",
+      "qubits": 428,
+      "ratio_to_reference": 10.697560497774584,
+      "previous_sha12": "cef141d17b4d",
+      "task_cost_reduction_pct_vs_previous": 0.331874,
+      "source_change_summary": "Loaders rebuilt (15,585 Toffolis, -44 vs b9b05e14dbdb/cef141d17b4d) with new weights (lambda_eff 47.025650 vs cef141d17b4d's 47.049404): cost 313,678,954.10, -0.332% vs cef141d17b4d (10.6976x the reference)"
+    }
+  ],
+  "commentary_boundaries": [
+    "The source_change_summary is provenance text, not an independently proved mechanism.",
+    "Task cost reductions are computed from the two verified ratio-to-reference values; do not call them portfolio GM gains.",
+    "The portfolio score in check.json is local/hosted notebook arithmetic, not a competition leaderboard score.",
+    "Every factual claim in generated prose must point to a SHA-12 or source notebook in this packet."
+  ]
+}

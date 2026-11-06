@@ -1,0 +1,33 @@
+{
+ "extract": {
+  "peb_ccx": 40090,
+  "single_then_reset": 19387,
+  "single_no_reset": 10
+ },
+ "unextract": {
+  "single_then_reset": 26930,
+  "peb_ccx": 67046,
+  "single_no_reset": 420
+ },
+ "unsynthesis": {
+  "single_then_reset": 3858,
+  "peb_ccx": 21396,
+  "single_no_reset": 20
+ },
+ "convert": {
+  "single_then_reset": 7797,
+  "peb_ccx": 59036
+ },
+ "synthesis": {
+  "single_then_reset": 1091,
+  "peb_ccx": 45488,
+  "single_no_reset": 20
+ },
+ "unconvert": {
+  "single_then_reset": 11629,
+  "peb_ccx": 34154
+ },
+ "scan": {
+  "single_then_reset": 44275
+ }
+}

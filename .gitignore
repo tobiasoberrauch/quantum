@@ -1,0 +1,99 @@
+# ============================================================
+# quantum — public repo .gitignore
+# Goal: share analysis/source/docs; NEVER share creds, venvs,
+# downloaded data, circuit binaries, submissions, or nested repos.
+# ============================================================
+
+# --- Python / virtualenvs / caches -------------------------
+.venv/
+.venv-chem/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+.ruff_cache/
+
+# --- macOS --------------------------------------------------
+.DS_Store
+
+# --- Kaggle / cloud credentials (NEVER commit) --------------
+.kaggle/
+kaggle.json
+*.kaggle.json
+credentials.json
+service-account*.json
+
+# --- Downloaded competition data & dataset symlinks ---------
+.kaggle_data/
+data
+starter_kit
+sota_mrmeows
+sota_yoyobar
+
+# --- Our actual competition submission payloads -------------
+submissions/
+
+# --- Nested upstream / reference git repos (own homes) ------
+qualtran/
+refs/
+
+# --- Large binaries / circuit artifacts / downloads ---------
+*.kmb
+*.kmx
+*.zip
+*.bundle
+*.whl
+*.xz
+*.tar
+*.tar.gz
+*.tgz
+*.npz
+*.npy
+*.h5
+*.hdf5
+*.onnx
+*.bin
+*.so
+*.dylib
+*.o
+*.a
+
+# --- Media / docs binaries ----------------------------------
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.mp4
+*.mov
+*.wav
+*.mp3
+
+# --- Intermediate data outputs (large TSV/CSV dumps) --------
+work/**/out/*.tsv
+work/**/out/*.csv
+*.tsv
+*.u32
+*.u8
+
+# --- Runtime artifacts (logs may leak local paths) ----------
+*.log
+*.err
+
+# --- Scraped third-party competitor content (NOT ours) ------
+work/frontier_1104/downloads/
+work/frontier_1104/intel/
+work/frontier_scan/kirill_output/
+work/frontier_scan/mwa_output/
+work/frontier_scan/chilton_output/
+
+# --- Private competition strategy / outreach (not for public) --
+work/outreach_somejoint_merge.md
+work/merger_dossier.md
+work/advisory_feedback_round3.md
+work/strategy3_dqi_overwrite/report_G.md

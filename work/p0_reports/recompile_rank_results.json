@@ -1,0 +1,2711 @@
+[
+  {
+    "tag": "current",
+    "total_content_ccx": 7325,
+    "total_static_ccx": 9185,
+    "predicted_angles_toffoli": 18370,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4101
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3832
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4174
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5585
+      },
+      {
+        "k": 4,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 4390
+      },
+      {
+        "k": 5,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 4005
+      },
+      {
+        "k": 6,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 4150
+      },
+      {
+        "k": 7,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 4435
+      },
+      {
+        "k": 8,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 2993
+      },
+      {
+        "k": 9,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 5779
+      },
+      {
+        "k": 10,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 3525
+      },
+      {
+        "k": 11,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 3505
+      },
+      {
+        "k": 12,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 3779
+      },
+      {
+        "k": 13,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 5130
+      },
+      {
+        "k": 14,
+        "content_ccx": 475,
+        "static_ccx": 599,
+        "kernels_found": 30,
+        "untransformed": 505,
+        "searched": 5229
+      }
+    ]
+  },
+  {
+    "tag": "perm0",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4779
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4429
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5764
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4876
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4497
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3511
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3773
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4343
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4382
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5078
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3464
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4589
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3609
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4839
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4689
+      }
+    ]
+  },
+  {
+    "tag": "perm1",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6025
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4618
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4414
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3330
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4897
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4706
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4085
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4062
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5600
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5107
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4075
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4524
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4744
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5064
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4728
+      }
+    ]
+  },
+  {
+    "tag": "perm2",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.3,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 2636
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3837
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4246
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3809
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3962
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5073
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4919
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4761
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5506
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4710
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4894
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3679
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4844
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4860
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3647
+      }
+    ]
+  },
+  {
+    "tag": "perm3",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3583
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3868
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4673
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5325
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3968
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4443
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4131
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4509
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3874
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3729
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5820
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4496
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 7071
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4195
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3814
+      }
+    ]
+  },
+  {
+    "tag": "perm4",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.3,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3614
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5179
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5784
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4600
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3786
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4557
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4276
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4344
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 34,
+        "untransformed": 559,
+        "searched": 3776
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4735
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4598
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5139
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3846
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5098
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3679
+      }
+    ]
+  },
+  {
+    "tag": "perm5",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4715
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4541
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5355
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3133
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4101
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5591
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4594
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3974
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5509
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4669
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3315
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5688
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5370
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3750
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4808
+      }
+    ]
+  },
+  {
+    "tag": "perm6",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.3,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4112
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4773
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4521
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4978
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3860
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5579
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4029
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4712
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5961
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4043
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 34,
+        "untransformed": 559,
+        "searched": 3317
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4692
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3501
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4186
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4259
+      }
+    ]
+  },
+  {
+    "tag": "perm7",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5690
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5944
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4113
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3898
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 7056
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3471
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4803
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4958
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4856
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4902
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3047
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5089
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3590
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3818
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4369
+      }
+    ]
+  },
+  {
+    "tag": "perm8",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.3,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4142
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6397
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4112
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3247
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4323
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4420
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5770
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4122
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4075
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4340
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3933
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4089
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4461
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5257
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3949
+      }
+    ]
+  },
+  {
+    "tag": "perm9",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5057
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5496
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4599
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4648
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3399
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6144
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4994
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3669
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5302
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3713
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3697
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3947
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5044
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5129
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5598
+      }
+    ]
+  },
+  {
+    "tag": "perm10",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 34,
+        "untransformed": 559,
+        "searched": 5652
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4200
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6534
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 2955
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4831
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4130
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3639
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5683
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3441
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3499
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4129
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4856
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4604
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6020
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4997
+      }
+    ]
+  },
+  {
+    "tag": "perm11",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5437
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4053
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5365
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4519
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5685
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3687
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5258
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3697
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3716
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4036
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4886
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4558
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4526
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3930
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3747
+      }
+    ]
+  },
+  {
+    "tag": "perm12",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4000
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4970
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3890
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4452
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5670
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6001
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4957
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3780
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4783
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3833
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4796
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4877
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3353
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5309
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4017
+      }
+    ]
+  },
+  {
+    "tag": "perm13",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5288
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3943
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5583
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3581
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4001
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4042
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4613
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4925
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4882
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5200
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4500
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5310
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5474
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4856
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5140
+      }
+    ]
+  },
+  {
+    "tag": "perm14",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.3,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4403
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3732
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4579
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5156
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5173
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3349
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4076
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4572
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5744
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3570
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3737
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4747
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4326
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4248
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4210
+      }
+    ]
+  },
+  {
+    "tag": "perm15",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3959
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5155
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4794
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4337
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3812
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3876
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4665
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4278
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4881
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4584
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4140
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 34,
+        "untransformed": 559,
+        "searched": 4253
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4266
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5364
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4860
+      }
+    ]
+  },
+  {
+    "tag": "perm16",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.3,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5881
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5819
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4538
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4498
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3085
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5093
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4334
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3879
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3316
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3866
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4133
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5539
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3992
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3731
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3601
+      }
+    ]
+  },
+  {
+    "tag": "perm17",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.4,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5666
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4636
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4095
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4698
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3773
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3428
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4863
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4224
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3527
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5334
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4081
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5090
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6803
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3750
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4498
+      }
+    ]
+  },
+  {
+    "tag": "perm18",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.5,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5103
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3454
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5618
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4553
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4872
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 6176
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4352
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4747
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5496
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3800
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5671
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5780
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4134
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5034
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 34,
+        "untransformed": 559,
+        "searched": 4223
+      }
+    ]
+  },
+  {
+    "tag": "perm19",
+    "total_content_ccx": 7875,
+    "total_static_ccx": 9735,
+    "predicted_angles_toffoli": 19470,
+    "seconds": 1.5,
+    "per_loader": [
+      {
+        "k": 0,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5110
+      },
+      {
+        "k": 1,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5432
+      },
+      {
+        "k": 2,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4737
+      },
+      {
+        "k": 3,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5414
+      },
+      {
+        "k": 4,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 7079
+      },
+      {
+        "k": 5,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3047
+      },
+      {
+        "k": 6,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 34,
+        "untransformed": 559,
+        "searched": 5000
+      },
+      {
+        "k": 7,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5755
+      },
+      {
+        "k": 8,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4039
+      },
+      {
+        "k": 9,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 3229
+      },
+      {
+        "k": 10,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4671
+      },
+      {
+        "k": 11,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5282
+      },
+      {
+        "k": 12,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 4202
+      },
+      {
+        "k": 13,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5560
+      },
+      {
+        "k": 14,
+        "content_ccx": 525,
+        "static_ccx": 649,
+        "kernels_found": 35,
+        "untransformed": 560,
+        "searched": 5401
+      }
+    ]
+  }
+]

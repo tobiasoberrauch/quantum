@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "632b82b49ef70696407613f16cae5f8e00a25c4d190e32e93a8e4247a267d1b9",
+ "sources": [
+  "k__dmitriigluzdov__quantum-circuit-compilation-from-source"
+ ],
+ "status": "PASS",
+ "score": 379073515864.5884,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 399932.78346679686,
+ "max_toffoli_count": 454886,
+ "reaction_depth": 67736,
+ "num_ops": 62195439,
+ "num_qubits": 892,
+ "num_bits": 104320,
+ "circuit_sha256": "632b82b49ef70696407613f16cae5f8e00a25c4d190e32e93a8e4247a267d1b9",
+ "seconds": 89.7,
+ "ratio": 64.4715670202693
+}

@@ -1,0 +1,175 @@
+{
+  "system": "FeMoCo76o113e",
+  "factorization": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_scan/mwa2_unpacked/dfthcsos/submission.npz",
+  "tree": "log_depth",
+  "brot": 8,
+  "batch_size": 5,
+  "rounding": "nearest",
+  "num_vectors": 1363,
+  "num_angles": 75,
+  "circuits": [
+    "angle_k_0.kmx",
+    "angle_k_1.kmx",
+    "angle_k_2.kmx",
+    "angle_k_3.kmx",
+    "angle_k_4.kmx",
+    "angle_k_5.kmx",
+    "angle_k_6.kmx",
+    "angle_k_7.kmx",
+    "angle_k_8.kmx",
+    "angle_k_9.kmx",
+    "angle_k_10.kmx",
+    "angle_k_11.kmx",
+    "angle_k_12.kmx",
+    "angle_k_13.kmx",
+    "angle_k_14.kmx"
+  ],
+  "costs": [
+    {
+      "k": 0,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 30520
+    },
+    {
+      "k": 1,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 30307
+    },
+    {
+      "k": 2,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 29947
+    },
+    {
+      "k": 3,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 29189
+    },
+    {
+      "k": 4,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 29446
+    },
+    {
+      "k": 5,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 29429
+    },
+    {
+      "k": 6,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 35542
+    },
+    {
+      "k": 7,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36779
+    },
+    {
+      "k": 8,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36617
+    },
+    {
+      "k": 9,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36584
+    },
+    {
+      "k": 10,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36518
+    },
+    {
+      "k": 11,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36735
+    },
+    {
+      "k": 12,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36714
+    },
+    {
+      "k": 13,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36346
+    },
+    {
+      "k": 14,
+      "num_qubits": 61,
+      "max_magic": 1361,
+      "reaction_depth": 10,
+      "num_instructions": 36668
+    }
+  ],
+  "resources": {
+    "brot": 8,
+    "keep_bits": 10,
+    "angles_toffoli_per_pass": 20415.0,
+    "angles_toffoli": 40830.0,
+    "angles_qubits": 61,
+    "angles_selection_qubits": 11,
+    "angles_persistent_qubits": 40,
+    "angles_temporary_qubits": 10,
+    "outer_state_prep_toffoli": 317,
+    "inner_state_prep_toffoli": 4086,
+    "givens_rotations_toffoli": 2250,
+    "outer_state_prep_persistent_qubits": 40,
+    "outer_state_prep_temporary_qubits": 90,
+    "outer_state_prep_qubits": 130,
+    "inner_state_prep_persistent_qubits": 45,
+    "inner_state_prep_temporary_qubits": 303,
+    "inner_state_prep_qubits": 348,
+    "heuristic_persistent_qubits": 85,
+    "heuristic_temporary_qubits": 303,
+    "heuristic_toffoli": 6653,
+    "heuristic_qubits": 388,
+    "persistent_qubits": 125,
+    "temporary_qubits": 303,
+    "toffoli": 47483.0,
+    "qubits": 428,
+    "angles_within_cap": true
+  },
+  "metrics": {
+    "error_1": 0.05151939996058597,
+    "error_2": 0.01999965003349825,
+    "Lambda": 284.39278557037665,
+    "E_SOS": -22144.188249200004,
+    "E_gap": 3.9148992000045837,
+    "lambda_eff": 47.02564982737494,
+    "gap_in_domain": true,
+    "Lambda_floor": 49.0,
+    "E_gap_floor": 3.914898
+  },
+  "score": Infinity,
+  "directory": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/chem_gpu/_baseline_check"
+}

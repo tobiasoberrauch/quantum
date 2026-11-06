@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "d3094d20257e944303b7970656b63245b81333b4a2468752947caa506a766665",
+ "sources": [
+  "k__ahmedberatozer__quantum-ai-df-thc-group-compression"
+ ],
+ "status": "PASS",
+ "score": 326787908.01329714,
+ "lambda_eff": 47.035246076743576,
+ "toffoli_count": 16233.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 240,
+ "num_ops": 689060,
+ "verified_shots": 87232,
+ "submission_sha256": "a6b85c6c8f7424a7db92747c58806cf4959178099db095afe6ae12982a2c8c8f",
+ "seconds": 26.6,
+ "ratio": 10.268432539979406
+}

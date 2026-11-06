@@ -1,0 +1,14 @@
+[9s] frozen-U seed (9,143,36): err2=722.3m lamEff=126.22 Egap=28.3516 Lambda=295.1
+ep=   250 [    16s] err2=  84.675m lamEff=  54.704 Egap=  5.01953 Lambda=  300.60 cost=  0.0701
+ep=   500 [    22s] err2=  59.214m lamEff=  54.631 Egap=  4.89648 Lambda=  307.21 cost=  0.0447
+ep=   750 [    28s] err2=  49.577m lamEff=  57.476 Egap=  5.39258 Lambda=  309.00 cost=  0.0353
+ep=  1000 [    35s] err2=  45.130m lamEff=  50.485 Egap=  4.16016 Lambda=  308.41 cost=  0.0302
+ep=  1250 [    41s] err2=  46.791m lamEff=  59.222 Egap=  5.68359 Lambda=  311.38 cost=  0.0327
+ep=  1500 [    48s] err2=  44.605m lamEff=  50.838 Egap=  4.17773 Lambda=  311.41 cost=  0.0297
+ep=  1750 [    54s] err2=  42.008m lamEff=  55.004 Egap=  4.88281 Lambda=  312.24 cost=  0.0275
+ep=  2000 [    61s] err2=  39.948m lamEff=  59.363 Egap=  5.70508 Lambda=  311.70 cost=  0.0259
+ep=  2250 [    68s] err2=  40.188m lamEff=  50.955 Egap=  4.20703 Lambda=  310.69 cost=  0.0253
+ep=  2500 [    74s] err2=  72.496m lamEff=  78.112 Egap=  9.91016 Lambda=  312.80 cost=  0.0603
+
+BEST: err2=44.086m lamEff=59.0673 Egap=5.636719 Lambda=312.302 valid_err2=False valid_gap=True
+saved work/chem_lower_rank/refit_143_36.npz

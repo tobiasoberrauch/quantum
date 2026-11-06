@@ -1,0 +1,5 @@
+ref                                     title                                         size  lastUpdated                 downloadCount  voteCount  usabilityRating  
+--------------------------------------  --------------------------------------  ----------  --------------------------  -------------  ---------  ---------------  
+auqib92/qvcc-own-circuits               QVCC own circuits invsqrt dqi dfthcsos    70325145  2026-10-23 23:16:06.427000           1759          0  0.375            
+skumarramparimala/30data-login          30data login                                 23972  2025-12-27 06:28:13.043000              5          0  0.125            
+neiljs/all-shark-tank-us-pitches-deals  All Shark Tank (US) pitches & deals          55826  2017-08-28 20:37:19.633000           3806         46  0.85294116       

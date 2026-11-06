@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "b9c9b0776e5f59ed62009303a70ba4034a702e6700eca6a7459d973a00e5758f",
+ "sources": [
+  "k__somejoint__quantum-circuits-24-59-local-gm-chem-refit"
+ ],
+ "status": "PASS",
+ "score": 311465252.2007287,
+ "lambda_eff": 47.18460574048915,
+ "toffoli_count": 15459.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 196,
+ "num_ops": 607298,
+ "verified_shots": 78080,
+ "submission_sha256": "e5a7eba6852d26f9d53653b2b2ef25aedb6caa3c39cf4c00974be45d5f514944",
+ "seconds": 14.9,
+ "ratio": 10.773592124982752
+}

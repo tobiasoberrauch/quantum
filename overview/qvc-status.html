@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QVC · Status &amp; Grundlagen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1117; --surface:#141a22; --surface-2:#1a222d;
+    --hairline:rgba(226,232,240,.08); --hairline-2:rgba(226,232,240,.16);
+    --t1:#e6ebf1; --t2:#98a4b3; --t3:#5d6a7a;
+    --accent:#45c4bc; --amber:#d9a05b; --green:#62b879; --red:#d97066;
+    --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:rgba(69,196,188,.25)}
+
+  /* light theme */
+  html[data-theme="light"]{
+    --bg:#f5f6f8; --surface:#ffffff; --surface-2:#eceff3;
+    --hairline:rgba(16,24,32,.09); --hairline-2:rgba(16,24,32,.18);
+    --t1:#1a222c; --t2:#46525f; --t3:#6e7986;
+    --accent:#0b7a73; --amber:#a06a24; --green:#35804a; --red:#bf5348;
+  }
+  html[data-theme="light"] ::selection{background:rgba(11,122,115,.18)}
+  html[data-theme="light"] .panel,
+  html[data-theme="light"] .bench,
+  html[data-theme="light"] .stat,
+  html[data-theme="light"] .chart-wrap{box-shadow:0 1px 2px rgba(16,24,32,.05)}
+  html[data-theme="light"] header{background:rgba(245,246,248,.92)}
+  html[data-theme="light"] .row-accent td{background:rgba(11,122,115,.06)}
+  html[data-theme="light"] .formula{background:#f2f4f7}
+
+  /* theme toggle */
+  .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--hairline);border-radius:8px;background:transparent;color:var(--t2);cursor:pointer;flex:none;transition:color .15s,background-color .15s,border-color .15s}
+  .theme-toggle:hover{color:var(--t1);background:var(--surface)}
+  .theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .theme-toggle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  html[data-theme="dark"] .ic-moon{display:none}
+  html[data-theme="light"] .ic-sun{display:none}
+
+  /* header */
+  header{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
+  .head-in{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .head-in .wordmark{margin-right:auto}
+  .wordmark{font-weight:600;font-size:15px;letter-spacing:-.01em}
+  .wordmark span{color:var(--t3);font-weight:400}
+  .head-status{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;color:var(--t2);white-space:nowrap}
+  .dot{width:7px;height:7px;border-radius:50%;flex:none;display:inline-block}
+  .dot.run{background:var(--amber)} .dot.ok{background:var(--green)} .dot.off{background:var(--t3)} .dot.act{background:var(--accent)}
+
+  /* shell */
+  .shell{max-width:1200px;margin:0 auto;padding:48px 32px 96px;display:grid;grid-template-columns:224px minmax(0,1fr);gap:56px}
+  nav.toc{position:sticky;top:88px;align-self:start;font-size:13.5px}
+  nav.toc a{display:block;color:var(--t3);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;transition:color .15s}
+  nav.toc a:hover{color:var(--t2)}
+  nav.toc a.cur{color:var(--t1)}
+  nav.toc .n{font-family:var(--mono);font-size:11px;color:var(--t3);margin-right:8px}
+  .toc-label{font-family:var(--mono);font-size:11px;color:var(--t3);margin-bottom:12px}
+
+  main{max-width:780px}
+  section{margin-bottom:72px;scroll-margin-top:88px}
+  h2{font-size:22px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
+  h2 .no{font-family:var(--mono);font-size:13px;font-weight:400;color:var(--t3);margin-right:12px}
+  h3{font-size:15.5px;font-weight:500;margin:32px 0 8px;color:var(--t1)}
+  p{color:var(--t2);margin-bottom:12px}
+  p strong,li strong{color:var(--t1);font-weight:500}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  ul,ol{color:var(--t2);padding-left:20px;margin-bottom:12px}
+  li{margin-bottom:6px}
+  .lead{font-size:16px;color:var(--t2)}
+  .mono{font-family:var(--mono);font-size:.92em}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+  /* panels */
+  .panel{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:24px;margin:20px 0}
+  .panel.tight{padding:20px}
+  .callout{background:var(--surface);border:1px solid var(--hairline);border-left:2px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0}
+  .callout p{margin:0;color:var(--t2);font-size:14.5px}
+  .callout p strong{color:var(--t1)}
+
+  /* formula */
+  .formula{font-family:var(--mono);font-size:14px;color:var(--t1);background:var(--surface-2);border:1px solid var(--hairline);border-radius:8px;padding:16px 20px;margin:16px 0;line-height:2}
+  .formula em{font-style:normal;color:var(--accent)}
+  .formula .c{color:var(--t3)}
+
+  /* stat row */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
+  .stat{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:20px}
+  .stat .k{font-size:12.5px;color:var(--t3);margin-bottom:8px}
+  .stat .v{font-family:var(--mono);font-size:22px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .stat .v small{font-size:13px;color:var(--t3);font-weight:400}
+  .stat .d{font-size:12.5px;color:var(--t3);margin-top:6px}
+  .stat .d.up{color:var(--green)}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+  th{font-weight:500;color:var(--t3);text-align:left;font-size:12.5px;padding:8px 12px;border-bottom:1px solid var(--hairline-2)}
+  td{padding:10px 12px;border-bottom:1px solid var(--hairline);color:var(--t2);vertical-align:top}
+  td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
+  tr:last-child td{border-bottom:none}
+  td.hl{color:var(--t1)}
+  .row-accent td{background:rgba(69,196,188,.05)}
+  .ref{font-family:var(--mono);font-size:12.5px;color:var(--t2);white-space:nowrap}
+  .tag{font-family:var(--mono);font-size:11px;color:var(--t3);border:1px solid var(--hairline-2);border-radius:4px;padding:1px 6px;white-space:nowrap}
+
+  /* benchmark cards */
+  .bench{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:24px;margin:16px 0}
+  .bench-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:8px}
+  .bench-name{font-weight:600;font-size:16px}
+  .bench-name span{font-family:var(--mono);font-size:12px;color:var(--t3);font-weight:400;margin-left:8px}
+  .bench-ratio{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--accent);font-variant-numeric:tabular-nums}
+  .bench p{font-size:14px;margin-bottom:8px}
+  .bench-meta{display:flex;gap:24px;font-family:var(--mono);font-size:12px;color:var(--t3);margin-top:12px;padding-top:12px;border-top:1px solid var(--hairline)}
+  .bench-meta b{color:var(--t2);font-weight:400}
+
+  /* chart */
+  .chart-wrap{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:24px 24px 16px;margin:20px 0}
+  .chart-title{font-size:13px;color:var(--t3);margin-bottom:16px}
+  svg text{font-family:var(--mono);font-size:11px;fill:var(--t3)}
+  svg .grid{stroke:var(--hairline);stroke-width:1}
+  svg .axis{stroke:var(--hairline-2);stroke-width:1}
+
+  /* scenario bars */
+  .scen{margin:16px 0}
+  .scen-row{display:grid;grid-template-columns:220px 1fr 72px;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--hairline)}
+  .scen-row:last-child{border-bottom:none}
+  .scen-label{font-size:13.5px;color:var(--t2)}
+  .scen-label b{color:var(--t1);font-weight:500}
+  .scen-track{position:relative;height:10px;background:var(--surface-2);border-radius:5px;overflow:visible}
+  .scen-fill{position:absolute;left:0;top:0;bottom:0;background:var(--t3);border-radius:5px}
+  .scen-fill.hot{background:var(--accent)}
+  .scen-val{font-family:var(--mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums;color:var(--t2)}
+  .scen-val.hot{color:var(--accent)}
+  .scen-scale{display:grid;grid-template-columns:220px 1fr 72px;gap:16px;margin-top:8px}
+  .scale-line{position:relative;height:20px}
+  .scale-line .tick{position:absolute;top:0;font-family:var(--mono);font-size:10.5px;color:var(--t3);transform:translateX(-50%)}
+  .scale-line .tick::before{content:'';position:absolute;left:50%;top:-6px;width:1px;height:5px;background:var(--hairline-2)}
+
+  /* glossary */
+  dl.gloss{display:grid;grid-template-columns:1fr 1fr;gap:4px 32px;margin:16px 0}
+  dl.gloss div{padding:10px 0;border-bottom:1px solid var(--hairline)}
+  dt{font-weight:500;font-size:14px;color:var(--t1);margin-bottom:2px}
+  dd{font-size:13.5px;color:var(--t2)}
+
+  /* steps */
+  ol.steps{list-style:none;padding:0;counter-reset:s;margin:16px 0}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 16px 40px;color:var(--t2);font-size:14.5px}
+  ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:1px;font-family:var(--mono);font-size:12px;color:var(--accent)}
+  ol.steps li::after{content:'';position:absolute;left:11px;top:22px;bottom:2px;width:1px;background:var(--hairline)}
+  ol.steps li:last-child::after{display:none}
+
+  footer{border-top:1px solid var(--hairline);padding-top:24px;margin-top:8px}
+  footer .src{font-size:13px;color:var(--t3);columns:2;column-gap:40px}
+  footer .src li{margin-bottom:4px;break-inside:avoid}
+  .credit{font-size:12px;color:var(--t3);margin-top:20px;font-family:var(--mono)}
+
+  @media (max-width:960px){
+    .shell{grid-template-columns:1fr;gap:32px;padding:32px 20px 64px}
+    nav.toc{position:static;display:flex;flex-wrap:wrap;gap:4px 16px}
+    nav.toc a{border:none;padding:2px 0}
+    .toc-label{width:100%}
+    .stats{grid-template-columns:1fr}
+    dl.gloss{grid-template-columns:1fr}
+    .scen-row,.scen-scale{grid-template-columns:1fr;gap:6px}
+    .scen-val{text-align:left}
+    footer .src{columns:1}
+    .head-in{padding:12px 20px}
+    .head-status .hs-long{display:none}
+  }
+</style>
+<script>
+  try{ if(localStorage.getItem('qvc-theme')==='light') document.documentElement.setAttribute('data-theme','light'); }catch(e){}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="wordmark">QVC <span>· Status &amp; Grundlagen</span></div>
+    <div class="head-status">
+      <span class="dot run"></span>
+      <span class="hs-long">Stand 02.11.2026 · </span>Rang ~255/1782 · <span style="color:var(--t1)">23.91003</span> · qvc-003 pending
+    </div>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Farbschema wechseln" title="Hell / Dunkel">
+      <svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="shell">
+<nav class="toc">
+  <div class="toc-label">Inhalt</div>
+  <a href="#s1"><span class="n">01</span>Was ist die Competition</a>
+  <a href="#s2"><span class="n">02</span>Die drei Benchmarks</a>
+  <a href="#s3"><span class="n">03</span>Wo stehen wir</a>
+  <a href="#s4"><span class="n">04</span>Wo ist die Lücke</a>
+  <a href="#s5"><span class="n">05</span>Constant Seed</a>
+  <a href="#s6"><span class="n">06</span>Strategie &amp; Hebel</a>
+  <a href="#s7"><span class="n">07</span>Ideenraum</a>
+  <a href="#s8"><span class="n">08</span>Glossar</a>
+  <a href="#s9"><span class="n">09</span>Quellen</a>
+</nav>
+
+<main>
+
+<!-- ================= 01 ================= -->
+<section id="s1">
+  <h2><span class="no">01</span>Was ist die Competition</h2>
+  <p class="lead">Google Quantum AI sucht die günstigsten Quantenschaltkreise für drei konkrete Rechenaufgaben. 150.000 $ Preisgeld, 1.782 Teams, Deadline 20.01.2027. Wir sind Solo-Team <span class="mono">Tobias Oberrauch</span>.</p>
+
+  <p>Jedes Team liefert für jeden der drei Benchmarks einen Schaltkreis. Der offizielle Verifier simulierte den Kreis für <strong>jeden erlaubten Eingabewert</strong> und misst zwei Dinge: dass das Ergebnis stimmt (innerhalb einer Toleranz) und wie teuer der Kreis ist. Teurer = schlechter.</p>
+
+  <h3>Bewertung</h3>
+  <div class="formula">
+    Score = ( r<sub>I</sub> · r<sub>II</sub> · r<sub>III</sub> )<sup>⅓</sup> &nbsp;<span class="c">— geometrisches Mittel der drei Verhältnisse</span><br>
+    r = Referenzkosten ÷ unsere Kosten<br>
+    Kosten = <em>Q</em> · C &nbsp;<span class="c">— Peak-Qubits mal Toffoli-äquivalente Operationen C</span>
+  </div>
+  <p>Das geometrische Mittel bedeutet: <strong>eine Verbesserung um denselben Faktor zählt gleich viel, egal in welchem Benchmark</strong>. dqi ist bei 64×, chem bei 10× – aber 10 % mehr bei chem helfen dem Score genau so viel wie 10 % mehr bei dqi. Wer nur an der stärksten Aufgabe feilt, verfehlt den Hebel.</p>
+
+  <h3>Warum „verifizierbar"</h3>
+  <p>Normale Quantenschaltkreise kann man klassisch nicht prüfen – ab ~50 Qubits bricht jede Simulation zusammen. Diese Competition nutzt einen Trick: Die kritischen Teile der Kreise dürfen nur aus <strong>reversibler klassischer Logik</strong> (Toffoli-Gates), <strong>Phasen</strong> und <strong>Messung-basierter Aufräumung</strong> bestehen. Solche Kreise kann man für jeden klassischen Eingang exakt simulieren – mit Googles Simulator <span class="mono">kickmix</span>. Der Verifier macht daraus ein Fuzz-Testing: Millionen Eingaben durchspielen, Phasen abgleichen, Kosten zählen.</p>
+  <div class="callout"><p><strong>Folge:</strong> Jeder Kreis ist lokal in Minuten prüfbar. Das ist unser Vorteil gegenüber „Blackbox"-Optimierung – wir können jede Änderung gegen den offiziellen Verifier testen, bevor sie submitted wird.</p></div>
+</section>
+
+<!-- ================= 02 ================= -->
+<section id="s2">
+  <h2><span class="no">02</span>Die drei Benchmarks</h2>
+  <p>Je ein Satz: was der Kreis berechnen muss, warum es schwer ist, und wo wir stehen.</p>
+
+  <div class="bench">
+    <div class="bench-top">
+      <div class="bench-name">Invsqrt <span>Benchmark I</span></div>
+      <div class="bench-ratio">20.65×</div>
+    </div>
+    <p>Der Kreis muss für jede Zahl x von 1 bis 3.133.452 die Phase 1/√x auf ein Qubit schreiben – auf 2⁻²⁴ genau. Klassisch: Newton-Raphson-Iteration mit Fixpunktarithmetik. Schwer, weil jede Multiplikation in reversibler Logik Tausende Toffolis kostet und das Ergebnis trotzdem in wenigen Dutzend Qubits untergebracht sein muss.</p>
+    <div class="bench-meta">
+      <div>Qubits <b>62</b></div>
+      <div>Kosten <b>100.568</b></div>
+      <div>Fehler-Marge <b>0.9993 / 1.0</b></div>
+      <div>Status <b style="color:var(--amber)">gesättigt</b></div>
+    </div>
+  </div>
+
+  <div class="bench">
+    <div class="bench-top">
+      <div class="bench-name">DQI <span>Benchmark II</span></div>
+      <div class="bench-ratio">64.47×</div>
+    </div>
+    <p>Ein Quanten-Fehlerkorrektur-Dekoder: Aus 70 Syndrom-Werten muss der Kreis die Fehlerstellen eines Reed-Solomon-Codes finden (Majority-Belief-Propagation). Unser stärkster Benchmark – und gerade aktiv: Die Community hat diese Woche zwei exakte Rewrite-Techniken (Produkt-Caching, Messung-basierte Uncomputation) darauf angewandt und ~0.7 % Toffolis gespart.</p>
+    <div class="bench-meta">
+      <div>Qubits <b>892</b></div>
+      <div>Kosten <b>3.77·10¹¹</b></div>
+      <div>Fehler-Budget <b>ε₊ &lt; 1/16</b></div>
+      <div>Status <b style="color:var(--green)">bewegt sich</b></div>
+    </div>
+  </div>
+  <div class="callout"><p><strong>DQI-Insight dieser Woche:</strong> Der Verifier verlangt nicht null Fehler, sondern eine effektive Fehlerrate unter 1/16. yoyobar nutzt das: Sein Dekoder enthält <em>bewusste</em> Approximationen seltener Zweige und spart dadurch ~1.830 Toffolis pro Shot. Wir haben seine Bytes übernommen (qvc-003).</p></div>
+
+  <div class="bench">
+    <div class="bench-top">
+      <div class="bench-name">DFTHCOS <span>Benchmark III · Chemie</span></div>
+      <div class="bench-ratio">10.27×</div>
+    </div>
+    <p>Grundzustands-Energie eines FeMoCo-Komplexes: Der Kreis bereitet einen chemischen Zustandsansatz vor (DF-THC, Tensor-Hyperkontraktion) und misst die Energie. Schwächster Benchmark – aber auch am nächsten an seiner physikalischen Grenze: Das Kostenmaß hängt an λ_eff, dessen Untergrenze bei ~46.79 liegt; wir sind bei 47.04.</p>
+    <div class="bench-meta">
+      <div>Qubits <b>428</b></div>
+      <div>Kosten <b>3.27·10⁸</b></div>
+      <div>λ_eff <b>47.04 / 46.79 Floor</b></div>
+      <div>Status <b style="color:var(--amber)">am Floor</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 ================= -->
+<section id="s3">
+  <h2><span class="no">03</span>Wo stehen wir</h2>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="k">Bester Score</div>
+      <div class="v">23.91003</div>
+      <div class="d up">+0.66 seit Start (23.24970)</div>
+    </div>
+    <div class="stat">
+      <div class="k">Rang</div>
+      <div class="v">~255 <small>/ 1782</small></div>
+      <div class="d">vorher 832</div>
+    </div>
+    <div class="stat">
+      <div class="k">Abstand zum Top</div>
+      <div class="v">−4.09</div>
+      <div class="d">Top: 27.996 (Breaking1800)</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Score-Verlauf · 31.10.–02.11.2026 · geometrisches Mittel der drei Benchmarks</div>
+    <svg viewBox="0 0 760 340" role="img" aria-label="Score-Verlauf: LB Top, öffentliches Plateau und unsere Submissions">
+      <!-- grid -->
+      <line class="grid" x1="56" y1="273.3" x2="720" y2="273.3"/>
+      <line class="grid" x1="56" y1="228.0" x2="720" y2="228.0"/>
+      <line class="grid" x1="56" y1="182.7" x2="720" y2="182.7"/>
+      <line class="grid" x1="56" y1="137.3" x2="720" y2="137.3"/>
+      <line class="grid" x1="56" y1="92.0"  x2="720" y2="92.0"/>
+      <line class="grid" x1="56" y1="46.7"  x2="720" y2="46.7"/>
+      <line class="axis" x1="56" y1="24" x2="56" y2="296"/>
+      <line class="axis" x1="56" y1="296" x2="720" y2="296"/>
+      <!-- y labels -->
+      <text x="48" y="277" text-anchor="end">23</text>
+      <text x="48" y="232" text-anchor="end">24</text>
+      <text x="48" y="187" text-anchor="end">25</text>
+      <text x="48" y="141" text-anchor="end">26</text>
+      <text x="48" y="96"  text-anchor="end">27</text>
+      <text x="48" y="51"  text-anchor="end">28</text>
+      <!-- x labels -->
+      <text x="56"  y="316" text-anchor="middle">31.10.</text>
+      <text x="277" y="316" text-anchor="middle">01.11.</text>
+      <text x="499" y="316" text-anchor="middle">02.11.</text>
+      <text x="714" y="316" text-anchor="end">jetzt</text>
+
+      <!-- LB top (step) -->
+      <path d="M56,102.9 H471.7 V46.9 H720" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+      <text x="470" y="96" text-anchor="end" fill="var(--amber)">26.76</text>
+      <text x="716" y="40" text-anchor="end" fill="var(--amber)">LB Top 27.996</text>
+
+      <!-- public plateau (dashed) -->
+      <path d="M56,263.8 L683,235.2" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <text x="200" y="249" fill="var(--t3)">öffentliches Plateau 23.21 → 23.91</text>
+
+      <!-- us -->
+      <path d="M393.8,261.8 L684.6,235.2" fill="none" stroke="var(--accent)" stroke-width="2"/>
+      <path d="M684.6,235.2 L690,233.5" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="3 3"/>
+      <circle cx="393.8" cy="261.8" r="4" fill="var(--accent)"/>
+      <circle cx="684.6" cy="235.2" r="4" fill="var(--accent)"/>
+      <circle cx="690" cy="233.5" r="4" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="393.8" y="280" text-anchor="middle" fill="var(--accent)">qvc-001</text>
+      <text x="664" y="252" text-anchor="end" fill="var(--accent)">qvc-002 · 003</text>
+
+      <!-- gap annotation -->
+      <line x1="708" y1="46.9" x2="708" y2="233.5" stroke="var(--hairline-2)" stroke-width="1"/>
+      <text x="704" y="140" text-anchor="end" transform="rotate(-90 704 140)">Lücke 4.05 GM</text>
+    </svg>
+  </div>
+
+  <h3>Unsere Submissions</h3>
+  <table>
+    <tr><th></th><th>Portfolio</th><th class="num">Score</th><th>Status</th></tr>
+    <tr>
+      <td><span class="ref">57838697</span></td>
+      <td>qvc-001 · yoyobar/heliosli v57 (invsqrt 20.62× · dqi 61.06× · chem 9.93×)</td>
+      <td class="num">23.24970</td>
+      <td><span class="dot ok"></span> <span class="tag">COMPLETE</span></td>
+    </tr>
+    <tr>
+      <td><span class="ref">57901499</span></td>
+      <td>qvc-002 · busyaprime v14 (invsqrt 20.65× · dqi 64.47× · chem 10.27×)</td>
+      <td class="num hl">23.91003</td>
+      <td><span class="dot ok"></span> <span class="tag">COMPLETE</span></td>
+    </tr>
+    <tr class="row-accent">
+      <td><span class="ref">57902602</span></td>
+      <td>qvc-003 · Hybrid-Best (yoyobar-dqi mit Approximations-Zweigen + neue heliosli-Weights)</td>
+      <td class="num">~23.947</td>
+      <td><span class="dot run"></span> <span class="tag">PENDING</span></td>
+    </tr>
+  </table>
+  <p style="font-size:13.5px">Jede Zeile: 18 Dateien, SHA-256-pinned an öffentliche Releases, lokal mit den unveränderten offiziellen Verifiern geprüft, bevor sie submitted wurden. qvc-002 hat exakt busyaprimes LB-Score reproduziert – Byte-Identität bedeutet Score-Identität.</p>
+
+  <h3>Meilensteine</h3>
+  <ul>
+    <li><strong>Mid-Milestone (Frist 20.11.):</strong> erfüllt – öffentliches Research-Notebook <a href="https://www.kaggle.com/code/tobeetaylor/constseed-invsqrt-reconstruction">constseed-invsqrt-reconstruction</a> ist live (unser eigenständiges Constant-Seed-Ergebnis).</li>
+    <li><strong>Longest-Leader (bis 04.01.):</strong> Punkte für längsten Aufenthalt an der Tabellenspitze – realistisch nur mit einem echten Sprung relevant.</li>
+    <li><strong>Team-Merger (ab 13.01.):</strong> Teams dürfen sich bis zur Deadline mergen – Option, pro Benchmark den besten Kreis zu kombinieren.</li>
+  </ul>
+</section>
+
+<!-- ================= 04 ================= -->
+<section id="s4">
+  <h2><span class="no">04</span>Wo ist die Lücke</h2>
+  <p>Von 23.91 auf 28.0 muss das <strong>Produkt</strong> der drei Verhältnisse um den Faktor (28.0/23.91)³ = <strong>×1.61</strong> wachsen. Weil das Score-Mittel geometrisch ist, kann das jeder Benchmark allein leisten – die Frage ist nur, was jeweils nötig wäre:</p>
+
+  <table>
+    <tr><th>Benchmark</th><th class="num">heute</th><th class="num">allein nötig für 28.0</th><th>Plausibel?</th></tr>
+    <tr class="row-accent">
+      <td class="hl">Invsqrt</td><td class="num">20.65×</td><td class="num">33.2×</td>
+      <td><span class="dot act"></span> ja – bekannter offener Weg (Constant Seed, s. 05)</td>
+    </tr>
+    <tr>
+      <td>DQI</td><td class="num">64.47×</td><td class="num">103.6×</td>
+      <td><span class="dot run"></span> möglich, aber aggressiv – Community arbeitet daran</td>
+    </tr>
+    <tr>
+      <td>Chemie</td><td class="num">10.27×</td><td class="num">16.5×</td>
+      <td><span class="dot off"></span> unwahrscheinlich – λ_eff schon am physikalischen Floor</td>
+    </tr>
+  </table>
+
+  <div class="callout"><p><strong>Fazit:</strong> Die Top-Teams (stagnieren seit gestern Abend bei ~28.0) haben mit hoher Wahrscheinlichkeit einen <strong>kompilierten Constant-Seed-Invsqrt</strong> bei ~30–33×. DQI und Chemie sind bei uns bereits auf Community-SOTA. Der eine Hebel, der zählt, ist Invsqrt – und der ist exakt das, was mrmeows als „open direction" beschrieben hat, ohne es selbst zu kompilieren.</p></div>
+
+  <p>Zwei Margen zeigen, dass die anderen Tasks ausgereizt sind: Invsqrt läuft bei Fehler/Marge 0.9993 von 1.0 (kein Raum für billigere Approximation), Chemie bei einer Energiespalten-Marge von 7·10⁻⁷. Beide sind an ihrer jeweiligen Grenze – dort bringt nur eine andere Circuit-Familie Fortschritt, keine Feinoptimierung.</p>
+</section>
+
+<!-- ================= 05 ================= -->
+<section id="s5">
+  <h2><span class="no">05</span>Constant Seed – unsere eigene Forschung</h2>
+  <p>mrmeows (Community-Forscher, teilt alles unter Apache-2.0) hat in seinem Release eine Richtung beschrieben, die noch niemand kompiliert hat:</p>
+  <div class="panel tight" style="font-size:14px">
+    <p style="margin:0;font-style:italic;color:var(--t2)">„A constant-seed model (128 entry seed table, 8 fractional bits, degree 3, residual 24 plus 2 guard bits, output fraction 26) passes the full domain numerical check at worst error/tolerance 0.617. That margin is the asset: spend it on cheaper circuits."</p>
+  </div>
+
+  <h3>Was das bedeutet, einfach erklärt</h3>
+  <p>Der heutige Invsqrt-Kreis startet Newton-Raphson mit einer <strong>17-Bit-koeffizientierten Kubik-Polynom-Rate</strong> – teuer zu laden. Die Constant-Seed-Idee: Starte mit einem <strong>grobem, billigen Seed</strong> (8 Bit Genauigkeit) und verfeinere mit <strong>zwei schmalen Newton-Schritten</strong>. Newton quadriert den Fehler: 2⁻⁷ → 2⁻¹⁵ → 2⁻³⁰. Der grobe Seed reicht, weil die Arithmetik danach die Präzision selbst erzeugt.</p>
+  <ol class="steps">
+    <li><strong>Normalisieren:</strong> x wird so verschoben, dass M ∈ [1,4) – kostet ~10 Gates.</li>
+    <li><strong>Seed laden:</strong> 128-Tabelle oder (unser Befund) stückweise-kubisches Polynom in 7 Adress-Bits – ~450 Gates statt ~1.074.</li>
+    <li><strong>Newton #1:</strong> 16-Bit-Schritt, ~650 Gates.</li>
+    <li><strong>Newton #2:</strong> 24+2 Guard-Bit-Residual, ~1.300 Gates.</li>
+    <li><strong>Ausgabe:</strong> nur die Top-26 Bits werden als Phase geschrieben („output fraction 26").</li>
+  </ol>
+
+  <h3>Was wir unabhängig rekonstruiert haben</h3>
+  <table>
+    <tr><th>Modell-Variante</th><th class="num">schlechtester Fehler / Toleranz</th><th>Anmerkung</th></tr>
+    <tr><td>Referenz (offizieller Docstring)</td><td class="num">2.84·10⁻⁸</td><td>unser Harness validiert exakt</td></tr>
+    <tr><td>128-Tabelle (mrmeows-Spec)</td><td class="num">0.6434</td><td>seine Angabe: 0.617</td></tr>
+    <tr class="row-accent"><td class="hl">Stückweise-kubisch (pwq3)</td><td class="num hl">0.5577</td><td>besser als seine Spec – unser Ergebnis</td></tr>
+  </table>
+  <p>Und die entscheidende Interpretation: <strong>„output fraction 26" heißt, nur die obersten ~26 Ausgabe-Bits werden phasenweise geschrieben.</strong> Bits darunter liegen unter der Toleranz und brauchen keine Gatter. Das spart ~15 feine Rotationen gegenüber dem heutigen SOTA-Kreis (~400 Toffoli-Äquivalente) – aber es fügt Quantisierungsfehler hinzu (≤ 0.25 Marge). Das geht nur, weil die Arithmetik Marge übrig lässt: 0.5577 + 0.25 = 0.81 &lt; 1. <strong>Die numerische Marge ist das Budget, das billigere Schaltungen bezahlt.</strong></p>
+
+  <h3>Status</h3>
+  <ul>
+    <li><span class="dot ok" style="margin-right:8px"></span>Nummerisches Modell: rekonstruiert, über den vollen Domain verifiziert, als <a href="https://www.kaggle.com/code/tobeetaylor/constseed-invsqrt-reconstruction">öffentliches Notebook</a> publiziert</li>
+    <li><span class="dot run" style="margin-right:8px"></span>Roher kickmix-Kreis: wird gerade gebaut (Track B, Subagent) – Fundament, erwartet ~1.8× (bewusst unoptimiert)</li>
+    <li><span class="dot act" style="margin-right:8px"></span>Optimierung auf Wettbewerbsniveau: entweder mrmeows' Paket (Discord-Anfrage offen) oder unser eigenes 32-Runden-Programm (Wochen–Monate)</li>
+  </ul>
+</section>
+
+<!-- ================= 06 ================= -->
+<section id="s6">
+  <h2><span class="no">06</span>Strategie &amp; Hebel</h2>
+  <p>Alle Hebel laufen parallel. Legende: <span class="dot ok" style="vertical-align:baseline"></span> erledigt · <span class="dot run" style="vertical-align:baseline"></span> läuft · <span class="dot act" style="vertical-align:baseline"></span> deine Aktion · <span class="dot off" style="vertical-align:baseline"></span> geschlossen</p>
+
+  <table>
+    <tr><th></th><th>Hebel</th><th>Erwartung</th><th>Status</th></tr>
+    <tr>
+      <td class="num">A</td>
+      <td>Caching-Techniken auf Invsqrt übertragen</td>
+      <td>+0.5–1.5 GM</td>
+      <td><span class="dot off"></span> negativ (s. unten)</td>
+    </tr>
+    <tr>
+      <td class="num">B</td>
+      <td>Roher Constant-Seed-Kreis (Fundament)</td>
+      <td>Basis für C</td>
+      <td><span class="dot run"></span> Subagent aktiv</td>
+    </tr>
+    <tr>
+      <td class="num">C</td>
+      <td>Best-of-public weiter adoptieren + Monitoring alle 30 min</td>
+      <td>+0.01–0.1 GM pro Welle</td>
+      <td><span class="dot run"></span> aktiv (2 Wellen bereits adoptiert)</td>
+    </tr>
+    <tr>
+      <td class="num">D</td>
+      <td>Mid-Milestone-Notebook</td>
+      <td>Prize-Voraussetzung</td>
+      <td><span class="dot ok"></span> live</td>
+    </tr>
+    <tr class="row-accent">
+      <td class="num">E</td>
+      <td class="hl">Discord: mrmeows um research/-Paket + seinen kompilierten Kreis bitten</td>
+      <td class="hl">+3–4 GM (der Sprung auf ~28)</td>
+      <td><span class="dot act"></span> wartet auf dich</td>
+    </tr>
+  </table>
+
+  <h3>Warum A negativ ist (und warum das gut zu wissen ist)</h3>
+  <p>busyaprimes Erfolg beim DQI kam aus zwei Techniken: <strong>Produkt-Caching</strong> (wiederholte AND-Produkte auf freien Drähten zwischenspeichern) und <strong>Messung-basierte Uncomputation</strong> (Flags per Messung aufräumen statt neu zu berechnen). Wir haben seinen symbolischen Wiederholungs-Finder exakt nachgebaut (GF(2)-Normalformen pro Draht, ~5 s Laufzeit) und auf unserem 62Q-Invsqrt gefahren: <strong>0 echte Produkt-Wiederholungen.</strong> Der Invsqrt ist ein One-Shot-Newton-Verfahren – jeder Partialprodukt-AND wird genau einmal berechnet und per Messung aufgelöst (897 HMR-Operationen). Der DQI dagegen ist ein iterativer Dekoder, in dem dieselben Flags in jeder Epoche neu auftauchen. Die Technik passt strukturell nicht. Geschlossen, dokumentiert, kein weiterer Aufwand.</p>
+</section>
+
+<!-- ================= 07 ================= -->
+<section id="s7">
+  <h2><span class="no">07</span>Ideenraum</h2>
+  <p>Was müsste passieren, um 28+ zu erreichen? Kein einzelner Benchmark reicht – aber eine Kombination plausibler Verbesserungen schafft es:</p>
+
+  <div class="panel">
+    <div class="scen">
+      <div class="scen-row">
+        <div class="scen-label">nur Invsqrt → <b>30×</b> (Constant Seed kompiliert)</div>
+        <div class="scen-track"><div class="scen-fill" style="width:68.2%"></div></div>
+        <div class="scen-val">27.09</div>
+      </div>
+      <div class="scen-row">
+        <div class="scen-label">nur DQI → <b>75×</b> (mehr Caching, kleinere Dekoder-Linie)</div>
+        <div class="scen-track"><div class="scen-fill" style="width:35.7%"></div></div>
+        <div class="scen-val">25.14</div>
+      </div>
+      <div class="scen-row">
+        <div class="scen-label">nur Chemie → <b>12×</b> (neue Faktorisierung)</div>
+        <div class="scen-track"><div class="scen-fill" style="width:36.2%"></div></div>
+        <div class="scen-val">25.17</div>
+      </div>
+      <div class="scen-row">
+        <div class="scen-label"><b>Kombination</b> (30× / 70× / 11×)</div>
+        <div class="scen-track"><div class="scen-fill hot" style="width:91.3%"></div></div>
+        <div class="scen-val hot">28.48</div>
+      </div>
+      <div class="scen-scale">
+        <div></div>
+        <div class="scale-line">
+          <span class="tick" style="left:15.2%">heute 23.91</span>
+          <span class="tick" style="left:83.3%">Top 28.0</span>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Offene Fragen – hier könnten neue Ideen herkommen</h3>
+  <table>
+    <tr><th>Idee</th><th>Wirkung</th><th>Aufwand</th><th>Anmerkung</th></tr>
+    <tr class="row-accent">
+      <td class="hl">E: mrmeows-Paket bekommen (Discord)</td>
+      <td>hoch</td><td>niedrig (1 Nachricht)</td>
+      <td>er teilt alles Apache-2.0; Entwurf liegt bereit</td>
+    </tr>
+    <tr>
+      <td>Eigene DQI-Optimierung auf SomeJoint-Quellcode</td>
+      <td>mittel</td><td>mittel</td>
+      <td>der volle Decoder-Builder ist seit heute öffentlich (<span class="mono">somejoint/qcc-dqi-892-q26 → dqi-sources/</span>)</td>
+    </tr>
+    <tr>
+      <td>Constant-Seed-Optimierungsprogramm (Z3-SAT-Rewrites)</td>
+      <td>hoch</td><td>sehr hoch</td>
+      <td>mrmeows' 32 Runden neu auf unserem Kern; erst sinnvoll, wenn Track B steht</td>
+    </tr>
+    <tr>
+      <td>Team-Merger am 13.01.</td>
+      <td>hoch</td><td>niedrig</td>
+      <td>pro Benchmark den besten Kreis nehmen; Kandidaten: Teams im 24–26-Band mit komplementären Stärken</td>
+    </tr>
+    <tr>
+      <td>Chemie: neue Faktorisierung jenseits von Leras (9,143,40)</td>
+      <td>mittel</td><td>hoch</td>
+      <td>λ_eff-Floor 46.79 ist die harte Grenze der aktuellen Wortfamilie</td>
+    </tr>
+    <tr>
+      <td>Weitere Approximations-Budgets suchen</td>
+      <td>niedrig</td><td>niedrig</td>
+      <td>Invsqrt (Marge 0.9993) und Chemie (7·10⁻⁷) sind gesättigt; nur DQI hat Budget</td>
+    </tr>
+  </table>
+
+  <div class="callout"><p><strong>Was ein Breakthrough wäre:</strong> ein kompilierter Constant-Seed-Invsqrt bei ~30× allein bringt 27.1 – kombiniert mit der laufenden DQI-Entwicklung der Community (die wir weiter adoptieren) reicht das auf 28+. Genau deshalb ist E der wichtigste einzelne Schritt, und B+C die Versicherung, falls E leer ausgeht.</p></div>
+</section>
+
+<!-- ================= 08 ================= -->
+<section id="s8">
+  <h2><span class="no">08</span>Glossar</h2>
+  <dl class="gloss">
+    <div><dt>Toffoli-Gate (CCX)</dt><dd>Das Arbeitspferd reversibler Logik: drei Qubits, das dritte wird genau dann umgekippt, wenn die ersten beiden 1 sind. Kostet am meisten – die Competition zählt im Wesentlichen diese.</dd></div>
+    <div><dt>Peak-Qubits (Q)</dt><dd>Die maximal gleichzeitig benötigten Qubits. Kosten = Q · C, also: weniger Qubits UND weniger Gates, beides zählt.</dd></div>
+    <div><dt>Phase</dt><dd>Ein Winkel, den ein Kreis auf einen Zustand schreibt. Alle drei Benchmarks sind im Kern Phasen-Aufgaben: den richtigen Winkel auf das richtige Qubit bringen.</dd></div>
+    <div><dt>Rotation</dt><dd>Feingesteuerte Phase. Im T-Zählung-Modell teuer (logarithmisch in der gewünschten Genauigkeit) – deshalb zahlt sich „output fraction 26" aus: weniger Rotationen.</dd></div>
+    <div><dt>HMR / Messung-basierte Uncomputation</dt><dd>Gidney-Trick: Hilfsqubit statt aufwendig zurückzurechnen einfach messen; das Messergebnis korrigiert die Phase bedingt. Spart viele Gates – in allen SOTA-Kreisen allgegenwärtig.</dd></div>
+    <div><dt>kickmix</dt><dd>Googles klassischer Simulator für „verifizierbare" Kreise. Er spielt jeden klassischen Eingang durch und liest die Phase ab – die Basis des offiziellen Verifiers.</dd></div>
+    <div><dt>Geometrisches Mittel</dt><dd>Mittelwert über Produkte: (a·b·c)^⅓. Fair zwischen Tasks unterschiedlicher Größe – ein Faktor-Verbesserung zählt überall gleich.</dd></div>
+    <div><dt>Newton-Raphson</dt><dd>Iterative Verfeinerung: aus einer groben Rate y wird y·(3−x·y²)/2, doppelt so viele richtige Bits pro Schritt. Das Herz des Invsqrt.</dd></div>
+    <div><dt>MBUC-Dekoder</dt><dd>Majority-Belief-Propagation für Reed-Solomon-Codes – der Algorithmus hinter Benchmark II (DQI), iterativ über „Epochen".</dd></div>
+    <div><dt>DF-THC</dt><dd>Density-Fitting Tensor-Hypercontraction – ein chemischer Zustandsansatz, der die Elektronenwechselwirkung kompakt darstellt. Hinter Benchmark III.</dd></div>
+    <div><dt>λ_eff</dt><dd>Effektive Wellenlänge des Givens-Rotations-Schemas in der Chemie. Hat einen harten Floor (~46.79) – darunter geht nichts mehr, egal wie gut der Kreis.</dd></div>
+    <div><dt>ε₊ (DQI-Fehlerbudget)</dt><dd>Maximal erlaubte effektive Fehlerrate des Dekoders (1/16). Nicht null – daher sind bewusste Approximationen legal.</dd></div>
+  </dl>
+</section>
+
+<!-- ================= 09 ================= -->
+<section id="s9">
+  <h2><span class="no">09</span>Quellen</h2>
+  <ul class="src">
+    <li><a href="https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation">Competition &amp; Leaderboard</a></li>
+    <li>Paper: arXiv:2610.23832 (Google Quantum AI, 21.10.2026)</li>
+    <li><a href="https://www.kaggle.com/code/busyaprime/lb-23-91003-exact-dqi-rewrites-at-892-qubits">busyaprime – LB 23.91003, DQI-Rewrites</a></li>
+    <li><a href="https://www.kaggle.com/code/yoyobar/lb-22-99-invsqrt-101-62-qubits">yoyobar – Portfolio &amp; Approximations-DQI</a></li>
+    <li><a href="https://www.kaggle.com/code/heliosli/the-dataset-is-public-now-enjoy">heliosli – Release-Dataset (live)</a></li>
+    <li><a href="https://www.kaggle.com/code/somejoint/quantum-circuits-23-85-local-gm-892-qubit-dqi">SomeJoint – 892Q-Dekoder + Quellcode</a></li>
+    <li><a href="https://www.kaggle.com/code/mrmeows/21-0-circuits-let-s-all-reach-the-plateau">mrmeows – Open Circuits &amp; Constant-Seed-Richtung</a></li>
+    <li><a href="https://www.kaggle.com/code/tobeetaylor/constseed-invsqrt-reconstruction">Unser Constant-Seed-Notebook</a></li>
+    <li>Lokale Memory-Notizen: <span class="mono">~/.agent-memory/kaggle-qvc/</span></li>
+  </ul>
+  <footer>
+    <p class="credit">Stand 02.11.2026, 11:10 UTC · aktualisiert bei jeder Submission und Monitoring-Welle<br>Design: unslop by @heydamir (CC BY 4.0) · Design-Datenbank: UI UX Pro Max (uupm.cc)</p>
+  </footer>
+</section>
+
+</main>
+</div>
+<script>
+  (function(){
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      try{ localStorage.setItem('qvc-theme', next); }catch(e){}
+    });
+  })();
+</script>
+</body>
+</html>

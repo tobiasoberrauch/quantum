@@ -1,0 +1,60 @@
+menu
+Skip to
+content
+
+Create
+
+Home
+
+Competitions
+
+Benchmarks
+
+Arenas
+
+Game Arena
+
+Data Hub
+
+More
+
+​
+Login
+Sign Up
+Kaggle uses cookies from Google to deliver and enhance the quality of its services and to analyze traffic.
+Learn more
+OK, Got it.
+Google Quantum AI · Featured Prediction Competition · 3 months to go
+Join Competition
+more_horiz
+Google Quantum AI - Verifiable Quantum Circuit Compilation
+
+Reducing the resources required for quantum applications
+
+Overview
+Data
+Code
+Models
+Discussion
+Leaderboard
+Rules
+Leaderboard
+file_download
+Raw Data
+refresh
+Refresh
+​
+Public
+Private
+
+This leaderboard is calculated with approximately 50% of the test data. The final results will be based on the other 50%, so the final standings may be different.
+
+Prize Contenders
+
+#
+Team
+Members
+Score
+Entries
+Last
+Join

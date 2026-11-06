@@ -1,0 +1,61 @@
+kickmix-engine
+Copyright 2026 James Barlow
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+AI authorship. All code, tests and documentation in this repository were written
+by an AI model (Claude, by Anthropic) under the direction of the repository
+owner, James Barlow, who reviews it and is responsible for it. It is openly
+AI-assisted and is not presented as hand-written.
+
+Derived from kickmix. The simulation semantics (operation set, condition stack,
+128-bit fixed-precision angles, global phase, HMR/R measurement outcomes,
+operation-statistics counting including INFO_TAG and PUSH/POP_CONDITION), the
+random-number chain (std::seed_seq -> mt19937_64 -> ChaCha8 keys, per-256-shot
+seeding), the reaction-depth rules (src/program.rs, ReactionDepth, restating
+compute_reaction_depth in circuit/circuit_util.cc) and the .kmb file layout
+follow kickmix (distributed in Google's Qualtran project,
+https://github.com/quantumlib/Qualtran, directory kickmix/), Copyright Google
+LLC, licensed under the Apache License, Version 2.0. This crate is an
+independent Rust re-implementation checked for per-shot equality against
+kickmix. Where semantics were taken from kickmix source (sim/sim.h,
+util/chacha.h, util/fixed_precision_angle_128.*, circuit .kmb reader,
+circuit/circuit_util.cc, py/interactive_simulator.pybind.cc,
+py/operation_statistics.pybind.cc), the attribution above applies. No kickmix
+source files are included; parts of the Rust code (notably ReactionDepth) are
+close restatements of kickmix logic and are treated as derivative works under
+Apache-2.0, with this attribution. tests/chachakeys.cc restates the key
+derivation with the C++ standard library as a test reference.
+
+Official verifier logic. The task adapters (python/kickmix_engine/dqi.py,
+invsqrt.py, dfthcsos.py) load the competition's official verifier modules at run time and
+call their functions, and the CLI's --cross-check runs the official verifier
+CLI; the verifiers are not included in this repository. Error messages are
+reproduced from the verifiers' text so that outputs can be compared field by
+field. tests/fail_paths_crosscheck.py builds its base circuits with the official
+reference-circuit builders (dqi_reference_circuit.py, nr_reference_circuit.py)
+loaded from the user's verifiers directory. The DQI sampler (src/dqi_sample.rs)
+re-implements the behaviour of the official `sample_shots`, and
+tests/test_engine.py restates that function for testing. The official verifiers
+are Copyright Google LLC, licensed under the Apache License, Version 2.0.
+python/kickmix_engine/dfthcsos.py restates the control flow of the dfthcsos
+verifier's verify(), load_inputs() and recover_words_from_circuits() (its checks,
+their order and their messages) around the engine, and reads the FCIDUMP
+integrals through a cache built from the official load_reference() output.
+
+NumPy algorithms. src/dqi_sample.rs re-implements, to reproduce NumPy's output
+exactly, the algorithms of NumPy's PCG64 bit generator (the PCG XSL-RR 128/64
+generator by Melissa O'Neill, with NumPy's 32-bit buffering), its 53-bit double
+conversion, its bounded-integer method (Lemire) and its Generator.choice
+algorithms. NumPy is Copyright NumPy Developers, BSD-3-Clause licence. No NumPy
+source code is included.
+
+Test data. tests/data/random_ops.kmb and random_ops_ref.npz were generated with
+kickmix by tests/make_fixtures.py; tests/data/reaction_depth_ref.json (random
+circuits and their reaction depth from kickmix 1.0.0) by
+tests/reaction_depth_parity.py; tests/data/rng_keys_ref.npz by
+tests/chachakeys.cc. tests/data/dqi_logged_failing_shots.jsonl records failing
+shots observed by the owner when running the official DQI verifier on two
+public, Apache-2.0 competition circuits.
+
+This project is not affiliated with or endorsed by Google LLC.

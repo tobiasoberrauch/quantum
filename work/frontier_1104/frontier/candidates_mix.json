@@ -1,0 +1,432 @@
+{
+ "chem": {
+  "ac73e7bfb417760f00f4ef6e4c2905c1e675c1d94a5fa16c84b35523fa97cb9a": {
+   "n_angle": 15,
+   "members": {
+    "angle_k_9.kmb": "b0d0646f6a58c6153f2811ae7850429082a2c52a829d489f5f770e01f97366de",
+    "angle_k_10.kmb": "4563c8ed5078c37129e8dc0ab48af330219b00ba3b7fca48d1c9f45a80a138d3",
+    "angle_k_11.kmb": "ce959dfe543e87123a34abe80059be6010585d1ab827d1df55dfe7fc89270d1d",
+    "angle_k_8.kmb": "8f45c1ef866be337c7379e11baa17f7078809872587a63f6a5e03f87d4906482",
+    "angle_k_13.kmb": "ad1eb01452c2e91319b459ab7f80b5d1d7f76cbcdeaf207cac897818ee18cdcd",
+    "angle_k_12.kmb": "dda0fa8c5717472bc1da8d08d4ad7d59f53f72b0f86a667b1e8511b2eace2fda",
+    "angle_k_14.kmb": "d2c9cb2d2aafd602a0200a6daf599a34123fdd2a6037874cc3b4c43a3995ea96",
+    "angle_k_0.kmb": "ec7f688960a6159917105a2c4306bb1082434274d86a2badc98992228bd06ba1",
+    "submission.npz": "e2ba3d6442589e3397b641f32724747b317cfc5b2823474683005c4beabdd5d8",
+    "angle_k_1.kmb": "b32d4bdb316d2a650f2db98820ee078c0af6b536f51eefe4743a96bd19864856",
+    "angle_k_3.kmb": "af2d7e047b1f557cc3d485dde4a40c3673ddcf8d353ec723a025bc0647d80c85",
+    "angle_k_2.kmb": "96d2492ddc8b20b280ddd29972309a2f2a6a780a384fd46fd0712809dfca7db0",
+    "angle_k_6.kmb": "6877754baf31b84a7d91e9e6103067fc1049267811162aa9698d47ce2591e52c",
+    "angle_k_7.kmb": "13b87acfb0ff2ff09290eda4f9c33ed7c7098490e8925fda0d88010ec354421e",
+    "angle_k_5.kmb": "488bbf426a57bb2c849822922a33c4bc6b2bab329cc9fa7b002cb4f1d84a957d",
+    "angle_k_4.kmb": "18debcd3e8aeb27961a419b8c392778808afe3fd1b43dc337b0e2694fb90e43c"
+   },
+   "locs": {
+    "angle_k_9.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_9.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_10.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_10.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_11.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_11.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_8.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_8.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_13.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_13.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_12.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_12.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_14.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_14.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_0.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_0.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "submission.npz": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__somejoint__qcc-ladder-parts/qcc-ladder-parts.zip",
+     "inner": "dfthcsos-e5a7eba6/dfthcsos/submission.npz",
+     "xz": false
+    },
+    "angle_k_1.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_1.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_3.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_3.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_2.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_2.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_6.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_6.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_7.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_7.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_5.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_5.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_4.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_4.kmb",
+     "inner": null,
+     "xz": false
+    }
+   },
+   "sources": [
+    "MIX loaders=ahmedberatozer/vqcc-v23-portfolio npz=somejoint_e2ba3d",
+    "d__somejoint__qcc-ladder-parts"
+   ]
+  },
+  "ae57cceabfc228f61f4d0a05cc70ad60e7a0c33c06b1ec473c89d54bb1841039": {
+   "n_angle": 15,
+   "members": {
+    "angle_k_9.kmb": "b0d0646f6a58c6153f2811ae7850429082a2c52a829d489f5f770e01f97366de",
+    "angle_k_10.kmb": "4563c8ed5078c37129e8dc0ab48af330219b00ba3b7fca48d1c9f45a80a138d3",
+    "angle_k_11.kmb": "ce959dfe543e87123a34abe80059be6010585d1ab827d1df55dfe7fc89270d1d",
+    "angle_k_8.kmb": "8f45c1ef866be337c7379e11baa17f7078809872587a63f6a5e03f87d4906482",
+    "angle_k_13.kmb": "ad1eb01452c2e91319b459ab7f80b5d1d7f76cbcdeaf207cac897818ee18cdcd",
+    "angle_k_12.kmb": "dda0fa8c5717472bc1da8d08d4ad7d59f53f72b0f86a667b1e8511b2eace2fda",
+    "angle_k_14.kmb": "d2c9cb2d2aafd602a0200a6daf599a34123fdd2a6037874cc3b4c43a3995ea96",
+    "angle_k_0.kmb": "ec7f688960a6159917105a2c4306bb1082434274d86a2badc98992228bd06ba1",
+    "submission.npz": "b463690f734a8c4aae5c19677d7be6ae7589f05d69ad06b93f1c166d671af9df",
+    "angle_k_1.kmb": "b32d4bdb316d2a650f2db98820ee078c0af6b536f51eefe4743a96bd19864856",
+    "angle_k_3.kmb": "af2d7e047b1f557cc3d485dde4a40c3673ddcf8d353ec723a025bc0647d80c85",
+    "angle_k_2.kmb": "96d2492ddc8b20b280ddd29972309a2f2a6a780a384fd46fd0712809dfca7db0",
+    "angle_k_6.kmb": "6877754baf31b84a7d91e9e6103067fc1049267811162aa9698d47ce2591e52c",
+    "angle_k_7.kmb": "13b87acfb0ff2ff09290eda4f9c33ed7c7098490e8925fda0d88010ec354421e",
+    "angle_k_5.kmb": "488bbf426a57bb2c849822922a33c4bc6b2bab329cc9fa7b002cb4f1d84a957d",
+    "angle_k_4.kmb": "18debcd3e8aeb27961a419b8c392778808afe3fd1b43dc337b0e2694fb90e43c"
+   },
+   "locs": {
+    "angle_k_9.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_9.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_10.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_10.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_11.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_11.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_8.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_8.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_13.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_13.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_12.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_12.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_14.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_14.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_0.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_0.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "submission.npz": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/k__kalidenaiarys__quantum-circuit-compilation-public-lb-24-59425/submission.zip",
+     "inner": "dfthcsos/submission.npz",
+     "xz": false
+    },
+    "angle_k_1.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_1.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_3.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_3.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_2.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_2.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_6.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_6.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_7.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_7.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_5.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_5.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_4.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_4.kmb",
+     "inner": null,
+     "xz": false
+    }
+   },
+   "sources": [
+    "MIX loaders=ahmedberatozer/vqcc-v23-portfolio npz=kalidenaiarys_b46369",
+    "k__kalidenaiarys__quantum-circuit-compilation-public-lb-24-59425"
+   ]
+  },
+  "7a568271b77d6780186e396a73550cf1a674b61cc66f602fd7057caabe49e64e": {
+   "n_angle": 15,
+   "members": {
+    "angle_k_9.kmb": "b0d0646f6a58c6153f2811ae7850429082a2c52a829d489f5f770e01f97366de",
+    "angle_k_10.kmb": "4563c8ed5078c37129e8dc0ab48af330219b00ba3b7fca48d1c9f45a80a138d3",
+    "angle_k_11.kmb": "ce959dfe543e87123a34abe80059be6010585d1ab827d1df55dfe7fc89270d1d",
+    "angle_k_8.kmb": "8f45c1ef866be337c7379e11baa17f7078809872587a63f6a5e03f87d4906482",
+    "angle_k_13.kmb": "ad1eb01452c2e91319b459ab7f80b5d1d7f76cbcdeaf207cac897818ee18cdcd",
+    "angle_k_12.kmb": "dda0fa8c5717472bc1da8d08d4ad7d59f53f72b0f86a667b1e8511b2eace2fda",
+    "angle_k_14.kmb": "d2c9cb2d2aafd602a0200a6daf599a34123fdd2a6037874cc3b4c43a3995ea96",
+    "angle_k_0.kmb": "ec7f688960a6159917105a2c4306bb1082434274d86a2badc98992228bd06ba1",
+    "submission.npz": "ce06314cfc30fbf669999d6c4d1484975f62ef66cfe8cb87dead9066740652c1",
+    "angle_k_1.kmb": "b32d4bdb316d2a650f2db98820ee078c0af6b536f51eefe4743a96bd19864856",
+    "angle_k_3.kmb": "af2d7e047b1f557cc3d485dde4a40c3673ddcf8d353ec723a025bc0647d80c85",
+    "angle_k_2.kmb": "96d2492ddc8b20b280ddd29972309a2f2a6a780a384fd46fd0712809dfca7db0",
+    "angle_k_6.kmb": "6877754baf31b84a7d91e9e6103067fc1049267811162aa9698d47ce2591e52c",
+    "angle_k_7.kmb": "13b87acfb0ff2ff09290eda4f9c33ed7c7098490e8925fda0d88010ec354421e",
+    "angle_k_5.kmb": "488bbf426a57bb2c849822922a33c4bc6b2bab329cc9fa7b002cb4f1d84a957d",
+    "angle_k_4.kmb": "18debcd3e8aeb27961a419b8c392778808afe3fd1b43dc337b0e2694fb90e43c"
+   },
+   "locs": {
+    "angle_k_9.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_9.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_10.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_10.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_11.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_11.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_8.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_8.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_13.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_13.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_12.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_12.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_14.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_14.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_0.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_0.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "submission.npz": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__isabe11am00re__qcc-v66s33w-circuits/dfthcsos__submission.npz",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_1.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_1.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_3.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_3.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_2.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_2.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_6.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_6.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_7.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_7.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_5.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_5.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_4.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_4.kmb",
+     "inner": null,
+     "xz": false
+    }
+   },
+   "sources": [
+    "MIX loaders=ahmedberatozer/vqcc-v23-portfolio npz=isabe_ce0631",
+    "d__isabe11am00re__qcc-v66s33w-circuits"
+   ]
+  },
+  "453f5f90b3fc647f9996e219998a535c5c381bc99bfaa109ee531e683484cff7": {
+   "n_angle": 15,
+   "members": {
+    "angle_k_9.kmb": "b0d0646f6a58c6153f2811ae7850429082a2c52a829d489f5f770e01f97366de",
+    "angle_k_10.kmb": "4563c8ed5078c37129e8dc0ab48af330219b00ba3b7fca48d1c9f45a80a138d3",
+    "angle_k_11.kmb": "ce959dfe543e87123a34abe80059be6010585d1ab827d1df55dfe7fc89270d1d",
+    "angle_k_8.kmb": "8f45c1ef866be337c7379e11baa17f7078809872587a63f6a5e03f87d4906482",
+    "angle_k_13.kmb": "ad1eb01452c2e91319b459ab7f80b5d1d7f76cbcdeaf207cac897818ee18cdcd",
+    "angle_k_12.kmb": "dda0fa8c5717472bc1da8d08d4ad7d59f53f72b0f86a667b1e8511b2eace2fda",
+    "angle_k_14.kmb": "d2c9cb2d2aafd602a0200a6daf599a34123fdd2a6037874cc3b4c43a3995ea96",
+    "angle_k_0.kmb": "ec7f688960a6159917105a2c4306bb1082434274d86a2badc98992228bd06ba1",
+    "submission.npz": "17f5a4c26e359601167a9db6dc3f1319f363aed00484f7ce0bd66cedbf4700b4",
+    "angle_k_1.kmb": "b32d4bdb316d2a650f2db98820ee078c0af6b536f51eefe4743a96bd19864856",
+    "angle_k_3.kmb": "af2d7e047b1f557cc3d485dde4a40c3673ddcf8d353ec723a025bc0647d80c85",
+    "angle_k_2.kmb": "96d2492ddc8b20b280ddd29972309a2f2a6a780a384fd46fd0712809dfca7db0",
+    "angle_k_6.kmb": "6877754baf31b84a7d91e9e6103067fc1049267811162aa9698d47ce2591e52c",
+    "angle_k_7.kmb": "13b87acfb0ff2ff09290eda4f9c33ed7c7098490e8925fda0d88010ec354421e",
+    "angle_k_5.kmb": "488bbf426a57bb2c849822922a33c4bc6b2bab329cc9fa7b002cb4f1d84a957d",
+    "angle_k_4.kmb": "18debcd3e8aeb27961a419b8c392778808afe3fd1b43dc337b0e2694fb90e43c"
+   },
+   "locs": {
+    "angle_k_9.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_9.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_10.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_10.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_11.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_11.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_8.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_8.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_13.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_13.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_12.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_12.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_14.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_14.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_0.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_0.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "submission.npz": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/k__isabe11am00re__qcc-v66s33w-submission/submission.zip",
+     "inner": "dfthcsos/submission.npz",
+     "xz": false
+    },
+    "angle_k_1.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_1.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_3.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_3.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_2.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_2.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_6.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_6.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_7.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_7.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_5.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_5.kmb",
+     "inner": null,
+     "xz": false
+    },
+    "angle_k_4.kmb": {
+     "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/downloads/d__ahmedberatozer__vqcc-v23-portfolio/dfthcsos/angle_k_4.kmb",
+     "inner": null,
+     "xz": false
+    }
+   },
+   "sources": [
+    "MIX loaders=ahmedberatozer/vqcc-v23-portfolio npz=isabe_17f5a4",
+    "k__isabe11am00re__qcc-v66s33w-submission"
+   ]
+  }
+ }
+}

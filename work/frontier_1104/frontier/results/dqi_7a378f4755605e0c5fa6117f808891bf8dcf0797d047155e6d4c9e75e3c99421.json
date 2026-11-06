@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "7a378f4755605e0c5fa6117f808891bf8dcf0797d047155e6d4c9e75e3c99421",
+ "sources": [
+  "k__kirilltym__quantum-circuits-exact-gauge-5-word-qrom"
+ ],
+ "status": "PASS",
+ "score": 408399264306.69824,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 433785.1698242187,
+ "max_toffoli_count": 434512,
+ "reaction_depth": 4337,
+ "num_ops": 60050827,
+ "num_qubits": 889,
+ "num_bits": 101853,
+ "circuit_sha256": "7a378f4755605e0c5fa6117f808891bf8dcf0797d047155e6d4c9e75e3c99421",
+ "seconds": 112.6,
+ "ratio": 59.84208523284573
+}

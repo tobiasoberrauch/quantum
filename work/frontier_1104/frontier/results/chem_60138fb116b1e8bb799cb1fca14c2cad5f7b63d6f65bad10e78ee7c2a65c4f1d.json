@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "60138fb116b1e8bb799cb1fca14c2cad5f7b63d6f65bad10e78ee7c2a65c4f1d",
+ "sources": [
+  "k__orecord__quantum-circuit-compilation-pipeline",
+  "k__syed3000__vqcc-own-circuit-portfolio-notebook"
+ ],
+ "status": "PASS",
+ "score": 312550176.6391797,
+ "lambda_eff": 47.03751510815834,
+ "toffoli_count": 15525.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 275,
+ "num_ops": 662277,
+ "verified_shots": 87232,
+ "submission_sha256": "7e758da98c8f8d9f43b6bd990972c2f3943f60e4aaac45bde10560478174cc00",
+ "seconds": 15.9,
+ "ratio": 10.736194822853594
+}

@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "cfb719fe0c513dfd4633eb16c6967f917ef2c82ba6fba69b930210b35f9c0f08",
+ "sources": [
+  "d5__prvsiyan__vqcc-verified-best-of-circuits-1105",
+  "k5__prvsiyan__verifier-guided-quantum-circuit-optimization"
+ ],
+ "status": "PASS",
+ "score": 307606537.9117541,
+ "lambda_eff": 47.01977798633888,
+ "toffoli_count": 15321.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 600886,
+ "verified_shots": 78080,
+ "submission_sha256": "be01262cda099e02bf4449b2f69da35b5436ccd108a365990895f3f7283541ce",
+ "seconds": 15.9,
+ "ratio": 10.9087394926508
+}

@@ -1,0 +1,308 @@
+{
+ "path": "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_scan/mwa_unpacked/dqi.kmb",
+ "num_ops": 58336043,
+ "num_info_tags": 17876,
+ "num_distinct": 23,
+ "total_tagged_n3": 2010192,
+ "blocks": [
+  {
+   "tag": "mask_projection",
+   "occurrences": 2,
+   "op_lo": 0,
+   "op_hi": 2388213,
+   "frac_lo": 0.0,
+   "frac_hi": 0.04094,
+   "n3": 0,
+   "raw_tags": [
+    "@enter:mask_projection",
+    "@exit:mask_projection"
+   ]
+  },
+  {
+   "tag": "initial",
+   "occurrences": 2,
+   "op_lo": 2388214,
+   "op_hi": 2643972,
+   "frac_lo": 0.04094,
+   "frac_hi": 0.04532,
+   "n3": 0,
+   "raw_tags": [
+    "@enter:initial",
+    "@exit:initial"
+   ]
+  },
+  {
+   "tag": "extract",
+   "occurrences": 2,
+   "op_lo": 2643973,
+   "op_hi": 6607964,
+   "frac_lo": 0.04532,
+   "frac_hi": 0.11327,
+   "n3": 59595,
+   "raw_tags": [
+    "@enter:extract",
+    "@exit:extract"
+   ]
+  },
+  {
+   "tag": "inverse24 norm",
+   "occurrences": 58,
+   "op_lo": 2644492,
+   "op_hi": 6485233,
+   "frac_lo": 0.04533,
+   "frac_hi": 0.11117,
+   "n3": 56460,
+   "raw_tags": [
+    "@enter:inverse24 norm",
+    "@exit:inverse24 norm"
+   ]
+  },
+  {
+   "tag": "inverse24 scalar",
+   "occurrences": 58,
+   "op_lo": 2646630,
+   "op_hi": 6487691,
+   "frac_lo": 0.04537,
+   "frac_hi": 0.11121,
+   "n3": 56476,
+   "raw_tags": [
+    "@enter:inverse24 scalar",
+    "@exit:inverse24 scalar"
+   ]
+  },
+  {
+   "tag": "inverse12 norm",
+   "occurrences": 338,
+   "op_lo": 2646691,
+   "op_hi": 52256449,
+   "frac_lo": 0.04537,
+   "frac_hi": 0.89578,
+   "n3": 302419,
+   "raw_tags": [
+    "@enter:inverse12 norm",
+    "@exit:inverse12 norm"
+   ]
+  },
+  {
+   "tag": "inverse12 scalar",
+   "occurrences": 338,
+   "op_lo": 2646934,
+   "op_hi": 52257061,
+   "frac_lo": 0.04537,
+   "frac_hi": 0.89579,
+   "n3": 302422,
+   "raw_tags": [
+    "@enter:inverse12 scalar",
+    "@exit:inverse12 scalar"
+   ]
+  },
+  {
+   "tag": "inverse12 products",
+   "occurrences": 338,
+   "op_lo": 2647876,
+   "op_hi": 52258277,
+   "frac_lo": 0.04539,
+   "frac_hi": 0.89581,
+   "n3": 302429,
+   "raw_tags": [
+    "@enter:inverse12 products",
+    "@exit:inverse12 products"
+   ]
+  },
+  {
+   "tag": "inverse24 products",
+   "occurrences": 58,
+   "op_lo": 2649312,
+   "op_hi": 6499699,
+   "frac_lo": 0.04541,
+   "frac_hi": 0.11142,
+   "n3": 56488,
+   "raw_tags": [
+    "@enter:inverse24 products",
+    "@exit:inverse24 products"
+   ]
+  },
+  {
+   "tag": "multiply v",
+   "occurrences": 24,
+   "op_lo": 2680764,
+   "op_hi": 3007337,
+   "frac_lo": 0.04595,
+   "frac_hi": 0.05155,
+   "n3": 3398,
+   "raw_tags": [
+    "@enter:multiply v",
+    "@exit:multiply v"
+   ]
+  },
+  {
+   "tag": "synthesis",
+   "occurrences": 2,
+   "op_lo": 6607965,
+   "op_hi": 12023354,
+   "frac_lo": 0.11327,
+   "frac_hi": 0.20611,
+   "n3": 31637,
+   "raw_tags": [
+    "@enter:synthesis",
+    "@exit:synthesis"
+   ]
+  },
+  {
+   "tag": "convert",
+   "occurrences": 2,
+   "op_lo": 12023355,
+   "op_hi": 17714336,
+   "frac_lo": 0.20611,
+   "frac_hi": 0.30366,
+   "n3": 60796,
+   "raw_tags": [
+    "@enter:convert",
+    "@exit:convert"
+   ]
+  },
+  {
+   "tag": "aligned_route",
+   "occurrences": 104,
+   "op_lo": 12334075,
+   "op_hi": 46142846,
+   "frac_lo": 0.21143,
+   "frac_hi": 0.79098,
+   "n3": 160276,
+   "raw_tags": [
+    "@enter:aligned_route",
+    "@exit:aligned_route"
+   ]
+  },
+  {
+   "tag": "full_head_product",
+   "occurrences": 12,
+   "op_lo": 13870567,
+   "op_hi": 44647981,
+   "frac_lo": 0.23777,
+   "frac_hi": 0.76536,
+   "n3": 115178,
+   "raw_tags": [
+    "@enter:full_head_product",
+    "@exit:full_head_product"
+   ]
+  },
+  {
+   "tag": "scan",
+   "occurrences": 2,
+   "op_lo": 17714337,
+   "op_hi": 41207901,
+   "frac_lo": 0.30366,
+   "frac_hi": 0.70639,
+   "n3": 44275,
+   "raw_tags": [
+    "@enter:scan",
+    "@exit:scan"
+   ]
+  },
+  {
+   "tag": "gf_iadd",
+   "occurrences": 16472,
+   "op_lo": 17990394,
+   "op_hi": 57339721,
+   "frac_lo": 0.30839,
+   "frac_hi": 0.98292,
+   "n3": 235857,
+   "raw_tags": [
+    "@enter:gf_iadd",
+    "@exit:gf_iadd"
+   ]
+  },
+  {
+   "tag": "unconvert",
+   "occurrences": 2,
+   "op_lo": 41207902,
+   "op_hi": 46453778,
+   "frac_lo": 0.70639,
+   "frac_hi": 0.79631,
+   "n3": 62711,
+   "raw_tags": [
+    "@enter:unconvert",
+    "@exit:unconvert"
+   ]
+  },
+  {
+   "tag": "head_phase",
+   "occurrences": 6,
+   "op_lo": 44605196,
+   "op_hi": 44653241,
+   "frac_lo": 0.76462,
+   "frac_hi": 0.76545,
+   "n3": 1269,
+   "raw_tags": [
+    "@enter:head_phase",
+    "@exit:head_phase"
+   ]
+  },
+  {
+   "tag": "head_pivot",
+   "occurrences": 48,
+   "op_lo": 44676624,
+   "op_hi": 46142514,
+   "frac_lo": 0.76585,
+   "frac_hi": 0.79098,
+   "n3": 20326,
+   "raw_tags": [
+    "@enter:head_pivot",
+    "@exit:head_pivot"
+   ]
+  },
+  {
+   "tag": "unsynthesis",
+   "occurrences": 2,
+   "op_lo": 46453779,
+   "op_hi": 52153809,
+   "frac_lo": 0.79631,
+   "frac_hi": 0.89402,
+   "n3": 40556,
+   "raw_tags": [
+    "@enter:unsynthesis",
+    "@exit:unsynthesis"
+   ]
+  },
+  {
+   "tag": "unextract",
+   "occurrences": 2,
+   "op_lo": 52153810,
+   "op_hi": 57986186,
+   "frac_lo": 0.89402,
+   "frac_hi": 0.994,
+   "n3": 97624,
+   "raw_tags": [
+    "@enter:unextract",
+    "@exit:unextract"
+   ]
+  },
+  {
+   "tag": "uninitial",
+   "occurrences": 2,
+   "op_lo": 57986187,
+   "op_hi": 58241855,
+   "frac_lo": 0.994,
+   "frac_hi": 0.99839,
+   "n3": 0,
+   "raw_tags": [
+    "@enter:uninitial",
+    "@exit:uninitial"
+   ]
+  },
+  {
+   "tag": "restore_masks",
+   "occurrences": 2,
+   "op_lo": 58241856,
+   "op_hi": 58336042,
+   "frac_lo": 0.99839,
+   "frac_hi": 1.0,
+   "n3": 0,
+   "raw_tags": [
+    "@enter:restore_masks",
+    "@exit:restore_masks"
+   ]
+  }
+ ]
+}

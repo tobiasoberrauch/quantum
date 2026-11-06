@@ -1,0 +1,381 @@
+{
+ "mask_projection": {
+  "name": "mask_projection",
+  "lo": 0,
+  "hi": 2388213,
+  "span": 2388213,
+  "frac_lo": 0.0,
+  "frac_hi": 0.04094,
+  "n3": 0,
+  "n2": 0,
+  "n1": 840,
+  "nhmr": 0,
+  "nr": 0
+ },
+ "initial": {
+  "name": "initial",
+  "lo": 2388214,
+  "hi": 2643972,
+  "span": 255758,
+  "frac_lo": 0.04094,
+  "frac_hi": 0.04532,
+  "n3": 0,
+  "n2": 255757,
+  "n1": 0,
+  "nhmr": 0,
+  "nr": 0
+ },
+ "extract": {
+  "name": "extract",
+  "lo": 2643973,
+  "hi": 6607964,
+  "span": 3963991,
+  "frac_lo": 0.04532,
+  "frac_hi": 0.11327,
+  "n3": 59595,
+  "n2": 3887000,
+  "n1": 14119,
+  "nhmr": 4582,
+  "nr": 527,
+  "3q_types": {
+   "CCX": 59403,
+   "CSWAP": 192
+  },
+  "3q_syndrome_legs": 107394,
+  "3q_working_legs": 71391,
+  "hmr_syndrome": 2256,
+  "hmr_working": 2326,
+  "r_syndrome": 0,
+  "r_working": 527,
+  "subs": {
+   "inverse24 products": {
+    "count": 29,
+    "n3": 2030,
+    "span": 337299
+   },
+   "inverse24 scalar": {
+    "count": 29,
+    "n3": 1682,
+    "span": 66845
+   },
+   "inverse24 norm": {
+    "count": 29,
+    "n3": 1218,
+    "span": 57565
+   },
+   "multiply v": {
+    "count": 12,
+    "n3": 1188,
+    "span": 76728
+   },
+   "inverse12 products": {
+    "count": 2,
+    "n3": 50,
+    "span": 1722
+   },
+   "inverse12 scalar": {
+    "count": 2,
+    "n3": 36,
+    "span": 1174
+   },
+   "inverse12 norm": {
+    "count": 2,
+    "n3": 30,
+    "span": 436
+   }
+  }
+ },
+ "synthesis": {
+  "name": "synthesis",
+  "lo": 6607965,
+  "hi": 12023354,
+  "span": 5415389,
+  "frac_lo": 0.11327,
+  "frac_hi": 0.20611,
+  "n3": 31637,
+  "n2": 5381130,
+  "n1": 2609,
+  "nhmr": 1322,
+  "nr": 429,
+  "3q_types": {
+   "CCX": 31613,
+   "CSWAP": 24
+  },
+  "3q_syndrome_legs": 77255,
+  "3q_working_legs": 17656,
+  "hmr_syndrome": 816,
+  "hmr_working": 506,
+  "r_syndrome": 0,
+  "r_working": 429,
+  "subs": {
+   "inverse12 products": {
+    "count": 2,
+    "n3": 50,
+    "span": 1722
+   },
+   "inverse12 scalar": {
+    "count": 2,
+    "n3": 36,
+    "span": 1174
+   },
+   "inverse12 norm": {
+    "count": 2,
+    "n3": 30,
+    "span": 436
+   }
+  }
+ },
+ "convert": {
+  "name": "convert",
+  "lo": 12023355,
+  "hi": 17714336,
+  "span": 5690981,
+  "frac_lo": 0.20611,
+  "frac_hi": 0.30366,
+  "n3": 60796,
+  "n2": 5605121,
+  "n1": 12025,
+  "nhmr": 6268,
+  "nr": 2003,
+  "3q_types": {
+   "CCX": 55947,
+   "CSWAP": 4849
+  },
+  "3q_syndrome_legs": 157976,
+  "3q_working_legs": 24412,
+  "hmr_syndrome": 3145,
+  "hmr_working": 3123,
+  "r_syndrome": 584,
+  "r_working": 1419,
+  "subs": {
+   "aligned_route": {
+    "count": 26,
+    "n3": 3120,
+    "span": 3146
+   },
+   "inverse12 products": {
+    "count": 49,
+    "n3": 1225,
+    "span": 42189
+   },
+   "inverse12 scalar": {
+    "count": 49,
+    "n3": 882,
+    "span": 28763
+   },
+   "inverse12 norm": {
+    "count": 49,
+    "n3": 735,
+    "span": 10682
+   },
+   "full_head_product": {
+    "count": 3,
+    "n3": 504,
+    "span": 21326
+   }
+  }
+ },
+ "scan": {
+  "name": "scan",
+  "lo": 17714337,
+  "hi": 41207901,
+  "span": 23493564,
+  "frac_lo": 0.30366,
+  "frac_hi": 0.70639,
+  "n3": 44275,
+  "n2": 22762915,
+  "n1": 331844,
+  "nhmr": 44275,
+  "nr": 44275,
+  "3q_types": {
+   "CCX": 44275
+  },
+  "3q_syndrome_legs": 48300,
+  "3q_working_legs": 84525,
+  "hmr_syndrome": 0,
+  "hmr_working": 44275,
+  "r_syndrome": 0,
+  "r_working": 44275,
+  "subs": {
+   "gf_iadd": {
+    "count": 8050,
+    "n3": 0,
+    "span": 58144
+   }
+  }
+ },
+ "unconvert": {
+  "name": "unconvert",
+  "lo": 41207902,
+  "hi": 46453778,
+  "span": 5245876,
+  "frac_lo": 0.70639,
+  "frac_hi": 0.79631,
+  "n3": 62711,
+  "n2": 5144986,
+  "n1": 24687,
+  "nhmr": 11098,
+  "nr": 6100,
+  "3q_types": {
+   "CCZ": 256,
+   "CCX": 56669,
+   "CSWAP": 5786
+  },
+  "3q_syndrome_legs": 156956,
+  "3q_working_legs": 31177,
+  "hmr_syndrome": 3286,
+  "hmr_working": 7812,
+  "r_syndrome": 535,
+  "r_working": 5565,
+  "subs": {
+   "aligned_route": {
+    "count": 26,
+    "n3": 3120,
+    "span": 3146
+   },
+   "inverse12 products": {
+    "count": 49,
+    "n3": 1225,
+    "span": 42189
+   },
+   "inverse12 scalar": {
+    "count": 49,
+    "n3": 882,
+    "span": 28883
+   },
+   "inverse12 norm": {
+    "count": 49,
+    "n3": 735,
+    "span": 10682
+   },
+   "full_head_product": {
+    "count": 3,
+    "n3": 504,
+    "span": 21326
+   },
+   "head_pivot": {
+    "count": 24,
+    "n3": 288,
+    "span": 312
+   },
+   "head_phase": {
+    "count": 3,
+    "n3": 126,
+    "span": 8643
+   }
+  }
+ },
+ "unsynthesis": {
+  "name": "unsynthesis",
+  "lo": 46453779,
+  "hi": 52153809,
+  "span": 5700030,
+  "frac_lo": 0.79631,
+  "frac_hi": 0.89402,
+  "n3": 40556,
+  "n2": 5643767,
+  "n1": 13148,
+  "nhmr": 3860,
+  "nr": 713,
+  "3q_types": {
+   "CCZ": 272,
+   "CCX": 40260,
+   "CSWAP": 24
+  },
+  "3q_syndrome_legs": 97812,
+  "3q_working_legs": 23856,
+  "hmr_syndrome": 1620,
+  "hmr_working": 2240,
+  "r_syndrome": 3,
+  "r_working": 710,
+  "subs": {
+   "inverse12 products": {
+    "count": 36,
+    "n3": 900,
+    "span": 30996
+   },
+   "inverse12 scalar": {
+    "count": 36,
+    "n3": 648,
+    "span": 21138
+   },
+   "inverse12 norm": {
+    "count": 36,
+    "n3": 540,
+    "span": 7848
+   }
+  }
+ },
+ "unextract": {
+  "name": "unextract",
+  "lo": 52153810,
+  "hi": 57986186,
+  "span": 5832376,
+  "frac_lo": 0.89402,
+  "frac_hi": 0.994,
+  "n3": 97624,
+  "n2": 5626338,
+  "n1": 31286,
+  "nhmr": 7994,
+  "nr": 1829,
+  "3q_types": {
+   "CCZ": 955,
+   "CCX": 94480,
+   "CSWAP": 2189
+  },
+  "3q_syndrome_legs": 163398,
+  "3q_working_legs": 129474,
+  "hmr_syndrome": 2580,
+  "hmr_working": 5414,
+  "r_syndrome": 0,
+  "r_working": 1829,
+  "subs": {
+   "inverse12 products": {
+    "count": 2,
+    "n3": 50,
+    "span": 1722
+   },
+   "inverse12 scalar": {
+    "count": 2,
+    "n3": 36,
+    "span": 1174
+   },
+   "inverse12 norm": {
+    "count": 2,
+    "n3": 30,
+    "span": 436
+   },
+   "gf_iadd": {
+    "count": 186,
+    "n3": 0,
+    "span": 592
+   }
+  }
+ },
+ "uninitial": {
+  "name": "uninitial",
+  "lo": 57986187,
+  "hi": 58241855,
+  "span": 255668,
+  "frac_lo": 0.994,
+  "frac_hi": 0.99839,
+  "n3": 0,
+  "n2": 255667,
+  "n1": 0,
+  "nhmr": 0,
+  "nr": 0
+ },
+ "restore_masks": {
+  "name": "restore_masks",
+  "lo": 58241856,
+  "hi": 58336042,
+  "span": 94186,
+  "frac_lo": 0.99839,
+  "frac_hi": 1.0,
+  "n3": 0,
+  "n2": 0,
+  "n1": 0,
+  "nhmr": 0,
+  "nr": 0
+ }
+}

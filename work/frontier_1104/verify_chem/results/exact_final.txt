@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/verify_chem/scripts/exact_branch.py", line 85, in <module>
+    main()
+  File "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/verify_chem/scripts/exact_branch.py", line 79, in main
+    assert np.array_equal(exec_exact(ops, z), z ^ delta), f'k{k} XOR contract fails on random z'
+                          ^^^^^^^^^^^^^^^^^^
+  File "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/frontier_1104/verify_chem/scripts/exact_branch.py", line 51, in exec_exact
+    assert not st[o[1]].any(), 'R on nonzero qubit: uncorrectable dephasing'
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: R on nonzero qubit: uncorrectable dephasing

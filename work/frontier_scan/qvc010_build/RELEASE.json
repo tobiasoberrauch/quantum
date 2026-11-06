@@ -1,0 +1,102 @@
+{
+  "release_id": "qcc2494096-c44-dqi-v1",
+  "public_score": 24.94096,
+  "submission_ref": 58048913,
+  "local_score": 24.940960134170023,
+  "official_artifact_digests": {
+    "invsqrt": "c17971aff984830dc68f4f1459cdc549fd2637dc656bc7d3d70aeabc7c8eb775",
+    "dqi": "b4bbf86d504e2452c8185ec882e0cf7a8ba9401a4bfa69f71f18b4fc6d9c599c",
+    "dfthcsos": "342163fafd285b4d485414a12062ee143fee3c0d340595aac58b492adac51ec5"
+  },
+  "reference_costs": {
+    "invsqrt": 2076774.233715,
+    "dqi": 24439463583672.93,
+    "dfthcsos": 3355599588.3155375
+  },
+  "files": {
+    "APACHE-2.0.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "CREDITS.md": {
+      "bytes": 2406,
+      "sha256": "ee8bd3ed8424d7a2e4402eb3ef49d5e1a72479fa7d2447e8ccdbb4bf98d3408c"
+    },
+    "LICENSE.md": {
+      "bytes": 952,
+      "sha256": "8234101b77aa0bfae5583ca918d43f4ade44a3e314fef3a7c5fb8b4d0b0cc823"
+    },
+    "PUBLIC_SCORE.json": {
+      "bytes": 313,
+      "sha256": "cdb618c66bfceebed31839c08a50275a70cbf213864ded05e0a3dbf5bcc2897d"
+    },
+    "README.md": {
+      "bytes": 1501,
+      "sha256": "e3edb467337ecd10b2e02e546abff3b52a483d0413539ad947ac8b6a901ad91f"
+    },
+    "SOURCE_PROVENANCE.json": {
+      "bytes": 1076,
+      "sha256": "620dcbcc02c5c76624a6da6aefa20df60509968bcbbfa6c84323b8e7ae5b114e"
+    },
+    "UPSTREAM_HELIOS_CREDITS.md": {
+      "bytes": 4457,
+      "sha256": "4bb57bab434785d53e6264b5a93a39f8267a8187a92f22b56cf90a3950f63475"
+    },
+    "UPSTREAM_HELIOS_LICENSE.md": {
+      "bytes": 535,
+      "sha256": "ddd71764aaf7930662ae40ecd18070bf099d5537397cd6edf51db706261340fe"
+    },
+    "dqi_chain_cache_emit_v4.py": {
+      "bytes": 6222,
+      "sha256": "44902b1142ac95892e9382f8baf4c1d4c8993270395da6cac933b45e02a1dcb2"
+    },
+    "dqi_chain_cache_v4.py": {
+      "bytes": 16919,
+      "sha256": "dfeee72e760acab86b50aa1b4311a68295d247c77ea33c2cc431bf2bf5813b13"
+    },
+    "expected_artifacts.json": {
+      "bytes": 2453,
+      "sha256": "cf26a0fca7fa7a2f3fec124c7841f39cf8f924ba8ae1fdc4bc144a72889786c5"
+    },
+    "llvmlite-0.50.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": {
+      "bytes": 59696589,
+      "sha256": "425845f415a06dc50db08db033c6b568e0d85c4937e932c605a4d49e1514b2da"
+    },
+    "numba-0.68.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": {
+      "bytes": 3850592,
+      "sha256": "4d1b544f37fc237d16698a4266bb3d5b3c40ec8aa4c925a191ff09ec6d115310"
+    },
+    "numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": {
+      "bytes": 16718044,
+      "sha256": "6ffa07666f8da0eef81d149934a626d0d95fbd6838432a33e66245423a9062c0"
+    },
+    "public_release.bundle": {
+      "bytes": 12526482,
+      "sha256": "32f1eb04f2c260df2cc50e254d19c8e3541dcdb807d5062e958302ac014d2b11"
+    },
+    "reported_official_dfthcsos.json": {
+      "bytes": 1502,
+      "sha256": "3bbfe5c9141f7eed67e177b01ccc27fbf22a2d2211170e672d9c9f682a9bff6a"
+    },
+    "reported_official_dqi.json": {
+      "bytes": 1088,
+      "sha256": "89e4767fc96c26417432948d375a8e993d0a9e4575e4fc76866bd3ea482d3cff"
+    },
+    "reported_official_invsqrt.json": {
+      "bytes": 502,
+      "sha256": "f41bcd5ef6e11a9b675cd940310a0e7d4d21b4a5a6fc90a3a9276fdfcfc19abf"
+    },
+    "reproduce.py": {
+      "bytes": 7370,
+      "sha256": "f53278678ea971f4215dbfbd683f484ac3c7bd22c70970a15d312ea37bfddb37"
+    },
+    "scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": {
+      "bytes": 35312578,
+      "sha256": "fdaf5ea890a6183d0565f51a61799d67081bd5b1cf03c5f4b3fd3732108625c9"
+    },
+    "scored_submission.bundle": {
+      "bytes": 28117460,
+      "sha256": "6081c53c2e760d22152cc13fedb50429df6e521f4a39d30df3f9704dfd26d02f"
+    }
+  }
+}

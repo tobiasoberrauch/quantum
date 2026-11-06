@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "25c66718b05a48ad2bb3f31951b9d9330ae796ba2e3799d97a5f85c64d7002db",
+ "sources": [
+  "k__kalidenaiarys__quantum-circuit-compilation-public-lb-24-59425"
+ ],
+ "status": "PASS",
+ "score": 311463217.93684524,
+ "lambda_eff": 47.18429756505502,
+ "toffoli_count": 15459.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 196,
+ "num_ops": 607298,
+ "verified_shots": 78080,
+ "submission_sha256": "5dd0c7b5ad71cd2f42ac56bbf1c27997aa136cd4a59bbc276ecefb2ddf41acca",
+ "seconds": 14.7,
+ "ratio": 10.773662490689174
+}

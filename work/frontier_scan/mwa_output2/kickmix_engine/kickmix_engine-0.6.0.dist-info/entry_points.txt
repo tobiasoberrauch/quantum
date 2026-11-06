@@ -1,0 +1,2 @@
+[console_scripts]
+kickmix-engine=kickmix_engine.cli:main

@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "a917bef8e56a3c239740ccd262ae58e3f2350b6710c098240abb6c9f86184c9d",
+ "sources": [
+  "d__isabe11am00re__qcc-v66yk5-circuits"
+ ],
+ "status": "PASS",
+ "score": 312006787.61721605,
+ "lambda_eff": 47.26664421810719,
+ "toffoli_count": 15459.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 196,
+ "num_ops": 607298,
+ "verified_shots": 78080,
+ "submission_sha256": "2430e3a8cbfb1ccc673ad7d83ea863b9e220bcbf494aea4411254da256e1a24e",
+ "seconds": 15.0,
+ "ratio": 10.75489291095916
+}

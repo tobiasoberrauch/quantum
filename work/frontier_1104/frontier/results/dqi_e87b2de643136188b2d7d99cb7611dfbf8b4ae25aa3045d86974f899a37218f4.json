@@ -1,0 +1,31 @@
+{
+ "component": "dqi",
+ "key": "e87b2de643136188b2d7d99cb7611dfbf8b4ae25aa3045d86974f899a37218f4",
+ "sources": [
+  "d5__yoyobar__qcc-local-sota-20261031",
+  "k5__yoyobar__lb-22-99-invsqrt-101-62-qubits"
+ ],
+ "status": "PASS",
+ "score": 375372231684.7817,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 396917.27903320314,
+ "max_toffoli_count": 397190,
+ "reaction_depth": 5865,
+ "num_ops": 58336079,
+ "num_qubits": 891,
+ "num_bits": 101625,
+ "circuit_sha256": "e87b2de643136188b2d7d99cb7611dfbf8b4ae25aa3045d86974f899a37218f4",
+ "seconds": 94.5,
+ "ratio": 65.10727624678411
+}

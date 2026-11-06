@@ -1,0 +1,233 @@
+{
+  "status": "PASS",
+  "blocks": {
+    "invsqrt": {
+      "id": "ehanmallick-bce2948f",
+      "title": "Ehan Mallick's two AND merges on yoyobar's 62-qubit circuit, as Alex Chilton ships them",
+      "part": "bce2948ff24e20fe59666d131f7fc4316a905103937272c52fdd39d494b6fe47"
+    },
+    "dqi": {
+      "id": "yoyobar-148bc9bc",
+      "title": "yoyobar's 892-qubit decoder with two more product-cache reuses",
+      "part": "148bc9bcc77d5de13df6da6b33a487cc8c7c1f52e1b24a11bae03705b24b05ec"
+    },
+    "dfthcsos": {
+      "id": "rung-11bf72d9",
+      "title": "Public circuits, three of them recompiled, with our table weights",
+      "part": "11bf72d932d6348cf7ae96380128662046f03a18e3d30867ee02aef1a8345f25"
+    }
+  },
+  "verifiers": {
+    "invsqrt": {
+      "status": "PASS",
+      "score": 100568.4991945597,
+      "toffoli_equivalent": 1622.0725676541888,
+      "toffoli_count": 1325.481775804887,
+      "max_toffoli_count": 1495,
+      "t_count": 6.999871841622275,
+      "rotation_count": 41.0,
+      "rotation_eps": 2.434041480874084e-13,
+      "num_qubits": 62,
+      "reaction_depth": 805,
+      "num_ops": 47258,
+      "verified_shots": 200540928,
+      "worst_error_over_tolerance": 0.9993237694056958,
+      "worst_x": 161,
+      "circuit_sha256": "bce2948ff24e20fe59666d131f7fc4316a905103937272c52fdd39d494b6fe47"
+    },
+    "dqi": {
+      "status": "PASS",
+      "score": 377371305874.2584,
+      "m": 4095,
+      "n": 70,
+      "degree": 12,
+      "r": 2016,
+      "verified_shots": 102400,
+      "value_errors": 0,
+      "phase_errors": 0,
+      "empirical_error_rate": 0.0,
+      "effective_error_rate": 0.0008660587301657926,
+      "log2_delta": -128.0,
+      "repetition_factor": 1.1912604648115832,
+      "mean_error_weight": 31.046737331746634,
+      "toffoli_count": 398136.906015625,
+      "max_toffoli_count": 453310,
+      "reaction_depth": 63750,
+      "num_ops": 64168176,
+      "shot_operation_counts": {
+        "NEG": 36403346,
+        "BIT_INVERT": 183219083212,
+        "BIT_STORE0": 23393061956,
+        "BIT_STORE1": 4374515892,
+        "X": 26044892780,
+        "Z": 2357675894,
+        "R": 5721609750,
+        "HMR": 8409810263,
+        "CX": 5606420486758,
+        "CZ": 42775910630,
+        "SWAP": 162166129075,
+        "CSWAP": 1143296000,
+        "CCX": 39386938670,
+        "CCZ": 238984506,
+        "INFO_TAG": 1819033600,
+        "POP_CONDITION": 10985062400,
+        "PUSH_CONDITION": 10985062400
+      },
+      "num_qubits": 892,
+      "num_bits": 104142,
+      "circuit_sha256": "148bc9bcc77d5de13df6da6b33a487cc8c7c1f52e1b24a11bae03705b24b05ec"
+    },
+    "dfthcsos": {
+      "status": "PASS",
+      "score": 318542121.6888587,
+      "lambda_eff": 47.03047669292624,
+      "toffoli_count": 15825.0,
+      "num_qubits": 428,
+      "brot": 8,
+      "batch_size": 5,
+      "num_circuits": 15,
+      "reaction_depth": 235,
+      "num_ops": 664527,
+      "verified_shots": 87232,
+      "submission_sha256": "11bf72d932d6348cf7ae96380128662046f03a18e3d30867ee02aef1a8345f25",
+      "resources": {
+        "brot": 8,
+        "keep_bits": 10,
+        "angles_toffoli_per_pass": 4542.0,
+        "angles_toffoli": 9084.0,
+        "angles_qubits": 128,
+        "angles_selection_qubits": 11,
+        "angles_persistent_qubits": 40,
+        "angles_temporary_qubits": 77,
+        "outer_state_prep_toffoli": 320,
+        "inner_state_prep_toffoli": 4171,
+        "givens_rotations_toffoli": 2250,
+        "outer_state_prep_persistent_qubits": 40,
+        "outer_state_prep_temporary_qubits": 90,
+        "outer_state_prep_qubits": 130,
+        "inner_state_prep_persistent_qubits": 45,
+        "inner_state_prep_temporary_qubits": 303,
+        "inner_state_prep_qubits": 348,
+        "heuristic_persistent_qubits": 85,
+        "heuristic_temporary_qubits": 303,
+        "heuristic_toffoli": 6741,
+        "heuristic_qubits": 388,
+        "persistent_qubits": 125,
+        "temporary_qubits": 303,
+        "toffoli": 15825.0,
+        "qubits": 428,
+        "angles_within_cap": true
+      },
+      "metrics": {
+        "error_1": 0.015245173861306407,
+        "error_2": 0.019999649998452707,
+        "Lambda": 284.4506827099597,
+        "E_SOS": -22144.18825040011,
+        "E_gap": 3.9149004001119465,
+        "lambda_eff": 47.03047669292624,
+        "gap_in_domain": true
+      }
+    }
+  },
+  "member_sha256": {
+    "dfthcsos/angle_k_0.kmb": "a674d5f3e891da3ca2a7d335c6bab576fdfc2d55b64116f2592e858a168d6ad0",
+    "dfthcsos/angle_k_1.kmb": "94ee4b32007edc23b349efceaa6a132de0cd19cee23441b14a25c9a7d69756dc",
+    "dfthcsos/angle_k_10.kmb": "efacf35c7a29e6736ccf70054bbddef69e6292080e5588a6a000aec8ebf83312",
+    "dfthcsos/angle_k_11.kmb": "671534f0ff94e110f626f2b44f269a66389e35ae79759fa2754ed989224969e9",
+    "dfthcsos/angle_k_12.kmb": "fc9e4ff102bbc391c025a6ddc759101dca555bff33b2da4f7b3dae6884296644",
+    "dfthcsos/angle_k_13.kmb": "fd7d12aef747adad7ef873b03bd533a34724caf0f3a55a5942d9b9cff2d15dd4",
+    "dfthcsos/angle_k_14.kmb": "c9db481c02346260ac3263ee02f15af29b3950ecd87309b328266690435efdcd",
+    "dfthcsos/angle_k_2.kmb": "9a779a0775321da09bf3a7885e4ff2d28d51dbebff884d066fa4048c6b435e2f",
+    "dfthcsos/angle_k_3.kmb": "dcdf1135cb7b1d343272c9b07113796a3e33898fe21a353148cbdc8e4546348b",
+    "dfthcsos/angle_k_4.kmb": "8bb8f1276b36aaa79bd0c7538b08a309a78d3a3b9c3d62a32679150981fd8b7a",
+    "dfthcsos/angle_k_5.kmb": "c4a8a03ddd4b5f382e25478054533a793602b37aeb1feb4ec48cf97fdfbf74aa",
+    "dfthcsos/angle_k_6.kmb": "d90a57c9bddc08f2245ecf96a3662da5d9b96d5be2ffaf259d97afa79148af94",
+    "dfthcsos/angle_k_7.kmb": "77a79ee5f5cf97d19caf68e0ef20ba05d2d18d0f8c3f1ca3e451b5814dec601a",
+    "dfthcsos/angle_k_8.kmb": "9631ac78c0ea69edfc75a0e01a8e8a19d4c8c9ab09ebcdc42fa1240ffc708ad5",
+    "dfthcsos/angle_k_9.kmb": "6782a28e77cb1a1fd7602c3216670de4fa873a9a2187fa91c6afd5bc5a419c28",
+    "dfthcsos/submission.npz": "f1667fb3700505732f0eb7d631d2982b3a4d6ed6c59a76cacd5491346aa9c0d4",
+    "dqi.kmb": "148bc9bcc77d5de13df6da6b33a487cc8c7c1f52e1b24a11bae03705b24b05ec",
+    "invsqrt.kmb": "bce2948ff24e20fe59666d131f7fc4316a905103937272c52fdd39d494b6fe47"
+  },
+  "geometric_mean": 24.151890195087553,
+  "archive_sha256": "a372c77ad52cb3ec10fe5361529e1c00169a6545952577307e7026f3e75e056c",
+  "archive_bytes": 32320411,
+  "environment": {
+    "python": "3.13.15",
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.1.3",
+      "scipy": "1.16.3"
+    },
+    "workers": 4,
+    "affinity": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "numeric_threads": 1,
+    "kickmix_sha256": "c66b3216c4029e0cdfd09054306aa0feadf53ab2f50c1164e37f752874e5005e",
+    "seed": "official default: derived from each circuit SHA-256, empty salt",
+    "assembled_from_commit": "11174a7b86473e0eb575790a5d23fce97c259b9f",
+    "blocks_changed_since_commit": false
+  },
+  "timings": [
+    {
+      "command": [
+        "notebooks/take.py",
+        "/kaggle/input",
+        "/tmp/qcomp-ewfhdqj2/build/submission",
+        "/tmp/qcomp-ewfhdqj2/source/members.json",
+        "/tmp/qcomp-ewfhdqj2/build/built"
+      ],
+      "seconds": 6.045859770999982,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "data/comp/verifiers/invsqrt/verify_submission_invsqrt.py",
+        "/tmp/qcomp-ewfhdqj2/build/submission/invsqrt.kmb",
+        "--max-workers",
+        "4"
+      ],
+      "seconds": 764.255515718,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "data/comp/verifiers/dqi/verify_submission_dqi.py",
+        "/tmp/qcomp-ewfhdqj2/build/submission/dqi.kmb",
+        "--max-workers",
+        "4"
+      ],
+      "seconds": 176.38690500500002,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "data/comp/verifiers/dfthcsos/verify.py",
+        "/tmp/qcomp-ewfhdqj2/build/submission/dfthcsos"
+      ],
+      "seconds": 29.34643792199995,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "notebooks/check-submission",
+        "/tmp/qcomp-ewfhdqj2/build/submission"
+      ],
+      "seconds": 0.9581747610000093,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "notebooks/extra-format.py",
+        "/tmp/qcomp-ewfhdqj2/build/submission"
+      ],
+      "seconds": 0.19574625900008868,
+      "returncode": 0
+    }
+  ],
+  "elapsed_seconds": 1000.05699476
+}

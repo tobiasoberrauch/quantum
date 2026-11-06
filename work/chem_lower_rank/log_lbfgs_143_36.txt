@@ -1,0 +1,5 @@
+[9s] seed (9,143,36): err2=722.3m lamEff=126.22 Egap=28.3516
+
+L-BFGS status=CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH fun=0.23444 nfev=167
+BEST: err2=249.730m lamEff=47.0586 Egap=3.916016 Lambda=284.709 valid_err2=False valid_gap=True
+saved work/chem_lower_rank/lbfgs_143_36.npz

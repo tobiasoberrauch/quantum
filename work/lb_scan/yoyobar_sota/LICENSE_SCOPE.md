@@ -1,0 +1,1 @@
+Notebook code and prose authored by yoyobar are offered under Apache-2.0; see APACHE-2.0.txt. Third-party circuits and upstream material retain their own terms and notices. Public availability does not itself supply a license for unlicensed source-code ancestors. The user-provided image is not relicensed by this notice. See CREDITS.md.

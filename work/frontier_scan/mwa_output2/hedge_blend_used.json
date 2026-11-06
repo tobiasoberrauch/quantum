@@ -1,0 +1,29 @@
+{
+  "schema": "vqcc-friends-hedge-blend-v1",
+  "entries_sha256": "85bf16c8f1c232ac8d60ccb345c00e9c63a7add51dfa0abaa18e31974827e82e",
+  "entries": 13,
+  "unknown_version_entries": [],
+  "decisions": [
+    {
+      "task": "dqi",
+      "entry": "HW-09",
+      "candidate_sha256": "1698e864a3a638ef0569c438f01958731ebc164a917a4b84b8ff14598b83ab54",
+      "base_sha256": "fc3ba81614e1016f7fbc6c58bc229243fc0c26aa5de601caef7d280e7d14dad9",
+      "candidate_rank_cost": 379083756899.5127,
+      "base_rank_cost": 375699439867.0358,
+      "basis": "48-draw mean",
+      "selected": false
+    },
+    {
+      "task": "chemistry",
+      "entry": "HW-14",
+      "candidate_sha256": "7d372981d3ce8486b81afe199118f9f2ff438aa37f93af09d2d1650c1771c2fc",
+      "base_sha256": "4a9adf368a10836489d73b376a3c0ebc08cdeb11788d24a095312ca4459f7b24",
+      "candidate_rank_cost": 317574154.534703,
+      "base_rank_cost": 313678954.0955252,
+      "basis": "default-salt verifier",
+      "selected": false
+    }
+  ],
+  "selected": {}
+}

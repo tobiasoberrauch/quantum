@@ -1,0 +1,62 @@
+ref                                                               title                                              author                        lastRunTime                 totalVotes  
+----------------------------------------------------------------  -------------------------------------------------  ----------------------------  --------------------------  ----------  
+kirilltym/quantum-compilation-19                                  Quantum Compilation 19                             Kirill Tymchishin             2026-11-04 18:37:56.873000           0  
+manwithacat/vqcc-hedge-wizardry-notebook                          VQCC Hedge Wizardry Notebook                       manwithacat                   2026-11-04 18:36:29.767000          49  
+kalidenaiarys/quantum-circuit-compilation-public-lb-24-59425      Quantum Circuit Compilation | Public LB 24.59425   Kaliden Aiarys                2026-11-04 18:31:24.493000           1  
+isabe11am00re/qcc-v66s33w-submission                              QCC v66s33w submission                             Isabe11aM00re                 2026-11-04 17:36:52.173000           0  
+matousakura/best-of-public-portfolio-vqcc-24-0x-class             Best-of-public portfolio — VQCC (24.0x class)      matousakura                   2026-11-04 17:36:37.407000           2  
+somejoint/quantum-circuits-24-59-local-gm-chem-refit              Quantum Circuits | 24.59 Local GM: Chem Refit      Agniv Banerjee                2026-11-04 17:05:01.353000         113  
+leotang09/vqcc-t7421-submission                                   VQCC T7421 Submission                              Leo Tang                      2026-11-04 16:51:54.600000           1  
+mdkawsarahamed/verifiable-quantum-compilation-local-verification  Verifiable Quantum Compilation Local Verification  Md. Kawsar Ahamed             2026-11-04 16:24:41.697000           0  
+alexchilton/24-59-lb-verified-three-task-portfolio                24.59 LB: Verified Three-Task Portfolio            alex chilton                  2026-11-04 15:59:32.637000         110  
+manwithacat/the-real-150k-was-the-friends-we-made                 The Real $150K Was the Friends We Made             manwithacat                   2026-11-04 15:47:23.257000          84  
+yoyobar/lb-22-99-invsqrt-101-62-qubits                            LB 22.99 | invsqrt 101 - 62 qubits                 yoyobar                       2026-11-04 15:23:39.207000          85  
+kirilltym/quantum-circuits-four-loaders-eight-toffolis            Quantum Circuits | Four Loaders, Eight Toffolis    Kirill Tymchishin             2026-11-04 15:03:59.480000          42  
+isabe11am00re/qcc-v65wqq-submission                               QCC v65wqq submission                              Isabe11aM00re                 2026-11-04 14:09:53.363000           5  
+danielwycoff/circuit-diagnostic-baseline                          Circuit Diagnostic Baseline                        Daniel Wycoff                 2026-11-04 13:40:33.260000           1  
+ayodejiibrahimlateef/vqcc-24-56308-local                          VQCC 24.56308 local                                Ayodeji                       2026-11-04 13:32:50.587000           4  
+dmitriigluzdov/quantum-circuit-compilation-from-source            Quantum Circuit Compilation from Source            Dmitrii Gluzdov               2026-11-04 12:08:55.850000          88  
+rishabhbafnaiiitd/quantum-circuit-compilation-multi-task-sota     Quantum Circuit Compilation: Multi-Task SOTA       Rishabh Bafna                 2026-11-04 12:07:15.107000           1  
+coralfil/atlantis-vqcc-apex-quantum-circuit-portfolio             Atlantis VQCC Apex Quantum Circuit Portfolio       Roland Poulin                 2026-11-04 10:28:59.473000           1  
+qiuqiuh/qcc-refresh-v65w-sx-sy7-inverse                           QCC Refresh v65w-sx-sy7-inverse                    qiuqiu                        2026-11-04 09:09:54.073000           5  
+malachiwmoody/vqcc-open-notes                                     VQCC Open Notes                                    malachi w moody               2026-11-04 09:07:10.267000           0  
+heliosli/the-dataset-is-public-now-enjoy                          The dataset is public now. Enjoy!⭐⭐⭐               Heliosli                      2026-11-04 08:02:01.463000          24  
+psalmprax/apedp-q-a-verified-89-qubit-inverse-square-root         APEDP-Q: a verified 89-qubit inverse square root   Samuel                        2026-11-04 07:02:17.717000           0  
+shreyanshsingh7777/google-quantum-ai-raw-model                    Google Quantum AI Raw Model                        Shreyansh Singh               2026-11-04 05:01:03.540000           2  
+orecord/quantum-circuit-compilation-pipeline                      Quantum circuit compilation pipeline               Or4k2!                        2026-11-04 03:18:10.997000           9  
+syed3000/vqcc-own-circuit-portfolio-notebook                      VQCC Own-Circuit Portfolio Notebook                Syed Asad Ali                 2026-11-04 03:17:02.567000          15  
+kawh1111/qcomp-harvest-v32                                        Qcomp harvest v32                                  kawh1111                      2026-11-04 03:10:54.573000           9  
+qiuqiuh/qcc-refresh-v64y-sx-sy6                                   QCC Refresh v64y-sx-sy6                            qiuqiu                        2026-11-04 02:59:46.273000           3  
+nicks037/submission-zip                                           submission.zip                                     EigenOS                       2026-11-04 01:57:52.237000           0  
+manwithacat/dfthc-refit                                           dfthc_refit                                        manwithacat                   2026-11-03 23:02:00.130000           0  
+isabe11am00re/qcc-v58x-submission                                 QCC v58x submission                                Isabe11aM00re                 2026-11-03 22:56:08.537000          10  
+ahoirg/qcc-reproducible-circuit-portfolio                         QCC | Reproducible Circuit Portfolio               Ali Haydar Özdağ              2026-11-03 22:04:17.433000           6  
+aiokajima/quantum-alexchilton-v82-reproduction-public             Quantum Alexchilton V82 Reproduction (Public)      AI OKAJIMA                    2026-11-03 21:27:41.390000           0  
+leoprovorov/but-some-q-squared-width-lab                          🜁 But Some Q Squared | Width Lab                   AlekseiProvorov               2026-11-03 20:31:42.033000          17  
+pablodiegoo/google-quantum-compilation-starter-notebook           Google Quantum Compilation Starter Notebook        Pablo Diego Pereira           2026-11-03 19:44:32.893000           3  
+manwithacat/df-thc-weight-refit-demo                              DF-THC weight refit demo                           manwithacat                   2026-11-03 18:18:25.967000           0  
+davidpiln/what-didn-t-work-dead-ends                              What didn't work: dead ends                        David Pilný                   2026-11-03 17:56:00.400000           1  
+syed3000/vqcc-24-43-portfolio                                     VQCC 24.43 Portfolio                               Syed Asad Ali                 2026-11-03 17:34:47.623000          14  
+evgendvorkin/google-quantum-ai-deep-eda-with-analogies            🧠 Google Quantum AI | Deep EDA with Analogies      Дворкин Евгений Владимирович  2026-11-03 17:11:11.813000          27  
+asimandia/task-iii-xor-contract-minimal-reproducer                Task III XOR contract: minimal reproducer          Pizzaboi                      2026-11-03 15:03:40.913000           1  
+manwithacat/kickmix-tools                                         kickmix_tools                                      manwithacat                   2026-11-03 14:34:28.697000           1  
+heliosli/quantum-ai-v1                                            Quantum AI - v1                                    Heliosli                      2026-11-03 13:34:14.287000         125  
+anglolodorf/qcc-agentic-qwen-sota-portfolio                       QCC Agentic Qwen SOTA Portfolio                    ANGOUAH                       2026-11-03 12:45:11.470000           3  
+marculera/df-thc-10x-compact-groups-from-the-hamiltonian          DF-THC 10x: Compact Groups From the Hamiltonian    Lera                          2026-11-03 11:45:34.743000          13  
+psalmprax/benchmark-iii-a-123-qubit-angle-family                  Benchmark III: a 123-qubit angle family            Samuel                        2026-11-03 10:53:54.793000           0  
+qiuqiuh/qcc-verified-baseline-20261103                            QCC Verified Baseline 20261103                     qiuqiu                        2026-11-03 09:28:55.140000           0  
+nisargdavem/quantum-circuit-unified-optimization-pipeline         Quantum-Circuit-Unified-Optimization-Pipeline      Nisarg Dave M                 2026-11-03 09:23:34.247000           0  
+dcvxzyk/gvqcc-dfthcsos-anatomy-v1                                 GVQCC DFTHCSOS Anatomy V1                          dcvxzyk                       2026-11-03 07:39:31.973000           0  
+adilshamim8/google-quantum-ai-101                                 Google Quantum AI 101                              Adil Shamim                   2026-11-03 07:23:14.750000           1  
+seshurajup/quantum-circuits-3-tasks-lb-23-9062                    Quantum Circuits | 3 Tasks | [LB 23.9062]          SeshuRaju 🧘‍♂️                2026-11-03 07:18:39.717000           4  
+dcvxzyk/gvqcc-dqi-producer-v1                                     GVQCC DQI Producer V1                              dcvxzyk                       2026-11-03 07:18:00.540000           0  
+dcvxzyk/gvqcc-dqi-unextract-mass-v1                               GVQCC DQI Unextract Mass V1                        dcvxzyk                       2026-11-03 06:44:50.220000           0  
+dcvxzyk/gvqcc-dqi-collapse-v1                                     GVQCC DQI Collapse V1                              dcvxzyk                       2026-11-03 06:22:33.337000           0  
+dcvxzyk/gvqcc-dqi-unextract-cache-v1                              GVQCC DQI Unextract Cache V1                       dcvxzyk                       2026-11-03 06:11:02.253000           0  
+dcvxzyk/gvqcc-dqi-rewrite-v1                                      GVQCC DQI Rewrite V1                               dcvxzyk                       2026-11-03 05:28:54.040000           0  
+haoxiangxuexi/exp-206-qc-portfolio24                              exp-206-qc-portfolio24                             suhan                         2026-11-03 03:00:46.477000           2  
+harshalekkala1/fork-the-real-150k-friends-we-made                 fork: the real 150k friends we made                HARSHA Lekkala1               2026-11-03 02:17:44.927000           1  
+leoprovorov/the-unbearable-lightness-of-quantum-circuits          🪶 The Unbearable Lightness of Quantum Circuits     AlekseiProvorov               2026-11-03 01:05:37.497000          32  
+dcvxzyk/gvqcc-dqi-anatomy-v1                                      GVQCC DQI Anatomy V1                               dcvxzyk                       2026-11-03 00:57:34.477000           0  
+prvsiyan/verifier-guided-quantum-circuit-optimization             Verifier-Guided Quantum Circuit Optimization       prvsiyan                      2026-11-02 23:48:42.147000          20  
+dcpracmatic/google-quantum-ai-compilaci-n-verificable-de-cir      Google Quantum AI Compilación verificable de cir   Arturo Balderas               2026-11-02 23:20:07.717000           0  

@@ -1,0 +1,24 @@
+{
+ "component": "invsqrt",
+ "key": "dbb15f8bc441ca28bd432d3d498f69d9e3b6844f5029ba328d9192841d662416",
+ "sources": [
+  "d__iwanttorungemma9b__vqcc-optimized-submission"
+ ],
+ "status": "PASS",
+ "score": 684969.0897888336,
+ "toffoli_equivalent": 4005.667191747565,
+ "toffoli_count": 3757.0,
+ "max_toffoli_count": 3757,
+ "t_count": 1.0,
+ "rotation_count": 36.0,
+ "rotation_eps": 1.026901286931791e-12,
+ "num_qubits": 171,
+ "reaction_depth": 1861,
+ "num_ops": 40439,
+ "verified_shots": 200540928,
+ "worst_error_over_tolerance": 0.6610852380216476,
+ "worst_x": 2850173,
+ "circuit_sha256": "dbb15f8bc441ca28bd432d3d498f69d9e3b6844f5029ba328d9192841d662416",
+ "seconds": 315.8,
+ "ratio": 3.0319240162435976
+}

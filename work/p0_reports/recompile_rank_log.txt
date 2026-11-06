@@ -1,0 +1,27 @@
+D=1363 A=43 B=32 n_sel=11 cache=62 fixed_ccx/loader=124 q_circuit=124
+
+CURRENT: static CCX=9185 predicted angles_toffoli=18370 (measured by verifier: 8932)  [1.4s]
+per-loader kernels: [35, 35, 35, 35, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]
+perm 0: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm 1: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm 2: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.3s]
+perm 3: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm 4: static= 9735 angles_T=19470 (d=+1100) kernels=524 [1.3s]
+perm 5: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm 6: static= 9735 angles_T=19470 (d=+1100) kernels=524 [1.3s]
+perm 7: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm 8: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.3s]
+perm 9: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm10: static= 9735 angles_T=19470 (d=+1100) kernels=524 [1.4s]
+perm11: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm12: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm13: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm14: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.3s]
+perm15: static= 9735 angles_T=19470 (d=+1100) kernels=524 [1.4s]
+perm16: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.3s]
+perm17: static= 9735 angles_T=19470 (d=+1100) kernels=525 [1.4s]
+perm18: static= 9735 angles_T=19470 (d=+1100) kernels=524 [1.5s]
+perm19: static= 9735 angles_T=19470 (d=+1100) kernels=524 [1.5s]
+
+BEST perm: perm0 angles_T=19470 (d=+1100)
+-> /Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/work/p0_reports/recompile_rank_results.json

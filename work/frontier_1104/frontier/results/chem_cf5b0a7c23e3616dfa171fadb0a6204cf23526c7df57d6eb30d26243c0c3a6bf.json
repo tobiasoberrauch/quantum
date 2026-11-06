@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "cf5b0a7c23e3616dfa171fadb0a6204cf23526c7df57d6eb30d26243c0c3a6bf",
+ "sources": [
+  "k__heliosli__quantum-ai-v1"
+ ],
+ "status": "PASS",
+ "score": 314723439.47629964,
+ "lambda_eff": 47.04940424616527,
+ "toffoli_count": 15629.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 259,
+ "num_ops": 664327,
+ "verified_shots": 87232,
+ "submission_sha256": "f145f9c1201eb19bee949298a510eae05d33397fbc6a7c53a550e7cce780c2d6",
+ "seconds": 26.6,
+ "ratio": 10.6620580719989
+}

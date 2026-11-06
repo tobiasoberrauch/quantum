@@ -1,0 +1,19 @@
+{
+  "upstream_release": {
+    "url": "https://www.kaggle.com/datasets/heliosli/qcc-circuits-live",
+    "portfolio": "v76_y33_ay3",
+    "archive_sha256": "32f1eb04f2c260df2cc50e254d19c8e3541dcdb807d5062e958302ac014d2b11"
+  },
+  "dqi_tools": {
+    "url": "https://www.kaggle.com/datasets/atakanaldemir/qcc-c44-five-helper-release-sources/versions/1",
+    "upstream_archive_sha256": "a0f705ea88b888cfaa89b84ddc7c988fa4aa5702c1ffc81cb9b2f917e149b95c",
+    "files": {
+      "dqi_chain_cache_v4.py": "dfeee72e760acab86b50aa1b4311a68295d247c77ea33c2cc431bf2bf5813b13",
+      "dqi_chain_cache_emit_v4.py": "44902b1142ac95892e9382f8baf4c1d4c8993270395da6cac933b45e02a1dcb2"
+    }
+  },
+  "baseline_dqi_sha256": "1ab3ac53d442d74410cc753d140fb3008057672d2fcde67b563bfef3808339e5",
+  "final_dqi_sha256": "b4bbf86d504e2452c8185ec882e0cf7a8ba9401a4bfa69f71f18b4fc6d9c599c",
+  "submitted_archive_sha256": "6081c53c2e760d22152cc13fedb50429df6e521f4a39d30df3f9704dfd26d02f",
+  "source_modifications": "Atakan scanner and emitter are byte-identical to the cited source; orchestration is new."
+}

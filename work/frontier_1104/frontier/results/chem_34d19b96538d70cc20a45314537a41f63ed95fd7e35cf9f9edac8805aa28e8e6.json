@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "34d19b96538d70cc20a45314537a41f63ed95fd7e35cf9f9edac8805aa28e8e6",
+ "sources": [
+  "d__ahmedberatozer__vqcc-v23-portfolio"
+ ],
+ "status": "PASS",
+ "score": 308564564.39453137,
+ "lambda_eff": 47.184697373047555,
+ "toffoli_count": 15315.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 603646,
+ "verified_shots": 78080,
+ "submission_sha256": "b9e172c620931c43345e1b84f31aebfa7c3992c3f81249b33a5d37818a5f7706",
+ "seconds": 15.1,
+ "ratio": 10.874870207147506
+}

@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "92750bd64525924ef84c8cd1b379b2c2d3914d87347bbe1bc40c804efff3ccdc",
+ "sources": [
+  "k__busyaprime__lb-23-91003-exact-dqi-rewrites-at-892-qubits"
+ ],
+ "status": "PASS",
+ "score": 379108604829.7837,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 399969.8032714844,
+ "max_toffoli_count": 454945,
+ "reaction_depth": 64217,
+ "num_ops": 63908583,
+ "num_qubits": 892,
+ "num_bits": 101910,
+ "circuit_sha256": "92750bd64525924ef84c8cd1b379b2c2d3914d87347bbe1bc40c804efff3ccdc",
+ "seconds": 119.8,
+ "ratio": 64.46559975774231
+}

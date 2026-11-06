@@ -1,0 +1,26 @@
+{
+ "component": "invsqrt",
+ "key": "6eea5d218bd058c3d5628abe9b97ae4e6d6ac63fbbbad7becc3feea9ab28529c",
+ "sources": [
+  "d__syed3000__vqcc-own-circuit-portfolio",
+  "k__orecord__quantum-circuit-compilation-pipeline",
+  "k__syed3000__vqcc-own-circuit-portfolio-notebook"
+ ],
+ "status": "PASS",
+ "score": 98254.82298358945,
+ "toffoli_equivalent": 1584.755209412733,
+ "toffoli_count": 1286.2895855254046,
+ "max_toffoli_count": 1484,
+ "t_count": 14.499199993728961,
+ "rotation_count": 41.0,
+ "rotation_eps": 2.434041480874084e-13,
+ "num_qubits": 62,
+ "reaction_depth": 760,
+ "num_ops": 47635,
+ "verified_shots": 200540928,
+ "worst_error_over_tolerance": 0.9993237694056958,
+ "worst_x": 161,
+ "circuit_sha256": "6eea5d218bd058c3d5628abe9b97ae4e6d6ac63fbbbad7becc3feea9ab28529c",
+ "seconds": 293.0,
+ "ratio": 21.13661366080875
+}

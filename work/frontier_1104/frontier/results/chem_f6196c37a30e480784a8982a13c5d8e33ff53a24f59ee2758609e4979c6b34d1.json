@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "f6196c37a30e480784a8982a13c5d8e33ff53a24f59ee2758609e4979c6b34d1",
+ "sources": [
+  "k5__orecord__quantum-circuit-compilation-pipeline"
+ ],
+ "status": "PASS",
+ "score": 306711298.0737426,
+ "lambda_eff": 47.017964136401744,
+ "toffoli_count": 15277.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 612056,
+ "verified_shots": 78080,
+ "submission_sha256": "27eb0572eb348934da0a70b6723cfe88bedd3f9958a085ca686f36f90c81ef3d",
+ "seconds": 16.1,
+ "ratio": 10.940580309202533
+}

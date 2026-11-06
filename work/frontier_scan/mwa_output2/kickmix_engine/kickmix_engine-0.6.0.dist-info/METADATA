@@ -1,0 +1,562 @@
+Metadata-Version: 2.4
+Name: kickmix-engine
+Version: 0.6.0
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Dist: numpy>=1.26
+Requires-Dist: pytest>=8 ; extra == 'test'
+Provides-Extra: test
+License-File: LICENSE
+License-File: NOTICE
+Summary: Bit-sliced CPU simulator, per-shot compatible with kickmix, that runs the official VQCC invsqrt and DQI verifier flows
+License-Expression: Apache-2.0
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Project-URL: Changelog, https://github.com/manwithacat/kickmix-engine/blob/main/CHANGELOG.md
+Project-URL: Repository, https://github.com/manwithacat/kickmix-engine
+
+# kickmix-engine
+
+kickmix-engine is a CPU simulator for [kickmix](https://github.com/quantumlib/Qualtran/tree/main/kickmix) circuits,
+written in Rust, plus a `kickmix-engine verify` command for the **invsqrt**, **DQI** and **chemistry (`dfthcsos`)**
+tasks of the Kaggle competition
+[Google Quantum AI: Verifiable Quantum Circuit Compilation](https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation)
+(VQCC). It is an independent re-implementation of kickmix's simulation semantics. It has been checked shot for shot
+against kickmix: every qubit, every classical bit, the exact phase and the operation counts. `verify` runs the
+competition's official verifier logic with this engine as the simulator and prints the same summary JSON. With
+`--cross-check` it also runs the official verifier and compares every field.
+
+**Not affiliated with Google, Qualtran or Kaggle.** The official verifier running on kickmix is the reference.
+This engine gets the same answer with less memory and in less time, and it can check itself against the reference
+whenever you ask it to.
+
+**Who wrote it.** The code, tests and documentation were written by an AI model (Claude, by Anthropic) under the
+direction of the repository owner, James Barlow, who reviews the work and is responsible for it. See [NOTICE](NOTICE).
+
+## Install
+
+Requirements: Python 3.12 or later on macOS arm64 or Linux x86_64. NumPy is installed as a dependency.
+
+```sh
+# Wheels are attached to each GitHub release (abi3: one wheel per platform serves every Python >= 3.12).
+pip install https://github.com/manwithacat/kickmix-engine/releases/download/v0.5.0/kickmix_engine-0.5.0-cp312-abi3-macosx_11_0_arm64.whl
+pip install https://github.com/manwithacat/kickmix-engine/releases/download/v0.5.0/kickmix_engine-0.5.0-cp312-abi3-manylinux_2_28_x86_64.whl
+
+# kickmix must also be importable: the official verifier modules import it, even though the engine never uses it to simulate.
+pip install kickmix   # kickmix 1.0.0 from PyPI, or the faster fork below
+```
+
+Each release has a `SHA256SUMS.txt` and a machine-readable `release-manifest.json` (see
+[For agents and automation](#for-agents-and-automation)). The Linux x86_64 wheel contains three simulator kernels
+(baseline, AVX2, AVX-512) and picks the best one for the CPU at start-up; there is no separate AVX wheel to choose.
+For kickmix you can use the PyPI package (the official build) or the
+[kickmix-macos](https://github.com/manwithacat/kickmix-macos) fork, an openly AI-assisted fork by the same owner. The
+benchmarks below compare against both.
+
+Building from source needs Rust 1.80 or later:
+
+```sh
+pip install maturin && maturin build --release --locked -o dist && pip install dist/*.whl
+# On Kaggle (internet off): attach the dataset manwithacat/kickmix-engine-wheels (mirrored from every release), then
+#   pip install --no-index --no-deps /kaggle/input/kickmix-engine-wheels/kickmix_engine-*-manylinux_2_28_x86_64.whl
+
+# For an in-place development build on macOS: ./build.sh, then put python/ on PYTHONPATH.
+```
+
+## What you need besides the package
+
+- **The official verifiers.** `verify_submission_dqi.py`, `verify_submission_invsqrt.py` and the `dfthcsos` package ship in the `verifiers/`
+  directory of the competition data. Download them from the competition's Data tab, or with
+  `kaggle competitions download -c google-verifiable-quantum-circuit-compilation` once you have accepted the rules.
+  They are not redistributed here. Point the engine at that directory:
+  `export KICKMIX_ENGINE_VERIFIERS=/path/to/verifiers` (it must contain `dqi/`, `invsqrt/` and `dfthcsos/`). The
+  chemistry verifier also needs SciPy, as the official one does.
+- **Circuits to verify.** Use your own `.kmb` files, the competition's `sample_submission/`, or the public Kaggle
+  dataset [manwithacat/vqcc-apache-public-circuits](https://www.kaggle.com/datasets/manwithacat/vqcc-apache-public-circuits).
+  That dataset collects circuits published in Apache-2.0 notebooks, including the two DQI circuits used below
+  (`dqi/4ee7a17b4cbc.kmb`, `dqi/b3354f60e459.kmb`) and `invsqrt/07314803a092.kmb`.
+
+## Quickstart
+
+```sh
+export KICKMIX_ENGINE_VERIFIERS=/path/to/verifiers
+
+kickmix-engine verify dqi circuits/dqi/4ee7a17b4cbc.kmb                    # prints the official summary JSON
+kickmix-engine verify dqi circuits/dqi/4ee7a17b4cbc.kmb --salt my-salt --cross-check --official-workers 4
+kickmix-engine verify invsqrt sample_submission/invsqrt.kmb --cross-check
+kickmix-engine verify dfthcsos sample_submission/dfthcsos/ --cross-check    # a directory: angle_k_*.kmb + submission.npz
+
+# Compare two circuits (0.6.0): structural hunks, paired per-shot agreement and the Toffoli change, as JSON
+kickmix-engine diff invsqrt base.kmb candidate.kmb --n 16 --threads 4 --out base-vs-cand.json
+# Profile a base once over 48 fixed draws, then predict any candidate's expected cost from 16 paired batches
+kickmix-engine profile dqi base.kmb --out profiles/ --draws 48 --anchor BASE_SHA256 --salt-format 'sweep-{}'
+kickmix-engine diff dqi base.kmb candidate.kmb --profile profiles/profile-<sha12>.json --n 16
+kickmix-engine diff dfthcsos submission_a/dfthcsos/ submission_b/dfthcsos/              # family level
+kickmix-engine diff generic a.kmb b.kmb --inputs x,y          # any circuit: uniform inputs on named registers
+```
+
+From Python:
+
+```python
+from kickmix_engine.dqi import DQITask
+summary = DQITask("4ee7a17b4cbc.kmb").verify(salt="", threads=8)   # the official verify() fields
+```
+
+## The `verify` command
+
+```
+kickmix-engine verify {dqi,invsqrt} CIRCUIT.kmb [--salt S] [--seed N] [--threads N] [--cross-check] [options]
+kickmix-engine verify dfthcsos SUBMISSION_DIR [--salt S] [--seed N] [--threads N] [--cross-check] [options]
+kickmix-engine cache {info,prune,clear} [--cache-dir DIR]
+kickmix-engine doctor [--json] [--manifest PATH_OR_URL]
+python -m kickmix_engine ...    # same thing
+```
+
+- Output: the official verifier's summary fields, with the same names and values, including `reaction_depth` and
+  `circuit_sha256`. On failure it prints `{"status": "FAIL", "error": ...}` with the official message text, as the
+  official CLI does.
+- Exit codes: 0 PASS; 1 FAIL; 3 when `--cross-check` finds any difference.
+- `--cross-check` also runs the official verifier CLI, unchanged, in `--official-python` (default: the same
+  interpreter), with `--official-workers` processes (default: the verifier's own default). It prints
+  `{"match": bool, "differences": {...}, "engine": {...}, "official": {...}, "seconds": {...}}`. Every field is
+  compared, on PASS and on FAIL.
+- The task options mirror the official CLI's: `--m --n --degree --r --num-shots --log2-delta` for DQI, and
+  `--n-p --beta --precision-bits --shots-per-x --eta --width --max-x --system-qubits` for invsqrt.
+- For `dfthcsos` the options mirror the official CLI: `--factorization`, `--tree-edges`, `--format`,
+  `--shots-per-address`. `--no-fcidump-cache` always parses the FCIDUMP (as the official verifier does) and
+  `--no-low-memory` keeps the official tensor layout in the error_2 step (see [Chemistry](#chemistry-dfthcsos)).
+- `--verifier PATH` selects one verifier file (for `dfthcsos`, the package directory). If it is not given, the engine uses `$KICKMIX_ENGINE_DQI_VERIFIER` or
+  `$KICKMIX_ENGINE_INVSQRT_VERIFIER`, and then `$KICKMIX_ENGINE_VERIFIERS/{dqi,invsqrt}/verify_submission_*.py`.
+- DQI input sampling: `--sampler engine` (the default) draws the inputs in Rust, reproducing the verifier's
+  `sample_shots` draw for draw from NumPy's PCG64 stream. `--sampler official` calls the verifier's own `sample_shots`.
+  `--self-check K` re-draws K batches (or all of them, with -1) with the official function and fails on any difference.
+- Compiled programs are cached on disk, keyed by the SHA-256 of the circuit file and the engine build. The cache lives
+  in `--cache-dir`, `$KICKMIX_ENGINE_CACHE`, `$XDG_CACHE_HOME/kickmix-engine` or `~/.cache/kickmix-engine`, and
+  `--no-cache` turns it off. A DQI program takes about 257 MiB. `cache prune` removes entries written by other builds.
+- `--timing` prints engine timings, cache events and the simulator kernel (`kernel`, how it was selected, the CPU
+  features detected) to stderr. `--cross-check` output also carries `engine_kernel`. The summary itself has only the
+  official verifier's fields, so it stays comparable.
+- Exit code 2 (with `{"status": "ERROR", ...}`) when `KICKMIX_ENGINE_KERNEL` names a kernel this CPU cannot run.
+
+## The `diff` and `profile` commands
+
+Comparing two circuits is a first-class operation: `diff` works for any kickmix circuit (and any rewrite of it)
+and the task-specific parts are small plug-ins.
+
+```
+kickmix-engine diff {dqi,invsqrt,dfthcsos,generic} BASE.kmb CANDIDATE.kmb [--profile P.json] [--n 16]
+                    [--draws N --anchor HASH --salt-format 'sweep-{}'] [--threads N] [--out NEW.json] [--full]
+kickmix-engine profile {dqi,invsqrt,generic} BASE.kmb --out DIR [--draws N --anchor HASH] [--threads N]
+kickmix-engine diff dfthcsos SUBMISSION_DIR_A SUBMISSION_DIR_B      # family level
+```
+
+`diff` prints one JSON object with three layers:
+
+1. **Structural** (Rust, no simulation): op-level alignment of the two files in order. The common prefix is found
+   while both files stream in lockstep, the common suffix from 64-bit op hashes, and the middle is aligned with
+   content-defined anchors (sampled k-grams unique on both sides, chained and extended op by op). The report lists
+   the hunks (changed regions) with their op ranges, per-kind and Toffoli deltas, the static counts, qubits, bits and
+   whether the register interfaces match. Two 64M-op DQI circuits that differ at 24 sites take about 4 s and
+   240 MiB; two unrelated DQI circuits about 7 s.
+2. **Semantic** (the paired runner, `kickmix_engine.pair`): both circuits run on identical inputs and simulator seeds
+   over a fixed schedule of batches (`draw i mod draws, batch (157 i + 3) mod batches_per_draw`). Per shot: the
+   interface-state agreement, the exact phase difference (2^-64 turns), both sides' acceptance verdicts. Per paired
+   unit (a batch, or a simulator chunk for invsqrt): the Toffolis executed. In aggregate: the per-shot mean Toffoli
+   change with its standard error, agreement fractions and a bounded disagreement list. Pairing by seed means the
+   same ChaCha stream per simulator; a rewrite that keeps the measurement structure sees identical outcomes.
+3. **Cost prediction** (with `--profile`): the candidate's expected cost over the profile's draw set through the
+   plug-in's price model, assuming the candidate's failing shots equal the base's, which is checked on the base's
+   failing batches and on every paired batch (coverage is reported; unchecked shots can still differ). A profile
+   (`kickmix-engine profile`) is one full pass of the base over the draw set, recording every batch's Toffolis and
+   failing shots, written once and reused for every candidate. The VQCC project's `dqi_fast_rank.py` method
+   (48 fixed draws, N = 16 paired batches, about 5 s per candidate against a 10-minute sweep) is this layer; the
+   engine reproduced its five validation predictions exactly.
+
+A plug-in (`kickmix_engine.plugins.TaskPlugin`) supplies five things: `interface(prog, sha)` (which registers are
+inputs, by the official rules), `batches(sha, draws, i)` (the verifier's seeds and sampler states for one draw),
+`inputs(iface, batches)` (bit-sliced inputs and expected outcomes), `judge(iface, batches, inputs, out)` (per-shot
+failing shots by type, Toffolis, margins) and `price(profile_draws, Q, delta_t)`. The shipped plug-ins: `dqi`
+(engine `sample_shots`; value and phase verdicts; R(k) x Q^2 x mean Toffolis), `invsqrt` (one simulator per chunk
+of 64 batches; the official `reference_values` tolerance per x; the rotation-cost rule from the smallest margin;
+reproduces the official summary exactly on the frontier circuits), `dfthcsos` (family level: both submissions
+verified by the official pipeline on the engine, plus a structural diff per ANGLE_k circuit) and `generic` (any
+circuit: uniform random inputs on named registers or explicit `qubits=`, restore check, Q x mean Toffolis). The
+official verifier remains the only authority on a score; a predicted cost is a projection.
+
+From Python:
+
+```python
+from kickmix_engine.diff import diff, structural, profile, Circuit
+from kickmix_engine.plugins import make_plugin, DrawSet
+rep = diff("invsqrt", "base.kmb", "cand.kmb", verifier_path=V, n=16, threads=4)      # three layers as a dict
+s = structural("a.kmb", "b.kmb")                                                      # layer 1 only
+prof = profile(make_plugin("dqi", V), Circuit("base.kmb", make_plugin("dqi", V)), DrawSet(anchor=H, count=48))
+```
+
+## The `qrom-plan` crate
+
+`crates/qrom-plan` (0.6.0, a workspace member with no third-party crates, built with
+`cargo build --release -p qrom-plan`; not part of the Python wheel) is a bit-packed GF(2) cost model for the VQCC
+chemistry `ANGLE_k` five-word QROM loaders. It ports the project's Python kernel-relation planner (loader build,
+relation draws, pairing, repair, exact plan checking) and adds an incremental evaluator that prices a single word-bit
+flip through a rank-one update of the loader tensor instead of a rebuild, for word-flip searches:
+
+```sh
+qrom-plan check-plan words.npy plans/k4.txt          # exact verification of a stored plan
+qrom-plan screen|stack|batch ...                     # word-flip search (see crates/qrom-plan/README.md)
+```
+
+On an Apple M2 Pro, pricing one flip incrementally takes 90 µs on one thread (about 1,050x the Python planner) and a
+full re-plan attempt 35-52 ms (22-70x); all 30 stored plans of the source project verify exactly, and 17,202
+incremental evaluations equalled full recomputation. Details and the model are in
+[crates/qrom-plan/README.md](crates/qrom-plan/README.md).
+
+## Chemistry (`dfthcsos`)
+
+The official chemistry verifier spends most of its time outside simulation: on the fork build, 66% of a 7.6 s
+verification parses the 128 MB FeMoCo FCIDUMP in pure Python and 10% is NumPy numerics; the 30 kickmix circuit runs are
+16%. `verify dfthcsos` therefore changes three things, each checked against the official verifier:
+
+- **Simulation** on the engine (`run_sequence`): one 256-shot engine simulator per kickmix simulator, alive across the
+  15 forward and 15 reverse circuit runs, so measurement outcomes and Toffoli counts continue exactly as in kickmix.
+  The official checks run in the official order with the official messages.
+- **FCIDUMP cache**: after the official size and SHA-256 check (which still runs every time), the parser's packed
+  float32 integrals are read from `<cache dir>/fcidump/` and expanded by the official code. The first run parses the
+  file and writes the entry (34 MB) only if a round trip reproduces the parsed arrays bit for bit.
+- **Peak memory**: the error_2 Gram tensor is moved into C order in place, which removes one 255 MiB copy that the
+  official `norm(h2_delta.ravel())` makes. Values are moved, not recomputed.
+
+Everything else (loading, hashing and seeding, register rules, DF-THC metrics, costs, score, summary) is the official
+code. Measured on an Apple M2 Pro (load average 1.3-2.7, recorded per run), one process per verification, against
+the official verifier on the kickmix-macos 0.3.0 fork. Times are the `verify()` call (the whole process takes about
+0.24 s more, mostly imports); medians of 3 runs (mean of 2 for the sample); every run returned the identical summary:
+
+| submission | official | engine warm, 10 threads | engine warm, 1 thread | engine cold, 10 / 1 threads | peak footprint, official / engine warm |
+| --- | --- | --- | --- | --- | --- |
+| 998607123fc8 (N=76, R=8, B=143; 78,080 shots) | 7.30 s | 1.06 s (6.9x) | 2.03 s (3.6x) | 5.97 / 6.96 s | 1,320 / 895 MiB |
+| sample_submission (R=65, B=60; 254,464 shots) | 15.25 s | 2.47 s (6.2x) | 7.45 s (2.0x) | not measured | 2,368 / 1,731 MiB |
+
+"Cold" means an empty cache: the FCIDUMP is parsed as in the official verifier, so the gain is small.
+
+**On Kaggle's CPU notebook** (Xeon, 4 vCPUs; engine 0.5.0 from the public wheels dataset; family de8eb0bf484f; medians
+of 2 alternating rounds; memory as summed PSS; every run returned the identical summary):
+
+| build | time | vs kickmix 1.0.0 | peak PSS |
+| --- | --- | --- | --- |
+| kickmix 1.0.0 (official verifier) | 17.66 s | 1.00x | 884 MiB |
+| kickmix-macos 0.3.0 (official verifier) | 14.79 s | 1.19x | 826 MiB |
+| engine, cold cache, 4 threads | 14.06 s | 1.26x | 704 MiB |
+| engine, warm cache, 1 thread | 4.23 s | 4.18x | 693 MiB |
+| engine, warm cache, 4 threads | 3.60 s | **4.90x** | 694 MiB |
+
+## Kernels (x86_64)
+
+The simulator loop and the DQI sampler are compiled three times into the x86_64 build: **baseline** (any x86-64
+CPU), **avx2** (the x86-64-v3 set: `avx2 bmi1 bmi2 fma lzcnt movbe`) and **avx512** (v3 plus
+`avx512f avx512bw avx512vl avx512dq`). Each copy is the same Rust source compiled with different target features, so
+all three must give the same results bit for bit. At the first simulation call the engine picks the best kernel the
+CPU supports (`is_x86_feature_detected!`). To force one, for testing or benchmarking:
+
+```sh
+KICKMIX_ENGINE_KERNEL=baseline kickmix-engine verify dqi c.kmb --timing   # or avx2, avx512; auto = default
+```
+
+The choice is made once per process. A kernel the CPU lacks is an error, not a silent fallback. On aarch64 (Apple
+Silicon) there is a single kernel, reported as `neon`. From Python, `kickmix_engine.kernel_info()` returns the
+selected kernel and the detected features, and `kickmix_engine.cpu_info()` returns the same information without
+selecting a kernel. The parity scripts (`tests/parity.py`, `tests/parity_dqi.py`) record the kernel in their JSON
+output. CI runs the tests once per kernel that the Linux runner supports.
+
+## For agents and automation
+
+Two machine-readable entry points let a program pick and check the right artefact without guessing:
+
+- **`release-manifest.json`**, attached to every GitHub release and uploaded as the `release-manifest` artifact of
+  every CI run (schema `kickmix-engine-release-manifest/1`). It lists `engine_version`, `git_commit`, `git_ref`,
+  `ci_run_id`, `ci_run_url`, an overall `test_status` (`passed`, `failed` or `incomplete`) and `parity_evidence`.
+  For every wheel it gives `filename`, `python_tag`, `abi_tag`, `platform_tag`, `os`, `arch`, `sha256`, `size`,
+  `url` (releases only), `kernels` (each with the CPU features it `requires`) and `test_status.per_kernel`
+  (`passed`, `failed`, `skipped: <reason>` or `not run on CI`), plus the sdist. It is built by
+  `tools/make_release_manifest.py DIST_DIR --status-dir STATUS_DIR`, which takes the kernel feature lists from
+  `src/kernel.rs` and the per-kernel test outcomes from the CI test jobs (`tools/ci_kernel_tests.py`).
+- **`kickmix-engine doctor --json [--manifest PATH_OR_URL]`** (schema `kickmix-engine-doctor/1`) reports `platform`,
+  `python`, `cpu.features`, `kernels` (`compiled`, `available`, `selected`, `selected_by`, `requires`, `error`),
+  `engine` (version, cache format, extension path and SHA-256), `cache`, `kickmix` (importable, version) and
+  `verifiers` (path, SHA-256, importable) for DQI and invsqrt. With `--manifest` it adds `manifest.match`, the wheel
+  in that release that fits this interpreter and platform with its `sha256`, whether the selected kernel is in it, and
+  whether the installed version is the manifest's. It exits 0, or 2 if the kernel override is invalid. Without
+  `--json` it prints a short human-readable summary.
+
+A typical agent flow: fetch the manifest, take `manifest.match.url` and `sha256` from `doctor --json --manifest URL`
+(or match `platform_tag` yourself), install, check that `test_status.per_kernel[<selected kernel>]` is `passed`, then
+run `verify ... --cross-check` once on a known circuit.
+
+### Resident engine (loops of `diff`, `profile`, `verify`)
+
+```sh
+kickmix-engine serve --socket /tmp/ke.sock &          # one process, compiled programs and reference tables stay in memory
+kickmix-engine --via /tmp/ke.sock diff dqi BASE.kmb CAND.kmb --profile P.json --threads 4
+kickmix-engine --via /tmp/ke.sock ping | stats | stop
+```
+
+A served command prints exactly what the one-shot command prints and exits with the same code (the server runs the
+ordinary CLI with its output captured); only the timing fields inside the JSON differ. The process keeps compiled
+programs by content hash (an unchanged file, by realpath, size, mtime_ns and inode, is not re-read or re-hashed),
+task plug-ins with their reference tables (invsqrt's `reference_values`, about 1.2 s) and parsed profile JSONs;
+`--max-programs` bounds the LRU. Requests are served one at a time. From Python:
+`kickmix_engine.resident.Client('/tmp/ke.sock').json(['diff', 'dqi', base, cand, '--profile', p])`.
+
+## Measured results
+
+### 0.6.0: frontier circuits against kickmix 1.0.0 (2026-11-03)
+
+Current frontier circuits, each verified at full official settings with the empty salt: invsqrt `bce2948ff24e`,
+DQI `e3928244a1c1`, and the chemistry family HW-13 (15 `ANGLE_k` circuits). Machine: Apple M2 Pro (6 performance +
+4 efficiency cores), 16 GB, macOS 26.7.2. Baseline: the unmodified official verifier CLIs on kickmix 1.0.0 (PyPI
+wheel) in a clean pyenv Python 3.12.11 venv, at 1 and 4 `--max-workers`. The chemistry verifier has no worker
+option, so it runs single-process. Engine: `kickmix-engine verify` at 1 and 4 threads with a warm program and FCIDUMP
+cache. The kickmix 1.0.0 columns and the chemistry row were measured on commit 7dcd7b6; the engine invsqrt and DQI cells were re-measured on the 0.6.0 simulator (uniform runs and lockstep pairs, commit 01cd212) as medians of three back-to-back runs at a lower 1-minute load (1.3-4.3), so those two ratios combine two sessions. On the same machine and session, 0.6.0 against 7dcd7b6: invsqrt 166.2 s -> 79.1 s (1 thread) and 45.7 s -> 23.3 s (4 threads); DQI 40.1 s -> 31.8 s and 10.7 s -> 8.6 s. Times are the wall clock of
+the whole CLI process; memory is the peak summed RSS of the process tree. Each cell is the median of the runs given
+in brackets. Every one of the 24 runs returned the identical score (invsqrt 100,568.4992; DQI 377,372,994,802.87;
+chemistry 317,777,218.02).
+
+| task | kickmix 1.0.0, 1 worker | engine, 1 thread | speed-up | kickmix 1.0.0, 4 workers | engine, 4 threads | speed-up | peak memory, official / engine (4) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| invsqrt `bce2948ff24e` | 686.0 s (1) | **79.1 s** (3) | **8.7x** | 173.7 s (2) | **23.3 s** (3) | **7.5x** | 464-481 / 515 MiB |
+| DQI `e3928244a1c1` | 219.9 s (1) | **31.8 s** (3) | **6.9x** | 83.5 s (2) | **8.6 s** (3) | **9.7x** | 5,099-5,282 / 459 MiB |
+| chemistry HW-13 | 14.8 s (3; first run 35.0 s) | 2.7 s (2) | 5.5x | (single process) 14.8 s | 1.6 s (2; first run after a cache clear 8.0 s) | 9.3x | 849-852 / 645-937 MiB |
+
+Caveats. This is one machine, and it was **not idle**. Other agents' work, including a 4-core `qrom-plan` job, ran
+throughout, and the 1-minute load average was 6.0-9.2 during the engine runs and 3.4-9.1 during the official runs.
+Each run's load is recorded in its JSON. The official invsqrt rows ran at lower load (3.4-5.1) than the engine
+invsqrt rows (6.4-9.2), so the invsqrt ratios lean conservative for the engine. The rows were not alternated, and the 1-worker
+official invsqrt and DQI rows are single runs. The per-shot invsqrt checks now run on the engine; they were about 1% of the time, and the gain came from
+the simulator (uniform runs, lockstep pairs). The older tables below remain the
+reference for their circuits and dates. Evidence: VQCC project card
+`experiments/2026-11-03-engine-general-paired-runner.md`, `outputs/engine-paired-runner-2026-11-03/benchmarks/`.
+
+### DQI, engine 0.2.0 (measured 2026-10-28)
+
+Full DQI verification of `4ee7a17b4cbc` (889 qubits, 55.8M ops, 102,400 shots, empty salt) on an Apple M2 Pro (6
+performance + 4 efficiency cores). Engine 0.2.0 wheel built by GitHub Actions, against the official verifier CLI on
+kickmix 1.0.0 (PyPI) and on the kickmix-macos 0.3.0 fork, each in a clean Python 3.13 venv. Medians of alternating
+rounds (3 against the fork, 2 against 1.0.0). "Cold" includes compiling the circuit; "warm" loads it from the program
+cache. All 34 runs returned the identical result (PASS, 0 value and 0 phase errors, R 1.19126, score
+414781342770.7355).
+
+| baseline | workers / threads | baseline time | engine cold | engine warm | speed-up warm (cold) | peak memory, baseline / engine |
+| --- | --- | --- | --- | --- | --- | --- |
+| kickmix-macos 0.3.0 | 1 | 49.5 s | 31.7 s | 30.7 s | 1.61x (1.56x) | 2,091 / 339-352 MiB |
+| kickmix-macos 0.3.0 | 10 | 8.9 s | 5.7 s | 4.7 s | 1.89x (1.56x) | 8,251 / 417-418 MiB |
+| kickmix 1.0.0 | 1 | 189.7 s | 32.3 s | 31.5 s | 6.0x (5.9x) | 8,073 / 340-344 MiB |
+| kickmix 1.0.0 | 6 | 36.7 s | 6.8 s | 5.9 s | 6.2x (5.4x) | 9,211 / 388-389 MiB |
+
+Caveats: one machine, one circuit, one salt. The machine was not idle (load average 3.0-7.4 from other work, recorded
+per run), but the ratios held steady across the alternating rounds. Peak memory is the whole process tree's peak
+physical footprint. The engine's single process is set against the verifier's worker processes, which is how each one
+is meant to run. These numbers are for engine 0.2.0. Version 0.3.0 changes only the one-off compile step, which now
+also computes `reaction_depth` (1.13 s for this circuit, measured locally, against 1.17 s for 0.2.0), so the table
+was not re-measured. Version 0.4.0 adds the x86_64 kernels; on Apple Silicon the simulation code is the same
+(DQI cross-check 5.7 s cold at 10 threads, as for 0.3.0). invsqrt is less accelerated: about 1.8x the fork at 10 threads on the sample submission
+(31.5 s against 56.2 s, a single smoke run), because its per-shot checks still run in NumPy.
+
+**On Kaggle's CPU notebooks, engine 0.2.0** (2026-10-28, private benchmark notebook, internet off, all three builds installed from
+wheels): Intel Xeon @ 2.20 GHz (CPU model 79, Broadwell class), 4 vCPUs = 2 cores x 2 threads, AVX2 but no AVX-512,
+31 GiB RAM. Same circuit and salt, engine 0.2.0 (baseline x86-64 build), medians of 2 alternating rounds, memory as the
+process tree's summed PSS (shared pages counted once, so lower than the macOS footprint figures). All 16 runs
+returned the identical result.
+
+| workers / threads | kickmix 1.0.0 | kickmix-macos 0.3.0 | engine cold | engine warm | warm vs fork | warm vs 1.0.0 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 488.4 s / 4,579 MiB | 175.3 s / 1,907 MiB | 79.6 s / 316 MiB | 79.4 s / 315 MiB | 2.2x | 6.2x |
+| 4 | 282.7 s / 4,552 MiB | 87.0 s / 1,888 MiB | 41.7 s / 341 MiB | 41.2 s / 330 MiB | 2.1x | 6.9x |
+
+**Kernels on Kaggle (engine 0.4.0, same hardware, second session; every kernel forced in turn; all 20 runs returned
+the identical result).** The AVX2 kernel, which the engine selects automatically on this CPU, is 1.42x faster than
+the baseline kernel at 4 threads:
+
+| workers / threads | kickmix-macos 0.3.0 | engine baseline (cold / warm) | engine avx2 (cold / warm) | avx2 warm vs fork |
+| --- | --- | --- | --- | --- |
+| 1 | 167.7 s | 78.2 / 76.6 s | 61.7 / 60.7 s | 2.8x |
+| 4 | 72.1 s | 40.0 / 38.7 s | 28.5 / 27.2 s | 2.7x |
+
+Against kickmix 1.0.0 (first session's figures) that is roughly 8-10x; the fork's own time moved between the two
+sessions (87.0 s vs 72.1 s at 4 workers), so treat cross-session ratios as approximate. Kaggle's CPU notebooks have no
+AVX-512, so that kernel's speed is not measured here.
+
+Parity record (0.1.0-0.5.0, 2026-10-27/28, on the circuits named above; the oracle is the unmodified official
+verifier on kickmix). The 0.6.0 release check repeats the per-shot and cross-check parity on the current frontier
+circuits (see Release check below):
+
+| check | result |
+| --- | --- |
+| DQI per-shot parity | 2 circuits, 17 verifier batches + 6 random ones, 5,888 shots: 0 mismatches in all qubits, classical bits, exact phase, error flags and op counts. Both negative controls (wrong seed, one CX changed to CZ) mismatch |
+| invsqrt per-shot parity | 7 verifier chunks + random multi-simulator chunks: 0 mismatches; the wrong-seed control mismatches |
+| DQI sampler | 2 circuits x 3 salts x 400 batches: inputs, phases and the generator state after every batch identical to the official `sample_shots` |
+| DQI task parity | 2 circuits x 3 salts: every summary field and all 400 per-batch results identical |
+| `reaction_depth` | equal to kickmix's `Circuit.reaction_depth()` on both DQI circuits, two invsqrt circuits and thousands of random circuits covering every op kind |
+| x86_64 kernels (0.4.0) | baseline and avx2, each forced in turn, on an x86_64 macOS build under Rosetta 2: invsqrt per-shot parity (106,496 shots) and DQI per-shot parity on 4ee7a17b4cbc (2,048 shots, controls mismatch), 0 mismatches; DQI `--cross-check` at salt-check-1 equal on every field against the official verifier on the same x86_64 interpreter. In CI on GitHub's Linux runner (AMD EPYC 9V74, Zen 4, AVX-512), the test suite (13 tests, including random-circuit parity against stored kickmix references and the sampler restatement) passes with each of baseline, avx2 and avx512 forced, on Python 3.12 and 3.13 |
+| dfthcsos per-shot parity (0.5.0) | 4 families (3 public frontier submissions and the sample) at 64 shots per address, plus 3 runs with partly used 256-shot simulators (1 and 3 shots per address): every qubit, classical bit, phase flip, register value, workspace flag and per-kind count after each of the 20 or 30 circuit runs equal to the official loop on kickmix; wrong-seed and fresh-simulator-per-step controls mismatch. Repeated under Rosetta 2 with the x86_64 build (baseline and avx2 kernels) against kickmix 1.0.0 from PyPI |
+| dfthcsos task parity (0.5.0) | `--cross-check` on the 4 families x 2 salts (PASS, every field equal) and on 11 mutated families (dirty workspace, changed selection, phase kickback, measurement-dependent word, flipped word bit, broken reverse, Z_POW, missing circuit, other family's factorization, scaled weights over the 20 mHa gates, non-zero padding), at 64 and 1 shots per address: same status and message as the official verifier |
+| FAIL paths | dirty ancilla, syndrome not restored, x not restored, dirty scratch, error-rate and phase-tolerance failures: same status and message as the official verifier |
+
+## Release check
+
+`tools/release_check.py` is the single gate before a release. It builds the wheel with maturin, unpacks it, and runs
+every later check against that artifact (not the source tree), sequentially, with at most `--threads` threads:
+
+```sh
+python tools/release_check.py --out-dir ./rc-0.6.0 \
+    --verifiers /path/to/verifiers --kickmix-python /path/to/venv-with-kickmix/bin/python \
+    --maturin "$(which maturin)" \
+    --invsqrt $C/invsqrt/bce2948ff24e.kmb --dqi $C/dqi/e3928244a1c1.kmb --dfthcsos /path/to/submission/dfthcsos \
+    --rank-json stored-rank-1.json --rank-json stored-rank-2.json \
+    --qrom-words words.npy --qrom-plans plans/ --threads 4
+```
+
+| check | what it does |
+| --- | --- |
+| `versions` | Cargo.toml, Cargo.lock, pyproject.toml and the first CHANGELOG heading carry one version |
+| `cargo-test` | `cargo test --workspace --locked` (qrom-plan's real-data parity too, with `--qrom-words`/`--qrom-plans`) |
+| `wheel-build` | `maturin build --release --locked`; the wheel name must carry the version |
+| `wheel-smoke` | fresh venv (uv, Python 3.12): install the wheel, import, `__version__`, every subcommand's `--help`, `doctor --json`, pytest without kickmix |
+| `pytest-kickmix` | pytest in the kickmix interpreter with the verifiers set (the kickmix-gated tests run) |
+| `parity-invsqrt`, `parity-dqi`, `parity-dfthcsos` | the per-shot parity scripts below on the given circuits, with their negative controls |
+| `reaction-depth` | 300 random circuits plus the invsqrt and DQI circuits against `Circuit.reaction_depth()` |
+| `fail-paths` | the FAIL-path cases through `--cross-check` |
+| `crosscheck-invsqrt`, `crosscheck-dqi`, `crosscheck-dfthcsos` | `verify --cross-check`: every summary field equal to the unmodified official verifier's |
+| `profile-invsqrt` | the invsqrt plug-in's profile at the official seed equals the official summary (score, Toffolis, T, rotations, eps, worst ratio and x, Q) |
+| `diff-dqi-rank` | `diff dqi --profile` reproduces stored predictions (`--rank-json`, e.g. from the VQCC project's `dqi_fast_rank.py`): delta, SE, predicted cost, precondition verdict, every paired Toffoli total |
+| `diff-broken` | `diff invsqrt` of a circuit against itself (agreement 1, delta 0) and against a copy with one CX turned into a CZ (a structural hunk, semantic disagreement and candidate errors) |
+
+It prints one line per check as it goes, then a PASS/FAIL/SKIP table, writes `release-check.json` with the logs and
+reports beside it, and exits 1 if any check failed. A check whose inputs are not given is SKIPped and listed, not
+passed. `--only` and `--skip` take comma lists of check names (`versions` and `wheel-build` always run). The output
+directory must be new. A full run on an Apple M2 Pro at 4 threads takes about 11 minutes with a warm cargo target directory (2026-11-03, 16/16 PASS), most of it the
+official verifier inside the three cross-checks and the FAIL-path cases.
+
+## Reproduce the parity claims
+
+The scripts in `tests/` need kickmix and the official verifiers (set `KICKMIX_ENGINE_VERIFIERS`). They write a JSON
+report, refuse to overwrite an existing one, and exit non-zero on any mismatch. Set `KICKMIX_ENGINE_KERNEL` to
+check a particular x86_64 kernel (the report records which kernel ran). Compare summaries from the same platform:
+`mean_error_weight` is computed by the verifier itself in NumPy and can differ in the last bit between arm64 and x86_64
+NumPy builds. Run them from the repository root with
+`kickmix_engine` installed (or `PYTHONPATH=python` after `./build.sh`).
+
+```sh
+export KICKMIX_ENGINE_VERIFIERS=/path/to/verifiers
+C=/path/to/vqcc-apache-public-circuits/circuits      # the public dataset
+
+# DQI per-shot parity (verifier batches incl. logged failing shots from tests/data, random batches, negative controls).
+# --scratch receives a 0.5 GB mutated copy for the CX->CZ control; delete it afterwards.
+python tests/parity_dqi.py g1.json --kmb $C/dqi/4ee7a17b4cbc.kmb --kmb $C/dqi/b3354f60e459.kmb --scratch ./scratch
+# invsqrt per-shot parity
+python tests/parity.py g1_invsqrt.json --kmb /path/to/sample_submission/invsqrt.kmb
+# DQI sampler against the official sample_shots, all batches, three salts
+python tests/sampler_parity_dqi.py sampler.json --kmb $C/dqi/4ee7a17b4cbc.kmb --kmb $C/dqi/b3354f60e459.kmb
+# DQI task parity: full verification against the official verify(), field by field and per batch
+python tests/task_parity_dqi.py g2.json --kmb $C/dqi/4ee7a17b4cbc.kmb --kmb $C/dqi/b3354f60e459.kmb
+# reaction_depth against kickmix: random circuits plus real ones
+python tests/reaction_depth_parity.py rd.json --random 2000 --kmb $C/dqi/4ee7a17b4cbc.kmb --kmb $C/invsqrt/07314803a092.kmb
+# FAIL paths: small mutated circuits built from the official reference circuits, through --cross-check
+python tests/fail_paths_crosscheck.py fail.json --scratch ./scratch
+# dfthcsos per-shot parity of every circuit run against the official loop (plus negative controls)
+python tests/parity_dfthcsos.py g1_chem.json --family /path/to/sample_submission/dfthcsos --family $C/chemistry/998607123fc8
+# dfthcsos --cross-check on real and mutated families (PASS and FAIL paths)
+python tests/task_parity_dfthcsos.py g2_chem.json --verifier $KICKMIX_ENGINE_VERIFIERS/dfthcsos --scratch ./scratch \
+    --cache-dir ./kme-cache --family $C/chemistry/998607123fc8 --mutate-from $C/chemistry/998607123fc8 \
+    --mutate-sample /path/to/sample_submission/dfthcsos --salts ,s1
+# Any circuit, any salt
+kickmix-engine verify dqi your.kmb --salt anything --cross-check
+```
+
+## Tests
+
+```sh
+pip install pytest
+pytest            # from the repository root; needs only the installed wheel (no kickmix, no competition files)
+```
+
+`tests/test_dfthcsos.py` checks `run_sequence` (the chemistry simulator loop) against chained single runs, partly used
+simulators and wide registers without kickmix; with kickmix installed it also compares it with kickmix's Simulator
+shot for shot, and with `KICKMIX_ENGINE_VERIFIERS` set it checks the FCIDUMP cache and the full chemistry
+verification against the official one (on the sample submission, or `KICKMIX_ENGINE_DFTHCSOS_FAMILY`). Tests whose
+inputs are missing are skipped.
+`tests/test_engine.py` checks the simulator against a stored kickmix reference for a random circuit over every op
+kind. It also covers the program cache (round trip and corruption detection), `reaction_depth` against stored kickmix
+values, and the DQI sampler against a NumPy restatement of `sample_shots`. `tests/test_rng.py` compares the random
+number chain with a stored reference and, when a C++ compiler is available (`$CXX` or `c++`), with
+`tests/chachakeys.cc` built on the spot. Otherwise that test is skipped. The fixtures in `tests/data` were produced
+with kickmix by `tests/make_fixtures.py` and `tests/reaction_depth_parity.py`. The bench scripts in `bench/` take
+their inputs as arguments (`--kmb`, `--verifier`) or environment variables (`FORK_PY`, `ENGINE_PY`, `VERIFIER`, `KMB`,
+`EVIDENCE`), as each script's header documents.
+
+To test every kernel your CPU supports: `python tools/ci_kernel_tests.py --tests tests --wheel dist/X.whl --status
+status.json`. It runs pytest once per kernel with `KICKMIX_ENGINE_KERNEL` set, and records kernels the CPU lacks as
+skipped. The parity scripts below honour the same variable.
+
+## How it works
+
+- **Kernels** (`src/kernel.rs`): run-time choice of the baseline, AVX2 or AVX-512 copy of the simulator and sampler
+  on x86_64 (see [Kernels](#kernels-x86_64)).
+- **Simulator** (`src/sim.rs`, `src/engine.rs`): 256 shots per group of four 64-bit words per qubit or bit. It follows
+  kickmix's semantics: condition stack, 128-bit fixed-point angles, global phase, HMR/R outcomes from kickmix's random
+  number chain (std::seed_seq, mt19937_64, then ChaCha8 keys per 256-shot simulator) and exact per-kind operation
+  counts. Batches run in parallel with Rayon, and the GIL is released while they run. `run_sequence` keeps each
+  256-shot simulator alive across several programs (the chemistry task's 30 circuit runs). The word type is generic
+  over its width (`Wn<L>`): every driver simulates two independent 256-shot sims per op in lockstep (`Wn<8>`: one
+  decode, two states, two RNG streams, two sets of counts), which overlaps the read-modify-write chains of
+  arithmetic-heavy circuits and halves the instruction-stream reads per sim; the results are the two single runs'
+  results (`lockstep=False` runs them singly).
+- **Compiler** (`src/program.rs`): streams a `.kmb` file into a compact u32 instruction stream with compacted
+  classical-bit ids. NEG, Z, X, CZ, CX, CCZ and CCX ops, bit-conditioned or not, become *uniform runs* that the
+  simulator executes without a data-dependent branch (`t = base & bits[cb] & q[a] & q[b] & q[c]; q[d] ^= t`,
+  with constant all-ones slots for absent operands and rotating sink slots for phase ops; two-word entries when no
+  entry is conditioned, three-word otherwise; counts from (condition, kind, count) items with one popcount per
+  distinct condition); plain-CX stretches of two or more stay one-word CX runs. In the same pass it computes
+  kickmix's `reaction_depth`, which is stored with the cached program. `Program.stream_stats()` reports the mix.
+- **DQI sampler** (`src/dqi_sample.rs`): an exact re-implementation of the verifier's `sample_shots` on NumPy's PCG64
+  stream, fused with the simulation.
+- **Task adapters** (`python/kickmix_engine/dqi.py`, `invsqrt.py`, `dfthcsos.py`): load the official verifier module
+  and use its seeds, problem spec, reference tables, Clopper-Pearson bound, repetition factor, DF-THC metrics and cost
+  model unchanged.
+
+## Limitations
+
+- invsqrt and DQI: only `.kmb` input and `--batch-size 256`. dfthcsos: `.kmb` directories use the program cache;
+  `.kmx` files and in-memory circuits are compiled from kickmix's text form; word registers wider than 62 bits are
+  not supported. The chemistry speed-up depends on the FCIDUMP cache: the first run on a machine parses the file
+  as the official verifier does. DEBUG_PRINT ops are rejected. Qubit ids must be below 65,527.
+- kickmix must be importable, because the official verifier modules import it.
+- invsqrt's per-shot checks (x restored, scratch clean, phase within the per-x tolerance) still run in NumPy, in
+  `verify` and in the `invsqrt` diff plug-in; they have not been ported to Rust, so invsqrt gains less than DQI.
+- `diff`: Toffoli counts are per 256-shot simulator, not per shot. Pairing by seed is exact only for rewrites that keep
+  the measurement structure. The structural layer reports op indices, not op text. A predicted cost is a projection
+  from sampled draws; only the official verifier gives a score.
+- `qrom-plan` is a source-only workspace crate (`cargo build --release -p qrom-plan`); it is not in the Python wheel.
+- `circuit_sha256` is the SHA-256 of the file bytes. The official verifier hashes kickmix's re-serialisation of the
+  circuit. The two are equal for canonical `.kmb` files (as written by kickmix), and `--cross-check` compares them on
+  every run. A non-canonical file would get different seeds, and the cross-check would report it.
+- On FAIL the engine reports the first failure in task order, as the official verifier does. That has been checked on
+  the FAIL cases listed above, not on every possible failure.
+- Wheels are built for macOS arm64 and Linux x86_64 only. Big-endian hosts are not supported (cache format).
+- Full per-shot DQI and invsqrt parity runs have been done for the baseline and AVX2 kernels (locally, x86_64 under
+  Rosetta 2). The AVX-512 kernel has passed the CI test suite on an AMD Zen 4 runner but not yet the full per-shot DQI
+  parity run, and Kaggle's CPU notebooks (Broadwell-class Xeon) have no AVX-512. Check `test_status.per_kernel` in the
+  release manifest before relying on a kernel.
+- Speed and memory have been measured on one Apple Silicon machine and on Kaggle's CPU notebooks, for one DQI circuit,
+  and (0.5.0) on the Apple Silicon machine only for chemistry.
+  Other machines, circuits and salts may differ; `verify --timing` reports what you get.
+
+## Licence
+
+Apache-2.0 (see [LICENSE](LICENSE)). The simulation semantics, the random-number chain and the `reaction_depth`
+definition follow kickmix (Copyright Google LLC, Apache-2.0). The task adapters call the official verifiers (Copyright
+Google LLC, Apache-2.0), which are not included. The DQI sampler reproduces NumPy's random-number algorithms
+(BSD-3-Clause), without NumPy source code. Details are in [NOTICE](NOTICE), and changes are listed in
+[CHANGELOG.md](CHANGELOG.md); plans are in [ROADMAP.md](ROADMAP.md).
+

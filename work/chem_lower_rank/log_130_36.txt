@@ -1,0 +1,19 @@
+[9s] seed (9,130,36) from submission.npz: err2=836.6m lamEff=178.45 Egap=56.7461
+B ep=   100 [    13s] err2= 410.214m lamEff=  89.641 Egap= 13.58789 Lambda=  302.48 cost=  0.3992
+B ep=   200 [    15s] err2= 164.157m lamEff=  56.816 Egap=  5.49805 Lambda=  296.31 cost=  0.1498
+B ep=   300 [    18s] err2= 116.925m lamEff=  53.691 Egap=  4.85547 Lambda=  299.28 cost=  0.1023
+  ep=   400 [    21s] err2=  89.637m lamEff=  54.407 Egap=  4.93750 Lambda=  302.22 cost=  0.0751
+  ep=   500 [    24s] err2=3793.873m lamEff= 754.603 Egap=419.38477 Lambda=  888.57 cost=  3.8493
+  ep=   600 [    28s] err2= 383.573m lamEff= 603.701 Egap=285.73242 Lambda=  780.62 cost=  0.4239
+  ep=   700 [    31s] err2= 181.504m lamEff= 590.265 Egap=280.25391 Lambda=  761.73 cost=  0.2205
+  ep=   800 [    34s] err2= 125.402m lamEff= 581.609 Egap=276.17383 Lambda=  750.51 cost=  0.1636
+  ep=   900 [    37s] err2=  99.568m lamEff= 574.568 Egap=272.69336 Lambda=  741.66 cost=  0.1370
+  ep=  1000 [    40s] err2=  84.030m lamEff= 568.278 Egap=269.47070 Lambda=  733.95 cost=  0.1209
+  ep=  1100 [    43s] err2=  73.546m lamEff= 562.310 Egap=266.34766 Lambda=  726.74 cost=  0.1098
+  ep=  1200 [    47s] err2=  68.300m lamEff= 555.911 Egap=262.67383 Lambda=  719.59 cost=  0.1039
+  ep=  1300 [    51s] err2=  62.888m lamEff= 550.350 Egap=259.71680 Lambda=  712.97 cost=  0.0979
+  ep=  1400 [    54s] err2=  61.017m lamEff= 546.094 Egap=257.98828 Lambda=  706.96 cost=  0.0956
+  ep=  1500 [    57s] err2=  58.000m lamEff= 540.452 Egap=254.89062 Lambda=  700.41 cost=  0.0920
+
+BEST: err2=79.567m lamEff=49.7429 Egap=4.113281 Lambda=302.832 valid_err2=False valid_gap=True
+saved work/chem_lower_rank/run_130_36.npz

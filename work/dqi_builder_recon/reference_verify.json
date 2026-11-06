@@ -1,0 +1,12 @@
+{
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "shots": 256,
+ "num_qubits": 1893,
+ "static_toffoli_like": 5725461,
+ "verifier": {
+  "status": "FAIL",
+  "error": "Effective error rate 0.2929 >= 1/16 at log2_delta=-128.0 (empirical=0.0000, value_errors=0/256, phase_errors=0/256)"
+ }
+}

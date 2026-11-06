@@ -1,0 +1,42 @@
+{
+  "anf_current": {
+    "11": 75
+  },
+  "anf_perm_avg": {
+    "11": 75.0
+  },
+  "frac_deg_le1": {
+    "current": 0.0,
+    "perm_avg": 0.0
+  },
+  "frac_deg_le2": {
+    "current": 0.0,
+    "perm_avg": 0.0
+  },
+  "structured": {
+    "current": {
+      "static_ccx": 9185,
+      "kernels": 470
+    },
+    "rev_b": {
+      "static_ccx": 9735,
+      "kernels": 524,
+      "delta": 550
+    },
+    "rho_swap": {
+      "static_ccx": 9654,
+      "kernels": 470,
+      "delta": 469
+    },
+    "rev_b_rho_swap": {
+      "static_ccx": 9666,
+      "kernels": 470,
+      "delta": 481
+    },
+    "b7mod": {
+      "static_ccx": 9735,
+      "kernels": 524,
+      "delta": 550
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "e8c9980e8061303fa24e3ec8aab8fc75533eac19074aeb66d153e296645317f7",
+ "sources": [
+  "k__coralfil__atlantis-vqcc-apex-quantum-circuit-portfolio",
+  "k__kawh1111__qcomp-harvest-v32"
+ ],
+ "status": "PASS",
+ "score": 313208885.80106604,
+ "lambda_eff": 47.02155510839963,
+ "toffoli_count": 15563.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 270,
+ "num_ops": 664005,
+ "verified_shots": 87232,
+ "submission_sha256": "90ad64e431ecf280516ece8af6a9a44fbec8111c4fe27d26283fe093c4b6b33f",
+ "seconds": 16.3,
+ "ratio": 10.713615546804249
+}

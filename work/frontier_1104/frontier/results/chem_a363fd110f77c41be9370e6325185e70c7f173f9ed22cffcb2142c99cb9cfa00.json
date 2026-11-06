@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "a363fd110f77c41be9370e6325185e70c7f173f9ed22cffcb2142c99cb9cfa00",
+ "sources": [
+  "d__manwithacat__vqcc-hedge-wizardry"
+ ],
+ "status": "PASS",
+ "score": 324791746.2326955,
+ "lambda_eff": 47.031869858682946,
+ "toffoli_count": 16135.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 220,
+ "num_ops": 685354,
+ "verified_shots": 87232,
+ "submission_sha256": "19a3df13035e7ba021225d64b9e3033cfb1bf93eb5a6ae86f8f73c2ade55c39e",
+ "seconds": 26.0,
+ "ratio": 10.331542064223004
+}

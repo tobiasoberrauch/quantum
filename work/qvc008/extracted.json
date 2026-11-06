@@ -1,0 +1,101 @@
+{
+  "portfolio": "v65w_sx_sy7",
+  "salt": "notebook-verification",
+  "reference_costs": {
+    "invsqrt": 2076774.233715282,
+    "dfthcsos": 3355599588.3155375,
+    "dqi": 24439463583672.93
+  },
+  "files": [
+    {
+      "file": "dfthcsos/angle_k_0.kmb",
+      "stored_as": "dfthcsos__angle_k_0.kmb",
+      "sha256": "956dc0b494a85b72aacc830b45e10e52a65a11454207fb76072b43c050016f8e"
+    },
+    {
+      "file": "dfthcsos/angle_k_1.kmb",
+      "stored_as": "dfthcsos__angle_k_1.kmb",
+      "sha256": "cf0291d59ba246eb2bbf61f56b7128a69bdca36d740f2bf8487fe4b0fa77c88c"
+    },
+    {
+      "file": "dfthcsos/angle_k_10.kmb",
+      "stored_as": "dfthcsos__angle_k_10.kmb",
+      "sha256": "8c31a64784c3d0ecb6bf71c5e67a4f27bdf63ce0f4dd4e213ff4ee20029d9ba9"
+    },
+    {
+      "file": "dfthcsos/angle_k_11.kmb",
+      "stored_as": "dfthcsos__angle_k_11.kmb",
+      "sha256": "402ebdf216abae95c91ae2aee37078a2bbb13ef59bf0db66f4af9f057161e310"
+    },
+    {
+      "file": "dfthcsos/angle_k_12.kmb",
+      "stored_as": "dfthcsos__angle_k_12.kmb",
+      "sha256": "7707330d587dfc5609e3f2b7ebca3dfacf64afb77d462050457671e80bcc168c"
+    },
+    {
+      "file": "dfthcsos/angle_k_13.kmb",
+      "stored_as": "dfthcsos__angle_k_13.kmb",
+      "sha256": "451cc5acbe1bbefd0affef3622a7e611eb7d3cd784c6d26a59d7312354f91c39"
+    },
+    {
+      "file": "dfthcsos/angle_k_14.kmb",
+      "stored_as": "dfthcsos__angle_k_14.kmb",
+      "sha256": "c36fef91c85080a9b686c8c81d995c0569fead3f79960673d7d26ccce9dd3217"
+    },
+    {
+      "file": "dfthcsos/angle_k_2.kmb",
+      "stored_as": "dfthcsos__angle_k_2.kmb",
+      "sha256": "7d2038cea60c2a9484d51e4ea60521e254dd4c3e2f29133ed62a101a3d088557"
+    },
+    {
+      "file": "dfthcsos/angle_k_3.kmb",
+      "stored_as": "dfthcsos__angle_k_3.kmb",
+      "sha256": "9937a233c65981c29aa923f2821819dac54faac17a55d1dfc06353bff09ba681"
+    },
+    {
+      "file": "dfthcsos/angle_k_4.kmb",
+      "stored_as": "dfthcsos__angle_k_4.kmb",
+      "sha256": "063aa910bb8e3f3cd4864762ea4accecc4f043ddf6ab8d55dc3461a858af88fb"
+    },
+    {
+      "file": "dfthcsos/angle_k_5.kmb",
+      "stored_as": "dfthcsos__angle_k_5.kmb",
+      "sha256": "b381c166926b4196ab26e1a428bf8d530ce18af86453a5c9cb8824a8f0980c99"
+    },
+    {
+      "file": "dfthcsos/angle_k_6.kmb",
+      "stored_as": "dfthcsos__angle_k_6.kmb",
+      "sha256": "6dd19bf59ca80deacf851f42eeee3d785d8334346642bb94e22c99904060010c"
+    },
+    {
+      "file": "dfthcsos/angle_k_7.kmb",
+      "stored_as": "dfthcsos__angle_k_7.kmb",
+      "sha256": "2375754fa132843532bf075b56bf9a4d3ab877cedbb8cc22777a59867cd850f8"
+    },
+    {
+      "file": "dfthcsos/angle_k_8.kmb",
+      "stored_as": "dfthcsos__angle_k_8.kmb",
+      "sha256": "5708aea25df768f3c58daa759af70c5e4cadeb38b7e3680d67e93312cba5607e"
+    },
+    {
+      "file": "dfthcsos/angle_k_9.kmb",
+      "stored_as": "dfthcsos__angle_k_9.kmb",
+      "sha256": "f1f1cc1cbe2ad7d74a425888bdee3780956c2ba555b12e5f00b2aaf71b6c7cc1"
+    },
+    {
+      "file": "dfthcsos/submission.npz",
+      "stored_as": "dfthcsos__submission.npz",
+      "sha256": "85c420b68e0aaf58354954a93aea4d231db33f7aa5be9f82b883a3277bbe760a"
+    },
+    {
+      "file": "dqi.kmb",
+      "stored_as": "dqi.kmb.xz",
+      "sha256": "748b01a7a07662c3f7e389b844e313a3d55dfb3b3d993414e5ad3dfac6fe154c"
+    },
+    {
+      "file": "invsqrt.kmb",
+      "stored_as": "invsqrt.kmb",
+      "sha256": "15118bfa94a4084cd853c752100442ec41d8a80bae0f483af98a0cac2677e64c"
+    }
+  ]
+}

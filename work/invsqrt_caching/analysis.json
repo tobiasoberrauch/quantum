@@ -1,0 +1,155 @@
+{
+  "elapsed_s": 5.09,
+  "num_ops": 47281,
+  "toffoli_like_gates": 1495,
+  "ccx": 1153,
+  "ccz": 141,
+  "cswap": 201,
+  "n_complex": 1424,
+  "max_anf_size": 1572864,
+  "num_vars": 919,
+  "ccx_groups": 19,
+  "ccz_groups": 0,
+  "cswap_groups": 6,
+  "namepair_repeats": 309,
+  "namepair_with_exact": 0,
+  "namepair_true_product_repeats": 0,
+  "namepair_true_examples": [],
+  "ccx_chains": 0,
+  "ccz_chains": 0,
+  "cswap_chains": 6,
+  "est_save_ccx_all": 0,
+  "est_save_ccx_stable": 0,
+  "est_save_ccz_all": 0,
+  "est_save_ccz_stable": 0,
+  "est_save_cswap_all": 46,
+  "est_save_cswap_stable": 46,
+  "est_save_total_all": 46,
+  "est_save_total_stable": 46,
+  "ccx_chain_sizes": [],
+  "ccz_chain_sizes": [],
+  "cswap_chain_sizes": [
+    11,
+    10,
+    10,
+    10,
+    9,
+    2
+  ],
+  "ccx_top": [],
+  "ccz_top": [],
+  "cswap_top": [
+    {
+      "size": 11,
+      "save": 10,
+      "stable": true,
+      "idxs": [
+        167,
+        168,
+        169,
+        171,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179
+      ],
+      "wires": [
+        "q46"
+      ]
+    },
+    {
+      "size": 10,
+      "save": 9,
+      "stable": true,
+      "idxs": [
+        181,
+        182,
+        183,
+        185,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192
+      ],
+      "wires": [
+        "q42"
+      ]
+    },
+    {
+      "size": 10,
+      "save": 9,
+      "stable": true,
+      "idxs": [
+        195,
+        196,
+        197,
+        198,
+        200,
+        202,
+        203,
+        204,
+        205,
+        206
+      ],
+      "wires": [
+        "q43"
+      ]
+    },
+    {
+      "size": 10,
+      "save": 9,
+      "stable": true,
+      "idxs": [
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234
+      ],
+      "wires": [
+        "q45"
+      ]
+    },
+    {
+      "size": 9,
+      "save": 8,
+      "stable": true,
+      "idxs": [
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        220,
+        221,
+        222
+      ],
+      "wires": [
+        "q44"
+      ]
+    },
+    {
+      "size": 2,
+      "save": 1,
+      "stable": true,
+      "idxs": [
+        239,
+        240
+      ],
+      "wires": [
+        "q45"
+      ]
+    }
+  ]
+}

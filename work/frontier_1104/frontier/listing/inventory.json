@@ -1,0 +1,3467 @@
+[
+ {
+  "kind": "k",
+  "ref": "kirilltym/quantum-compilation-19",
+  "files": [
+   {
+    "name": "mps_loader_inputs/angle_k_0.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/submission.npz",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_0.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_1.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_10.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_11.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_12.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_13.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_14.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_2.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_3.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_4.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_5.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_6.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_7.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_8.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/angle_k_9.kmx",
+    "size": null
+   },
+   {
+    "name": "original_sdk_exports/invsqrt.kmx",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "manwithacat/vqcc-hedge-wizardry-notebook",
+  "files": []
+ },
+ {
+  "kind": "k",
+  "ref": "kalidenaiarys/quantum-circuit-compilation-public-lb-24-59425",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   },
+   {
+    "name": "submission_audit.json",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "isabe11am00re/qcc-v66s33w-submission",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "matousakura/best-of-public-portfolio-vqcc-24-0x-class",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "somejoint/quantum-circuits-24-59-local-gm-chem-refit",
+  "files": [
+   {
+    "name": "submission-members.sha256",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   },
+   {
+    "name": "summary.json",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "leotang09/vqcc-t7421-submission",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "mdkawsarahamed/verifiable-quantum-compilation-local-verification",
+  "files": []
+ },
+ {
+  "kind": "k",
+  "ref": "alexchilton/24-59-lb-verified-three-task-portfolio",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   },
+   {
+    "name": "v5/__pycache__/private_arithmetic_r4_w.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "v5/__pycache__/stage_r5_w.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "v5/__pycache__/stage_ref.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "v5/build_invsqrt_v5.py",
+    "size": null
+   },
+   {
+    "name": "v5/exact_functions.py",
+    "size": null
+   },
+   {
+    "name": "v5/invsqrt.kmb",
+    "size": null
+   },
+   {
+    "name": "v5/private_arithmetic_r4_w.py",
+    "size": null
+   },
+   {
+    "name": "v5/stage_r5_w.py",
+    "size": null
+   },
+   {
+    "name": "v5/stage_ref.py",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "manwithacat/the-real-150k-was-the-friends-we-made",
+  "files": [
+   {
+    "name": "check.json",
+    "size": null
+   },
+   {
+    "name": "checks.csv",
+    "size": null
+   },
+   {
+    "name": "chemistry_current_table.csv",
+    "size": null
+   },
+   {
+    "name": "credits.csv",
+    "size": null
+   },
+   {
+    "name": "credits.parquet",
+    "size": null
+   },
+   {
+    "name": "frontier_commentary.md",
+    "size": null
+   },
+   {
+    "name": "frontier_commentary_facts.json",
+    "size": null
+   },
+   {
+    "name": "frontier_path.gif",
+    "size": null
+   },
+   {
+    "name": "frontier_steps.csv",
+    "size": null
+   },
+   {
+    "name": "hedge_blend_used.json",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/bin/kickmix-engine",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/INSTALLER",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/METADATA",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/RECORD",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/REQUESTED",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/WHEEL",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/direct_url.json",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/entry_points.txt",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/licenses/LICENSE",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/licenses/NOTICE",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine-0.6.0.dist-info/sboms/kickmix-engine.cyclonedx.json",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__init__.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__main__.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/__init__.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/__main__.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/cache.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/cli.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/dfthcsos.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/diff.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/doctor.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/dqi.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/invsqrt.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/pair.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/plugins.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/__pycache__/resident.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/_engine.abi3.so",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/cache.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/cli.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/dfthcsos.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/diff.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/doctor.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/dqi.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/invsqrt.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/pair.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/plugins.py",
+    "size": null
+   },
+   {
+    "name": "kickmix_engine/kickmix_engine/resident.py",
+    "size": null
+   },
+   {
+    "name": "leaderboard_summary.csv",
+    "size": null
+   },
+   {
+    "name": "receipt.json",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "yoyobar/lb-22-99-invsqrt-101-62-qubits",
+  "files": [
+   {
+    "name": "submission-provenance.json",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "kirilltym/quantum-circuits-four-loaders-eight-toffolis",
+  "files": [
+   {
+    "name": "CREDITS.md",
+    "size": null
+   },
+   {
+    "name": "LICENSE_SCOPES.txt",
+    "size": null
+   },
+   {
+    "name": "checked_composition.png",
+    "size": null
+   },
+   {
+    "name": "derived_somejoint1511.kmb",
+    "size": null
+   },
+   {
+    "name": "derived_somejoint1511.kmx",
+    "size": null
+   },
+   {
+    "name": "derived_somejoint1511_roundtrip.kmx",
+    "size": null
+   },
+   {
+    "name": "factual_comparison.csv",
+    "size": null
+   },
+   {
+    "name": "full_dfthcsos_report.json",
+    "size": null
+   },
+   {
+    "name": "full_dqi_report.json",
+    "size": null
+   },
+   {
+    "name": "full_invsqrt_report.json",
+    "size": null
+   },
+   {
+    "name": "historical_06aa_cached_product_kernel.json",
+    "size": null
+   },
+   {
+    "name": "isabe_source_inverse.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_cached_product_kernel.json",
+    "size": null
+   },
+   {
+    "name": "mps_compact427_full.json",
+    "size": null
+   },
+   {
+    "name": "mps_compact427_negative.json",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_0.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_0.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_1.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_1.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_10.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_10.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_11.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_11.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_12.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_12.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_13.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_13.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_14.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_14.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_2.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_2.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_3.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_3.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_4.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_4.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_5.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_5.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_6.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_6.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_7.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_7.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_8.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_8.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_9.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_k_9.normalized.kmx",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/angle_kmxs.json",
+    "size": null
+   },
+   {
+    "name": "mps_loader_inputs/submission.npz",
+    "size": null
+   },
+   {
+    "name": "mps_somejoint_hmr_windows.json",
+    "size": null
+   },
+   {
+    "name": "mps_syed292_full.json",
+    "size": null
+   },
+   {
+    "name": "mps_syed292_negative.json",
+    "size": null
+   },
+   {
+    "name": "mps_syed_decode_inverse.json",
+    "size": null
+   },
+   {
+    "name": "mps_syed_decode_negative.json",
+    "size": null
+   },
+   {
+    "name": "mps_v8_dqi_kernels.json",
+    "size": null
+   },
+   {
+    "name": "mps_v8_factor_compatibility.json",
+    "size": null
+   },
+   {
+    "name": "mps_v8_factor_initial_metadata_failure.json",
+    "size": null
+   },
+   {
+    "name": "mps_v8_free_coins_inverse.json",
+    "size": null
+   },
+   {
+    "name": "mps_v8_free_coins_negative.json",
+    "size": null
+   },
+   {
+    "name": "mps_v9_qiu_coins_inverse.json",
+    "size": null
+   },
+   {
+    "name": "mps_v9_qiu_coins_negative.json",
+    "size": null
+   },
+   {
+    "name": "output_manifest.json",
+    "size": null
+   },
+   {
+    "name": "public_qiu_inverse.kmb",
+    "size": null
+   },
+   {
+    "name": "public_qiu_inverse.kmx",
+    "size": null
+   },
+   {
+    "name": "public_qiu_roundtrip.kmx",
+    "size": null
+   },
+   {
+    "name": "quadratic_window_anf.json",
+    "size": null
+   },
+   {
+    "name": "same_binary_hmr_reconstruction.json",
+    "size": null
+   },
+   {
+    "name": "selected_inverse.kmx",
+    "size": null
+   },
+   {
+    "name": "selected_inverse_roundtrip.kmx",
+    "size": null
+   },
+   {
+    "name": "source_pins.json",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   },
+   {
+    "name": "syed_source_inverse.kmx",
+    "size": null
+   },
+   {
+    "name": "verification_conditions.json",
+    "size": null
+   },
+   {
+    "name": "verification_receipt.json",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "isabe11am00re/qcc-v65wqq-submission",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "ayodejiibrahimlateef/vqcc-24-56308-local",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "dmitriigluzdov/quantum-circuit-compilation-from-source",
+  "files": [
+   {
+    "name": "src/__pycache__/qcc_pipeline.cpython-313.pyc",
+    "size": null
+   },
+   {
+    "name": "src/chemistry_r5.py",
+    "size": null
+   },
+   {
+    "name": "src/compact_gap_variant.py",
+    "size": null
+   },
+   {
+    "name": "src/compact_lifetime_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/domain_compile.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/common.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/compact_euclid.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/continued_fraction/jfraction_decoder.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/continued_fraction/jfraction_gap_decoder.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/continued_fraction/keyeq/model_fast_extraction.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/continued_fraction/keyeq/model_jfraction.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/continued_fraction/mask_projection.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/continued_fraction/poly_arithmetic.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/counter.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/cubic.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/early_a.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/evaluation.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/forney_control.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/narrow.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/quotient.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/quotient_hmr.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/recursive.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/static_divisions.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/sweep.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/tower.py",
+    "size": null
+   },
+   {
+    "name": "src/dqi/zero_chain.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/build.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/calib.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/check.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/exact.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/fit.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/hsplit.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/model.py",
+    "size": null
+   },
+   {
+    "name": "src/marsyas/run.py",
+    "size": null
+   },
+   {
+    "name": "src/matrix_pair_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/mc4_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/merge_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/merged_own.py",
+    "size": null
+   },
+   {
+    "name": "src/norm_recycle_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/paired_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/phase_tensor.py",
+    "size": null
+   },
+   {
+    "name": "src/port_pipeline.py",
+    "size": null
+   },
+   {
+    "name": "src/public_inv_payload.py",
+    "size": null
+   },
+   {
+    "name": "src/public_v11.py",
+    "size": null
+   },
+   {
+    "name": "src/qcc_pipeline.py",
+    "size": null
+   },
+   {
+    "name": "src/quadratic_cube.py",
+    "size": null
+   },
+   {
+    "name": "src/round10_dqi.py",
+    "size": null
+   },
+   {
+    "name": "src/round10_fit.py",
+    "size": null
+   },
+   {
+    "name": "src/round10_inv.py",
+    "size": null
+   },
+   {
+    "name": "src/round10_lookup.py",
+    "size": null
+   },
+   {
+    "name": "src/round10_virtual.py",
+    "size": null
+   },
+   {
+    "name": "src/round11_dqi.py",
+    "size": null
+   },
+   {
+    "name": "src/round11_history.py",
+    "size": null
+   },
+   {
+    "name": "src/round11_lookup.py",
+    "size": null
+   },
+   {
+    "name": "src/round12_dqi.py",
+    "size": null
+   },
+   {
+    "name": "src/round5_marsyas_build.py",
+    "size": null
+   },
+   {
+    "name": "src/round5_marsyas_tables.json",
+    "size": null
+   },
+   {
+    "name": "src/round5_selected_inv.json",
+    "size": null
+   },
+   {
+    "name": "src/round5_virtual.py",
+    "size": null
+   },
+   {
+    "name": "src/round6_dqi.py",
+    "size": null
+   },
+   {
+    "name": "src/round6_hmr.py",
+    "size": null
+   },
+   {
+    "name": "src/round9_marsyas_phase.py",
+    "size": null
+   },
+   {
+    "name": "src/round9_pointer.py",
+    "size": null
+   },
+   {
+    "name": "src/selected_dqi.json",
+    "size": null
+   },
+   {
+    "name": "src/selected_inv78.json",
+    "size": null
+   },
+   {
+    "name": "src/selected_invsqrt.json",
+    "size": null
+   },
+   {
+    "name": "src/selected_phase_fit.json",
+    "size": null
+   },
+   {
+    "name": "src/smallspace_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/invsqrt/public/LICENSE",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/invsqrt/public/NOTICE",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/notebooks/LICENSE",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/notebooks/check-submission",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/notebooks/extra-format.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/build.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/bezout_model.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/border_circuit.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/central_circuit.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/forney_bezout.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/half_circuit.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/inplace_poly.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/recursive_ldu.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/central2/retry_circuit.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/cyclic_gold.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/gold26/gold_cube.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/gold26/gold_forms.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/gold26/hermitian12-search-check.json",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/gold_extraction.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/hankel_half.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/runtime.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/LICENSE.txt",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/NOTICE.txt",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/build_merge_dqi.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/build_paired_dqi.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/build_projected_dqi.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/compact_gap_variant.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/compact_lifetime_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/matrix_pair_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/mc4_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/merge_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/norm_recycle_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/one_mask_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/paired_kernels.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/phase_tensor.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/pinned_sources.json",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/pointer_phase_codec.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/quadratic_cube.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/smallspace_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/triple_matrix.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/triple_ordinary.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/common.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/compact_euclid.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/continued_fraction/jfraction_decoder.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/continued_fraction/jfraction_gap_decoder.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/continued_fraction/keyeq/model_fast_extraction.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/continued_fraction/keyeq/model_jfraction.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/continued_fraction/mask_projection.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/continued_fraction/poly_arithmetic.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/counter.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/cubic.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/early_a.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/evaluation.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/forney_control.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/narrow.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/quotient.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/quotient_hmr.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/recursive.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/static_divisions.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/sweep.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/tower.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/upstream/dqi/zero_chain.py",
+    "size": null
+   },
+   {
+    "name": "src/somejoint/runs/mad-dqi/upstream/zero_mask_inverse.py",
+    "size": null
+   },
+   {
+    "name": "src/zero_mask_inverse.py",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   },
+   {
+    "name": "verification.json",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "rishabhbafnaiiitd/quantum-circuit-compilation-multi-task-sota",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_0.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_1.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_10.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_11.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_12.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_13.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_14.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_2.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_3.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_4.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_5.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_6.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_7.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_8.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/angle_k_9.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dfthcsos/submission.npz",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/dqi.kmb",
+    "size": null
+   },
+   {
+    "name": "submission_bundle/invsqrt.kmb",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "coralfil/atlantis-vqcc-apex-quantum-circuit-portfolio",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "qiuqiuh/qcc-refresh-v65w-sx-sy7-inverse",
+  "files": [
+   {
+    "name": "CREDITS.md",
+    "size": null
+   },
+   {
+    "name": "INVSQRT_CREDITS.md",
+    "size": null
+   },
+   {
+    "name": "LICENSE.md",
+    "size": null
+   },
+   {
+    "name": "QCC_RELEASE_MANIFEST.json",
+    "size": null
+   },
+   {
+    "name": "candidate_manifest.json",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   },
+   {
+    "name": "verification_receipt.json",
+    "size": null
+   },
+   {
+    "name": "verifier_snapshot.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "heliosli/the-dataset-is-public-now-enjoy",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "syed3000/vqcc-own-circuit-portfolio-notebook",
+  "files": [
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "kawh1111/qcomp-harvest-v32",
+  "files": [
+   {
+    "name": "dqi.kmb",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "manwithacat/dfthc-refit",
+  "files": [
+   {
+    "name": "dfthc_refit.py",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "k",
+  "ref": "orecord/quantum-circuit-compilation-pipeline",
+  "files": [
+   {
+    "name": "candidate/dfthcsos/angle_k_0.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_1.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_10.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_11.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_12.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_13.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_14.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_2.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_3.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_4.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_5.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_6.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_7.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_8.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/angle_k_9.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/dfthcsos/submission.npz",
+    "size": null
+   },
+   {
+    "name": "candidate/dqi.kmb",
+    "size": null
+   },
+   {
+    "name": "candidate/invsqrt.kmb",
+    "size": null
+   },
+   {
+    "name": "reports/verified_dfthcsos.json",
+    "size": null
+   },
+   {
+    "name": "reports/verified_dqi.json",
+    "size": null
+   },
+   {
+    "name": "reports/verified_invsqrt.json",
+    "size": null
+   },
+   {
+    "name": "submission.zip",
+    "size": null
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "isabe11am00re/qcc-v66s33w-circuits",
+  "files": [
+   {
+    "name": "CREDITS.md",
+    "size": 4677
+   },
+   {
+    "name": "LICENSE.md",
+    "size": 535
+   },
+   {
+    "name": "QCC_RELEASE_MANIFEST.json",
+    "size": 3722
+   },
+   {
+    "name": "dfthcsos__angle_k_0.kmb",
+    "size": 396933
+   },
+   {
+    "name": "dfthcsos__angle_k_1.kmb",
+    "size": 394900
+   },
+   {
+    "name": "dfthcsos__angle_k_10.kmb",
+    "size": 358836
+   },
+   {
+    "name": "dfthcsos__angle_k_11.kmb",
+    "size": 357681
+   },
+   {
+    "name": "dfthcsos__angle_k_12.kmb",
+    "size": 358465
+   },
+   {
+    "name": "dfthcsos__angle_k_13.kmb",
+    "size": 341040
+   },
+   {
+    "name": "dfthcsos__angle_k_14.kmb",
+    "size": 355951
+   },
+   {
+    "name": "dfthcsos__angle_k_2.kmb",
+    "size": 399458
+   },
+   {
+    "name": "dfthcsos__angle_k_3.kmb",
+    "size": 392891
+   },
+   {
+    "name": "dfthcsos__angle_k_4.kmb",
+    "size": 358122
+   },
+   {
+    "name": "dfthcsos__angle_k_5.kmb",
+    "size": 356361
+   },
+   {
+    "name": "dfthcsos__angle_k_6.kmb",
+    "size": 357332
+   },
+   {
+    "name": "dfthcsos__angle_k_7.kmb",
+    "size": 348960
+   },
+   {
+    "name": "dfthcsos__angle_k_8.kmb",
+    "size": 355400
+   },
+   {
+    "name": "dfthcsos__angle_k_9.kmb",
+    "size": 359657
+   },
+   {
+    "name": "dfthcsos__submission.npz",
+    "size": 1866292
+   },
+   {
+    "name": "dqi.kmb.xz",
+    "size": 10534528
+   },
+   {
+    "name": "invsqrt.kmb",
+    "size": 479055
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "isabe11am00re/qcc-v66yk5-circuits",
+  "files": [
+   {
+    "name": "CREDITS.md",
+    "size": 4677
+   },
+   {
+    "name": "LICENSE.md",
+    "size": 535
+   },
+   {
+    "name": "QCC_RELEASE_MANIFEST.json",
+    "size": 3602
+   },
+   {
+    "name": "dfthcsos__angle_k_0.kmb",
+    "size": 396933
+   },
+   {
+    "name": "dfthcsos__angle_k_1.kmb",
+    "size": 394900
+   },
+   {
+    "name": "dfthcsos__angle_k_10.kmb",
+    "size": 358836
+   },
+   {
+    "name": "dfthcsos__angle_k_11.kmb",
+    "size": 357681
+   },
+   {
+    "name": "dfthcsos__angle_k_12.kmb",
+    "size": 358465
+   },
+   {
+    "name": "dfthcsos__angle_k_13.kmb",
+    "size": 341040
+   },
+   {
+    "name": "dfthcsos__angle_k_14.kmb",
+    "size": 355951
+   },
+   {
+    "name": "dfthcsos__angle_k_2.kmb",
+    "size": 399458
+   },
+   {
+    "name": "dfthcsos__angle_k_3.kmb",
+    "size": 392891
+   },
+   {
+    "name": "dfthcsos__angle_k_4.kmb",
+    "size": 358122
+   },
+   {
+    "name": "dfthcsos__angle_k_5.kmb",
+    "size": 356361
+   },
+   {
+    "name": "dfthcsos__angle_k_6.kmb",
+    "size": 357332
+   },
+   {
+    "name": "dfthcsos__angle_k_7.kmb",
+    "size": 348960
+   },
+   {
+    "name": "dfthcsos__angle_k_8.kmb",
+    "size": 355400
+   },
+   {
+    "name": "dfthcsos__angle_k_9.kmb",
+    "size": 359657
+   },
+   {
+    "name": "dfthcsos__submission.npz",
+    "size": 1866292
+   },
+   {
+    "name": "dqi.kmb.xz",
+    "size": 10805692
+   },
+   {
+    "name": "invsqrt.kmb",
+    "size": 479046
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "isabe11am00re/qcc-v65wqq-circuits",
+  "files": [
+   {
+    "name": "CREDITS.md",
+    "size": 2843
+   },
+   {
+    "name": "LICENSE.md",
+    "size": 535
+   },
+   {
+    "name": "QCC_RELEASE_MANIFEST.json",
+    "size": 3722
+   },
+   {
+    "name": "dfthcsos__angle_k_0.kmb",
+    "size": 422345
+   },
+   {
+    "name": "dfthcsos__angle_k_1.kmb",
+    "size": 422317
+   },
+   {
+    "name": "dfthcsos__angle_k_10.kmb",
+    "size": 390112
+   },
+   {
+    "name": "dfthcsos__angle_k_11.kmb",
+    "size": 387411
+   },
+   {
+    "name": "dfthcsos__angle_k_12.kmb",
+    "size": 387890
+   },
+   {
+    "name": "dfthcsos__angle_k_13.kmb",
+    "size": 387032
+   },
+   {
+    "name": "dfthcsos__angle_k_14.kmb",
+    "size": 391415
+   },
+   {
+    "name": "dfthcsos__angle_k_2.kmb",
+    "size": 423379
+   },
+   {
+    "name": "dfthcsos__angle_k_3.kmb",
+    "size": 422311
+   },
+   {
+    "name": "dfthcsos__angle_k_4.kmb",
+    "size": 389637
+   },
+   {
+    "name": "dfthcsos__angle_k_5.kmb",
+    "size": 391227
+   },
+   {
+    "name": "dfthcsos__angle_k_6.kmb",
+    "size": 390141
+   },
+   {
+    "name": "dfthcsos__angle_k_7.kmb",
+    "size": 386959
+   },
+   {
+    "name": "dfthcsos__angle_k_8.kmb",
+    "size": 390085
+   },
+   {
+    "name": "dfthcsos__angle_k_9.kmb",
+    "size": 386641
+   },
+   {
+    "name": "dfthcsos__submission.npz",
+    "size": 2022588
+   },
+   {
+    "name": "dqi.kmb.xz",
+    "size": 10809732
+   },
+   {
+    "name": "invsqrt.kmb",
+    "size": 479036
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "somejoint/qcc-ladder-parts",
+  "files": [
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_0.kmb",
+    "size": 396933
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_1.kmb",
+    "size": 394900
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_10.kmb",
+    "size": 358836
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_11.kmb",
+    "size": 357681
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_12.kmb",
+    "size": 358465
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_13.kmb",
+    "size": 341040
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_14.kmb",
+    "size": 355951
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_2.kmb",
+    "size": 399458
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_3.kmb",
+    "size": 392891
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_4.kmb",
+    "size": 358122
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_5.kmb",
+    "size": 356361
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_6.kmb",
+    "size": 357332
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_7.kmb",
+    "size": 348960
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_8.kmb",
+    "size": 355400
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/angle_k_9.kmb",
+    "size": 359657
+   },
+   {
+    "name": "dfthcsos-e5a7eba6/dfthcsos/submission.npz",
+    "size": 1863164
+   },
+   {
+    "name": "dqi-748b01a7/dqi-748b01a7/dqi.kmb",
+    "size": 529710608
+   },
+   {
+    "name": "invsqrt-af469847/invsqrt-af469847/invsqrt.kmb",
+    "size": 479055
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "yoyobar/qcc-local-sota-20261031",
+  "files": [
+   {
+    "name": "APACHE-2.0.txt",
+    "size": 11358
+   },
+   {
+    "name": "CREDITS.md",
+    "size": 1395
+   },
+   {
+    "name": "CURRENT_RELEASE.md",
+    "size": 1849
+   },
+   {
+    "name": "LICENSE_SCOPE.md",
+    "size": 338
+   },
+   {
+    "name": "PREVIOUS_CREDITS_V26.md",
+    "size": 7936
+   },
+   {
+    "name": "PREVIOUS_CREDITS_V27.md",
+    "size": 994
+   },
+   {
+    "name": "QUALIFICATION.md",
+    "size": 2196
+   },
+   {
+    "name": "UPSTREAM-AHMED-V21-CREDITS.md",
+    "size": 1498
+   },
+   {
+    "name": "UPSTREAM-AHMED-V21-README.md",
+    "size": 1370
+   },
+   {
+    "name": "UPSTREAM-C40-NEW-LOADERS-CREDITS.md",
+    "size": 1169
+   },
+   {
+    "name": "UPSTREAM-HEDGE-HW13-CREDITS.md",
+    "size": 1275
+   },
+   {
+    "name": "UPSTREAM-HELIOSLI-CREDITS.md",
+    "size": 3021
+   },
+   {
+    "name": "UPSTREAM-HELIOSLI-LICENSE.md",
+    "size": 535
+   },
+   {
+    "name": "UPSTREAM-KIRILL-C39-CREDITS.md",
+    "size": 3940
+   },
+   {
+    "name": "UPSTREAM-KIRILL-V9-CREDITS.md",
+    "size": 7597
+   },
+   {
+    "name": "UPSTREAM-KIRILL-V9-LICENSE_SCOPES.txt",
+    "size": 137
+   },
+   {
+    "name": "UPSTREAM-SOMEJOINT-V34-NOTICES.md",
+    "size": 14057
+   },
+   {
+    "name": "UPSTREAM-SYED-OWN-NOTEBOOK-NOTICES.md",
+    "size": 5620
+   },
+   {
+    "name": "UPSTREAM-V63SN-CREDITS.md",
+    "size": 2311
+   },
+   {
+    "name": "UPSTREAM-V63SN-LICENSE.md",
+    "size": 535
+   },
+   {
+    "name": "UPSTREAM-V65W-NOTICES.md",
+    "size": 3290
+   },
+   {
+    "name": "V20_RELEASE.md",
+    "size": 1369
+   },
+   {
+    "name": "portfolio-manifest.json",
+    "size": 2780
+   },
+   {
+    "name": "submission-meme.png",
+    "size": 2091768
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_0.kmb",
+    "size": 396933
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_1.kmb",
+    "size": 394900
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_10.kmb",
+    "size": 358836
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_11.kmb",
+    "size": 357681
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_12.kmb",
+    "size": 358465
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_13.kmb",
+    "size": 341040
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_14.kmb",
+    "size": 355951
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_2.kmb",
+    "size": 399458
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_3.kmb",
+    "size": 392891
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_4.kmb",
+    "size": 358122
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_5.kmb",
+    "size": 356361
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_6.kmb",
+    "size": 357332
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_7.kmb",
+    "size": 348960
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_8.kmb",
+    "size": 355400
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_9.kmb",
+    "size": 359657
+   },
+   {
+    "name": "submission/dfthcsos/submission.npz",
+    "size": 1863164
+   },
+   {
+    "name": "submission/dqi.kmb",
+    "size": 529710680
+   },
+   {
+    "name": "submission/invsqrt.kmb",
+    "size": 479055
+   },
+   {
+    "name": "verification-summary.json",
+    "size": 15117
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "manwithacat/vqcc-hedge-wizardry",
+  "files": [
+   {
+    "name": "LICENSE",
+    "size": 11358
+   },
+   {
+    "name": "NOTICE",
+    "size": 10563
+   },
+   {
+    "name": "README.md",
+    "size": 16645
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 22560
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_0.kmb",
+    "size": 450120
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_1.kmb",
+    "size": 453866
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_10.kmb",
+    "size": 397365
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_11.kmb",
+    "size": 405306
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_12.kmb",
+    "size": 401695
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_13.kmb",
+    "size": 403312
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_14.kmb",
+    "size": 402051
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_2.kmb",
+    "size": 453102
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_3.kmb",
+    "size": 450913
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_4.kmb",
+    "size": 399688
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_5.kmb",
+    "size": 400270
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_6.kmb",
+    "size": 403806
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_7.kmb",
+    "size": 398378
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_8.kmb",
+    "size": 404391
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/angle_k_9.kmb",
+    "size": 401146
+   },
+   {
+    "name": "circuits/chemistry/02f8f7d9d75a/submission.npz",
+    "size": 2050388
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_0.kmb",
+    "size": 428885
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_1.kmb",
+    "size": 430734
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_10.kmb",
+    "size": 390219
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_11.kmb",
+    "size": 385326
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_12.kmb",
+    "size": 387526
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_13.kmb",
+    "size": 385519
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_14.kmb",
+    "size": 389067
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_2.kmb",
+    "size": 430514
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_3.kmb",
+    "size": 430986
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_4.kmb",
+    "size": 384837
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_5.kmb",
+    "size": 388811
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_6.kmb",
+    "size": 386990
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_7.kmb",
+    "size": 387204
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_8.kmb",
+    "size": 388086
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/angle_k_9.kmb",
+    "size": 386799
+   },
+   {
+    "name": "circuits/chemistry/3aac21436c28/submission.npz",
+    "size": 1288167
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_0.kmb",
+    "size": 451672
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_1.kmb",
+    "size": 448085
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_10.kmb",
+    "size": 400612
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_11.kmb",
+    "size": 406276
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_12.kmb",
+    "size": 400502
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_13.kmb",
+    "size": 401708
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_14.kmb",
+    "size": 401890
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_2.kmb",
+    "size": 451996
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_3.kmb",
+    "size": 456266
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_4.kmb",
+    "size": 397777
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_5.kmb",
+    "size": 401580
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_6.kmb",
+    "size": 404097
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_7.kmb",
+    "size": 404041
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_8.kmb",
+    "size": 400918
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/angle_k_9.kmb",
+    "size": 402097
+   },
+   {
+    "name": "circuits/chemistry/7377be20cff0/submission.npz",
+    "size": 2033028
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_0.kmb",
+    "size": 428885
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_1.kmb",
+    "size": 430734
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_10.kmb",
+    "size": 388127
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_11.kmb",
+    "size": 391023
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_12.kmb",
+    "size": 388710
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_13.kmb",
+    "size": 388183
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_14.kmb",
+    "size": 388946
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_2.kmb",
+    "size": 430514
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_3.kmb",
+    "size": 430986
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_4.kmb",
+    "size": 384837
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_5.kmb",
+    "size": 388811
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_6.kmb",
+    "size": 386990
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_7.kmb",
+    "size": 387204
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_8.kmb",
+    "size": 389702
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/angle_k_9.kmb",
+    "size": 389225
+   },
+   {
+    "name": "circuits/chemistry/7d372981d3ce/submission.npz",
+    "size": 2033028
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_0.kmb",
+    "size": 444245
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_1.kmb",
+    "size": 442886
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_10.kmb",
+    "size": 387946
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_11.kmb",
+    "size": 387220
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_12.kmb",
+    "size": 391202
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_13.kmb",
+    "size": 388367
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_14.kmb",
+    "size": 389476
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_2.kmb",
+    "size": 445429
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_3.kmb",
+    "size": 439889
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_4.kmb",
+    "size": 386218
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_5.kmb",
+    "size": 386934
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_6.kmb",
+    "size": 389406
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_7.kmb",
+    "size": 390169
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_8.kmb",
+    "size": 385813
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/angle_k_9.kmb",
+    "size": 390533
+   },
+   {
+    "name": "circuits/chemistry/b94b469b148a/submission.npz",
+    "size": 2033028
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_0.kmb",
+    "size": 422928
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_1.kmb",
+    "size": 429281
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_10.kmb",
+    "size": 389273
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_11.kmb",
+    "size": 386698
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_12.kmb",
+    "size": 388248
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_13.kmb",
+    "size": 385419
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_14.kmb",
+    "size": 386985
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_2.kmb",
+    "size": 423575
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_3.kmb",
+    "size": 423389
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_4.kmb",
+    "size": 390607
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_5.kmb",
+    "size": 387652
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_6.kmb",
+    "size": 390346
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_7.kmb",
+    "size": 385769
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_8.kmb",
+    "size": 387014
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/angle_k_9.kmb",
+    "size": 385676
+   },
+   {
+    "name": "circuits/chemistry/bf016fb054d5/submission.npz",
+    "size": 2019532
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_0.kmb",
+    "size": 395754
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_1.kmb",
+    "size": 393475
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_10.kmb",
+    "size": 358836
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_11.kmb",
+    "size": 357681
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_12.kmb",
+    "size": 358465
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_13.kmb",
+    "size": 341040
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_14.kmb",
+    "size": 355951
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_2.kmb",
+    "size": 391237
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_3.kmb",
+    "size": 391501
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_4.kmb",
+    "size": 358122
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_5.kmb",
+    "size": 356361
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_6.kmb",
+    "size": 357332
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_7.kmb",
+    "size": 348960
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_8.kmb",
+    "size": 355400
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/angle_k_9.kmb",
+    "size": 359657
+   },
+   {
+    "name": "circuits/chemistry/c6d391fdc236/submission.npz",
+    "size": 1863164
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_0.kmb",
+    "size": 444245
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_1.kmb",
+    "size": 442444
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_10.kmb",
+    "size": 400612
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_11.kmb",
+    "size": 406276
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_12.kmb",
+    "size": 400502
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_13.kmb",
+    "size": 401708
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_14.kmb",
+    "size": 401890
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_2.kmb",
+    "size": 445140
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_3.kmb",
+    "size": 444064
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_4.kmb",
+    "size": 397777
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_5.kmb",
+    "size": 401580
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_6.kmb",
+    "size": 404097
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_7.kmb",
+    "size": 404041
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_8.kmb",
+    "size": 400918
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/angle_k_9.kmb",
+    "size": 402097
+   },
+   {
+    "name": "circuits/chemistry/cc079d42a714/submission.npz",
+    "size": 2033028
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_0.kmb",
+    "size": 400395
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_1.kmb",
+    "size": 400453
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_10.kmb",
+    "size": 352755
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_11.kmb",
+    "size": 308137
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_12.kmb",
+    "size": 352979
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_13.kmb",
+    "size": 308119
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_14.kmb",
+    "size": 352701
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_2.kmb",
+    "size": 394618
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_3.kmb",
+    "size": 396782
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_4.kmb",
+    "size": 356137
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_5.kmb",
+    "size": 310562
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_6.kmb",
+    "size": 351298
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_7.kmb",
+    "size": 304732
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_8.kmb",
+    "size": 352967
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/angle_k_9.kmb",
+    "size": 307434
+   },
+   {
+    "name": "circuits/chemistry/e148cacdd4ad/submission.npz",
+    "size": 1999484
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_0.kmb",
+    "size": 453962
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_1.kmb",
+    "size": 448085
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_10.kmb",
+    "size": 400612
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_11.kmb",
+    "size": 406276
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_12.kmb",
+    "size": 400502
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_13.kmb",
+    "size": 401708
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_14.kmb",
+    "size": 400193
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_2.kmb",
+    "size": 451996
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_3.kmb",
+    "size": 456266
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_4.kmb",
+    "size": 397777
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_5.kmb",
+    "size": 401580
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_6.kmb",
+    "size": 404097
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_7.kmb",
+    "size": 404041
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_8.kmb",
+    "size": 400918
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/angle_k_9.kmb",
+    "size": 402097
+   },
+   {
+    "name": "circuits/chemistry/ff2b2733c1fc/submission.npz",
+    "size": 2029652
+   },
+   {
+    "name": "circuits/dqi/1698e864a3a6.kmb",
+    "size": 579764652
+   },
+   {
+    "name": "circuits/dqi/1779b4e5967f.kmb",
+    "size": 573491486
+   },
+   {
+    "name": "circuits/dqi/5e86f69a9611.kmb",
+    "size": 579584652
+   },
+   {
+    "name": "circuits/dqi/5faba4591853.kmb",
+    "size": 535037041
+   },
+   {
+    "name": "circuits/dqi/c253111974fc.kmb",
+    "size": 573492338
+   },
+   {
+    "name": "entries.csv",
+    "size": 30804
+   },
+   {
+    "name": "evidence/HW-01/draws_48.csv",
+    "size": 3178
+   },
+   {
+    "name": "evidence/HW-01/sweep42_failing_shot.json",
+    "size": 424
+   },
+   {
+    "name": "evidence/HW-01/verify_summary.json",
+    "size": 1795
+   },
+   {
+    "name": "evidence/HW-03/alternation_curve.csv",
+    "size": 764
+   },
+   {
+    "name": "evidence/HW-03/metrics.json",
+    "size": 991
+   },
+   {
+    "name": "evidence/HW-03/verify_summary.json",
+    "size": 2200
+   },
+   {
+    "name": "evidence/HW-04/alternation_curve.csv",
+    "size": 706
+   },
+   {
+    "name": "evidence/HW-04/metrics.json",
+    "size": 1385
+   },
+   {
+    "name": "evidence/HW-04/verify_summary.json",
+    "size": 2204
+   },
+   {
+    "name": "evidence/HW-05/alternation_curve.csv",
+    "size": 151
+   },
+   {
+    "name": "evidence/HW-05/metrics.json",
+    "size": 684
+   },
+   {
+    "name": "evidence/HW-05/verify_summary.json",
+    "size": 2203
+   },
+   {
+    "name": "evidence/HW-06/draws_48.csv",
+    "size": 3169
+   },
+   {
+    "name": "evidence/HW-06/verify_summary.json",
+    "size": 1681
+   },
+   {
+    "name": "evidence/HW-07/draws_48.csv",
+    "size": 3173
+   },
+   {
+    "name": "evidence/HW-07/draws_48_vs_6d58bd6d0232.csv",
+    "size": 3178
+   },
+   {
+    "name": "evidence/HW-07/verify_summary.json",
+    "size": 1689
+   },
+   {
+    "name": "evidence/HW-08/draws_48.csv",
+    "size": 3169
+   },
+   {
+    "name": "evidence/HW-08/verify_summary.json",
+    "size": 1688
+   },
+   {
+    "name": "evidence/HW-09/draws_48.csv",
+    "size": 3173
+   },
+   {
+    "name": "evidence/HW-09/verify_summary.json",
+    "size": 1801
+   },
+   {
+    "name": "evidence/HW-10/base_report.json",
+    "size": 3991
+   },
+   {
+    "name": "evidence/HW-10/refit_log.jsonl",
+    "size": 217252
+   },
+   {
+    "name": "evidence/HW-10/verify_summary.json",
+    "size": 2198
+   },
+   {
+    "name": "evidence/HW-11/verify_summary.json",
+    "size": 2198
+   },
+   {
+    "name": "evidence/HW-12/verify_summary.json",
+    "size": 2202
+   },
+   {
+    "name": "evidence/HW-13/verify_summary.json",
+    "size": 2204
+   },
+   {
+    "name": "evidence/HW-14/verify_summary.json",
+    "size": 2198
+   },
+   {
+    "name": "evidence/HW-15/alternation_curve.csv",
+    "size": 452
+   },
+   {
+    "name": "evidence/HW-15/metrics.json",
+    "size": 1275
+   },
+   {
+    "name": "evidence/HW-15/verify_summary.json",
+    "size": 2201
+   },
+   {
+    "name": "evidence/HW-16/family_check.md",
+    "size": 2273
+   },
+   {
+    "name": "evidence/HW-16/verify_summary.json",
+    "size": 2202
+   },
+   {
+    "name": "figures/hw01_ledger_73e1b187_vs_5faba459.png",
+    "size": 83169
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "manwithacat/vqcc-apache-public-circuits",
+  "error": "HTTPError('429 Client Error: Too Many Requests for url: https://api.kaggle.com/v1/datasets.DatasetApiService/ListDatasetFiles')"
+ },
+ {
+  "kind": "d",
+  "ref": "iwanttorungemma9b/vqcc-optimized-submission",
+  "files": [
+   {
+    "name": "MANIFEST.sha256",
+    "size": 6028
+   },
+   {
+    "name": "README.md",
+    "size": 4795
+   },
+   {
+    "name": "builders/build_dqi.py",
+    "size": 31775
+   },
+   {
+    "name": "builders/build_invsqrt.py",
+    "size": 9157
+   },
+   {
+    "name": "builders/build_invsqrt2.py",
+    "size": 10674
+   },
+   {
+    "name": "builders/gf_inv12.py",
+    "size": 13163
+   },
+   {
+    "name": "builders/gf_mul12.py",
+    "size": 6925
+   },
+   {
+    "name": "builders/model_direct.py",
+    "size": 1673
+   },
+   {
+    "name": "builders/test_dqi.py",
+    "size": 774
+   },
+   {
+    "name": "builders/test_gf_primitives.py",
+    "size": 7150
+   },
+   {
+    "name": "builders/test_invsqrt.py",
+    "size": 2323
+   },
+   {
+    "name": "dfthc_source/BEST.md",
+    "size": 4112
+   },
+   {
+    "name": "dfthc_source/arbitrary_words_check.json",
+    "size": 465
+   },
+   {
+    "name": "dfthc_source/certificate.json",
+    "size": 5852
+   },
+   {
+    "name": "dfthc_source/circuit_costs.json",
+    "size": 870
+   },
+   {
+    "name": "dfthc_source/freeze_hashes.json",
+    "size": 700
+   },
+   {
+    "name": "dfthc_source/numerical_invariants.json",
+    "size": 1726
+   },
+   {
+    "name": "dfthc_source/numerical_source.json",
+    "size": 887
+   },
+   {
+    "name": "dfthc_source/reproduction_check.json",
+    "size": 181
+   },
+   {
+    "name": "dfthc_source/verify_default.json",
+    "size": 1561
+   },
+   {
+    "name": "dfthc_source/verify_independent.json",
+    "size": 1558
+   },
+   {
+    "name": "docs/DESIGN_NOTES.md",
+    "size": 2987
+   },
+   {
+    "name": "docs/HANDOFF.md",
+    "size": 27652
+   },
+   {
+    "name": "docs/METHODS.md",
+    "size": 5410
+   },
+   {
+    "name": "docs/REPRODUCING.md",
+    "size": 2890
+   },
+   {
+    "name": "env.sh",
+    "size": 1269
+   },
+   {
+    "name": "kickmix/LICENSE.txt",
+    "size": 11358
+   },
+   {
+    "name": "kickmix/kickmix.so",
+    "size": 3220392
+   },
+   {
+    "name": "score.py",
+    "size": 18161
+   },
+   {
+    "name": "submission/README.md",
+    "size": 5846
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_0.kmb",
+    "size": 2468842
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_1.kmb",
+    "size": 2475826
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_2.kmb",
+    "size": 2589460
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_3.kmb",
+    "size": 3065524
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_4.kmb",
+    "size": 3068242
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_5.kmb",
+    "size": 3062167
+   },
+   {
+    "name": "submission/dfthcsos/angle_k_6.kmb",
+    "size": 3061429
+   },
+   {
+    "name": "submission/dfthcsos/submission.npz",
+    "size": 5659596
+   },
+   {
+    "name": "submission/dqi.kmb",
+    "size": 839742809
+   },
+   {
+    "name": "submission/invsqrt.kmb",
+    "size": 404016
+   },
+   {
+    "name": "verification/dfthc_verify.json",
+    "size": 1556
+   },
+   {
+    "name": "verification/dqi_verify_v6.json",
+    "size": 1079
+   },
+   {
+    "name": "verification/dqi_verify_v6_salt2.json",
+    "size": 1063
+   },
+   {
+    "name": "verification/inv_verify_v2.json",
+    "size": 496
+   },
+   {
+    "name": "verifiers/LICENSE.txt",
+    "size": 11358
+   },
+   {
+    "name": "verifiers/dfthcsos/FeMoCo76o113e.fcidump",
+    "size": 128128348
+   },
+   {
+    "name": "verifiers/dfthcsos/FeMoCo76o113e.fixed_shifts.npz",
+    "size": 61028
+   },
+   {
+    "name": "verifiers/dfthcsos/SCORING_README.md",
+    "size": 22477
+   },
+   {
+    "name": "verifiers/dfthcsos/__init__.py",
+    "size": 326
+   },
+   {
+    "name": "verifiers/dfthcsos/example_submission/angle_k_reference_circuit.py",
+    "size": 10258
+   },
+   {
+    "name": "verifiers/dfthcsos/scoreinfra/__init__.py",
+    "size": 280
+   },
+   {
+    "name": "verifiers/dfthcsos/scoreinfra/circuits.py",
+    "size": 24418
+   },
+   {
+    "name": "verifiers/dfthcsos/scoreinfra/costs_prepare.py",
+    "size": 8335
+   },
+   {
+    "name": "verifiers/dfthcsos/scoreinfra/dfthc_math.py",
+    "size": 17608
+   },
+   {
+    "name": "verifiers/dfthcsos/scoreinfra/reference.py",
+    "size": 13180
+   },
+   {
+    "name": "verifiers/dfthcsos/verify.py",
+    "size": 31752
+   },
+   {
+    "name": "verifiers/dqi/__init__.py",
+    "size": 87
+   },
+   {
+    "name": "verifiers/dqi/dqi_reference_circuit.py",
+    "size": 30450
+   },
+   {
+    "name": "verifiers/dqi/verify_submission_dqi.py",
+    "size": 20959
+   },
+   {
+    "name": "verifiers/invsqrt/__init__.py",
+    "size": 84
+   },
+   {
+    "name": "verifiers/invsqrt/nr_reference_circuit.py",
+    "size": 18862
+   },
+   {
+    "name": "verifiers/invsqrt/verify_submission_invsqrt.py",
+    "size": 17210
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "ahmedberatozer/vqcc-v23-portfolio",
+  "files": [
+   {
+    "name": "CREDITS.md",
+    "size": 1746
+   },
+   {
+    "name": "README.md",
+    "size": 1439
+   },
+   {
+    "name": "angle_circuits_proof.json",
+    "size": 5341
+   },
+   {
+    "name": "dfthcsos/angle_k_0.kmb",
+    "size": 393883
+   },
+   {
+    "name": "dfthcsos/angle_k_1.kmb",
+    "size": 400271
+   },
+   {
+    "name": "dfthcsos/angle_k_10.kmb",
+    "size": 352524
+   },
+   {
+    "name": "dfthcsos/angle_k_11.kmb",
+    "size": 351050
+   },
+   {
+    "name": "dfthcsos/angle_k_12.kmb",
+    "size": 353840
+   },
+   {
+    "name": "dfthcsos/angle_k_13.kmb",
+    "size": 354659
+   },
+   {
+    "name": "dfthcsos/angle_k_14.kmb",
+    "size": 351911
+   },
+   {
+    "name": "dfthcsos/angle_k_2.kmb",
+    "size": 396773
+   },
+   {
+    "name": "dfthcsos/angle_k_3.kmb",
+    "size": 398558
+   },
+   {
+    "name": "dfthcsos/angle_k_4.kmb",
+    "size": 353561
+   },
+   {
+    "name": "dfthcsos/angle_k_5.kmb",
+    "size": 349942
+   },
+   {
+    "name": "dfthcsos/angle_k_6.kmb",
+    "size": 351037
+   },
+   {
+    "name": "dfthcsos/angle_k_7.kmb",
+    "size": 351693
+   },
+   {
+    "name": "dfthcsos/angle_k_8.kmb",
+    "size": 350074
+   },
+   {
+    "name": "dfthcsos/angle_k_9.kmb",
+    "size": 354011
+   },
+   {
+    "name": "dfthcsos/submission.npz",
+    "size": 1863164
+   },
+   {
+    "name": "dfthcsos_verify.json",
+    "size": 1424
+   },
+   {
+    "name": "dqi.kmb.xz",
+    "size": 10541108
+   },
+   {
+    "name": "dqi_verify.json",
+    "size": 998
+   },
+   {
+    "name": "invsqrt.kmb",
+    "size": 479055
+   },
+   {
+    "name": "invsqrt_verify.json",
+    "size": 502
+   },
+   {
+    "name": "pins.json",
+    "size": 1692
+   },
+   {
+    "name": "vqcc_v7.py",
+    "size": 4394
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "sigmaborov/qcc-frozen-alex-v83-public-baseline",
+  "files": [
+   {
+    "name": "ALEX_CREDITS.md",
+    "size": 43659
+   },
+   {
+    "name": "UPSTREAM_COMPONENT_LICENSE.md",
+    "size": 535
+   },
+   {
+    "name": "UPSTREAM_LICENSE_AND_CREDITS.txt",
+    "size": 45844
+   },
+   {
+    "name": "alexchilton-v83-original.ipynb",
+    "size": 343219
+   },
+   {
+    "name": "baseline-v14.zip.bin",
+    "size": 32345907
+   },
+   {
+    "name": "manifest.json",
+    "size": 1980
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "syed3000/vqcc-own-circuit-portfolio",
+  "files": [
+   {
+    "name": "dfthcsos__angle_k_0.kmb",
+    "size": 422345
+   },
+   {
+    "name": "dfthcsos__angle_k_1.kmb",
+    "size": 422317
+   },
+   {
+    "name": "dfthcsos__angle_k_10.kmb",
+    "size": 390112
+   },
+   {
+    "name": "dfthcsos__angle_k_11.kmb",
+    "size": 387411
+   },
+   {
+    "name": "dfthcsos__angle_k_12.kmb",
+    "size": 387890
+   },
+   {
+    "name": "dfthcsos__angle_k_13.kmb",
+    "size": 387032
+   },
+   {
+    "name": "dfthcsos__angle_k_14.kmb",
+    "size": 391415
+   },
+   {
+    "name": "dfthcsos__angle_k_2.kmb",
+    "size": 423379
+   },
+   {
+    "name": "dfthcsos__angle_k_3.kmb",
+    "size": 422311
+   },
+   {
+    "name": "dfthcsos__angle_k_4.kmb",
+    "size": 389637
+   },
+   {
+    "name": "dfthcsos__angle_k_5.kmb",
+    "size": 391227
+   },
+   {
+    "name": "dfthcsos__angle_k_6.kmb",
+    "size": 390141
+   },
+   {
+    "name": "dfthcsos__angle_k_7.kmb",
+    "size": 386959
+   },
+   {
+    "name": "dfthcsos__angle_k_8.kmb",
+    "size": 390085
+   },
+   {
+    "name": "dfthcsos__angle_k_9.kmb",
+    "size": 386641
+   },
+   {
+    "name": "dfthcsos__submission.npz",
+    "size": 2019532
+   },
+   {
+    "name": "dqi.kmb",
+    "size": 529710482
+   },
+   {
+    "name": "invsqrt.kmb",
+    "size": 473676
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "heliosli/qcc-circuits-live",
+  "files": [
+   {
+    "name": "CREDITS.md",
+    "size": 2482
+   },
+   {
+    "name": "LICENSE.md",
+    "size": 535
+   },
+   {
+    "name": "QCC_RELEASE_MANIFEST.json",
+    "size": 3602
+   },
+   {
+    "name": "dfthcsos__angle_k_0.kmb",
+    "size": 422345
+   },
+   {
+    "name": "dfthcsos__angle_k_1.kmb",
+    "size": 422317
+   },
+   {
+    "name": "dfthcsos__angle_k_10.kmb",
+    "size": 390112
+   },
+   {
+    "name": "dfthcsos__angle_k_11.kmb",
+    "size": 387411
+   },
+   {
+    "name": "dfthcsos__angle_k_12.kmb",
+    "size": 387890
+   },
+   {
+    "name": "dfthcsos__angle_k_13.kmb",
+    "size": 387032
+   },
+   {
+    "name": "dfthcsos__angle_k_14.kmb",
+    "size": 391415
+   },
+   {
+    "name": "dfthcsos__angle_k_2.kmb",
+    "size": 423379
+   },
+   {
+    "name": "dfthcsos__angle_k_3.kmb",
+    "size": 422311
+   },
+   {
+    "name": "dfthcsos__angle_k_4.kmb",
+    "size": 389637
+   },
+   {
+    "name": "dfthcsos__angle_k_5.kmb",
+    "size": 391227
+   },
+   {
+    "name": "dfthcsos__angle_k_6.kmb",
+    "size": 390141
+   },
+   {
+    "name": "dfthcsos__angle_k_7.kmb",
+    "size": 386959
+   },
+   {
+    "name": "dfthcsos__angle_k_8.kmb",
+    "size": 390085
+   },
+   {
+    "name": "dfthcsos__angle_k_9.kmb",
+    "size": 386641
+   },
+   {
+    "name": "dfthcsos__submission.npz",
+    "size": 2022588
+   },
+   {
+    "name": "dqi.kmb.xz",
+    "size": 10809732
+   },
+   {
+    "name": "invsqrt.kmb",
+    "size": 477668
+   }
+  ]
+ },
+ {
+  "kind": "d",
+  "ref": "mdkawsarahamed/qcc-verified-public-portfolio-costs",
+  "files": [
+   {
+    "name": "portfolio_decomposition.csv",
+    "size": 832
+   },
+   {
+    "name": "reference_costs.csv",
+    "size": 828
+   }
+  ]
+ }
+]

@@ -1,0 +1,22 @@
+ref                                                      title                                                    size  lastUpdated                 downloadCount  voteCount  usabilityRating  
+-------------------------------------------------------  -------------------------------------------------  ----------  --------------------------  -------------  ---------  ---------------  
+manwithacat/vqcc-hedge-wizardry                          VQCC Hedge Wizardry                                         0  2026-11-04 18:34:40.807000           6057          0  0.64705884       
+somejoint/qcc-ladder-parts                               QCC ladder parts                                     39773475  2026-11-04 17:03:47.083000           3056          0  0.5625           
+mdkawsarahamed/qcc-verified-public-portfolio-costs       Verifiable Quantum Compilation - Verified Costs          1439  2026-11-04 16:26:00.820000             16          0  0.4117647        
+iwanttorungemma9b/vqcc-optimized-submission              Quantum Circuit Compilation: Optimized Submission   110335860  2026-11-04 15:44:13.817000             73          0  0.5              
+manwithacat/vqcc-apache-public-circuits                  VQCC public circuits (Apache-2.0)                           0  2026-11-04 15:42:01.267000          45722         21  0.88235295       
+dmitriigluzdov/vqcc-femoco-public-factorization          VQCC FeMoCo Angle Words                             302896287  2026-11-04 12:05:16.163000          37208         21  1                
+ahoirg/qcc-reproducible-circuit-assets                   QCC Reproducible Circuit Assets                      27164756  2026-11-03 22:02:58.173000           1040          0  0.5              
+manwithacat/kickmix-engine-wheels                        kickmix-engine wheels (offline install)               1197566  2026-11-03 13:29:08.500000            144          1  1                
+marculera/dfthc-compact-pipeline                         DF-THC compact groups pipeline                       49801726  2026-11-03 11:44:36.860000          10376          0  0.5625           
+victorzhong0110/vqcc-verifier-invariance-atlas           VQCC Verifier Invariance Atlas                          24896  2026-11-03 04:44:41.020000            157          1  0.7647059        
+victorzhong0110/vqcc-givens-tree-angle-budget-atlas      VQCC Givens Tree Angle Budget Atlas                     28935  2026-11-03 04:44:01.447000            150          1  0.7058824        
+victorzhong0110/vqcc-femoco-public-factorization-audit   VQCC FeMoCo Public Factorization Audit                  16726  2026-11-03 04:43:11.370000            112          0  0.7058824        
+victorzhong0110/vqcc-dfthc-cost-precision-atlas          VQCC DF-THC Cost-Precision Atlas                        20502  2026-11-03 04:42:28.217000            172          0  0.7058824        
+victorzhong0110/vqcc-dfthc-baseline-metrics              VQCC DF-THC Baseline Metrics                            17426  2026-11-03 04:41:44.877000            252          0  0.64705884       
+manwithacat/vqcc-chemistry-negative-results              VQCC Negative Results                                 7962426  2026-11-02 21:08:57.777000           1607          1  0.9411765        
+somejoint/qcc-v27-parts                                  QCC v27 parts                                        42968306  2026-11-02 20:52:52.427000             87          0  0.5625           
+sigmaborov/qcc-frozen-alex-v83-public-baseline           QCC frozen Alex V83 public baseline                  27801849  2026-11-02 15:20:20.347000            127          1  0.5625           
+harshitsama/quantum-circuit-public-notebooks-2026-11-02  Quantum Circuit Public Notebooks 2026-11-02             11697  2026-11-02 12:21:19.597000             58          0  0.5294118        
+harshitsama/kaggle-public-leaderboards-2026-11-02        Kaggle Public Leaderboards Snapshot 2026-11-02         156745  2026-11-02 12:11:38.323000             58          1  0.5294118        
+somejoint/qcc-dqi-892-q26                                QCC DQI 892 q26                                      44575945  2026-11-01 16:52:19.417000           4695          0  0.5              

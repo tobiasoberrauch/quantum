@@ -1,0 +1,1841 @@
+============================================================================
+1. OFFIZIELLER DQI-VERIFIER: FEHLER- & KOSTENFORMEL AUSLESEN
+============================================================================
+Datei geladen: data/verifiers/dqi/verify_submission_dqi.py (20959 Zeichen)
+
+--- Zeilen 12..21 ---
+   12: and the global phase must be multiplied by `(-1) ** sum_j popcount(e_j & M_j)`. `Z_POW` gates
+   13: are not allowed. With `k = value_errors + phase_errors` failed shots out of `N = num_shots`,
+   14: the one-sided Clopper-Pearson upper bound `eps_plus` at confidence `1 - 2^log2_delta`
+   15: (default `log2_delta = -128`, i.e. `delta = 2^{-128}`) must satisfy `eps_plus < 1/16`,
+   16: and the score is `R(eps_plus) * Q^2 * T` where `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))`.
+   17: 
+   18: Test distribution: each shot draws error weight `k in {0, ..., l}` with probability `w_k^2`,
+   19: where `w` is the principal eigenvector of the `(l + 1) x (l + 1)` DQI matrix `A` with
+   20: `A[k, k] = k (q - 2r) / sqrt(r (q - r))` and `A[k - 1, k] = sqrt(k (m - k + 1))` for `q = 2^b`
+   21: and `r = |F_i|` (`default_num_accepted_values(b)`), then picks `k` uniform positions in `0..m-1`
+
+--- Zeilen 13..22 ---
+   13: are not allowed. With `k = value_errors + phase_errors` failed shots out of `N = num_shots`,
+   14: the one-sided Clopper-Pearson upper bound `eps_plus` at confidence `1 - 2^log2_delta`
+   15: (default `log2_delta = -128`, i.e. `delta = 2^{-128}`) must satisfy `eps_plus < 1/16`,
+   16: and the score is `R(eps_plus) * Q^2 * T` where `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))`.
+   17: 
+   18: Test distribution: each shot draws error weight `k in {0, ..., l}` with probability `w_k^2`,
+   19: where `w` is the principal eigenvector of the `(l + 1) x (l + 1)` DQI matrix `A` with
+   20: `A[k, k] = k (q - 2r) / sqrt(r (q - r))` and `A[k - 1, k] = sqrt(k (m - k + 1))` for `q = 2^b`
+   21: and `r = |F_i|` (`default_num_accepted_values(b)`), then picks `k` uniform positions in `0..m-1`
+   22: with uniform nonzero values in `GF(2^b)` and uniform independent `M_j in GF(2^b)`.
+
+--- Zeilen 14..23 ---
+   14: the one-sided Clopper-Pearson upper bound `eps_plus` at confidence `1 - 2^log2_delta`
+   15: (default `log2_delta = -128`, i.e. `delta = 2^{-128}`) must satisfy `eps_plus < 1/16`,
+   16: and the score is `R(eps_plus) * Q^2 * T` where `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))`.
+   17: 
+   18: Test distribution: each shot draws error weight `k in {0, ..., l}` with probability `w_k^2`,
+   19: where `w` is the principal eigenvector of the `(l + 1) x (l + 1)` DQI matrix `A` with
+   20: `A[k, k] = k (q - 2r) / sqrt(r (q - r))` and `A[k - 1, k] = sqrt(k (m - k + 1))` for `q = 2^b`
+   21: and `r = |F_i|` (`default_num_accepted_values(b)`), then picks `k` uniform positions in `0..m-1`
+   22: with uniform nonzero values in `GF(2^b)` and uniform independent `M_j in GF(2^b)`.
+   23: 
+
+--- Zeilen 15..24 ---
+   15: (default `log2_delta = -128`, i.e. `delta = 2^{-128}`) must satisfy `eps_plus < 1/16`,
+   16: and the score is `R(eps_plus) * Q^2 * T` where `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))`.
+   17: 
+   18: Test distribution: each shot draws error weight `k in {0, ..., l}` with probability `w_k^2`,
+   19: where `w` is the principal eigenvector of the `(l + 1) x (l + 1)` DQI matrix `A` with
+   20: `A[k, k] = k (q - 2r) / sqrt(r (q - r))` and `A[k - 1, k] = sqrt(k (m - k + 1))` for `q = 2^b`
+   21: and `r = |F_i|` (`default_num_accepted_values(b)`), then picks `k` uniform positions in `0..m-1`
+   22: with uniform nonzero values in `GF(2^b)` and uniform independent `M_j in GF(2^b)`.
+   23: 
+   24: Shots are drawn `batch_size` at a time from `numpy.random.default_rng(seed)`, where `seed` is
+
+--- Zeilen 23..32 ---
+   23: 
+   24: Shots are drawn `batch_size` at a time from `numpy.random.default_rng(seed)`, where `seed` is
+   25: derived from the SHA-256 of the circuit's `.kmb` binary representation (merged with `--salt` when
+   26: given) unless `--seed` is passed. The same `seed` also seeds `HMR` and `R` outcomes in
+   27: `km.Simulator`, so verification and per-shot operation counts (`T` = mean Toffoli-like gates per
+   28: shot) are deterministic. `num_shots` must be a multiple of `batch_size`.
+   29: 
+   30: Usage:
+   31:     python dqi/verify_submission_dqi.py submission.kmb [--m 4095] [--n 70] [--degree 12] [--r 2016] [--log2-delta -128] [--salt STR]
+   32: """
+
+--- Zeilen 25..34 ---
+   25: derived from the SHA-256 of the circuit's `.kmb` binary representation (merged with `--salt` when
+   26: given) unless `--seed` is passed. The same `seed` also seeds `HMR` and `R` outcomes in
+   27: `km.Simulator`, so verification and per-shot operation counts (`T` = mean Toffoli-like gates per
+   28: shot) are deterministic. `num_shots` must be a multiple of `batch_size`.
+   29: 
+   30: Usage:
+   31:     python dqi/verify_submission_dqi.py submission.kmb [--m 4095] [--n 70] [--degree 12] [--r 2016] [--log2-delta -128] [--salt STR]
+   32: """
+   33: 
+   34: from __future__ import annotations
+
+--- Zeilen 27..36 ---
+   27: `km.Simulator`, so verification and per-shot operation counts (`T` = mean Toffoli-like gates per
+   28: shot) are deterministic. `num_shots` must be a multiple of `batch_size`.
+   29: 
+   30: Usage:
+   31:     python dqi/verify_submission_dqi.py submission.kmb [--m 4095] [--n 70] [--degree 12] [--r 2016] [--log2-delta -128] [--salt STR]
+   32: """
+   33: 
+   34: from __future__ import annotations
+   35: 
+   36: import argparse
+
+--- Zeilen 55..64 ---
+   55: DEFAULT_R = 2016  # Bent-function support size (2^12 - 2^6) // 2 for degree=12.
+   56: DEFAULT_NUM_SHOTS = 400 * 256  # 102,400 shots.
+   57: DEFAULT_BATCH_SIZE = 256
+   58: DEFAULT_LOG2_DELTA = -128.0  # log2(delta) for Clopper-Pearson confidence 1 - 2^log2_delta.
+   59: DEFAULT_MAX_WORKERS = 4
+   60: 
+   61: 
+   62: # Problem specification.
+   63: 
+   64: 
+
+--- Zeilen 57..66 ---
+   57: DEFAULT_BATCH_SIZE = 256
+   58: DEFAULT_LOG2_DELTA = -128.0  # log2(delta) for Clopper-Pearson confidence 1 - 2^log2_delta.
+   59: DEFAULT_MAX_WORKERS = 4
+   60: 
+   61: 
+   62: # Problem specification.
+   63: 
+   64: 
+   65: @dataclasses.dataclass(frozen=True)
+   66: class ProblemSpecDQI:
+
+--- Zeilen 71..80 ---
+   71:     r: int
+   72:     num_shots: int
+   73: 
+   74:     @property
+   75:     def max_errors(self) -> int:
+   76:         """Maximum number of correctable errors `l = n // 2`."""
+   77:         return self.n // 2
+   78: 
+   79:     @property
+   80:     def q(self) -> int:
+
+--- Zeilen 74..83 ---
+   74:     @property
+   75:     def max_errors(self) -> int:
+   76:         """Maximum number of correctable errors `l = n // 2`."""
+   77:         return self.n // 2
+   78: 
+   79:     @property
+   80:     def q(self) -> int:
+   81:         """Field size `q = 2^degree`."""
+   82:         return 1 << self.degree
+   83: 
+
+--- Zeilen 79..88 ---
+   79:     @property
+   80:     def q(self) -> int:
+   81:         """Field size `q = 2^degree`."""
+   82:         return 1 << self.degree
+   83: 
+   84:     @classmethod
+   85:     def benchmark_instance(
+   86:         cls,
+   87:         *,
+   88:         m: int = DEFAULT_M,
+
+--- Zeilen 84..93 ---
+   84:     @classmethod
+   85:     def benchmark_instance(
+   86:         cls,
+   87:         *,
+   88:         m: int = DEFAULT_M,
+   89:         n: int = DEFAULT_N,
+   90:         degree: int = DEFAULT_DEGREE,
+   91:         r: int | None = None,
+   92:         num_shots: int = DEFAULT_NUM_SHOTS,
+   93:     ) -> ProblemSpecDQI:
+
+--- Zeilen 91..100 ---
+   91:         r: int | None = None,
+   92:         num_shots: int = DEFAULT_NUM_SHOTS,
+   93:     ) -> ProblemSpecDQI:
+   94:         """Returns the default competition benchmark instance."""
+   95:         return cls(
+   96:             m=m,
+   97:             n=n,
+   98:             degree=degree,
+   99:             r=default_num_accepted_values(degree) if r is None else r,
+  100:             num_shots=num_shots,
+
+--- Zeilen 99..108 ---
+   99:             r=default_num_accepted_values(degree) if r is None else r,
+  100:             num_shots=num_shots,
+  101:         )
+  102: 
+  103: 
+  104: # Field and distribution helpers.
+  105: 
+  106: 
+  107: class FieldTables:
+  108:     """Precomputed log and antilog tables over `GF(2^b)`."""
+
+--- Zeilen 109..118 ---
+  109: 
+  110:     def __init__(self, field: km.GF2Field):
+  111:         self.degree = field.degree
+  112:         self.order = (1 << self.degree) - 1
+  113:         primitive = field.primitive_element
+  114:         self.antilog = np.array([field.pow(primitive, k) for k in range(self.order)], dtype=np.int64)
+  115:         if len(set(self.antilog.tolist())) != self.order:
+  116:             raise ValueError(
+  117:                 f'Element {primitive} is not primitive in GF(2^{self.degree}) '
+  118:                 f'(generated {len(set(self.antilog.tolist()))} of {self.order} nonzero elements).'
+
+--- Zeilen 123..132 ---
+  123: 
+  124: def default_num_accepted_values(degree: int) -> int:
+  125:     """Default `r = |F_i| = (2^b - isqrt(2^b)) // 2` (bent-function support size, 2016 for b=12)."""
+  126:     q = 1 << degree
+  127:     return max(1, (q - math.isqrt(q)) // 2)
+  128: 
+  129: 
+  130: def repetition_overhead(eps: float) -> float:
+  131:     """Repetition factor `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))` for `0 <= eps < 1/16`."""
+  132:     if not 0.0 <= eps < 1 / 16:
+
+--- Zeilen 129..138 ---
+  129: 
+  130: def repetition_overhead(eps: float) -> float:
+  131:     """Repetition factor `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))` for `0 <= eps < 1/16`."""
+  132:     if not 0.0 <= eps < 1 / 16:
+  133:         raise ValueError(f'Effective error rate eps must be in [0, 1/16), got {eps}.')
+  134:     if eps == 0.0:
+  135:         return 1.0
+  136:     return math.log(2.0) / -math.log(0.5 + 2.0 * math.sqrt(eps))
+  137: 
+  138: 
+
+--- Zeilen 130..139 ---
+  130: def repetition_overhead(eps: float) -> float:
+  131:     """Repetition factor `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))` for `0 <= eps < 1/16`."""
+  132:     if not 0.0 <= eps < 1 / 16:
+  133:         raise ValueError(f'Effective error rate eps must be in [0, 1/16), got {eps}.')
+  134:     if eps == 0.0:
+  135:         return 1.0
+  136:     return math.log(2.0) / -math.log(0.5 + 2.0 * math.sqrt(eps))
+  137: 
+  138: 
+  139: def clopper_pearson_upper_bound(
+
+--- Zeilen 131..140 ---
+  131:     """Repetition factor `R(eps) = ln(2) / -ln(1/2 + 2 * sqrt(eps))` for `0 <= eps < 1/16`."""
+  132:     if not 0.0 <= eps < 1 / 16:
+  133:         raise ValueError(f'Effective error rate eps must be in [0, 1/16), got {eps}.')
+  134:     if eps == 0.0:
+  135:         return 1.0
+  136:     return math.log(2.0) / -math.log(0.5 + 2.0 * math.sqrt(eps))
+  137: 
+  138: 
+  139: def clopper_pearson_upper_bound(
+  140:     k: int, n: int, log2_delta: float = DEFAULT_LOG2_DELTA
+
+--- Zeilen 132..141 ---
+  132:     if not 0.0 <= eps < 1 / 16:
+  133:         raise ValueError(f'Effective error rate eps must be in [0, 1/16), got {eps}.')
+  134:     if eps == 0.0:
+  135:         return 1.0
+  136:     return math.log(2.0) / -math.log(0.5 + 2.0 * math.sqrt(eps))
+  137: 
+  138: 
+  139: def clopper_pearson_upper_bound(
+  140:     k: int, n: int, log2_delta: float = DEFAULT_LOG2_DELTA
+  141: ) -> float:
+
+--- Zeilen 133..142 ---
+  133:         raise ValueError(f'Effective error rate eps must be in [0, 1/16), got {eps}.')
+  134:     if eps == 0.0:
+  135:         return 1.0
+  136:     return math.log(2.0) / -math.log(0.5 + 2.0 * math.sqrt(eps))
+  137: 
+  138: 
+  139: def clopper_pearson_upper_bound(
+  140:     k: int, n: int, log2_delta: float = DEFAULT_LOG2_DELTA
+  141: ) -> float:
+  142:     """One-sided Clopper-Pearson upper bound `eps_plus` at confidence `1 - 2^log2_delta`."""
+
+--- Zeilen 135..144 ---
+  135:         return 1.0
+  136:     return math.log(2.0) / -math.log(0.5 + 2.0 * math.sqrt(eps))
+  137: 
+  138: 
+  139: def clopper_pearson_upper_bound(
+  140:     k: int, n: int, log2_delta: float = DEFAULT_LOG2_DELTA
+  141: ) -> float:
+  142:     """One-sided Clopper-Pearson upper bound `eps_plus` at confidence `1 - 2^log2_delta`."""
+  143:     if n <= 0 or not (0 <= k <= n) or not (math.isfinite(log2_delta) and log2_delta <= 0.0):
+  144:         raise ValueError(
+
+--- Zeilen 138..147 ---
+  138: 
+  139: def clopper_pearson_upper_bound(
+  140:     k: int, n: int, log2_delta: float = DEFAULT_LOG2_DELTA
+  141: ) -> float:
+  142:     """One-sided Clopper-Pearson upper bound `eps_plus` at confidence `1 - 2^log2_delta`."""
+  143:     if n <= 0 or not (0 <= k <= n) or not (math.isfinite(log2_delta) and log2_delta <= 0.0):
+  144:         raise ValueError(
+  145:             f'Expected 0 <= k <= n, n > 0, and finite log2_delta <= 0, '
+  146:             f'got k={k}, n={n}, log2_delta={log2_delta}.'
+  147:         )
+
+--- Zeilen 141..150 ---
+  141: ) -> float:
+  142:     """One-sided Clopper-Pearson upper bound `eps_plus` at confidence `1 - 2^log2_delta`."""
+  143:     if n <= 0 or not (0 <= k <= n) or not (math.isfinite(log2_delta) and log2_delta <= 0.0):
+  144:         raise ValueError(
+  145:             f'Expected 0 <= k <= n, n > 0, and finite log2_delta <= 0, '
+  146:             f'got k={k}, n={n}, log2_delta={log2_delta}.'
+  147:         )
+  148:     if k == n or log2_delta == 0.0:
+  149:         return 1.0 if k == n else k / n
+  150:     log_delta = log2_delta * math.log(2.0)
+
+--- Zeilen 155..164 ---
+  155: 
+  156:     def log_tail(p: float) -> float:
+  157:         terms = log_comb + j * math.log(p) + (n - j) * math.log1p(-p)
+  158:         m = float(terms.max())
+  159:         return m + math.log(float(np.exp(terms - m).sum()))
+  160: 
+  161:     lo = k / n if log_tail(k / n) >= log_delta else 0.0
+  162:     hi = 1.0
+  163:     for _ in range(64):
+  164:         mid = 0.5 * (lo + hi)
+
+--- Zeilen 173..182 ---
+  173: 
+  174: def optimal_dqi_weights(m: int, max_errors: int, degree: int, r: int) -> np.ndarray:
+  175:     """Principal unit eigenvector `w_0..w_l` of the DQI tridiagonal matrix (arXiv:2408.08292, Lemma 9.2)."""
+  176:     q = 1 << degree
+  177:     if not (0 <= max_errors <= m and 0 < r < q):
+  178:         raise ValueError(f'Invalid (max_errors={max_errors}, r={r}) for m={m}, q={q}.')
+  179:     k = np.arange(max_errors + 1, dtype=np.float64)
+  180:     off = np.sqrt(k[1:] * (m - k[1:] + 1))
+  181:     d = (q - 2 * r) / math.sqrt(r * (q - r))
+  182:     _, vecs = np.linalg.eigh(np.diag(k * d) + np.diag(off, 1) + np.diag(off, -1))
+
+--- Zeilen 186..195 ---
+  186: 
+  187: def sample_error(m: int, max_value: int, weight_probs: Sequence[float],
+  188:                  rng: np.random.Generator) -> dict[int, int]:
+  189:     """Samples an error word `position -> value` from the DQI error distribution."""
+  190:     k = int(rng.choice(len(weight_probs), p=weight_probs))
+  191:     positions = rng.choice(m, size=k, replace=False).tolist()
+  192:     values = rng.integers(1, max_value, size=k, endpoint=True).tolist()
+  193:     return dict(zip(positions, values))
+  194: 
+  195: 
+
+--- Zeilen 195..204 ---
+  195: 
+  196: def to_bits(values: np.ndarray, degree: int) -> np.ndarray:
+  197:     """Unpacks `(batch, num_regs)` field elements into `(num_regs * degree, batch)` booleans."""
+  198:     bits = (values[:, :, None] >> np.arange(degree)) & 1 == 1
+  199:     return bits.transpose(1, 2, 0).reshape(-1, len(values))
+  200: 
+  201: 
+  202: # Register validation.
+  203: 
+  204: 
+
+--- Zeilen 204..213 ---
+  204: 
+  205: def validate_registers(
+  206:     circuit: km.Circuit, spec: ProblemSpecDQI
+  207: ) -> tuple[list[Any], list[Any], km.array]:
+  208:     """Validates register names, types, widths, and disjointness."""
+  209:     registers = circuit.register_data
+  210:     s_names = [f'S{i}' for i in range(spec.n)]
+  211:     e_names = [f'E{j}' for j in range(spec.m)]
+  212:     if len(registers) != circuit.num_registers or set(registers) != set(s_names) | set(e_names):
+  213:         raise ValueError('Registers must be exactly S0..S{n-1} and E0..E{m-1}.')
+
+--- Zeilen 214..223 ---
+  214: 
+  215:     def collect(names: list[str], kind: type, label: str) -> list:
+  216:         out = []
+  217:         for name in names:
+  218:             reg = list(registers[name])
+  219:             if len(reg) != spec.degree or not all(isinstance(x, kind) for x in reg):
+  220:                 raise ValueError(f'Register {name!r} must be {spec.degree} {label}, got {len(reg)}.')
+  221:             out.extend(reg)
+  222:         if len(set(out)) != len(out):
+  223:             raise ValueError(f'{label} registers must not overlap.')
+
+--- Zeilen 235..244 ---
+  235: 
+  236: def sample_shots(
+  237:     spec: ProblemSpecDQI,
+  238:     tables: FieldTables,
+  239:     rng: np.random.Generator,
+  240:     num_shots: int,
+  241:     weight_probs: Sequence[float] | None = None,
+  242: ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+  243:     """Returns `(syndromes, mbuc, phases)` for `num_shots` DQI test cases drawn from `rng`."""
+  244:     if weight_probs is None:
+
+--- Zeilen 239..248 ---
+  239:     rng: np.random.Generator,
+  240:     num_shots: int,
+  241:     weight_probs: Sequence[float] | None = None,
+  242: ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+  243:     """Returns `(syndromes, mbuc, phases)` for `num_shots` DQI test cases drawn from `rng`."""
+  244:     if weight_probs is None:
+  245:         weight_probs = optimal_dqi_weights(spec.m, spec.max_errors, spec.degree, spec.r) ** 2
+  246:     max_value = (1 << tables.degree) - 1
+  247:     weights = rng.choice(len(weight_probs), size=num_shots, p=weight_probs)
+  248:     mbuc = rng.integers(0, max_value, size=(num_shots, spec.m), endpoint=True, dtype=np.int64)
+
+--- Zeilen 242..251 ---
+  242: ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+  243:     """Returns `(syndromes, mbuc, phases)` for `num_shots` DQI test cases drawn from `rng`."""
+  244:     if weight_probs is None:
+  245:         weight_probs = optimal_dqi_weights(spec.m, spec.max_errors, spec.degree, spec.r) ** 2
+  246:     max_value = (1 << tables.degree) - 1
+  247:     weights = rng.choice(len(weight_probs), size=num_shots, p=weight_probs)
+  248:     mbuc = rng.integers(0, max_value, size=(num_shots, spec.m), endpoint=True, dtype=np.int64)
+  249:     syndromes = np.zeros((num_shots, spec.n), dtype=np.int64)
+  250:     phases = np.zeros(num_shots, dtype=bool)
+  251:     rows = np.arange(1, spec.n + 1, dtype=np.int64)[:, None]
+
+--- Zeilen 246..255 ---
+  246:     max_value = (1 << tables.degree) - 1
+  247:     weights = rng.choice(len(weight_probs), size=num_shots, p=weight_probs)
+  248:     mbuc = rng.integers(0, max_value, size=(num_shots, spec.m), endpoint=True, dtype=np.int64)
+  249:     syndromes = np.zeros((num_shots, spec.n), dtype=np.int64)
+  250:     phases = np.zeros(num_shots, dtype=bool)
+  251:     rows = np.arange(1, spec.n + 1, dtype=np.int64)[:, None]
+  252: 
+  253:     for shot in np.flatnonzero(weights):
+  254:         k = int(weights[shot])
+  255:         pos = rng.choice(spec.m, size=k, replace=False)
+
+--- Zeilen 247..256 ---
+  247:     weights = rng.choice(len(weight_probs), size=num_shots, p=weight_probs)
+  248:     mbuc = rng.integers(0, max_value, size=(num_shots, spec.m), endpoint=True, dtype=np.int64)
+  249:     syndromes = np.zeros((num_shots, spec.n), dtype=np.int64)
+  250:     phases = np.zeros(num_shots, dtype=bool)
+  251:     rows = np.arange(1, spec.n + 1, dtype=np.int64)[:, None]
+  252: 
+  253:     for shot in np.flatnonzero(weights):
+  254:         k = int(weights[shot])
+  255:         pos = rng.choice(spec.m, size=k, replace=False)
+  256:         vals = rng.integers(1, max_value, size=k, endpoint=True, dtype=np.int64)
+
+--- Zeilen 248..257 ---
+  248:     mbuc = rng.integers(0, max_value, size=(num_shots, spec.m), endpoint=True, dtype=np.int64)
+  249:     syndromes = np.zeros((num_shots, spec.n), dtype=np.int64)
+  250:     phases = np.zeros(num_shots, dtype=bool)
+  251:     rows = np.arange(1, spec.n + 1, dtype=np.int64)[:, None]
+  252: 
+  253:     for shot in np.flatnonzero(weights):
+  254:         k = int(weights[shot])
+  255:         pos = rng.choice(spec.m, size=k, replace=False)
+  256:         vals = rng.integers(1, max_value, size=k, endpoint=True, dtype=np.int64)
+  257:         exps = (tables.log[vals][None, :] + rows * pos[None, :]) % tables.order
+
+--- Zeilen 249..258 ---
+  249:     syndromes = np.zeros((num_shots, spec.n), dtype=np.int64)
+  250:     phases = np.zeros(num_shots, dtype=bool)
+  251:     rows = np.arange(1, spec.n + 1, dtype=np.int64)[:, None]
+  252: 
+  253:     for shot in np.flatnonzero(weights):
+  254:         k = int(weights[shot])
+  255:         pos = rng.choice(spec.m, size=k, replace=False)
+  256:         vals = rng.integers(1, max_value, size=k, endpoint=True, dtype=np.int64)
+  257:         exps = (tables.log[vals][None, :] + rows * pos[None, :]) % tables.order
+  258:         syndromes[shot] = np.bitwise_xor.reduce(tables.antilog[exps], axis=1)
+
+--- Zeilen 265..274 ---
+  265: 
+  266: def _validate_inputs(
+  267:     spec: ProblemSpecDQI,
+  268:     batch_size: int,
+  269:     log2_delta: float,
+  270:     shots: tuple[np.ndarray, np.ndarray, np.ndarray] | None,
+  271: ) -> int:
+  272:     """Validates `spec`, `batch_size`, `log2_delta`, and `shots`, returning the total `num_shots`."""
+  273:     if not (1 <= spec.degree and 2 <= spec.n < spec.m <= (1 << spec.degree) - 1):
+  274:         raise ValueError(
+
+--- Zeilen 269..278 ---
+  269:     log2_delta: float,
+  270:     shots: tuple[np.ndarray, np.ndarray, np.ndarray] | None,
+  271: ) -> int:
+  272:     """Validates `spec`, `batch_size`, `log2_delta`, and `shots`, returning the total `num_shots`."""
+  273:     if not (1 <= spec.degree and 2 <= spec.n < spec.m <= (1 << spec.degree) - 1):
+  274:         raise ValueError(
+  275:             f'Expected 1 <= degree and 2 <= n < m <= 2^degree - 1, '
+  276:             f'got m={spec.m}, n={spec.n}, degree={spec.degree}.'
+  277:         )
+  278:     if batch_size <= 0:
+
+--- Zeilen 271..280 ---
+  271: ) -> int:
+  272:     """Validates `spec`, `batch_size`, `log2_delta`, and `shots`, returning the total `num_shots`."""
+  273:     if not (1 <= spec.degree and 2 <= spec.n < spec.m <= (1 << spec.degree) - 1):
+  274:         raise ValueError(
+  275:             f'Expected 1 <= degree and 2 <= n < m <= 2^degree - 1, '
+  276:             f'got m={spec.m}, n={spec.n}, degree={spec.degree}.'
+  277:         )
+  278:     if batch_size <= 0:
+  279:         raise ValueError(f'batch_size must be positive, got {batch_size}.')
+  280:     if not (math.isfinite(log2_delta) and log2_delta <= 0.0):
+
+--- Zeilen 281..290 ---
+  281:         raise ValueError(f'Expected finite log2_delta <= 0, got {log2_delta}.')
+  282:     num_shots = spec.num_shots if shots is None else len(shots[0])
+  283:     if num_shots <= 0 or num_shots % batch_size:
+  284:         raise ValueError(f'num_shots must be a positive multiple of batch_size={batch_size}, got {num_shots}.')
+  285:     if shots is not None and not (
+  286:             shots[0].shape == (num_shots, spec.n)
+  287:             and shots[1].shape == (num_shots, spec.m)
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+
+--- Zeilen 282..291 ---
+  282:     num_shots = spec.num_shots if shots is None else len(shots[0])
+  283:     if num_shots <= 0 or num_shots % batch_size:
+  284:         raise ValueError(f'num_shots must be a positive multiple of batch_size={batch_size}, got {num_shots}.')
+  285:     if shots is not None and not (
+  286:             shots[0].shape == (num_shots, spec.n)
+  287:             and shots[1].shape == (num_shots, spec.m)
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+
+--- Zeilen 283..292 ---
+  283:     if num_shots <= 0 or num_shots % batch_size:
+  284:         raise ValueError(f'num_shots must be a positive multiple of batch_size={batch_size}, got {num_shots}.')
+  285:     if shots is not None and not (
+  286:             shots[0].shape == (num_shots, spec.n)
+  287:             and shots[1].shape == (num_shots, spec.m)
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+  292: 
+
+--- Zeilen 284..293 ---
+  284:         raise ValueError(f'num_shots must be a positive multiple of batch_size={batch_size}, got {num_shots}.')
+  285:     if shots is not None and not (
+  286:             shots[0].shape == (num_shots, spec.n)
+  287:             and shots[1].shape == (num_shots, spec.m)
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+  292: 
+  293: def _circuit_sha256(circuit: km.Circuit) -> str:
+
+--- Zeilen 285..294 ---
+  285:     if shots is not None and not (
+  286:             shots[0].shape == (num_shots, spec.n)
+  287:             and shots[1].shape == (num_shots, spec.m)
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+  292: 
+  293: def _circuit_sha256(circuit: km.Circuit) -> str:
+  294:     """Returns the SHA-256 hex digest of the canonical `.kmb` serialization of `circuit`."""
+
+--- Zeilen 286..295 ---
+  286:             shots[0].shape == (num_shots, spec.n)
+  287:             and shots[1].shape == (num_shots, spec.m)
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+  292: 
+  293: def _circuit_sha256(circuit: km.Circuit) -> str:
+  294:     """Returns the SHA-256 hex digest of the canonical `.kmb` serialization of `circuit`."""
+  295:     buf = io.BytesIO()
+
+--- Zeilen 287..296 ---
+  287:             and shots[1].shape == (num_shots, spec.m)
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+  292: 
+  293: def _circuit_sha256(circuit: km.Circuit) -> str:
+  294:     """Returns the SHA-256 hex digest of the canonical `.kmb` serialization of `circuit`."""
+  295:     buf = io.BytesIO()
+  296:     circuit.to_file(buf, format='kmb')
+
+--- Zeilen 288..297 ---
+  288:             and shots[2].shape == (num_shots,)):
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+  292: 
+  293: def _circuit_sha256(circuit: km.Circuit) -> str:
+  294:     """Returns the SHA-256 hex digest of the canonical `.kmb` serialization of `circuit`."""
+  295:     buf = io.BytesIO()
+  296:     circuit.to_file(buf, format='kmb')
+  297:     return hashlib.sha256(buf.getvalue()).hexdigest()
+
+--- Zeilen 289..298 ---
+  289:         raise ValueError('shots must be (syndromes[N, n], mbuc[N, m], phases[N]).')
+  290:     return num_shots
+  291: 
+  292: 
+  293: def _circuit_sha256(circuit: km.Circuit) -> str:
+  294:     """Returns the SHA-256 hex digest of the canonical `.kmb` serialization of `circuit`."""
+  295:     buf = io.BytesIO()
+  296:     circuit.to_file(buf, format='kmb')
+  297:     return hashlib.sha256(buf.getvalue()).hexdigest()
+  298: 
+
+--- Zeilen 292..301 ---
+  292: 
+  293: def _circuit_sha256(circuit: km.Circuit) -> str:
+  294:     """Returns the SHA-256 hex digest of the canonical `.kmb` serialization of `circuit`."""
+  295:     buf = io.BytesIO()
+  296:     circuit.to_file(buf, format='kmb')
+  297:     return hashlib.sha256(buf.getvalue()).hexdigest()
+  298: 
+  299: 
+  300: def _initial_seed(circuit_hash: str, salt: str) -> int:
+  301:     """Computes the initial RNG seed from `circuit_hash` and optional `salt`."""
+
+--- Zeilen 299..308 ---
+  299: 
+  300: def _initial_seed(circuit_hash: str, salt: str) -> int:
+  301:     """Computes the initial RNG seed from `circuit_hash` and optional `salt`."""
+  302:     if not salt:
+  303:         return int(circuit_hash, 16)
+  304:     return int(hashlib.sha256(f'{circuit_hash}{salt}'.encode('utf-8')).hexdigest(), 16)
+  305: 
+  306: 
+  307: _WORKER_FN = None
+  308: 
+
+--- Zeilen 300..309 ---
+  300: def _initial_seed(circuit_hash: str, salt: str) -> int:
+  301:     """Computes the initial RNG seed from `circuit_hash` and optional `salt`."""
+  302:     if not salt:
+  303:         return int(circuit_hash, 16)
+  304:     return int(hashlib.sha256(f'{circuit_hash}{salt}'.encode('utf-8')).hexdigest(), 16)
+  305: 
+  306: 
+  307: _WORKER_FN = None
+  308: 
+  309: 
+
+--- Zeilen 309..318 ---
+  309: 
+  310: def _call_worker(task):
+  311:     return _WORKER_FN(task)
+  312: 
+  313: 
+  314: def _run_parallel(fn, tasks: list, max_workers: int | None) -> list:
+  315:     global _WORKER_FN
+  316:     if max_workers is not None and max_workers <= 0:
+  317:         raise ValueError(f'max_workers must be positive, got {max_workers}.')
+  318:     cpus = getattr(os, 'process_cpu_count', os.cpu_count)() or 1
+
+--- Zeilen 313..322 ---
+  313: 
+  314: def _run_parallel(fn, tasks: list, max_workers: int | None) -> list:
+  315:     global _WORKER_FN
+  316:     if max_workers is not None and max_workers <= 0:
+  317:         raise ValueError(f'max_workers must be positive, got {max_workers}.')
+  318:     cpus = getattr(os, 'process_cpu_count', os.cpu_count)() or 1
+  319:     workers = min(len(tasks), min(cpus, DEFAULT_MAX_WORKERS) if max_workers is None else max_workers)
+  320:     if workers <= 1 or 'fork' not in mp.get_all_start_methods():
+  321:         return [fn(t) for t in tasks]
+  322:     _WORKER_FN = fn
+
+--- Zeilen 333..342 ---
+  333: 
+  334: def verify(
+  335:     circuit: km.Circuit,
+  336:     spec: ProblemSpecDQI,
+  337:     *,
+  338:     seed: int | None = None,
+  339:     salt: str = '',
+  340:     batch_size: int = DEFAULT_BATCH_SIZE,
+  341:     log2_delta: float = DEFAULT_LOG2_DELTA,
+  342:     max_workers: int | None = None,
+
+--- Zeilen 337..346 ---
+  337:     *,
+  338:     seed: int | None = None,
+  339:     salt: str = '',
+  340:     batch_size: int = DEFAULT_BATCH_SIZE,
+  341:     log2_delta: float = DEFAULT_LOG2_DELTA,
+  342:     max_workers: int | None = None,
+  343:     shots: tuple[np.ndarray, np.ndarray, np.ndarray] | None = None,
+  344: ) -> dict[str, Any]:
+  345:     """Verifies `circuit` on `spec.num_shots` DQI test cases (or pre-generated `shots`)."""
+  346:     num_shots = _validate_inputs(spec, batch_size, log2_delta, shots)
+
+--- Zeilen 342..351 ---
+  342:     max_workers: int | None = None,
+  343:     shots: tuple[np.ndarray, np.ndarray, np.ndarray] | None = None,
+  344: ) -> dict[str, Any]:
+  345:     """Verifies `circuit` on `spec.num_shots` DQI test cases (or pre-generated `shots`)."""
+  346:     num_shots = _validate_inputs(spec, batch_size, log2_delta, shots)
+  347: 
+  348:     circuit_stats = circuit.operation_statistics()
+  349:     if 'Z_POW' in circuit_stats:
+  350:         raise ValueError('Z_POW gates are not allowed in Benchmark II.')
+  351:     circuit_hash = _circuit_sha256(circuit)
+
+--- Zeilen 344..353 ---
+  344: ) -> dict[str, Any]:
+  345:     """Verifies `circuit` on `spec.num_shots` DQI test cases (or pre-generated `shots`)."""
+  346:     num_shots = _validate_inputs(spec, batch_size, log2_delta, shots)
+  347: 
+  348:     circuit_stats = circuit.operation_statistics()
+  349:     if 'Z_POW' in circuit_stats:
+  350:         raise ValueError('Z_POW gates are not allowed in Benchmark II.')
+  351:     circuit_hash = _circuit_sha256(circuit)
+  352: 
+  353:     syndrome_qubits, mbuc_bits, ancilla_qubits = validate_registers(circuit, spec)
+
+--- Zeilen 345..354 ---
+  345:     """Verifies `circuit` on `spec.num_shots` DQI test cases (or pre-generated `shots`)."""
+  346:     num_shots = _validate_inputs(spec, batch_size, log2_delta, shots)
+  347: 
+  348:     circuit_stats = circuit.operation_statistics()
+  349:     if 'Z_POW' in circuit_stats:
+  350:         raise ValueError('Z_POW gates are not allowed in Benchmark II.')
+  351:     circuit_hash = _circuit_sha256(circuit)
+  352: 
+  353:     syndrome_qubits, mbuc_bits, ancilla_qubits = validate_registers(circuit, spec)
+  354:     syndrome_array, mbuc_array = km.array(syndrome_qubits), km.array(mbuc_bits)
+
+--- Zeilen 357..366 ---
+  357:     tables = FieldTables(km.GF2Field(spec.degree))
+  358:     base_seed = _initial_seed(circuit_hash, salt) if seed is None else int(seed)
+  359: 
+  360:     def run_batch(task: tuple[int, int, int]) -> tuple[int, int, int, dict[str, int]]:
+  361:         start, rng_seed, sim_seed = task
+  362:         stop = start + batch_size
+  363:         if shots is None:
+  364:             rng = np.random.default_rng(rng_seed)
+  365:             syndromes, mbuc, phases = sample_shots(spec, tables, rng, batch_size, weight_probs)
+  366:         else:
+
+--- Zeilen 359..368 ---
+  359: 
+  360:     def run_batch(task: tuple[int, int, int]) -> tuple[int, int, int, dict[str, int]]:
+  361:         start, rng_seed, sim_seed = task
+  362:         stop = start + batch_size
+  363:         if shots is None:
+  364:             rng = np.random.default_rng(rng_seed)
+  365:             syndromes, mbuc, phases = sample_shots(spec, tables, rng, batch_size, weight_probs)
+  366:         else:
+  367:             syndromes, mbuc, phases = (a[start:stop] for a in shots)
+  368: 
+
+--- Zeilen 360..369 ---
+  360:     def run_batch(task: tuple[int, int, int]) -> tuple[int, int, int, dict[str, int]]:
+  361:         start, rng_seed, sim_seed = task
+  362:         stop = start + batch_size
+  363:         if shots is None:
+  364:             rng = np.random.default_rng(rng_seed)
+  365:             syndromes, mbuc, phases = sample_shots(spec, tables, rng, batch_size, weight_probs)
+  366:         else:
+  367:             syndromes, mbuc, phases = (a[start:stop] for a in shots)
+  368: 
+  369:         sim = km.Simulator(
+
+--- Zeilen 362..371 ---
+  362:         stop = start + batch_size
+  363:         if shots is None:
+  364:             rng = np.random.default_rng(rng_seed)
+  365:             syndromes, mbuc, phases = sample_shots(spec, tables, rng, batch_size, weight_probs)
+  366:         else:
+  367:             syndromes, mbuc, phases = (a[start:stop] for a in shots)
+  368: 
+  369:         sim = km.Simulator(
+  370:             batch_size=batch_size,
+  371:             debug_print=False,
+
+--- Zeilen 363..372 ---
+  363:         if shots is None:
+  364:             rng = np.random.default_rng(rng_seed)
+  365:             syndromes, mbuc, phases = sample_shots(spec, tables, rng, batch_size, weight_probs)
+  366:         else:
+  367:             syndromes, mbuc, phases = (a[start:stop] for a in shots)
+  368: 
+  369:         sim = km.Simulator(
+  370:             batch_size=batch_size,
+  371:             debug_print=False,
+  372:             counting_operations=True,
+
+--- Zeilen 364..373 ---
+  364:             rng = np.random.default_rng(rng_seed)
+  365:             syndromes, mbuc, phases = sample_shots(spec, tables, rng, batch_size, weight_probs)
+  366:         else:
+  367:             syndromes, mbuc, phases = (a[start:stop] for a in shots)
+  368: 
+  369:         sim = km.Simulator(
+  370:             batch_size=batch_size,
+  371:             debug_print=False,
+  372:             counting_operations=True,
+  373:             seed=sim_seed,
+
+--- Zeilen 366..375 ---
+  366:         else:
+  367:             syndromes, mbuc, phases = (a[start:stop] for a in shots)
+  368: 
+  369:         sim = km.Simulator(
+  370:             batch_size=batch_size,
+  371:             debug_print=False,
+  372:             counting_operations=True,
+  373:             seed=sim_seed,
+  374:         )
+  375:         sim.use_same_registers_as(circuit)
+
+--- Zeilen 372..381 ---
+  372:             counting_operations=True,
+  373:             seed=sim_seed,
+  374:         )
+  375:         sim.use_same_registers_as(circuit)
+  376:         input_syndromes = to_bits(syndromes, spec.degree)
+  377:         sim.write_across_shots(syndrome_array, input_syndromes)
+  378:         sim.write_across_shots(mbuc_array, to_bits(mbuc, spec.degree))
+  379:         sim.do(circuit)
+  380: 
+  381:         phase_flipped = sim.read_phase_flipped_across_shots()
+
+--- Zeilen 376..385 ---
+  376:         input_syndromes = to_bits(syndromes, spec.degree)
+  377:         sim.write_across_shots(syndrome_array, input_syndromes)
+  378:         sim.write_across_shots(mbuc_array, to_bits(mbuc, spec.degree))
+  379:         sim.do(circuit)
+  380: 
+  381:         phase_flipped = sim.read_phase_flipped_across_shots()
+  382:         reg_diff = sim.read_across_shots(syndrome_array) ^ input_syndromes
+  383:         junk = (
+  384:             sim.read_across_shots(ancilla_qubits)
+  385:             if len(ancilla_qubits)
+
+--- Zeilen 377..386 ---
+  377:         sim.write_across_shots(syndrome_array, input_syndromes)
+  378:         sim.write_across_shots(mbuc_array, to_bits(mbuc, spec.degree))
+  379:         sim.do(circuit)
+  380: 
+  381:         phase_flipped = sim.read_phase_flipped_across_shots()
+  382:         reg_diff = sim.read_across_shots(syndrome_array) ^ input_syndromes
+  383:         junk = (
+  384:             sim.read_across_shots(ancilla_qubits)
+  385:             if len(ancilla_qubits)
+  386:             else np.zeros((0, batch_size), dtype=bool)
+
+--- Zeilen 380..389 ---
+  380: 
+  381:         phase_flipped = sim.read_phase_flipped_across_shots()
+  382:         reg_diff = sim.read_across_shots(syndrome_array) ^ input_syndromes
+  383:         junk = (
+  384:             sim.read_across_shots(ancilla_qubits)
+  385:             if len(ancilla_qubits)
+  386:             else np.zeros((0, batch_size), dtype=bool)
+  387:         )
+  388: 
+  389:         val_err = reg_diff.any(axis=0) | junk.any(axis=0)
+
+--- Zeilen 381..390 ---
+  381:         phase_flipped = sim.read_phase_flipped_across_shots()
+  382:         reg_diff = sim.read_across_shots(syndrome_array) ^ input_syndromes
+  383:         junk = (
+  384:             sim.read_across_shots(ancilla_qubits)
+  385:             if len(ancilla_qubits)
+  386:             else np.zeros((0, batch_size), dtype=bool)
+  387:         )
+  388: 
+  389:         val_err = reg_diff.any(axis=0) | junk.any(axis=0)
+  390:         phase_err = (phase_flipped ^ phases) & ~val_err
+
+--- Zeilen 383..392 ---
+  383:         junk = (
+  384:             sim.read_across_shots(ancilla_qubits)
+  385:             if len(ancilla_qubits)
+  386:             else np.zeros((0, batch_size), dtype=bool)
+  387:         )
+  388: 
+  389:         val_err = reg_diff.any(axis=0) | junk.any(axis=0)
+  390:         phase_err = (phase_flipped ^ phases) & ~val_err
+  391:         stats = sim.operation_statistics()
+  392:         return int(val_err.sum()), int(phase_err.sum()), int(stats.num_toffoli_like), dict(stats)
+
+--- Zeilen 393..402 ---
+  393: 
+  394:     starts = range(0, num_shots, batch_size)
+  395:     seeds = np.random.SeedSequence(base_seed, pool_size=8).generate_state(8 * len(starts), dtype=np.uint64).reshape(-1, 2, 4)
+  396:     tasks = [(s, int.from_bytes(seeds[i, 0], 'little'), int.from_bytes(seeds[i, 1], 'little')) for i, s in enumerate(starts)]
+  397:     results = _run_parallel(run_batch, tasks, max_workers)
+  398: 
+  399:     value_errors = sum(r[0] for r in results)
+  400:     phase_errors = sum(r[1] for r in results)
+  401:     shot_operation_counts: dict[str, int] = {}
+  402:     for _, _, _, op_counts in results:
+
+--- Zeilen 394..403 ---
+  394:     starts = range(0, num_shots, batch_size)
+  395:     seeds = np.random.SeedSequence(base_seed, pool_size=8).generate_state(8 * len(starts), dtype=np.uint64).reshape(-1, 2, 4)
+  396:     tasks = [(s, int.from_bytes(seeds[i, 0], 'little'), int.from_bytes(seeds[i, 1], 'little')) for i, s in enumerate(starts)]
+  397:     results = _run_parallel(run_batch, tasks, max_workers)
+  398: 
+  399:     value_errors = sum(r[0] for r in results)
+  400:     phase_errors = sum(r[1] for r in results)
+  401:     shot_operation_counts: dict[str, int] = {}
+  402:     for _, _, _, op_counts in results:
+  403:         for op, count in op_counts.items():
+
+--- Zeilen 395..404 ---
+  395:     seeds = np.random.SeedSequence(base_seed, pool_size=8).generate_state(8 * len(starts), dtype=np.uint64).reshape(-1, 2, 4)
+  396:     tasks = [(s, int.from_bytes(seeds[i, 0], 'little'), int.from_bytes(seeds[i, 1], 'little')) for i, s in enumerate(starts)]
+  397:     results = _run_parallel(run_batch, tasks, max_workers)
+  398: 
+  399:     value_errors = sum(r[0] for r in results)
+  400:     phase_errors = sum(r[1] for r in results)
+  401:     shot_operation_counts: dict[str, int] = {}
+  402:     for _, _, _, op_counts in results:
+  403:         for op, count in op_counts.items():
+  404:             shot_operation_counts[op] = shot_operation_counts.get(op, 0) + count
+
+--- Zeilen 406..415 ---
+  406:     total_errors = value_errors + phase_errors
+  407:     eps_hat = total_errors / num_shots
+  408:     eps_plus = clopper_pearson_upper_bound(total_errors, num_shots, log2_delta=log2_delta)
+  409:     if eps_plus >= 1 / 16:
+  410:         raise AssertionError(
+  411:             f'Effective error rate {eps_plus:.4f} >= 1/16 at log2_delta={log2_delta} '
+  412:             f'(empirical={eps_hat:.4f}, value_errors={value_errors}/{num_shots}, '
+  413:             f'phase_errors={phase_errors}/{num_shots})'
+  414:         )
+  415:     rep_factor = repetition_overhead(eps_plus)
+
+--- Zeilen 407..416 ---
+  407:     eps_hat = total_errors / num_shots
+  408:     eps_plus = clopper_pearson_upper_bound(total_errors, num_shots, log2_delta=log2_delta)
+  409:     if eps_plus >= 1 / 16:
+  410:         raise AssertionError(
+  411:             f'Effective error rate {eps_plus:.4f} >= 1/16 at log2_delta={log2_delta} '
+  412:             f'(empirical={eps_hat:.4f}, value_errors={value_errors}/{num_shots}, '
+  413:             f'phase_errors={phase_errors}/{num_shots})'
+  414:         )
+  415:     rep_factor = repetition_overhead(eps_plus)
+  416:     toffolis = sum(r[2] for r in results) / num_shots
+
+--- Zeilen 408..417 ---
+  408:     eps_plus = clopper_pearson_upper_bound(total_errors, num_shots, log2_delta=log2_delta)
+  409:     if eps_plus >= 1 / 16:
+  410:         raise AssertionError(
+  411:             f'Effective error rate {eps_plus:.4f} >= 1/16 at log2_delta={log2_delta} '
+  412:             f'(empirical={eps_hat:.4f}, value_errors={value_errors}/{num_shots}, '
+  413:             f'phase_errors={phase_errors}/{num_shots})'
+  414:         )
+  415:     rep_factor = repetition_overhead(eps_plus)
+  416:     toffolis = sum(r[2] for r in results) / num_shots
+  417:     num_qubits = circuit.num_qubits
+
+--- Zeilen 410..419 ---
+  410:         raise AssertionError(
+  411:             f'Effective error rate {eps_plus:.4f} >= 1/16 at log2_delta={log2_delta} '
+  412:             f'(empirical={eps_hat:.4f}, value_errors={value_errors}/{num_shots}, '
+  413:             f'phase_errors={phase_errors}/{num_shots})'
+  414:         )
+  415:     rep_factor = repetition_overhead(eps_plus)
+  416:     toffolis = sum(r[2] for r in results) / num_shots
+  417:     num_qubits = circuit.num_qubits
+  418:     return {
+  419:         'status': 'PASS',
+
+--- Zeilen 411..420 ---
+  411:             f'Effective error rate {eps_plus:.4f} >= 1/16 at log2_delta={log2_delta} '
+  412:             f'(empirical={eps_hat:.4f}, value_errors={value_errors}/{num_shots}, '
+  413:             f'phase_errors={phase_errors}/{num_shots})'
+  414:         )
+  415:     rep_factor = repetition_overhead(eps_plus)
+  416:     toffolis = sum(r[2] for r in results) / num_shots
+  417:     num_qubits = circuit.num_qubits
+  418:     return {
+  419:         'status': 'PASS',
+  420:         'score': rep_factor * (num_qubits ** 2) * toffolis,
+
+--- Zeilen 412..421 ---
+  412:             f'(empirical={eps_hat:.4f}, value_errors={value_errors}/{num_shots}, '
+  413:             f'phase_errors={phase_errors}/{num_shots})'
+  414:         )
+  415:     rep_factor = repetition_overhead(eps_plus)
+  416:     toffolis = sum(r[2] for r in results) / num_shots
+  417:     num_qubits = circuit.num_qubits
+  418:     return {
+  419:         'status': 'PASS',
+  420:         'score': rep_factor * (num_qubits ** 2) * toffolis,
+  421:         'm': spec.m,
+
+--- Zeilen 414..423 ---
+  414:         )
+  415:     rep_factor = repetition_overhead(eps_plus)
+  416:     toffolis = sum(r[2] for r in results) / num_shots
+  417:     num_qubits = circuit.num_qubits
+  418:     return {
+  419:         'status': 'PASS',
+  420:         'score': rep_factor * (num_qubits ** 2) * toffolis,
+  421:         'm': spec.m,
+  422:         'n': spec.n,
+  423:         'degree': spec.degree,
+
+--- Zeilen 415..424 ---
+  415:     rep_factor = repetition_overhead(eps_plus)
+  416:     toffolis = sum(r[2] for r in results) / num_shots
+  417:     num_qubits = circuit.num_qubits
+  418:     return {
+  419:         'status': 'PASS',
+  420:         'score': rep_factor * (num_qubits ** 2) * toffolis,
+  421:         'm': spec.m,
+  422:         'n': spec.n,
+  423:         'degree': spec.degree,
+  424:         'r': spec.r,
+
+--- Zeilen 419..428 ---
+  419:         'status': 'PASS',
+  420:         'score': rep_factor * (num_qubits ** 2) * toffolis,
+  421:         'm': spec.m,
+  422:         'n': spec.n,
+  423:         'degree': spec.degree,
+  424:         'r': spec.r,
+  425:         'verified_shots': num_shots,
+  426:         'value_errors': value_errors,
+  427:         'phase_errors': phase_errors,
+  428:         'empirical_error_rate': eps_hat,
+
+--- Zeilen 424..433 ---
+  424:         'r': spec.r,
+  425:         'verified_shots': num_shots,
+  426:         'value_errors': value_errors,
+  427:         'phase_errors': phase_errors,
+  428:         'empirical_error_rate': eps_hat,
+  429:         'effective_error_rate': eps_plus,
+  430:         'log2_delta': log2_delta,
+  431:         'repetition_factor': rep_factor,
+  432:         'mean_error_weight': float(np.arange(len(weight_probs)) @ weight_probs),
+  433:         'toffoli_count': toffolis,
+
+--- Zeilen 427..436 ---
+  427:         'phase_errors': phase_errors,
+  428:         'empirical_error_rate': eps_hat,
+  429:         'effective_error_rate': eps_plus,
+  430:         'log2_delta': log2_delta,
+  431:         'repetition_factor': rep_factor,
+  432:         'mean_error_weight': float(np.arange(len(weight_probs)) @ weight_probs),
+  433:         'toffoli_count': toffolis,
+  434:         'max_toffoli_count': circuit.operation_statistics().num_toffoli_like,
+  435:         'reaction_depth': circuit.reaction_depth(),
+  436:         'num_ops': len(circuit),
+
+--- Zeilen 428..437 ---
+  428:         'empirical_error_rate': eps_hat,
+  429:         'effective_error_rate': eps_plus,
+  430:         'log2_delta': log2_delta,
+  431:         'repetition_factor': rep_factor,
+  432:         'mean_error_weight': float(np.arange(len(weight_probs)) @ weight_probs),
+  433:         'toffoli_count': toffolis,
+  434:         'max_toffoli_count': circuit.operation_statistics().num_toffoli_like,
+  435:         'reaction_depth': circuit.reaction_depth(),
+  436:         'num_ops': len(circuit),
+  437:         'shot_operation_counts': shot_operation_counts,
+
+--- Zeilen 446..455 ---
+  446: 
+  447: def main() -> None:
+  448:     parser = argparse.ArgumentParser(description=__doc__,
+  449:                                      formatter_class=argparse.RawDescriptionHelpFormatter)
+  450:     parser.add_argument('circuit_file', help='Path to a submitted .kmb or .kmx circuit file.')
+  451:     parser.add_argument('--format', choices=('auto', 'kmb', 'kmx'), default='auto',
+  452:                         help="Input circuit file format (default: 'auto', auto-detects .kmb or .kmx).")
+  453:     parser.add_argument('--m', type=int, default=DEFAULT_M, help=f'Codeword length (default: {DEFAULT_M}).')
+  454:     parser.add_argument('--n', type=int, default=DEFAULT_N, help=f'Number of syndromes (default: {DEFAULT_N}).')
+  455:     parser.add_argument('--degree', type=int, default=DEFAULT_DEGREE,
+
+--- Zeilen 458..467 ---
+  458:                         help=f'Accepted values per constraint |F_i| (default: {DEFAULT_R}).')
+  459:     parser.add_argument('--num-shots', type=int, default=DEFAULT_NUM_SHOTS,
+  460:                         help=f'Number of verification shots; must be a multiple of --batch-size '
+  461:                              f'(default: {DEFAULT_NUM_SHOTS}).')
+  462:     parser.add_argument('--batch-size', type=int, default=DEFAULT_BATCH_SIZE,
+  463:                         help=f'Simulator batch size (default: {DEFAULT_BATCH_SIZE}).')
+  464:     parser.add_argument('--log2-delta', type=float, default=DEFAULT_LOG2_DELTA,
+  465:                         help=f'Base-2 log of Clopper-Pearson delta (confidence 1 - 2^log2_delta; '
+  466:                              f'default: {DEFAULT_LOG2_DELTA}).')
+  467:     parser.add_argument('--salt', type=str, default='',
+
+--- Zeilen 459..468 ---
+  459:     parser.add_argument('--num-shots', type=int, default=DEFAULT_NUM_SHOTS,
+  460:                         help=f'Number of verification shots; must be a multiple of --batch-size '
+  461:                              f'(default: {DEFAULT_NUM_SHOTS}).')
+  462:     parser.add_argument('--batch-size', type=int, default=DEFAULT_BATCH_SIZE,
+  463:                         help=f'Simulator batch size (default: {DEFAULT_BATCH_SIZE}).')
+  464:     parser.add_argument('--log2-delta', type=float, default=DEFAULT_LOG2_DELTA,
+  465:                         help=f'Base-2 log of Clopper-Pearson delta (confidence 1 - 2^log2_delta; '
+  466:                              f'default: {DEFAULT_LOG2_DELTA}).')
+  467:     parser.add_argument('--salt', type=str, default='',
+  468:                         help='Optional salt merged with circuit_sha256 to derive the initial seed (default: empty).')
+
+--- Zeilen 460..469 ---
+  460:                         help=f'Number of verification shots; must be a multiple of --batch-size '
+  461:                              f'(default: {DEFAULT_NUM_SHOTS}).')
+  462:     parser.add_argument('--batch-size', type=int, default=DEFAULT_BATCH_SIZE,
+  463:                         help=f'Simulator batch size (default: {DEFAULT_BATCH_SIZE}).')
+  464:     parser.add_argument('--log2-delta', type=float, default=DEFAULT_LOG2_DELTA,
+  465:                         help=f'Base-2 log of Clopper-Pearson delta (confidence 1 - 2^log2_delta; '
+  466:                              f'default: {DEFAULT_LOG2_DELTA}).')
+  467:     parser.add_argument('--salt', type=str, default='',
+  468:                         help='Optional salt merged with circuit_sha256 to derive the initial seed (default: empty).')
+  469:     parser.add_argument('--seed', type=int, default=None,
+
+--- Zeilen 464..473 ---
+  464:     parser.add_argument('--log2-delta', type=float, default=DEFAULT_LOG2_DELTA,
+  465:                         help=f'Base-2 log of Clopper-Pearson delta (confidence 1 - 2^log2_delta; '
+  466:                              f'default: {DEFAULT_LOG2_DELTA}).')
+  467:     parser.add_argument('--salt', type=str, default='',
+  468:                         help='Optional salt merged with circuit_sha256 to derive the initial seed (default: empty).')
+  469:     parser.add_argument('--seed', type=int, default=None,
+  470:                         help='Explicit RNG seed overriding circuit_sha256 and --salt.')
+  471:     parser.add_argument('--max-workers', type=int, default=DEFAULT_MAX_WORKERS,
+  472:                         help=f'Maximum worker processes (default: {DEFAULT_MAX_WORKERS}, matching 4-core / 30 GB '
+  473:                              f'Kaggle notebooks; each worker needs ~6 GB of RAM for the reference decoder).')
+
+--- Zeilen 467..476 ---
+  467:     parser.add_argument('--salt', type=str, default='',
+  468:                         help='Optional salt merged with circuit_sha256 to derive the initial seed (default: empty).')
+  469:     parser.add_argument('--seed', type=int, default=None,
+  470:                         help='Explicit RNG seed overriding circuit_sha256 and --salt.')
+  471:     parser.add_argument('--max-workers', type=int, default=DEFAULT_MAX_WORKERS,
+  472:                         help=f'Maximum worker processes (default: {DEFAULT_MAX_WORKERS}, matching 4-core / 30 GB '
+  473:                              f'Kaggle notebooks; each worker needs ~6 GB of RAM for the reference decoder).')
+  474:     args = parser.parse_args()
+  475: 
+  476:     r = default_num_accepted_values(args.degree) if args.r is None else args.r
+
+--- Zeilen 468..477 ---
+  468:                         help='Optional salt merged with circuit_sha256 to derive the initial seed (default: empty).')
+  469:     parser.add_argument('--seed', type=int, default=None,
+  470:                         help='Explicit RNG seed overriding circuit_sha256 and --salt.')
+  471:     parser.add_argument('--max-workers', type=int, default=DEFAULT_MAX_WORKERS,
+  472:                         help=f'Maximum worker processes (default: {DEFAULT_MAX_WORKERS}, matching 4-core / 30 GB '
+  473:                              f'Kaggle notebooks; each worker needs ~6 GB of RAM for the reference decoder).')
+  474:     args = parser.parse_args()
+  475: 
+  476:     r = default_num_accepted_values(args.degree) if args.r is None else args.r
+  477:     spec = ProblemSpecDQI(
+
+--- Zeilen 469..478 ---
+  469:     parser.add_argument('--seed', type=int, default=None,
+  470:                         help='Explicit RNG seed overriding circuit_sha256 and --salt.')
+  471:     parser.add_argument('--max-workers', type=int, default=DEFAULT_MAX_WORKERS,
+  472:                         help=f'Maximum worker processes (default: {DEFAULT_MAX_WORKERS}, matching 4-core / 30 GB '
+  473:                              f'Kaggle notebooks; each worker needs ~6 GB of RAM for the reference decoder).')
+  474:     args = parser.parse_args()
+  475: 
+  476:     r = default_num_accepted_values(args.degree) if args.r is None else args.r
+  477:     spec = ProblemSpecDQI(
+  478:         m=args.m,
+
+--- Zeilen 481..490 ---
+  481:         r=r,
+  482:         num_shots=args.num_shots,
+  483:     )
+  484:     try:
+  485:         summary = verify(
+  486:             km.Circuit.from_file(args.circuit_file, format=args.format),
+  487:             spec,
+  488:             seed=args.seed,
+  489:             salt=args.salt,
+  490:             batch_size=args.batch_size,
+
+--- Zeilen 487..496 ---
+  487:             spec,
+  488:             seed=args.seed,
+  489:             salt=args.salt,
+  490:             batch_size=args.batch_size,
+  491:             log2_delta=args.log2_delta,
+  492:             max_workers=args.max_workers,
+  493:         )
+  494:     except (AssertionError, ValueError, RuntimeError, OSError) as ex:
+  495:         print(json.dumps({'status': 'FAIL', 'error': str(ex)}, indent=2))
+  496:         sys.exit(1)
+
+============================================================================
+2. BREAK-EVEN-TABELLE: WIE VIEL DÜRFEN FEHLER KOSTEN?
+============================================================================
+Aktueller Stand: Q=891, T=396,921.5, R=1.19126 (0 Fehler / 102,400 Shots)
+Aktuelle Kosten: 375,376,238,975 (Ratio: 65.1066x)
+
+Fehler k | Fehlerrate |   ca. eps+ |   Nötige T-Ersparnis | ODER Q-Ersparnis
+----------------------------------------------------------------------------
+       0 |    0.0000% |   0.000866 |            -0 Toff. |       -0.0 Qubits
+       1 |    0.0010% |   0.000993 |        -1,036 Toff. |       -1.2 Qubits
+       2 |    0.0020% |   0.001051 |        -1,505 Toff. |       -1.7 Qubits
+       5 |    0.0049% |   0.001177 |        -2,503 Toff. |       -2.8 Qubits
+      10 |    0.0098% |   0.001334 |        -3,732 Toff. |       -4.2 Qubits
+      25 |    0.0244% |   0.001696 |        -6,478 Toff. |       -7.3 Qubits
+      50 |    0.0488% |   0.002183 |       -10,032 Toff. |      -11.3 Qubits
+     100 |    0.0977% |   0.003014 |       -15,819 Toff. |      -17.9 Qubits
+     250 |    0.2441% |   0.005160 |       -29,632 Toff. |      -33.9 Qubits
+     500 |    0.4883% |   0.008369 |       -48,380 Toff. |      -56.1 Qubits
+    1000 |    0.9766% |   0.014337 |       -79,621 Toff. |      -94.4 Qubits
+    2000 |    1.9531% |   0.025638 |      -131,212 Toff. |     -162.0 Qubits
+    4000 |    3.9062% |   0.047340 |      -214,630 Toff. |     -287.2 Qubits
+
+============================================================================
+3. ROENTGENBLICK IN WORK/DQI_SOURCES/ (STELLSCHRAUBEN & APPROXIMATIONEN)
+============================================================================
+
+>>> DATEI: audit.py (151 Zeilen) <<<
+  [class] Field [Zeile 5]
+  [def] data(f, cs, betas, ws) [Zeile 64] defaults=[]
+  [def] extract(f, cs, kappas, vals) [Zeile 76] defaults=[]
+  [def] synth(f, kappas, heads) [Zeile 86] defaults=[]
+  [def] rational_audit(f, kappas, nodes, N, D, heads) [Zeile 97] defaults=[]
+  [def] validate(m, modulus, h, repeats, seed) [Zeile 111] defaults=[]
+  Interessante Stellen (6 Treffer, zeige Top 25):
+    L 107: if poles:return {'first_nonterminal_zero_step':i,'poles':poles,'residual_degree':len(H)-1}
+    L 122: degree=len(B)-1
+    L 123: result={'t':t,'trial':trial,'correct':correct,'degree':degree,'monic':B[-1]==1,'squarefree':sqfree,'
+    L 124: results['cases']+=1;results['correct']+=correct;results['monic']+=B[-1]==1;results['degree_h']+=degr
+    L 129: if not correct or not sqfree or degree!=h or not result['monic']:
+    L 148: parser=argparse.ArgumentParser();parser.add_argument('--m',type=int,default=12);parser.add_argument(
+
+>>> DATEI: blocked_three_noscratch.py (165 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 10]
+  [const] sys.path[:0] = [str(ROOT / 'research/agents/a01'), str(ROOT / 'research/agents/a03')] [Zeile 11]
+  [def] mask_word(b, x, F, G, not_f, not_g) [Zeile 17] defaults=['False', 'False']
+  [def] erase_mask(b, x, out, F, G, not_f, not_g) [Zeile 29] defaults=['False', 'False']
+  [def] copy_flag(b, F, x, y, complement) [Zeile 39] defaults=['False']
+  [def] phase_flag(b, F, x, r, complement) [Zeile 45] defaults=['False']
+  [def] payload_middle(b, lo_f, lo_g, heads, out, q, F0, F1, F2) [Zeile 51] defaults=[]
+  [def] pre_partial(b, f, g, payloads, F, cutoff, defer_coefficient) [Zeile 90] defaults=['False']
+  [def] look_solve(b, f, g, payloads, H, parent, reverse, phase) [Zeile 105] defaults=['None', 'None', 'False', 'None']
+  [def] make_decoder(levels) [Zeile 148] defaults=['(16,)']
+  [const] decode = make_decoder() [Zeile 165]
+  Interessante Stellen (13 Treffer, zeige Top 25):
+    L  30: r=b.alloc_bits(12);b.hmr(out,r);b.free(out)
+    L  54: heads=(s0,s1,s2), q=(q10,q11). P has degree<=1, Q degree<=2.
+    L  55: Each ephemeral word is measured only while its defining sources survive.
+    L  67: b.hmr(P0,r0);b.hmr(P1,r1);b.free(P0);b.free(P1)
+    L  84: b.hmr(Q1,r1);b.hmr(Q2,r2);b.free(Q1);b.free(Q2)
+    L  90: def pre_partial(b,f,g,payloads,F,cutoff,defer_coefficient=False):
+    L  95: for i in range(cutoff,len(g)-1):
+    L 109: assert m-2>=THRESHOLD and not any(n in KEEP_CHILD for n in (m,m-1,m-2))
+    L 110: cutoff=m-3;frames=[]
+    L 113: carry=pre_partial(b,f,g,payloads,F,cutoff,i==2)
+    L 120: # These are the same predicates as the two already measured parent flags.
+    L 126: payload_middle(b,f[:cutoff],g[:cutoff],heads,payloads[j][:cutoff],
+    L 149: cv=p.install_dot_cache(p.install_base_zero(p.install_undo_zeros(
+
+>>> DATEI: companion.py (199 Zeilen) <<<
+  [const] HERE = Path(__file__).resolve().parent [Zeile 10]
+  [const] ROOT = HERE.parents[2] [Zeile 11]
+  [const] sys.path[:0] = [str(HERE), str(ROOT), str(ROOT / 'exp/frontier/a05')] [Zeile 12]
+  [def] normalize_three(b, N, D, L, R) [Zeile 20] defaults=[]
+  [def] pay_before_retire(b, D, F, forward, reverse, N, L, R) [Zeile 57] defaults=[]
+  [def] restore_direct(b, D, F, masks) [Zeile 84] defaults=[]
+  [def] external_node_chain(b, words, gi, reverse, token, normalizer) [Zeile 119] defaults=['False', 'None', 'None']
+  [def] install(entry, select) [Zeile 180] defaults=['range(9, 17)']
+  [const] decode = install(base.decode) [Zeile 199]
+  Interessante Stellen (5 Treffer, zeige Top 25):
+    L   5: are closed before the old N is measured. A direct denominator is recovered
+    L  95: b.hmr(g, m)
+    L 111: b.hmr(F, fm[0])
+    L 155: b.hmr(N, original)
+    L 162: b.hmr(pole, fm[0])
+
+>>> DATEI: conversion.py (218 Zeilen) <<<
+  [def] clone(fn, scope) [Zeile 19] defaults=[]
+  [def] clear_flag(b, a, F) [Zeile 24] defaults=[]
+  [def] hold_flag(b, F) [Zeile 36] defaults=[]
+  [def] consume_flag(b, F, m) [Zeile 39] defaults=[]
+  [const] KEEP_FULL = frozenset((2, 4, 6, 8, 10, 12, 14, 16, 17)) [Zeile 42]
+  [const] KEEP_CHILD = KEEP_FULL | {3} [Zeile 43]
+  [def] q_post(b, q, payloads, H, m, parent, reverse, phase) [Zeile 46] defaults=['False', 'None']
+  [def] look_solve(b, f, g, payloads, H, parent, reverse, phase) [Zeile 73] defaults=['None', 'None', 'False', 'None']
+  [def] erase_product_zero(b, a, ai, F) [Zeile 99] defaults=[]
+  [def] cached_root_action(b, f, g, payloads, ai, Z, post, undo) [Zeile 109] defaults=[]
+  [def] look_root_cached(b, O, g, payloads, reverse, phase) [Zeile 128] defaults=[]
+  [def] _bez_monic(b, O, E, payloads, reverse, history_scratch12, phase) [Zeile 175] defaults=[]
+  [const] scope['base_case'] = scope['base'] [Zeile 191]
+  [const] scope['q_inverse'] = contextmanager(clone(base._private.q_inverse.__wrapped__, scope)) [Zeile 192]
+  [const] scope['q_post'] = clone(q_post, scope) [Zeile 193]
+  [const] scope['look_solve'] = clone(look_solve, scope) [Zeile 194]
+  [const] _core_convert = clone(base._short_scope['convert_safe'], short) [Zeile 202]
+  [def] convert_safe(b, A, B, reverse, history_scratch12, phase_token) [Zeile 205] defaults=['False', 'None', 'None']
+  Interessante Stellen (14 Treffer, zeige Top 25):
+    L   4: also holds level3 through its child recursion; that flag is measured at
+    L   7: final flag measurement is repaid by its exact zero-predicate phase.
+    L  16: from exp.fold_cached_norm.phase34 import phase_inverse34
+    L  25: m=b.alloc_bits(1);b.hmr(F,m[0]);b.free(F)
+    L  37: m=b.alloc_bits(1);b.hmr(F,m[0]);b.free(F);return m
+    L 101: b.hmr(F, mask[0]); b.free(F)
+    L 109: def cached_root_action(b, f, g, payloads, ai, Z, post, undo):
+    L 128: def look_root_cached(b, O, g, payloads, reverse, phase):
+    L 141: cached_root_action(b, f, g, payloads, ai, Z, post=reverse, undo=reverse)
+    L 158: cached_root_action(b, f, g, payloads, ai, Z, post=not reverse, undo=reverse)
+    L 161: b.hmr(ai, mask); b.free(ai)
+    L 180: look_root_cached(b, O, E[:-1], payloads, reverse, phase)
+    L 199: for name, fn in [('cached_root_action', cached_root_action),
+    L 200: ('look_root_cached', look_root_cached), ('_bez_monic', _bez_monic)]:
+
+>>> DATEI: convert.py (150 Zeilen) <<<
+  [def] zero_flag(b, a) [Zeile 15] defaults=[]
+  [def] erase_zero_flag(b, a, flag) [Zeile 24] defaults=[]
+  [def] inverse_context(b, a) [Zeile 34] defaults=[]
+  [def] scale(b, x, a, ai, divide) [Zeile 42] defaults=['True']
+  [def] runops(b, ops, a, ai, undo) [Zeile 47] defaults=['False']
+  [def] pre(b, f, g, payloads, undo) [Zeile 54] defaults=['False']
+  [def] post(b, f, g, payloads, undo) [Zeile 64] defaults=['False']
+  [def] raw_solve(b, f, g, payloads, reverse) [Zeile 90] defaults=['False']
+  [def] bez_solve(b, O, E, payloads, reverse) [Zeile 105] defaults=['False']
+  [def] frob(b, words, power) [Zeile 110] defaults=[]
+  [def] convert(b, A, B, reverse) [Zeile 114] defaults=['False']
+  [def] raw_solve_blocked(b, f, g, payloads, block_size, reverse) [Zeile 132] defaults=['2', 'False']
+  Interessante Stellen (8 Treffer, zeige Top 25):
+    L   1: """Reversible fixed-generic-chart half-degree CONVERT.
+    L   3: Public convert(builder,A[35] words,B[35] words,reverse=False).
+    L   4: A,B hold GF12 polynomial coefficients; B35=1 implicit.
+    L   5: Safe divisors make roundtrip exact even on degree gaps; forward decode is only
+    L   6: proved for generic Euclid degrees. Runtime gap2 routing is not yet implemented.
+    L  13: from lowwidth import phase_inverse36
+    L  38: mask=b.alloc_bits(12);b.hmr(ai,mask);b.free(ai)
+    L 115: assert len(A)==len(B)==35
+
+>>> DATEI: direct_converter.py (153 Zeilen) <<<
+  [const] THRESHOLD = 6 [Zeile 10]
+  [def] pivot(b, g, F) [Zeile 13] defaults=[]
+  [def] aligned(b, f, g, F) [Zeile 16] defaults=[]
+  [def] cross(b, g, q1, q0, F) [Zeile 20] defaults=[]
+  [def] direct_pre(b, f, g, payloads, F, undo, incoming, defer) [Zeile 24] defaults=['False', 'None', 'False']
+  [def] direct_post(b, f, g, payloads, F, H, parent, reverse, incoming, defer, phase) [Zeile 40] defaults=['False', 'None', 'False', 'None']
+  [def] look_solve(b, f, g, payloads, H, parent, reverse, phase) [Zeile 63] defaults=['None', 'None', 'False', 'None']
+  [def] root_action(b, f, g, payloads, ai, Z, F, post, undo) [Zeile 87] defaults=[]
+  [def] look_root_cached(b, O, g, payloads, reverse, phase) [Zeile 106] defaults=[]
+  [def] make_converter() [Zeile 135] defaults=[]
+  [const] convert_safe = make_converter() [Zeile 153]
+  Interessante Stellen (7 Treffer, zeige Top 25):
+    L   6: import measured_heads as mh
+    L  10: THRESHOLD=6
+    L  65: if m<THRESHOLD:return old_look_solve(b,f,g,payloads,H,parent,reverse,phase)
+    L 106: def look_root_cached(b,O,g,payloads,reverse,phase):
+    L 126: mask=b.alloc_bits(12);b.hmr(ai,mask);b.free(ai)
+    L 137: scope.update(dk=dk,THRESHOLD=THRESHOLD,old_look_solve=scope['look_solve'])
+    L 141: for name in ['root_action','look_root_cached']:
+
+>>> DATEI: direct_forney.py (235 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 12]
+  [const] sys.path[:0] = [str(ROOT / 'playbook/kit'), str(ROOT / 'playbook/kit/decoder')] [Zeile 13]
+  [def] classical_zero(b, n) [Zeile 18] defaults=[]
+  [def] classical_product(b, x, y) [Zeile 24] defaults=[]
+  [def] frobenius_columns(exponent) [Zeile 49] defaults=[]
+  [def] classical_frobenius(b, x, exponent) [Zeile 53] defaults=[]
+  [def] inverse3_anf() [Zeile 60] defaults=[]
+  [def] classical_inverse(b, x) [Zeile 71] defaults=[]
+  [def] trace_columns() [Zeile 123] defaults=[]
+  [def] scale_public(b, x, factor, inverse) [Zeile 135] defaults=[]
+  [def] root_character(b, numerator, derivative, root_value, mask) [Zeile 151] defaults=[]
+  [def] scan(b, A, B, E) [Zeile 186] defaults=[]
+  Interessante Stellen (26 Treffer, zeige Top 25):
+    L   1: """Direct Forney phase, replacing conversion, scan and reverse conversion.
+    L   5: with inv0 for a vanishing derivative.  All measurements are X measurements
+    L   8: from functools import lru_cache
+    L  48: @lru_cache(None)
+    L  59: @lru_cache(None)
+    L  75: they allocate no qubit and perform no measurement.
+    L 122: @lru_cache(None)
+    L 144: b.hmr(x, mask)
+    L 155: coordinates.  Its zero case is skipped using a classical condition.
+    L 186: def scan(b, A, B, E, *, points=4095, skip_points=(), node_polynomial=None):
+    L 187: """Forney scan in the existing coefficient banks; no conversion token."""
+    L 189: if len(A) != 35 or len(B) != 35 or len(E) < points:
+    L 190: raise ValueError('need 35+35 words and one mask per point')
+    L 191: if points != 4095:
+    L 194: skip_points = frozenset(skip_points)
+    L 195: assert all(0 <= j < points for j in skip_points)
+    L 196: alpha = gf.primitive_element
+    L 197: powers = tuple(power(alpha, k) for k in range(35))
+    L 199: leadstep = power(alpha, 35)
+    L 202: if j not in skip_points:
+    L 205: for k in range(1, 35):
+    L 209: for k in range(3, 35, 2):
+    L 223: for k in reversed(range(3, 35, 2)):
+    L 226: for k in reversed(range(1, 35)):
+    L 229: for k in range(1, 35):
+
+>>> DATEI: division.py (180 Zeilen) <<<
+  [def] mul24_xor126(b, x, y, z, K) [Zeile 9] defaults=['None']
+  [def] mul24_xor(b, x, y, z, K) [Zeile 22] defaults=['None']
+  [def] phase_product24(b, x, y, mask, K) [Zeile 27] defaults=['None']
+  [def] multiply_forward(b, x, y, K) [Zeile 39] defaults=['None']
+  [def] divide_preserving_factor(b, x, y, K) [Zeile 49] defaults=['None']
+  [def] multiply_reverse(b, x, y, transcript, K) [Zeile 58] defaults=['None']
+  [def] divide_via_norm(b, x, y, K, retain_norm) [Zeile 63] defaults=['None', 'True']
+  [def] multiply_reverse_via_norm(b, x, y, transcript, K, retain_norm) [Zeile 89] defaults=['None', 'True']
+  [def] zero_flag(b, x) [Zeile 94] defaults=[]
+  [def] phase_zero(b, y, mask, head, headmask) [Zeile 105] defaults=['None', 'None']
+  [def] multiply_zero_forward(b, x, y, K) [Zeile 123] defaults=['None']
+  [def] divide_zero(b, x, y, K, extra_zero_mask) [Zeile 131] defaults=['None', 'None']
+  [def] multiply_zero_reverse(b, x, y, transcript, K) [Zeile 153] defaults=['None']
+  [def] erase_inverse_releasing(b, x, y) [Zeile 159] defaults=[]
+  Interessante Stellen (13 Treffer, zeige Top 25):
+    L   1: """Width-bounded GF24 scalar multiplication/division reference schedules.
+    L   4: verified primitive API while the scalar-normalization direction is measured.
+    L  46: m=b.alloc_bits(24);b.hmr(x,m);b.swap(x,z);b.free(z);return m
+    L  53: xm=b.alloc_bits(24);b.hmr(x,xm);b.swap(x,z);b.free(z)
+    L 126: oldmask=b.alloc_bits(24);b.hmr(x,oldmask);b.swap(x,z);b.free(z)
+    L 127: fm=b.alloc_bits(1);b.hmr(flag,fm[0]);b.free(flag)
+    L 137: oldmask=b.alloc_bits(24);b.hmr(x,oldmask);b.swap(x,z);b.free(z)
+    L 138: b.cx(flag,N[0]);fm=b.alloc_bits(1);b.hmr(flag,fm[0]);b.free(flag)
+    L 146: nm=b.alloc_bits(12);b.hmr(N,nm);b.free(N);ar._phase_norm(b,y,nm,K)
+    L 160: """Phase-only inverse erasure; measure/free target BEFORE recomputation.
+    L 163: of y's qubits. This helper owns and frees y.
+    L 168: mask=b.alloc_bits(3);b.hmr(y,mask);b.free(y)
+    L 176: mask=b.alloc_bits(n);b.hmr(y,mask);b.free(y)
+
+>>> DATEI: frozen_chart.py (210 Zeilen) <<<
+  [const] root = Path(__file__).resolve().parents[3] [Zeile 10]
+  [const] sys.path[:0] = [str(root / 'playbook/kit/decoder'), str(root / 'playbook/kit')] [Zeile 11]
+  [def] clone(fn, scope) [Zeile 19] defaults=[]
+  [def] scale_defer(b, x, f) [Zeile 24] defaults=[]
+  [def] add_masks(b) [Zeile 29] defaults=[]
+  [def] norm_chart_columns() [Zeile 36] defaults=[]
+  [def] chart_norm(b, r, F, h, reverse) [Zeile 48] defaults=['False']
+  [def] correct_subfield(b, x, F) [Zeile 61] defaults=[]
+  [def] normalize(b, N, D, L) [Zeile 67] defaults=[]
+  [def] pay_charts(b, D, forward, reverse) [Zeile 96] defaults=[]
+  [def] external_node_chain(b, words, gi, reverse, token, normalizer) [Zeile 144] defaults=['False', 'None', 'None']
+  [def] and_flag(b, x) [Zeile 173] defaults=[]
+  [def] phase_and(b, x, m) [Zeile 183] defaults=[]
+  [def] erase_and(b, x, F) [Zeile 195] defaults=[]
+  [def] zero_flag24(b, x) [Zeile 199] defaults=[]
+  [def] clear_flag24(b, x, F) [Zeile 205] defaults=[]
+  Interessante Stellen (8 Treffer, zeige Top 25):
+    L   1: """Width-safe paired normalization in high-component denominator chart.
+    L   4: This is an intentionally conservative combined-width baseline, not a cost win.
+    L   8: from functools import lru_cache
+    L  26: m=b.alloc_bits(12);b.hmr(x,m);b.swap(x,out);b.free(out);return m
+    L  35: @lru_cache(None)
+    L  92: b.hmr(r,rm);b.hmr(g,gg);b.free(D);b.hmr(F,fm[0]);b.free(F)
+    L 196: m=b.alloc_bits(1);b.hmr(F,m[0]);b.free(F);phase_and(b,x,m[0]);b.free(m)
+    L 206: m=b.alloc_bits(1);b.hmr(F,m[0]);b.free(F)
+
+>>> DATEI: inverse20.py (160 Zeilen) <<<
+  [const] DAG = json.loads(Path(__file__).with_name('optimized.json').read_text()) [Zeile 14]
+  [def] expose_pair(b, registers, left, right) [Zeile 17] defaults=[]
+  [def] form_xor(b, registers, mask, target) [Zeile 30] defaults=[]
+  [def] norm_forms(K) [Zeile 34] defaults=[]
+  [def] inverse3_virtual(b, registers, forms) [Zeile 43] defaults=[]
+  [def] phase_inverse3_virtual(b, registers, forms, mask) [Zeile 55] defaults=[]
+  [def] inverse6_xor20(b, x, z, keep_norm) [Zeile 67] defaults=['None', 'False']
+  [def] inverse_initialized(b, x, target) [Zeile 98] defaults=['None']
+  [def] norm_xor(b, x, z, K) [Zeile 116] defaults=[]
+  [def] inverse12_keep_norm(b, x) [Zeile 122] defaults=[]
+  [def] inverse_inplace_forward20(b, x) [Zeile 133] defaults=[]
+  [def] inverse_inplace_reverse20(b, x, mask) [Zeile 137] defaults=[]
+  [def] inverse24_forward20(b, x, K) [Zeile 154] defaults=['None']
+  [def] inverse24_reverse20(b, x, mask, K) [Zeile 158] defaults=['None']
+  Interessante Stellen (4 Treffer, zeige Top 25):
+    L   1: """Explicit 20-AND GF64 inverse XOR circuit with exact measurement cleanup.
+    L  82: for j,expression in enumerate(DAG['outputs']):form_xor(b,source,expression&65535,z[j])
+    L  87: wm=b.alloc_bits(3);b.hmr(w,wm);b.free(w)
+    L 135: b.hmr(x,mask);b.swap(x,target);b.free(target);return mask
+
+>>> DATEI: inverse_character_width.py (179 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 11]
+  [const] sys.path[:0] = [str(ROOT / 'exp/r-main/narrow240'), str(ROOT / 'research/agents/a01')] [Zeile 12]
+  [const] USED = False [Zeile 17]
+  [const] ORDINARY_FORMS = ((12, 52), (154, 94)) [Zeile 18]
+  [const] ORDINARY_COLUMNS = (10, 19, 34, 65, 5, 129, 1, 2) [Zeile 21]
+  [const] ORDINARY_INVERSE = (64, 128, 80, 129, 194, 132, 72, 96) [Zeile 22]
+  [const] MIXED_FORMS = ((23, 78), (60, 234), (15, 182)) [Zeile 23]
+  [const] MIXED_COLUMNS = (10, 19, 37, 66, 135, 257, 1, 2, 4) [Zeile 26]
+  [const] MIXED_INVERSE = (64, 128, 256, 129, 194, 324, 136, 464, 96) [Zeile 27]
+  [def] quadratic_phase(b, source, terms) [Zeile 30] defaults=[]
+  [def] cubic_phase(b, source, columns, inverse) [Zeile 40] defaults=[]
+  [def] character(b, x, forms, terms, columns, inverse, extra) [Zeile 48] defaults=['False']
+  [def] ordinary(b, x) [Zeile 64] defaults=[]
+  [def] mixed(b, x) [Zeile 69] defaults=[]
+  [def] zero_phase(b, x) [Zeile 73] defaults=[]
+  [def] phase_inverse6(b, x, mask, zero_mask) [Zeile 87] defaults=['None']
+  [def] target_ids(entry) [Zeile 119] defaults=[]
+  [def] install_converter(cv) [Zeile 169] defaults=[]
+  [def] install_decoder(decoder) [Zeile 175] defaults=[]
+  Interessante Stellen (2 Treffer, zeige Top 25):
+    L  26: MIXED_COLUMNS = (10,19,37,66,135,257,1,2,4)
+    L 120: """Find original helper copies only in this converter's private graph."""
+
+>>> DATEI: local_norm.py (167 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 12]
+  [const] p = baseline.p [Zeile 20]
+  [const] ar = p.ar [Zeile 21]
+  [const] TRACE = [] [Zeile 22]
+  [def] inverse_zero_kept(b, x, count) [Zeile 25] defaults=[]
+  [def] make_cached_phase() [Zeile 48] defaults=[]
+  [const] phase_inverse_cached = make_cached_phase() [Zeile 60]
+  [def] erase_kept(b, x, inv, zero, saved) [Zeile 63] defaults=[]
+  [def] make_decoder(count, levels, quotient_count, plain_count, plain_levels, factorized, converter, reference_decode) [Zeile 75] defaults=['1', 'range(6, 17)', '0', '0', 'range(2, 6)', 'False', 'None', 'None']
+  Interessante Stellen (8 Treffer, zeige Top 25):
+    L  16: import norm_cache as nc
+    L  48: def make_cached_phase():
+    L  51: 'def phase_inverse_cached(b, x, mask, saved, zero_mask=None):')
+    L  57: return scope['phase_inverse_cached']
+    L  60: phase_inverse_cached = make_cached_phase()
+    L  66: b.hmr(inv, mask)
+    L  67: b.hmr(zero, zm[0])
+    L  70: phase_inverse_cached(b, x, mask, saved, zm[0])
+
+>>> DATEI: lowwidth.py (154 Zeilen) <<<
+  [def] classical_transpose(b, mask, columns) [Zeile 7] defaults=[]
+  [def] inverse_stream_forward(b, x) [Zeile 14] defaults=[]
+  [def] phase_product_quantum(b, x, y, mask) [Zeile 35] defaults=[]
+  [def] phase_inverse_generic6(b, x, mask) [Zeile 47] defaults=[]
+  [def] phase_inverse_low12(b, x, mask) [Zeile 57] defaults=[]
+  [def] fix_scaled_half_masks(b, head, factor, masks, K) [Zeile 69] defaults=[]
+  [def] divide_lowwidth(b, x, y, K) [Zeile 88] defaults=['None']
+  [def] phase_inverse36(b, x, mask) [Zeile 106] defaults=[]
+  [def] divide_lowwidth375(b, x, y, K) [Zeile 139] defaults=['None']
+  Interessante Stellen (11 Treffer, zeige Top 25):
+    L  17: T3=3,T6=21,T12=66,T24=192. Transcriptisintheoriginalpolynomialbasis.
+    L  22: y=inverse(b,x);mask=b.alloc_bits(n);b.hmr(x,mask);b.swap(x,y);b.free(y);return mask
+    L  27: raw=b.alloc_bits(n);b.hmr(x[k:],raw[k:])
+    L  28: mul_xor(b,x[:k],N,x[k:]);b.cx(outb,x[k:]);b.hmr(x[:k],raw[:k])
+    L  64: um=b.alloc_bits(6);b.hmr(N,um);b.free(N)
+    L  88: def divide_lowwidth(b,x,y,K=None):
+    L  97: m=b.alloc_bits(12);b.hmr(half,m);masks.append(m);b.swap(half,out);b.free(out)
+    L 100: um=b.alloc_bits(12);b.hmr(u,um);b.free(u)
+    L 139: def divide_lowwidth375(b,x,y,K=None):
+    L 148: m=b.alloc_bits(12);b.hmr(half,m);masks.append(m);b.swap(half,out);b.free(out)
+    L 149: um=b.alloc_bits(12);b.hmr(u,um);b.free(u)
+
+>>> DATEI: narrow_gauge.py (197 Zeilen) <<<
+  [const] H = Path(__file__).resolve().parent [Zeile 9]
+  [const] ROOT = H.parents[2] [Zeile 9]
+  [def] _invert12(b, x) [Zeile 25] defaults=[]
+  [def] invert24(b, x) [Zeile 36] defaults=[]
+  [def] scale_pair(b, targets, source) [Zeile 49] defaults=[]
+  [def] divide_pair(b, targets, source) [Zeile 60] defaults=[]
+  [def] divide_pair_and_invert(b, targets, source, old_token) [Zeile 91] defaults=['None']
+  [def] close_reciprocal_chart(b, C, reciprocal_norm, masks) [Zeile 129] defaults=[]
+  [def] _erase_inverse12(b, x, xi) [Zeile 158] defaults=[]
+  [def] _scale_with_inverse(b, x, y, yi, inverse) [Zeile 163] defaults=['False']
+  [def] close_chart(b, C, masks) [Zeile 171] defaults=[]
+  Interessante Stellen (11 Treffer, zeige Top 25):
+    L   5: measurement in this file is repaid before its source changes.
+    L  78: hm=b.alloc_bits(12);b.hmr(half,hm)
+    L  81: im=b.alloc_bits(12);b.hmr(reciprocal,im);b.free(reciprocal)
+    L 112: m=b.alloc_bits(12);b.hmr(half,m)
+    L 120: m=b.alloc_bits(12);b.hmr(half,m)
+    L 154: fm=b.alloc_bits(1);b.hmr(F,fm[0]);b.free(F)
+    L 159: m=b.alloc_bits(12);b.hmr(xi,m);b.free(xi)
+    L 167: m=b.alloc_bits(12);b.hmr(x,m);b.swap(x,out);b.free(out)
+    L 182: # For the even-degree scalar field, the completed chart's trace-zero
+    L 189: hm=b.alloc_bits(12);b.hmr(h,hm);b.free(h)
+    L 196: fm=b.alloc_bits(1);b.hmr(F,fm[0]);b.free(F)
+
+>>> DATEI: no_clean_source12.py (141 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 11]
+  [class] Tape [Zeile 20]
+  [def] replay(b, ops, wires, reverse) [Zeile 41] defaults=['False']
+  [def] inverse6_dirty(b, r, borrow) [Zeile 46] defaults=[]
+  [def] one_plus_zeta(b, x, s, inverse) [Zeile 53] defaults=['False']
+  [def] correction_program() [Zeile 70] defaults=[]
+  [def] controlled_linear_predicate(b, x, columns, controls, borrow) [Zeile 89] defaults=[]
+  [def] exception_correction(b, x, r, key, borrow, inverse) [Zeile 102] defaults=['False']
+  [def] key_scale6(b, x, key, inverse) [Zeile 118] defaults=['False']
+  [def] source(b, y, borrow, inverse) [Zeile 128] defaults=['False']
+  Interessante Stellen (5 Treffer, zeige Top 25):
+    L   3: No fresh wire, HMR or phase. The nonzero promise is necessary only for
+    L   8: from functools import lru_cache
+    L  69: @lru_cache(None)
+    L 119: f=ar.field(6);alpha=f.invert(2) if inverse else 2
+    L 120: cols=tuple(f.mul(alpha,1<<i) for i in range(6))
+
+>>> DATEI: nonzero_consume16.py (138 Zeilen) <<<
+  [const] HERE = Path(__file__).resolve().parent [Zeile 5]
+  [const] ROOT = HERE.parents[2] [Zeile 6]
+  [const] sys.path[:0] = [str(ROOT / 'exp/r-main/narrow240')] [Zeile 7]
+  [const] PLAN = json.loads((HERE / 'nonzero_plan16.json').read_text()) [Zeile 16]
+  [const] TRACE = [] [Zeile 17]
+  [def] change_basis(b, live, rows) [Zeile 19] defaults=[]
+  [def] retire(b, live, pool, transcript, record) [Zeile 25] defaults=[]
+  [def] inverse6_nonzero_consume16(b, x) [Zeile 38] defaults=[]
+  [def] stream_nonzero(b, x) [Zeile 66] defaults=[]
+  [def] functions(entry) [Zeile 76] defaults=[]
+  [def] make_stream(ceiling) [Zeile 101] defaults=[]
+  [def] keep_for_fast_inverse(b, D) [Zeile 109] defaults=[]
+  [def] install(entry, forward, reverse, character, ceiling, retune_cache) [Zeile 116] defaults=['True', 'True', 'True', '889', 'False']
+  [const] decode = install(combo.decode) [Zeile 136]
+  Interessante Stellen (8 Treffer, zeige Top 25):
+    L  11: import norm_cache
+    L  30: q=live.pop(p);m=b.alloc_bits(1)[0];b.hmr(q,m)
+    L  39: """x <- 1/x for x!=0; return original-x HMR character in canonical basis."""
+    L 111: to,back=norm_cache.layout(k)
+    L 116: def install(entry,forward=True,reverse=True,character=True,ceiling=889,retune_cache=False):
+    L 127: if retune_cache and fn.__code__ is retained.linear_inverse_character.__code__:
+    L 129: cached=SimpleNamespace(**dict(vars(old_core.norm_cache),keep=keep_for_fast_inverse))
+    L 130: scope['core']=SimpleNamespace(**dict(vars(old_core),norm_cache=cached))
+
+>>> DATEI: norm_deferred_flag_return.py (179 Zeilen) <<<
+  [const] HERE = Path(__file__).resolve().parent [Zeile 12]
+  [const] ROOT = HERE.parents[2] [Zeile 13]
+  [const] sys.path[:0] = [str(ROOT / 'exp/round7/a06')] [Zeile 14]
+  [def] divide_from_norms(b, x, y, fm, before, after, owner, K) [Zeile 19] defaults=['None']
+  [def] sweep(b, C, B, folds, divide) [Zeile 140] defaults=[]
+  [const] consume_synthesis = previous.prior.rr.clone(previous.consume_synthesis, sweep=sweep) [Zeile 178]
+  [const] route_words = previous.route_words [Zeile 179]
+  Interessante Stellen (5 Treffer, zeige Top 25):
+    L  31: b.hmr(F, early[0])
+    L  53: b.hmr(half, m)
+    L  78: b.hmr(part, pm)
+    L 114: b.hmr(F, fmask[0])
+    L 128: b.hmr(t, tm)
+
+>>> DATEI: overlap_prefix.py (164 Zeilen) <<<
+  [const] HERE = Path(__file__).resolve().parent [Zeile 10]
+  [const] ROOT = HERE.parents[2] [Zeile 10]
+  [const] sys.path[:0] = [str(HERE), str(ROOT / 'exp/round7/a02'), str(ROOT / 'exp/round7/a09')] [Zeile 11]
+  [class] HeadOverlap [Zeile 19]
+  [def] make_return(first, last, source_type) [Zeile 123] defaults=['16', '8', 'HeadOverlap']
+  Interessante Stellen (8 Treffer, zeige Top 25):
+    L  16: from exp.mul99.schedules import multiply_forward99,divide_lowwidth369
+    L  32: divide_lowwidth369(b,combine(h2),combine(h1),K)
+    L  59: temp=combine(words[2:4]) # just measured to zero by the caller
+    L  74: mask=b.alloc_bits(24);b.hmr(c,mask)
+    L  86: mask=b.alloc_bits(24);b.hmr(c,mask)
+    L 104: m=b.alloc_bits(1);b.hmr(f,m[0]);b.free(f)
+    L 119: m=b.alloc_bits(12);b.hmr(top,m);b.free(top)
+    L 147: mask=b.alloc_bits(1);b.hmr(F,mask[0]);b.free(F)
+
+>>> DATEI: packed_chart.py (176 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 9]
+  [const] _f3 = ar.field(3) [Zeile 15]
+  [const] _K = ar.tower(6)[2] [Zeile 16]
+  [const] _logs = {_f3.pow(2, j): j for j in range(7)} [Zeile 17]
+  [const] _logq = tuple((_logs[_f3.square(r) ^ r ^ _K] for r in range(8))) [Zeile 18]
+  [const] PHI_TABLE = tuple((v << 2 & 7 | v >> 1 for v in _logq)) [Zeile 20]
+  [const] PHI_CONSTANT = PHI_TABLE[0] [Zeile 21]
+  [const] PHI_COLUMNS = tuple((PHI_TABLE[1 << j] ^ PHI_CONSTANT for j in range(3))) [Zeile 22]
+  [def] negate_mod7(b, target) [Zeile 26] defaults=[]
+  [def] add_norm_residue(b, target, ratio, inverse) [Zeile 37] defaults=['False']
+  [def] residue_chart6(b, source, reverse) [Zeile 61] defaults=['False']
+  [def] ratio_chart6(b, source, reverse) [Zeile 80] defaults=['False']
+  [def] dirty_mcx(b, controls, target, dirty) [Zeile 100] defaults=[]
+  [def] pack_nonzero(b, ratio, coefficient, flag, reverse) [Zeile 125] defaults=['False']
+  [def] swap_zero_corner(b, ratio, coefficient, flag, dirty) [Zeile 151] defaults=[]
+  [def] pack_complete(b, ratio, coefficient, flag, dirty, reverse) [Zeile 164] defaults=['False']
+  Interessante Stellen (4 Treffer, zeige Top 25):
+    L   1: """Exact low-width source-coordinate components, not a whole decoder.
+    L   3: All helpers allocate no qubits. Caller-provided dirty wires, where needed,
+    L   4: are returned pointwise. No helper measures or applies a phase.
+    L 169: clean qubit. The physical chart flag is still an input to this helper.
+
+>>> DATEI: paired_coefficient.py (147 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 11]
+  [const] K = 2048 [Zeile 20]
+  [def] multiply_closed(b, x, y, k) [Zeile 23] defaults=['K']
+  [def] closed_scale24(b, x, y, divide, k) [Zeile 39] defaults=['False', 'K']
+  [def] erase_affine_product(b, z, a, x, linear) [Zeile 44] defaults=['()']
+  [def] pivot(b, A, B, reverse, k) [Zeile 51] defaults=['False', 'K']
+  [def] qadic_matrix(n, k) [Zeile 122] defaults=['K']
+  [def] implicit_offsets(n, k) [Zeile 133] defaults=['K']
+  [def] qadic(b, A, B, reverse, k) [Zeile 141] defaults=['False', 'K']
+  Interessante Stellen (9 Treffer, zeige Top 25):
+    L   5: Two heads U,W occupy A[:2],B[:2]; the degree-(n-2) banks use their suffixes.
+    L   6: This is a component, not the fixed-Hermite syndrome inverse.
+    L   9: from functools import lru_cache
+    L  18: from exp.arithmetic.lowwidth import classical_transpose
+    L  45: mask=b.alloc_bits(12);b.hmr(z,mask);b.free(z)
+    L  86: mask=b.alloc_bits(12);b.hmr(eta,mask);b.free(eta)
+    L 101: mask=b.alloc_bits(24);b.hmr(L,mask);b.free(L);b.cz(U,mask)
+    L 121: @lru_cache(None)
+    L 132: @lru_cache(None)
+
+>>> DATEI: retired_top_block.py (186 Zeilen) <<<
+  [const] HERE = Path(__file__).resolve().parent [Zeile 9]
+  [const] ROOT = HERE.parents[2] [Zeile 9]
+  [def] mask_zero(b, n) [Zeile 20] defaults=[]
+  [class] RetiredTopOverlap [Zeile 24]
+  [def] product_frame(b, p, top, ct, delta) [Zeile 71] defaults=[]
+  [def] product_unframe(b, p, top, ct, delta) [Zeile 75] defaults=[]
+  [def] coefficient(b, h1, p, top, F, ct, delta) [Zeile 79] defaults=[]
+  [def] erase_coefficient(b, C, h1, p, top, F, ct, delta) [Zeile 91] defaults=[]
+  [def] two_head_return(b, words, gi, N, D, L, params, source, reference) [Zeile 102] defaults=[]
+  [def] make_return(first, last, source_type, defer_inverse) [Zeile 141] defaults=['16', '8', 'RetiredTopOverlap', 'True']
+  Interessante Stellen (12 Treffer, zeige Top 25):
+    L   5: The true polynomial top is retained; all width and source work are charged.
+    L  30: t=self.state['top'];m=b.alloc_bits(12);b.hmr(t,m);b.free(t)
+    L  33: f=self.state['flag'];m=b.alloc_bits(1);b.hmr(f,m[0]);b.free(f)
+    L  50: m=b.alloc_bits(12);b.hmr(t,m);b.swap(t,out);b.free(out)
+    L  53: m=b.alloc_bits(12);b.hmr(t,m);b.swap(t,out);b.free(out)
+    L  61: t=self.state['top'];m=b.alloc_bits(12);b.hmr(t,m);b.free(t)
+    L  92: m=b.alloc_bits(24);b.hmr(C,m);b.free(C);u,h=h1
+    L 110: divide_lowwidth369(b,N,combine(h1),K)
+    L 128: # This measured coordinate is a known inverse-Y function plus v.
+    L 129: m=b.alloc_bits(24);b.hmr(N,m)
+    L 164: b.ccx(F,N,D);m=b.alloc_bits(1);b.hmr(F,m[0]);b.free(F)
+    L 183: m=b.alloc_bits(1);b.hmr(f,m[0]);b.free(f)
+
+>>> DATEI: reverse_fusion.py (144 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 11]
+  [const] (p, ar) = (scalar.p, scalar.ar) [Zeile 17]
+  [def] install(cv) [Zeile 20] defaults=[]
+  Interessante Stellen (10 Treffer, zeige Top 25):
+    L   1: """Exact reverse middle fusion at the public root and degree-14 blocks.
+    L   3: The zero predicate is X-measured only while the three weight words coexist.
+    L  26: original_root=short['look_root_cached']
+    L  89: block=frames[-3:];cutoff=top-3
+    L 100: scope['payload_middle'](b,f[:cutoff],g[:cutoff],heads,
+    L 101: frame['payloads'][j][:cutoff],block[1]['f'][-2:],F0,F1,F)
+    L 112: cutoff=frame_to_top[m]-3
+    L 114: for i in range(cutoff,len(out)):
+    L 124: zm=b.alloc_bits(1);b.hmr(Z0,zm[0]);b.free(Z0)
+    L 142: short['look_root_cached']=root
+
+>>> DATEI: scalar_compact_v3.py (216 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[3] [Zeile 9]
+  [const] ar = p.ar [Zeile 17]
+  [def] prefix(b, x) [Zeile 20] defaults=[]
+  [def] finish(b, x, saved) [Zeile 28] defaults=[]
+  [def] inverse_zero_normpair(b, x) [Zeile 38] defaults=[]
+  [def] erase_normpair(b, x, ai, Z, saved, handoff) [Zeile 49] defaults=['None']
+  [def] scale_before_inverse(b, x, a) [Zeile 74] defaults=[]
+  [def] selected_partial(b, x, y, F, borrow) [Zeile 81] defaults=['11']
+  [def] converter_of(decoder) [Zeile 95] defaults=[]
+  [def] scope_of(cv) [Zeile 100] defaults=[]
+  [def] install_pre(cv, levels, plain_levels) [Zeile 105] defaults=['range(6, 17)', '(2, 3, 4, 5)']
+  [def] install_quotient(decoder, levels) [Zeile 157] defaults=['range(1, 16)']
+  [def] install_base(decoder) [Zeile 183] defaults=[]
+  [def] make_decoder(converter, reference_decode) [Zeile 206] defaults=['None', 'None']
+  [const] decode = make_decoder() [Zeile 216]
+  Interessante Stellen (9 Treffer, zeige Top 25):
+    L  16: from exp.arithmetic.lowwidth import classical_transpose
+    L  52: b.hmr(ai,mask)
+    L  57: b.hmr(Z,zm[0]);b.free(Z)
+    L  59: b.hmr(Z,zm[0]);b.free(ai);b.free(Z)
+    L  69: im=b.alloc_bits(6);b.hmr(invnorm,im);b.free(invnorm)
+    L  76: mask=b.alloc_bits(12);b.hmr(x,mask);b.swap(x,out);b.free(out)
+    L  88: mask=b.alloc_bits(12-borrow);b.hmr(z,mask);b.free(z)
+    L 125: zm=b.alloc_bits(1);b.hmr(Z0,zm[0]);b.free(Z0)
+    L 145: zm=b.alloc_bits(1);b.hmr(Z0,zm[0]);b.free(Z0)
+
+>>> DATEI: shrinking.py (290 Zeilen) <<<
+  [const] HERE = Path(__file__).resolve().parent [Zeile 15]
+  [const] ROOT = HERE.parents[2] [Zeile 16]
+  [const] ar = h.ar [Zeile 25]
+  [const] K = 2048 [Zeile 26]
+  [const] CENTERS = tuple((64 + 2 * j for j in range(17))) [Zeile 27]
+  [def] real_columns(center) [Zeile 31] defaults=[]
+  [def] expose(b, bank, real, offsets, center, reverse) [Zeile 36] defaults=['False']
+  [def] pivot(b, A, ra, B, rb, centers, reverse) [Zeile 50] defaults=['False']
+  [def] rebalance(b, U, W, A, B, ra, rb, offsets, center, reverse) [Zeile 74] defaults=['False']
+  [def] update_with_w(b, U, W, A, B, ra, rb, offsets, center, reverse) [Zeile 122] defaults=['False']
+  [def] v_to_w(b, U, V, reverse) [Zeile 172] defaults=['False']
+  [def] tail_geometry(center) [Zeile 182] defaults=[]
+  [def] tail_frame(b, A, B, center, reverse) [Zeile 195] defaults=['False']
+  [def] coefficient_geometry(centers) [Zeile 220] defaults=[]
+  [def] coefficient_frame(b, A, B, centers, reverse) [Zeile 235] defaults=['False']
+  [def] sweep(b, A, B, reverse, emitted_w, centers) [Zeile 255] defaults=['False', 'True', 'CENTERS']
+  Interessante Stellen (11 Treffer, zeige Top 25):
+    L   5: is made that this alone reconstructs the original Hermite syndromes.
+    L  12: from functools import lru_cache
+    L  30: @lru_cache(None)
+    L 181: @lru_cache(None)
+    L 188: rows = (tuple(x & 4095 for x in powers),
+    L 191: leads = (top & 4095, top >> 12, 0)
+    L 219: @lru_cache(None)
+    L 229: rows.extend((tuple(x&4095 for x in values),tuple(x>>12 for x in values)))
+    L 230: leads.extend((p&4095,p>>12));norms.append(eev(derivative,z))
+    L 256: """Monic 35/35 coefficient banks <-> 16 jets and a degree-three tail.
+    L 262: assert len(A) == len(B) == 35 and len(centers)==17
+
+>>> DATEI: synthesis_noflag.py (146 Zeilen) <<<
+  [const] ROOT = Path(__file__).resolve().parents[2] [Zeile 10]
+  [const] ck = base.ck [Zeile 19]
+  [def] xword(b, w, v) [Zeile 21] defaults=[]
+  [def] add_alias(b, src, targets, coeffs, virtual_zero, constant) [Zeile 24] defaults=['None', '0']
+  [def] eval_implicit(b, A, qi, c, reverse) [Zeile 31] defaults=['False']
+  [def] rank_affine(b, head, ac, words, bc, target, tc, constant) [Zeile 42] defaults=['0']
+  [def] projected_product(b, head, A, qi, target, kap) [Zeile 54] defaults=[]
+  [def] truncated_quotient(b, head, A, qi, B, kap) [Zeile 62] defaults=[]
+  [def] prefix_encode(b, heads, i, F, d) [Zeile 69] defaults=['None']
+  [def] prefix_decode(b, heads, i, F, m, d) [Zeile 82] defaults=['None']
+  [def] p_alias(heads, i, F) [Zeile 97] defaults=[]
+  [def] absorb(b, head, A, B, qi, p, virtual, pconst, c, kap, reverse, transcript) [Zeile 100] defaults=['False', 'None']
+  [def] synthesize(b, words, keep_leading) [Zeile 121] defaults=['True']
+  [def] unsynthesize(b, t) [Zeile 136] defaults=[]
+  Interessante Stellen (7 Treffer, zeige Top 25):
+    L   3: 70 input field words plus one rolling d field word and one boundary flag.
+    L   6: No edits to the live decoder; local measurement transcript is fully closed.
+    L  37: add_alias(b,qi,A[:2],[v&4095,v>>12],constant=1)
+    L  40: add_alias(b,qi,A[:2],[v&4095,v>>12],constant=1);return out
+    L 108: hm=b.alloc_bits(24);b.hmr(combine(head),hm)
+    L 110: fm=b.alloc_bits(1);b.hmr(flag,fm[0]);b.free(flag)
+    L 132: fmask=b.alloc_bits(1);b.hmr(F,fmask[0]);b.free(F)
+
+>>> DATEI: width_liveness.py (628 Zeilen) <<<
+  [const] MAGIC = bytes.fromhex('d750c7d5c329d326e3cc9f6834f2b8bf') [Zeile 40]
+  [const] HEADER_SIZE = 104 [Zeile 41]
+  [const] MAX_IDS = 500000000 [Zeile 42]
+  [const] (OP_HAS_1Q, OP_HAS_2Q, OP_HAS_3Q, OP_HAS_1B, OP_HAS_COND) = (16, 32, 48, 64, 128) [Zeile 45]
+  [const] TYPE2Q = {32: 'CZ', 160: 'CZ_IF', 33: 'CX', 161: 'CX_IF', 34: 'SWAP', 162: 'SWAP_IF'} [Zeile 49]
+  [const] RESET_TYPES = frozenset((18, 146, 80, 208)) [Zeile 57]
+  [const] TOFFOLI_TYPES = frozenset(set(TYPE3Q)) [Zeile 58]
+  [const] OP_INFO_TAG = 6 [Zeile 59]
+  [const] VALUE_TYPES = frozenset((17, 145, 33, 161, 34, 162, 49, 177, 50, 178, 18, 146, 80, 208)) [Zeile 63]
+  [def] die(msg) [Zeile 72] defaults=[]
+  [def] _validate_path(path) [Zeile 77] defaults=[]
+  [class] KmbReader [Zeile 94]
+  [def] sha256_of(path) [Zeile 227] defaults=[]
+  [def] _lut32(keys) [Zeile 236] defaults=[]
+  [def] op_positions(types, keys) [Zeile 242] defaults=[]
+  [def] first_last_for_array(vals, pos, nq) [Zeile 247] defaults=[]
+  [def] sweep_peak(segments) [Zeile 268] defaults=[]
+  [def] live_count_at(counts, p) [Zeile 303] defaults=[]
+  [def] main(argv) [Zeile 311] defaults=['None']
+  Interessante Stellen (34 Treffer, zeige Top 25):
+    L   2: """Qubit-width liveness analysis for kickmix .kmb circuits (DQI Benchmark II).
+    L   4: Question answered: can the declared qubit width (header num_qubits, which is the Q
+    L   9: is never loaded fully into RAM beyond page cache).
+    L  15: 4. Refined sweep: lifetimes are split at R / HMR ops (both reset the qubit to
+    L  19: 6. Working-ancilla (non-syndrome) idle analysis at the peak instant: interval
+    L  24: python3 width_liveness.py <path.kmb> [--json OUT.json] [--phases 20]
+    L  53: 0x50: "HMR", 0xD0: "HMR_IF"}
+    L  57: RESET_TYPES = frozenset((0x12, 0x92, 0x50, 0xD0))   # R, R_IF, HMR, HMR_IF
+    L  69: 0x50, 0xD0))         # HMR, HMR_IF
+    L 126: # internal consistency: every op has exactly one target class, except HMR
+    L 313: ap.add_argument("kmb", help="path to .kmb circuit file")
+    L 314: ap.add_argument("--json", dest="json_out", default=None, help="write full results to this JSON path"
+    L 315: ap.add_argument("--phases", type=int, default=20, help="histogram buckets (default 20)")
+    L 327: print(f"[width] {rd.path}\n[width] header: num_qubits={nq} num_bits={nb} num_ops={nops:,} "
+    L 375: print(f"[width] naive peak concurrent live qubits = {peak_naive} "
+    L 379: # ---- refined: split lifetimes at R/HMR ----
+    L 385: print(f"[width] R/HMR ops = {len(reset_pos):,}; qubits ever reset = {n_qubits_ever_reset}",
+    L 418: # conservative: every touch counts, split at R/HMR
+    L 428: # value-only: |0> stretches are inert, split at R/HMR
+    L 445: print(f"[width] refined peak (lifetimes split at R/HMR) = {peak_refined}", file=sys.stderr)
+    L 446: print(f"[width] VALUE-only peak (phase-inert |0> sharing allowed) = {peak_value}", file=sys.stderr)
+    L 469: # ---- syndrome vs working classification ----
+    L 474: syndrome_ids = sorted(set(q for q, names in reg_qids.items()
+    L 476: working_ids = [q for q in range(nq) if q not in set(syndrome_ids)]
+    L 562: r_hmr_ops=int(len(reset_pos)),

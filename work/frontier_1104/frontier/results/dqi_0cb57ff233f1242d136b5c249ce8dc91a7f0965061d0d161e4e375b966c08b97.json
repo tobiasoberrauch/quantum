@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "0cb57ff233f1242d136b5c249ce8dc91a7f0965061d0d161e4e375b966c08b97",
+ "sources": [
+  "d5__atakanaldemir__qcc-repaired-dqi-native-cache"
+ ],
+ "status": "PASS",
+ "score": 381282265113.2889,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 1,
+ "empirical_error_rate": 9.765625e-06,
+ "effective_error_rate": 0.0009104197583220583,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1967314991687559,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 400424.06859375,
+ "max_toffoli_count": 455755,
+ "reaction_depth": 65636,
+ "num_ops": 63852283,
+ "num_qubits": 892,
+ "num_bits": 101911,
+ "circuit_sha256": "0cb57ff233f1242d136b5c249ce8dc91a7f0965061d0d161e4e375b966c08b97",
+ "seconds": 104.5,
+ "ratio": 64.09808643056432
+}

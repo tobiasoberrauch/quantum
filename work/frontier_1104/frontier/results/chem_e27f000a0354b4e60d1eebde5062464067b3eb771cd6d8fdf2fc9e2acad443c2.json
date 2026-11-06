@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "e27f000a0354b4e60d1eebde5062464067b3eb771cd6d8fdf2fc9e2acad443c2",
+ "sources": [
+  "d5__heliosli__qcc-circuits-live",
+  "k5__heliosli__the-dataset-is-public-now-enjoy"
+ ],
+ "status": "PASS",
+ "score": 304298349.01396894,
+ "lambda_eff": 46.94305405082635,
+ "toffoli_count": 15181.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 614068,
+ "verified_shots": 78080,
+ "submission_sha256": "00023e574e97cabe6fd72b759274772cb1d7c6642120cf61190d238c6f62fce4",
+ "seconds": 15.9,
+ "ratio": 11.027334190897951
+}

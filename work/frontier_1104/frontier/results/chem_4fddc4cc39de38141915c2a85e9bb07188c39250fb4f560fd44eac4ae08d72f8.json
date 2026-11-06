@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "4fddc4cc39de38141915c2a85e9bb07188c39250fb4f560fd44eac4ae08d72f8",
+ "sources": [
+  "k5__kirilltym__quantum-compilation-19",
+  "k5__maoxin123__lb-24-786-pi-gauge-loaders-transferred-weights"
+ ],
+ "status": "PASS",
+ "score": 304305834.2401413,
+ "lambda_eff": 46.944208770784336,
+ "toffoli_count": 15181.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 614068,
+ "verified_shots": 78080,
+ "submission_sha256": "97768800c6083f6d74a6bce480aee72c77c87e5201f2b46384f6ef5dd337df41",
+ "seconds": 15.8,
+ "ratio": 11.027062943747193
+}

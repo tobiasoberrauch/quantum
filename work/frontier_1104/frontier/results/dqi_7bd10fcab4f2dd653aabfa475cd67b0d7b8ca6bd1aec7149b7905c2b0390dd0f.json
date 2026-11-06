@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "7bd10fcab4f2dd653aabfa475cd67b0d7b8ca6bd1aec7149b7905c2b0390dd0f",
+ "sources": [
+  "k5__atakanaldemir__qcc-gap-3-residue-repair-and-c43-native-compiler"
+ ],
+ "status": "PASS",
+ "score": 382458090510.632,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 403503.6010058594,
+ "max_toffoli_count": 458203,
+ "reaction_depth": 62827,
+ "num_ops": 64423744,
+ "num_qubits": 892,
+ "num_bits": 101079,
+ "circuit_sha256": "7bd10fcab4f2dd653aabfa475cd67b0d7b8ca6bd1aec7149b7905c2b0390dd0f",
+ "seconds": 113.8,
+ "ratio": 63.901023903149806
+}

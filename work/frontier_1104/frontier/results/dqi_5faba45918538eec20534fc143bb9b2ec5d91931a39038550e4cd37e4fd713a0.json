@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "5faba45918538eec20534fc143bb9b2ec5d91931a39038550e4cd37e4fd713a0",
+ "sources": [
+  "k__leotang09__vqcc-t7421-submission"
+ ],
+ "status": "PASS",
+ "score": 401985790933.50806,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 427935.2304296875,
+ "max_toffoli_count": 442513,
+ "reaction_depth": 8314,
+ "num_ops": 59052772,
+ "num_qubits": 888,
+ "num_bits": 101599,
+ "circuit_sha256": "5faba45918538eec20534fc143bb9b2ec5d91931a39038550e4cd37e4fd713a0",
+ "seconds": 89.0,
+ "ratio": 60.79683445257753
+}

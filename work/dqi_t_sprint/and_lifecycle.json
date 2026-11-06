@@ -1,0 +1,116 @@
+{
+ "<gap>": {
+  "opened": 33775,
+  "closed_del": 25711,
+  "conflict_new_target": 109936,
+  "destroyed_by_cswap": 694,
+  "closed_hmr": 7019,
+  "bare_reset": 9991
+ },
+ "synthesis": {
+  "conflict_new_target": 18812,
+  "closed_del": 6061,
+  "opened": 6740,
+  "destroyed_by_cswap": 12,
+  "closed_hmr": 640,
+  "bare_reset": 1111
+ },
+ "convert": {
+  "conflict_new_target": 31829,
+  "closed_del": 9598,
+  "opened": 14520,
+  "destroyed_by_cswap": 618,
+  "bare_reset": 4164,
+  "closed_hmr": 4107
+ },
+ "unconvert": {
+  "conflict_new_target": 16579,
+  "closed_del": 5141,
+  "opened": 12328,
+  "destroyed_by_cswap": 518,
+  "closed_hmr": 6853,
+  "bare_reset": 7011
+ },
+ "full_head_product": {
+  "opened": 51,
+  "closed_del": 40,
+  "conflict_new_target": 119
+ },
+ "aligned_route": {
+  "destroyed_by_cswap": 12
+ },
+ "unsynthesis": {
+  "conflict_new_target": 23569,
+  "closed_del": 7425,
+  "opened": 9266,
+  "destroyed_by_cswap": 6,
+  "closed_hmr": 2069,
+  "bare_reset": 2504
+ },
+ "head_phase": {
+  "closed_hmr": 11,
+  "opened": 13,
+  "conflict_new_target": 22,
+  "closed_del": 7,
+  "bare_reset": 1
+ },
+ "extract": {
+  "bare_reset": 850,
+  "opened": 776,
+  "conflict_new_target": 2407,
+  "closed_del": 456,
+  "closed_hmr": 298
+ },
+ "head_pivot": {},
+ "unextract": {
+  "opened": 510,
+  "closed_del": 469,
+  "conflict_new_target": 1885,
+  "closed_hmr": 34,
+  "bare_reset": 28,
+  "destroyed_by_cswap": 7
+ },
+ "inverse24 scalar": {
+  "opened": 17,
+  "conflict_new_target": 37,
+  "closed_del": 4,
+  "closed_hmr": 13,
+  "bare_reset": 9
+ },
+ "inverse12 scalar": {
+  "bare_reset": 6,
+  "opened": 13,
+  "closed_hmr": 6,
+  "conflict_new_target": 5
+ },
+ "inverse12 products": {
+  "opened": 4,
+  "closed_del": 1,
+  "conflict_new_target": 20
+ },
+ "inverse24 products": {
+  "opened": 9,
+  "conflict_new_target": 56,
+  "closed_del": 5
+ },
+ "multiply v": {
+  "conflict_new_target": 55,
+  "closed_del": 21,
+  "opened": 23
+ },
+ "inverse24 norm": {
+  "opened": 11,
+  "conflict_new_target": 25,
+  "closed_del": 6
+ },
+ "scan": {
+  "bare_reset": 44275,
+  "opened": 44275,
+  "closed_hmr": 44275
+ },
+ "inverse12 norm": {
+  "opened": 6,
+  "conflict_new_target": 6,
+  "closed_del": 3
+ }
+}

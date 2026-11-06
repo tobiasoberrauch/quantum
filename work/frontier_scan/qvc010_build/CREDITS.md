@@ -1,0 +1,12 @@
+# Credits for this reproduced portfolio
+
+This release combines public components, reproduces their verification, and applies Atakan Aldemir's exact affine product-chain scanner/emitter to the selected Syed decoder. The measured additional reduction is four static Toffoli gates at unchanged quantum width. It is not a new chemistry factorization or decoder architecture.
+
+- **Chemistry:** Syed Asad Ali's complete C44 table, angle representation, Givens tree and matching 15 loaders, with **Heliosli's refined W/H2_I weights**, from [Helios v76_y33_ay3](https://www.kaggle.com/datasets/heliosli/qcc-circuits-live). The original table/compiler builds on [Lera's DF-THC pipeline](https://www.kaggle.com/code/marculera/df-thc-10x-compact-groups-from-the-hamiltonian), Ahmed Berat Özer's rounding and the authors credited upstream. We adopt this family intact.
+- **Inverse square root:** [yoyobar version 33](https://www.kaggle.com/code/yoyobar/lb-22-99-invsqrt-101-62-qubits), on Syed's version-5 file and the inherited public lineage. Unchanged here.
+- **DQI baseline:** [Syed Asad Ali version 7](https://www.kaggle.com/code/syed3000/vqcc-own-circuit-portfolio-notebook), inherited through Helios's release. The final decoder is modified by the four retained-product chains described in this notebook.
+- **Scanner/emitter:** [Atakan Aldemir's version-1 source release](https://www.kaggle.com/datasets/atakanaldemir/qcc-c44-five-helper-release-sources/versions/1), unchanged source files; Busya PRIME's retained-product idea and Gidney's measurement-based uncomputation are credited there. Scope-aware exact affine identities and idle-wire eligibility come from Atakan's implementation.
+- **This release:** daifanhao's reproducible integration, pinned artifacts, execution workflow and application of the four-chain rewrite to this decoder, developed with Codex. No claim of authorship over the inherited circuits, fit or scanner algorithm.
+- **Organizers:** Google Quantum AI / Qualtran competition definitions, kickmix and official verifiers, loaded from attached competition data.
+
+UPSTREAM_HELIOS_CREDITS.md is the original Helios statement, preserved verbatim. Its first-person statements refer to Helios, not this release. Its byte-identical DQI description refers to our input decoder; our final decoder includes the four-chain rewrite. All earlier contributor notices are preserved in that document.

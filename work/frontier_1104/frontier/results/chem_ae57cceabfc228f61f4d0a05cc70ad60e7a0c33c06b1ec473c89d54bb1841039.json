@@ -1,0 +1,22 @@
+{
+ "component": "chem",
+ "key": "ae57cceabfc228f61f4d0a05cc70ad60e7a0c33c06b1ec473c89d54bb1841039",
+ "sources": [
+  "MIX loaders=ahmedberatozer/vqcc-v23-portfolio npz=kalidenaiarys_b46369",
+  "k__kalidenaiarys__quantum-circuit-compilation-public-lb-24-59425"
+ ],
+ "status": "PASS",
+ "score": 308561949.84816515,
+ "lambda_eff": 47.18429756505502,
+ "toffoli_count": 15315.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 603646,
+ "verified_shots": 78080,
+ "submission_sha256": "a4cc102189a1a70fada4a034882b2068c2d7e67329116bc08855887e9a9231df",
+ "seconds": 18.9,
+ "ratio": 10.874962353481159
+}

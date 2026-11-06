@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "86a9e589aef69465c2c8789ddc4d9715859bc1a81caab96456e613fb1044f83f",
+ "sources": [
+  "k__dmitriigluzdov__quantum-circuit-compilation-from-source"
+ ],
+ "status": "PASS",
+ "score": 317298974.73052967,
+ "lambda_eff": 47.04313374563736,
+ "toffoli_count": 15759.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 259,
+ "num_ops": 669868,
+ "verified_shots": 87232,
+ "submission_sha256": "c292981ebefa835423165887301855097fdbc98bfe66e361a172a58d4aa57422",
+ "seconds": 16.5,
+ "ratio": 10.575513492173508
+}

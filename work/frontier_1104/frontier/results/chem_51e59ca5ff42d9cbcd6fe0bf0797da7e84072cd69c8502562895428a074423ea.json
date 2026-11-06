@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "51e59ca5ff42d9cbcd6fe0bf0797da7e84072cd69c8502562895428a074423ea",
+ "sources": [
+  "k__busyaprime__lb-23-91003-exact-dqi-rewrites-at-892-qubits"
+ ],
+ "status": "PASS",
+ "score": 326801702.1535616,
+ "lambda_eff": 47.037231495315815,
+ "toffoli_count": 16233.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 240,
+ "num_ops": 689060,
+ "verified_shots": 87232,
+ "submission_sha256": "7d0ad9584264ff1c7e430cba47508e68ee8afce0667ef4f4af5ed44bb597c83b",
+ "seconds": 26.8,
+ "ratio": 10.267999114456163
+}

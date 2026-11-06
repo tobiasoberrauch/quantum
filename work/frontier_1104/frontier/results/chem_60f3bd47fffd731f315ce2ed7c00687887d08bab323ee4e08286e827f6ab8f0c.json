@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "60f3bd47fffd731f315ce2ed7c00687887d08bab323ee4e08286e827f6ab8f0c",
+ "sources": [
+  "k__saddamaditya__narrowed-877q-dqi-and-progressive-r10-chemistry"
+ ],
+ "status": "PASS",
+ "score": 355186805.3708027,
+ "lambda_eff": 47.55333620343766,
+ "toffoli_count": 17330.0,
+ "num_qubits": 431,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 733588,
+ "verified_shots": 87424,
+ "submission_sha256": "8c7b02eb3b5b8656da2f91e541fd3426eaa8943edd926549ab8d35305c66d340",
+ "seconds": 22.6,
+ "ratio": 9.447421856823786
+}

@@ -1,0 +1,30 @@
+{
+ "component": "dqi",
+ "key": "1698e864a3a638ef0569c438f01958731ebc164a917a4b84b8ff14598b83ab54",
+ "sources": [
+  "d__manwithacat__vqcc-hedge-wizardry"
+ ],
+ "status": "PASS",
+ "score": 378829960526.11633,
+ "m": 4095,
+ "n": 70,
+ "degree": 12,
+ "r": 2016,
+ "verified_shots": 102400,
+ "value_errors": 0,
+ "phase_errors": 0,
+ "empirical_error_rate": 0.0,
+ "effective_error_rate": 0.0008660587301657926,
+ "log2_delta": -128.0,
+ "repetition_factor": 1.1912604648115832,
+ "mean_error_weight": 31.046737331746655,
+ "toffoli_count": 399675.826015625,
+ "max_toffoli_count": 454669,
+ "reaction_depth": 64143,
+ "num_ops": 63908319,
+ "num_qubits": 892,
+ "num_bits": 101914,
+ "circuit_sha256": "1698e864a3a638ef0569c438f01958731ebc164a917a4b84b8ff14598b83ab54",
+ "seconds": 137.2,
+ "ratio": 64.51301673640485
+}

@@ -1,0 +1,72 @@
+{
+ "manifest_sha256": "c6d5c41b916060b2b0b3e2d694de46b4c569dab5ea16226b315f8d33546427e5",
+ "submission_sha256": "7d28a944a6efb20bc4c6f8f7e8b3a01e6e4e05c344efb68d946bcf62b2f4886a",
+ "geometric_mean_local": 24.485245309767492,
+ "fork": {
+  "kickmix_tools_version": "0.3.0",
+  "fork_version": "0.3.1",
+  "fork_install": "local wheel kickmix-0.3.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (SHA-256 matches SHA256SUMS)",
+  "fork_build_dir": "/tmp/kickmix_fork",
+  "engine_version": null,
+  "engine_install": null,
+  "engine_build_dir": null
+ },
+ "picks": {
+  "invsqrt": {
+   "sha256": "e4ed188b61634d6131e024c07926251deecb1fd1d4753f491dab60741aa75f90",
+   "author": "Kirill Tymchishin",
+   "notebook_title": "Quantum Circuits | Four Loaders, Eight Toffolis",
+   "source_notebook_url": "https://www.kaggle.com/code/kirilltym/quantum-circuits-four-loaders-eight-toffolis",
+   "release_date": "2026-11-03 14:53",
+   "local_task_score": "98533.87232080253"
+  },
+  "dqi": {
+   "sha256": "fc3ba81614e1016f7fbc6c58bc229243fc0c26aa5de601caef7d280e7d14dad9",
+   "author": "Syed Asad Ali",
+   "notebook_title": "VQCC 24.43 Portfolio",
+   "source_notebook_url": "https://www.kaggle.com/code/syed3000/vqcc-24-43-portfolio",
+   "release_date": "2026-11-03 12:32",
+   "local_task_score": "375376238975.30585"
+  },
+  "chemistry": {
+   "sha256": "4a9adf368a10836489d73b376a3c0ebc08cdeb11788d24a095312ca4459f7b24",
+   "author": "Agniv Banerjee",
+   "notebook_title": "QCC ladder parts",
+   "source_notebook_url": "https://www.kaggle.com/datasets/somejoint/qcc-ladder-parts",
+   "release_date": "2026-11-03 15:50",
+   "local_task_score": "313678954.0955252"
+  }
+ },
+ "hedge_blend": {},
+ "chemistry_assembly": null,
+ "verification": {
+  "invsqrt": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 9cf1a6e445ddd4ad\u2026",
+  "dqi": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 df02471d746671ed\u2026",
+  "chemistry": "reused: manifest.csv local report (local official verifier, default salt), 2026-11-03; report sha256 f08aba3496ed1f46\u2026"
+ },
+ "results": {
+  "invsqrt": {
+   "status": "PASS",
+   "score": 98533.87232080253,
+   "num_qubits": 62,
+   "toffoli_count": null
+  },
+  "dqi": {
+   "status": "PASS",
+   "score": 375376238975.30585,
+   "num_qubits": 891,
+   "toffoli_count": null
+  },
+  "chemistry": {
+   "status": "PASS",
+   "score": 313678954.0955252,
+   "num_qubits": 428,
+   "toffoli_count": 15585.0,
+   "metrics": {
+    "error_1": 0.010270472386659688,
+    "error_2": 0.019999650033498264,
+    "E_gap": 3.9148992000045837
+   }
+  }
+ }
+}

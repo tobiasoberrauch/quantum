@@ -1,0 +1,389 @@
+{
+ "ts": "2026-11-03 07:34:26",
+ "lb_top": [
+  {
+   "team": "James & Geremie & Tony 2026-11-03",
+   "date": "01:42:36.070000",
+   "score": 28.82853
+  },
+  {
+   "team": "Schr\u00f6dinger\u2019s cat lived 2026-11-02",
+   "date": "23:19:18.063000",
+   "score": 28.07608
+  },
+  {
+   "team": "Breaking1800 2026-11-01",
+   "date": "21:05:13.980000",
+   "score": 27.99617
+  },
+  {
+   "team": "Jack 2026-11-02",
+   "date": "05:58:15.040000",
+   "score": 27.79189
+  },
+  {
+   "team": "Thinking... 2026-11-01",
+   "date": "20:28:57.690000",
+   "score": 26.81091
+  },
+  {
+   "team": "Bingran You 2026-11-01",
+   "date": "20:57:55.533000",
+   "score": 26.8032
+  },
+  {
+   "team": "\u7530\u6751\u3055\u3093\u3092\u56f2\u3080\u4f1a 2026-11-03",
+   "date": "04:43:10.616000",
+   "score": 26.67001
+  },
+  {
+   "team": "taiseiu 2026-11-03",
+   "date": "01:48:12.183000",
+   "score": 26.4333
+  },
+  {
+   "team": "Adisak Sukul 2026-11-02",
+   "date": "00:37:24.223000",
+   "score": 26.35447
+  },
+  {
+   "team": "trust the transpiler 2026-11-01",
+   "date": "17:56:18.536000",
+   "score": 26.15339
+  },
+  {
+   "team": "Z\u00b3uperposition 2026-11-03",
+   "date": "04:08:06.970000",
+   "score": 26.04894
+  },
+  {
+   "team": "Yan Zhou 2026-11-02",
+   "date": "08:19:21.666000",
+   "score": 25.87803
+  },
+  {
+   "team": "smlcr 2026-11-03",
+   "date": "01:22:47.910000",
+   "score": 25.79122
+  },
+  {
+   "team": "Dan Pavlides (Zillatron) 2026-11-02",
+   "date": "04:58:36.050000",
+   "score": 25.78312
+  },
+  {
+   "team": "Earthwalker 2026-11-03",
+   "date": "00:46:12.043000",
+   "score": 25.72667
+  },
+  {
+   "team": "Some Joint 2026-11-02",
+   "date": "23:46:27.963000",
+   "score": 25.71721
+  },
+  {
+   "team": "CroDoc & Pavel 2026-11-02",
+   "date": "18:46:25.336000",
+   "score": 25.60607
+  },
+  {
+   "team": "Bingchen Zhao 2026-11-03",
+   "date": "04:20:19.876000",
+   "score": 25.53939
+  },
+  {
+   "team": "Cache Me If You Can 2026-10-31",
+   "date": "13:35:02.966000",
+   "score": 25.47565
+  },
+  {
+   "team": "Distortion!! 2026-11-02",
+   "date": "23:08:03.830000",
+   "score": 25.40191
+  }
+ ],
+ "datasets": {
+  "heliosli/qcc-circuits-live": {
+   "files_hash": "3c2d0b7a5794",
+   "n_files_page1": 21,
+   "latest": null
+  },
+  "yoyobar/qcc-local-sota-20261031": {
+   "files_hash": "9a75ae5e81f1",
+   "n_files_page1": 31,
+   "latest": null
+  },
+  "somejoint/qcc-dqi-892-q26": {
+   "files_hash": "4a9d2db61f0a",
+   "n_files_page1": 42,
+   "latest": null
+  },
+  "manwithacat/vqcc-apache-public-circuits": {
+   "files_hash": "33c528f6ea1a",
+   "n_files_page1": 200,
+   "latest": null
+  },
+  "busyaprime/33-qcc-v8-members": {
+   "files_hash": "f655fc6f34c7",
+   "n_files_page1": 23,
+   "latest": null
+  },
+  "dmitriigluzdov/vqcc-femoco-public-factorization": {
+   "files_hash": "65d0c625ec48",
+   "n_files_page1": 200,
+   "latest": null
+  }
+ },
+ "kernels": [
+  {
+   "ref": "manwithacat/vqcc-hedge-wizardry-notebook",
+   "run": "02:29:47.063000",
+   "votes": "40"
+  },
+  {
+   "ref": "yoyobar/lb-22-99-invsqrt-101-62-qubits",
+   "run": "05:24:29.400000",
+   "votes": "68"
+  },
+  {
+   "ref": "leoprovorov/the-unbearable-lightness-of-quantum-circuits",
+   "run": "01:05:37.497000",
+   "votes": "28"
+  },
+  {
+   "ref": "prvsiyan/verifier-guided-quantum-circuit-optimization",
+   "run": "23:48:42.147000",
+   "votes": "19"
+  },
+  {
+   "ref": "sigmaborov/22-85569-lb-exact-gauge-search",
+   "run": "19:20:52.633000",
+   "votes": "27"
+  },
+  {
+   "ref": "busyaprime/lb-23-91003-exact-dqi-rewrites-at-892-qubits",
+   "run": "06:17:06.323000",
+   "votes": "50"
+  },
+  {
+   "ref": "isabe11am00re/qcc-v58x-submission",
+   "run": "23:42:18.757000",
+   "votes": "2"
+  },
+  {
+   "ref": "harshalekkala1/fork-the-real-150k-friends-we-made",
+   "run": "02:17:44.927000",
+   "votes": "0"
+  },
+  {
+   "ref": "manwithacat/the-real-150k-was-the-friends-we-made",
+   "run": "04:58:26.177000",
+   "votes": "77"
+  },
+  {
+   "ref": "dcpracmatic/google-quantum-ai-compilaci-n-verificable-de-cir",
+   "run": "03:56:11.590000",
+   "votes": "0"
+  },
+  {
+   "ref": "isabe11am00re/qcc-v49x-submission",
+   "run": "19:18:50.030000",
+   "votes": "1"
+  },
+  {
+   "ref": "matousakura/best-of-public-portfolio-vqcc-24-0x-class",
+   "run": "06:10:29.187000",
+   "votes": "0"
+  },
+  {
+   "ref": "arzarei/23-910-local-gm-exact-dqi-rewrites-892-qubits-pro",
+   "run": "05:48:42.790000",
+   "votes": "3"
+  },
+  {
+   "ref": "harshitsama/quantum-leaderboard-anatomy",
+   "run": "12:12:07.867000",
+   "votes": "1"
+  },
+  {
+   "ref": "isabe11am00re/qcc-v58-submission",
+   "run": "18:15:57.637000",
+   "votes": "0"
+  },
+  {
+   "ref": "dcvxzyk/gvqcc-verify-portfolio-v1",
+   "run": "17:45:33.167000",
+   "votes": "0"
+  },
+  {
+   "ref": "utkarshkviim/quantum-compilation-starter-local-scorer",
+   "run": "16:42:12.087000",
+   "votes": "0"
+  },
+  {
+   "ref": "mohanrajvelu/quantum-circuit-compilation-baseline",
+   "run": "17:45:53.620000",
+   "votes": "0"
+  },
+  {
+   "ref": "jtheyogi/exp3-orthogonal-gauge-descent-sota-portfolio",
+   "run": "16:25:18.020000",
+   "votes": "0"
+  },
+  {
+   "ref": "olekis/dqi-quantum-decoder-optimization",
+   "run": "16:18:30.687000",
+   "votes": "0"
+  },
+  {
+   "ref": "olekis/verifiable-quantum-circuit-optimization-h14",
+   "run": "16:07:54.983000",
+   "votes": "0"
+  },
+  {
+   "ref": "tobeetaylor/constseed-invsqrt-reconstruction",
+   "run": "07:35:45.553000",
+   "votes": "1"
+  },
+  {
+   "ref": "anglolodorf/qcc-agentic-qwen-sota-portfolio",
+   "run": "13:14:26.163000",
+   "votes": "0"
+  },
+  {
+   "ref": "harshitsama/quantum-notebook-score-claims",
+   "run": "12:23:24.100000",
+   "votes": "0"
+  },
+  {
+   "ref": "emmanuelmirekumensah/q-busya-23-909-portfolio",
+   "run": "01:28:33.807000",
+   "votes": "1"
+  },
+  {
+   "ref": "metric/google-quantum-ai-metric",
+   "run": "17:38:55.393000",
+   "votes": "47"
+  },
+  {
+   "ref": "marculera/df-thc-10x-compact-groups-from-the-hamiltonian",
+   "run": "00:30:03.940000",
+   "votes": "10"
+  },
+  {
+   "ref": "mrmeows/21-0-circuits-let-s-all-reach-the-plateau",
+   "run": "02:15:06.830000",
+   "votes": "52"
+  },
+  {
+   "ref": "somejoint/quantum-circuits-24-15-local-gm-892-qubit-dqi",
+   "run": "23:25:52.037000",
+   "votes": "98"
+  },
+  {
+   "ref": "kawh1111/qcomp-harvest-v32",
+   "run": "02:58:21.353000",
+   "votes": "4"
+  },
+  {
+   "ref": "isabe11am00re/qcc-v47-submission",
+   "run": "19:07:25.350000",
+   "votes": "22"
+  },
+  {
+   "ref": "lightningv08/bezout-schur-5-word-qrom",
+   "run": "20:26:57.737000",
+   "votes": "55"
+  },
+  {
+   "ref": "phucthaiv02/qcc-verified-portfolio-df-thc-retraining-study",
+   "run": "19:26:49.240000",
+   "votes": "31"
+  },
+  {
+   "ref": "atakanaldemir/quantum-circuits-iso-gap-dqi-h5",
+   "run": "06:47:13.533000",
+   "votes": "20"
+  },
+  {
+   "ref": "anazemcev/quantum-circuits-source-exact-compilation",
+   "run": "08:05:29.987000",
+   "votes": "29"
+  },
+  {
+   "ref": "manwithacat/vqcc-chemistry-primer-df-thc-task-explained",
+   "run": "11:31:01.917000",
+   "votes": "2"
+  },
+  {
+   "ref": "ahoirg/score-23-64254-reproducible-circuit-portfolio",
+   "run": "23:38:47.053000",
+   "votes": "6"
+  },
+  {
+   "ref": "anazemcev/quantum-circuits-signed-digit-memory",
+   "run": "15:17:19.567000",
+   "votes": "21"
+  },
+  {
+   "ref": "kozykappa/lb-21-38884-quantum-ai-q-circuits",
+   "run": "09:01:31.553000",
+   "votes": "20"
+  },
+  {
+   "ref": "mpwolke/quantum-ai-kickmix-say-it-isn-t-so",
+   "run": "15:56:55.967000",
+   "votes": "19"
+  },
+  {
+   "ref": "alexchilton/24-17-lb-verified-three-task-portfolio",
+   "run": "02:00:33.580000",
+   "votes": "96"
+  },
+  {
+   "ref": "seyitkaangunes/verified-portfolio-best-public-circuit-per-task",
+   "run": "11:39:19.367000",
+   "votes": "8"
+  },
+  {
+   "ref": "rudrabhaskar/highest-public-score-direct-polynomial-phasing",
+   "run": "11:36:01.380000",
+   "votes": "17"
+  },
+  {
+   "ref": "marculera/kickmix-from-scratch-build-check-debug-verify",
+   "run": "02:13:23.877000",
+   "votes": "7"
+  },
+  {
+   "ref": "saddamaditya/narrowed-877q-dqi-and-progressive-r10-chemistry",
+   "run": "15:54:14.130000",
+   "votes": "16"
+  },
+  {
+   "ref": "anazemcev/quantum-circuits-thc-joint-norm-881q-dqi",
+   "run": "15:12:12.780000",
+   "votes": "16"
+  },
+  {
+   "ref": "heliosli/the-dataset-is-public-now-enjoy",
+   "run": "06:15:54.227000",
+   "votes": "112"
+  },
+  {
+   "ref": "dmitriigluzdov/quantum-circuit-compilation-from-source",
+   "run": "09:10:49.750000",
+   "votes": "86"
+  },
+  {
+   "ref": "leoprovorov/but-some-q-squared-width-lab",
+   "run": "01:45:37.623000",
+   "votes": "15"
+  },
+  {
+   "ref": "avikdas567/fault-tolerant-kickmix-quantum-circuit-synthesis",
+   "run": "09:17:35.530000",
+   "votes": "16"
+  }
+ ]
+}

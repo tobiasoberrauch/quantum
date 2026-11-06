@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "dca29775feb1d4e735041fb4c67894b8648553ba93b08c3bd8ec346d04453edb",
+ "sources": [
+  "k5__atakanaldemir__qcc-gap-3-residue-repair-and-c43-native-compiler"
+ ],
+ "status": "PASS",
+ "score": 304795695.5837307,
+ "lambda_eff": 47.01977798633888,
+ "toffoli_count": 15181.0,
+ "num_qubits": 427,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 165,
+ "num_ops": 614068,
+ "verified_shots": 78080,
+ "submission_sha256": "88e42951eb0a01d158ddf54d207275933a67eaa8e9cbb3de0d4365c59e6cf39b",
+ "seconds": 15.9,
+ "ratio": 11.009340476049202
+}

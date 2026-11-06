@@ -1,0 +1,37 @@
+{
+ "ts": "2026-11-04 11:20:27",
+ "lb_top": [],
+ "datasets": {
+  "heliosli/qcc-circuits-live": {
+   "files_hash": "e3b0c44298fc",
+   "n_files_page1": 0,
+   "latest": null
+  },
+  "yoyobar/qcc-local-sota-20261031": {
+   "files_hash": "e3b0c44298fc",
+   "n_files_page1": 0,
+   "latest": null
+  },
+  "somejoint/qcc-dqi-892-q26": {
+   "files_hash": "e3b0c44298fc",
+   "n_files_page1": 0,
+   "latest": null
+  },
+  "manwithacat/vqcc-apache-public-circuits": {
+   "files_hash": "e3b0c44298fc",
+   "n_files_page1": 0,
+   "latest": null
+  },
+  "busyaprime/33-qcc-v8-members": {
+   "files_hash": "e3b0c44298fc",
+   "n_files_page1": 0,
+   "latest": null
+  },
+  "dmitriigluzdov/vqcc-femoco-public-factorization": {
+   "files_hash": "e3b0c44298fc",
+   "n_files_page1": 0,
+   "latest": null
+  }
+ },
+ "kernels": []
+}

@@ -1,0 +1,22 @@
+ref                                                   title                                                    size  lastUpdated                 downloadCount  voteCount  usabilityRating  
+----------------------------------------------------  -------------------------------------------------  ----------  --------------------------  -------------  ---------  ---------------  
+isabe11am00re/qcc-v66s33w-circuits                    qcc-v66s33w-circuits                                 12331537  2026-11-04 17:36:33.353000             25          0  0.3125           
+somejoint/qcc-ladder-parts                            QCC ladder parts                                     39773475  2026-11-04 17:03:47.083000           3056          0  0.5625           
+mdkawsarahamed/qcc-verified-public-portfolio-costs    Verifiable Quantum Compilation - Verified Costs          1439  2026-11-04 16:26:00.820000             16          0  0.4117647        
+yoyobar/qcc-local-sota-20261031                       QCC Public Portfolio: invsqrt, DQI, Chemistry        41801278  2026-11-04 15:22:51.027000           9172          1  0.5625           
+isabe11am00re/qcc-v66yk5-circuits                     qcc-v66yk5-circuits                                  12607178  2026-11-04 14:09:34.103000            153          1  0.3125           
+dmitriigluzdov/vqcc-femoco-public-factorization       VQCC FeMoCo Angle Words                             302896287  2026-11-04 12:05:16.163000          37208         21  1                
+isabe11am00re/qcc-v65wqq-circuits                     qcc-v65wqq-circuits                                  12735941  2026-11-04 11:58:36.587000            120          1  0.3125           
+heliosli/qcc-circuits-live                            QCC circuits live                                    12735777  2026-11-04 07:59:23.647000          18410          3  0.3125           
+isabe11am00re/qcc-v63sn-circuits                      qcc-v63sn-circuits                                   12469084  2026-11-03 22:55:32.203000            160          0  0.3125           
+ahoirg/qcc-reproducible-circuit-assets                QCC Reproducible Circuit Assets                      27164756  2026-11-03 22:02:58.173000           1040          0  0.5              
+isabe11am00re/qcc-v63sj-circuits                      qcc-v63sj-circuits                                   12732962  2026-11-03 17:19:33.070000            146          0  0.25             
+isabe11am00re/qcc-v62-circuits                        qcc-v62-circuits                                     12467332  2026-11-03 16:10:20.240000            116          0  0.25             
+victorzhong0110/vqcc-dfthc-baseline-metrics           VQCC DF-THC Baseline Metrics                            17426  2026-11-03 04:41:44.877000            252          0  0.64705884       
+isabe11am00re/qcc-v59a-circuits                       qcc-v59a-circuits                                    13897076  2026-11-02 23:41:29.510000            191          0  0.3125           
+somejoint/qcc-v27-parts                               QCC v27 parts                                        42968306  2026-11-02 20:52:52.427000             87          0  0.5625           
+roserrll/qcc-portfolio54-v58y-public-1103             QCC portfolio54 v58y public chemistry inputs 1103    13911688  2026-11-02 20:16:30.677000            135          0  0.4375           
+roserrll/qcc-portfolio53-public24x-gauge-inputs-1103  QCC portfolio53 public24x gauge inputs 1103          13938458  2026-11-02 20:04:04.933000             54          0  0.4375           
+isabe11am00re/qcc-v58y-circuits                       qcc-v58y-circuits                                    13906350  2026-11-02 19:50:25.293000            134          0  0.25             
+isabe11am00re/qcc-v58x-circuits                       qcc-v58x-circuits                                    13938814  2026-11-02 19:18:22.563000             97          0  0.3125           
+sigmaborov/qcc-frozen-alex-v83-public-baseline        QCC frozen Alex V83 public baseline                  27801849  2026-11-02 15:20:20.347000            127          1  0.5625           

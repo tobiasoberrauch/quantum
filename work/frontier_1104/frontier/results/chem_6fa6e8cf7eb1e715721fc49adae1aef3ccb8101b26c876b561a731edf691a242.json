@@ -1,0 +1,21 @@
+{
+ "component": "chem",
+ "key": "6fa6e8cf7eb1e715721fc49adae1aef3ccb8101b26c876b561a731edf691a242",
+ "sources": [
+  "k__qiuqiuh__qcc-refresh-v65w-sx-sy7-inverse"
+ ],
+ "status": "PASS",
+ "score": 312443243.84047496,
+ "lambda_eff": 47.021422162095355,
+ "toffoli_count": 15525.0,
+ "num_qubits": 428,
+ "brot": 8,
+ "batch_size": 5,
+ "num_circuits": 15,
+ "reaction_depth": 275,
+ "num_ops": 662277,
+ "verified_shots": 87232,
+ "submission_sha256": "6d298e18657be8e17f30d6c5f1eb1b2ab94c69a28f3b467e8b06ecf04d9b5448",
+ "seconds": 13.5,
+ "ratio": 10.739869254554327
+}
