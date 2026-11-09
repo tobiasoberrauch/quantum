@@ -5,6 +5,7 @@ from unittest import mock
 
 import qvc_agent.client as C
 import qvc_agent.memory as M
+import qvc_agent.oracle as O
 import qvc_agent.proposal as P
 
 def _fake_cfg(tmp, with_key=True, provider="audius-we"):
@@ -141,3 +142,35 @@ class TestMemory(unittest.TestCase):
             M.append_loop_log(rd, rec)
             raw = (rd / "loop.jsonl").read_text()
             self.assertNotIn("sk-", raw)
+
+
+class TestOracle(unittest.TestCase):
+    def test_extract_cost_pass_identical(self):
+        r = {"all_passed": True, "official_cost_if_identical_across_salts": 95000.0}
+        self.assertEqual(O.extract_cost(r), 95000.0)
+
+    def test_extract_cost_fail_none(self):
+        self.assertIsNone(O.extract_cost({"all_passed": False, "official_cost_if_identical_across_salts": None}))
+
+    def test_is_keep_lower(self):
+        r = {"all_passed": True, "official_cost_if_identical_across_salts": 95000.0}
+        self.assertTrue(O.is_keep(r, best_cost=100000.0))
+
+    def test_is_keep_higher_false(self):
+        r = {"all_passed": True, "official_cost_if_identical_across_salts": 100000.0}
+        self.assertFalse(O.is_keep(r, best_cost=95000.0))
+
+    def test_is_keep_no_cost_false(self):
+        self.assertFalse(O.is_keep({"all_passed": True}, best_cost=100000.0))
+
+    def test_cost_to_ratio(self):
+        self.assertAlmostEqual(O.cost_to_ratio(95345.534), 2076774.233715282 / 95345.534, places=4)
+
+    def test_verify_routes_adapter_and_execute(self):
+        import qvc_discovery as D
+        with mock.patch.object(D, "verify_candidate", return_value={"status": "DRY_RUN_ONLY"}) as vc:
+            O.verify(Path("/tmp/x.kmb"), "precheck", Path("/tmp/out"), execute=False)
+        _, kwargs = vc.call_args
+        self.assertFalse(kwargs.get("execute", True))
+        # Precheck-Adapter wurde geladen (Pfad enthält 'precheck')
+        self.assertIn("precheck", str(vc.call_args[0][0]))
