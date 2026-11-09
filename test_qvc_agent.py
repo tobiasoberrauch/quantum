@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest import mock
 
 import qvc_agent.client as C
+import qvc_agent.curate as CU
 import qvc_agent.memory as M
 import qvc_agent.oracle as O
 import qvc_agent.proposal as P
@@ -174,3 +175,40 @@ class TestOracle(unittest.TestCase):
         self.assertFalse(kwargs.get("execute", True))
         # Precheck-Adapter wurde geladen (Pfad enthält 'precheck')
         self.assertIn("precheck", str(vc.call_args[0][0]))
+
+
+class TestCurate(unittest.TestCase):
+    def test_load_candidates(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "r.json"
+            p.write_text('{"invsqrt":[{"sha":"a","ratio":21.0}],"chem":[]}')
+            self.assertEqual(CU.load_candidates("invsqrt", path=p)[0]["sha"], "a")
+
+    def test_materialize_plain_file(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as tmp:
+            src = Path(tmp) / "invsqrt.kmb"
+            src.write_bytes(b"CIRCUITDATA")
+            sha = hashlib.sha256(b"CIRCUITDATA").hexdigest()
+            cand = Path(tmp) / "c.json"
+            cand.write_text(json.dumps({"invsqrt": {sha: {"locs": [{"path": str(src), "inner": None, "xz": False}], "ext": "kmb"}}}))
+            out = Path(tmp) / "out"
+            art = CU.materialize({"artifact_ref": sha}, out, comp="invsqrt", candidates_path=cand)
+            self.assertTrue(art.exists())
+            self.assertEqual(art.read_bytes(), b"CIRCUITDATA")
+
+    def test_materialize_unknown_sha(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            cand = Path(tmp) / "c.json"
+            cand.write_text('{"invsqrt":{}}')
+            with self.assertRaises(KeyError):
+                CU.materialize({"artifact_ref": "nope"}, Path(tmp) / "o", comp="invsqrt", candidates_path=cand)
+
+    def test_materialize_sha_mismatch(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            src = Path(tmp) / "x.kmb"
+            src.write_bytes(b"AAA")
+            cand = Path(tmp) / "c.json"
+            cand.write_text(json.dumps({"invsqrt": {"0" * 64: {"locs": [{"path": str(src), "inner": None, "xz": False}], "ext": "kmb"}}}))
+            with self.assertRaises(RuntimeError):
+                CU.materialize({"artifact_ref": "0" * 64}, Path(tmp) / "o", comp="invsqrt", candidates_path=cand)
