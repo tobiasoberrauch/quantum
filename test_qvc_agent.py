@@ -10,6 +10,7 @@ import qvc_agent.memory as M
 import qvc_agent.oracle as O
 import qvc_agent.proposal as P
 import qvc_agent.research as R
+import qvc_agent.cli as CLI
 
 def _fake_cfg(tmp, with_key=True, provider="audius-we"):
     p = Path(tmp) / "opencode.json"
@@ -326,3 +327,22 @@ class TestLoop(unittest.TestCase):
                         verify_fn=None,
                         approve_fn=lambda *a, **k: True,
                         run_dir=bad, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
+
+
+class TestCli(unittest.TestCase):
+    def test_check_endpoint_calls_client_once(self):
+        with mock.patch.object(CLI, "WeinstadtClient") as WC:
+            inst = WC.return_value; inst.chat.return_value = "pong"
+            rc = CLI.main(["check-endpoint"])
+        self.assertEqual(rc, 0)
+        self.assertEqual(inst.chat.call_count, 1)
+
+    def test_run_builds_kwargs(self):
+        with mock.patch.object(CLI, "run_loop", return_value={"kept":0}) as rl:
+            rc = CLI.main(["run","--task","invsqrt","--mode","curate","--rounds","2","--dry-run"])
+        self.assertEqual(rc, 0)
+        kwargs = rl.call_args.kwargs
+        self.assertEqual(kwargs["task"], "invsqrt")
+        self.assertEqual(kwargs["mode"], "curate")
+        self.assertEqual(kwargs["n_rounds"], 2)
+        self.assertIsNone(kwargs["verify_fn"])  # dry-run
