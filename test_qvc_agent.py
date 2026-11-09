@@ -1,5 +1,4 @@
 import json, os, tempfile, unittest
-from datetime import date
 from pathlib import Path
 from unittest import mock
 
@@ -328,6 +327,24 @@ class TestLoop(unittest.TestCase):
                         approve_fn=lambda *a, **k: True,
                         run_dir=bad, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
 
+    def test_propose_error_discards_and_continues(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            def boom(ctx):
+                raise RuntimeError("llm down sk-topsecret")
+            s = L.run_loop("invsqrt", "curate", 1,
+                propose_fn=boom,
+                materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                precheck_fn=lambda a: {"all_passed": True},
+                verify_fn=lambda a: {"all_passed": True, "official_cost_if_identical_across_salts": 1.0},
+                approve_fn=lambda *a, **k: True,
+                run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
+            self.assertEqual(s["kept"], 0)
+            rows = M.read_loop_log(rd)
+            self.assertEqual(rows[0]["verdict"], "DISCARD_PROPOSE_ERROR")
+            # the secret in the exception message must NOT leak into the public log
+            self.assertNotIn("sk-topsecret", (rd / "loop.jsonl").read_text())
+
 
 class TestCli(unittest.TestCase):
     def test_check_endpoint_calls_client_once(self):
@@ -338,11 +355,34 @@ class TestCli(unittest.TestCase):
         self.assertEqual(inst.chat.call_count, 1)
 
     def test_run_builds_kwargs(self):
-        with mock.patch.object(CLI, "run_loop", return_value={"kept":0}) as rl:
-            rc = CLI.main(["run","--task","invsqrt","--mode","curate","--rounds","2","--dry-run"])
+        with mock.patch.object(CLI, "run_loop", return_value={"kept": 0}) as rl, \
+             mock.patch.object(CLI, "resolve_endpoint",
+                               return_value={"base_url": "http://x/v1", "api_key": None, "model": "qwen3.8-27b"}), \
+             mock.patch.object(CLI.curate, "load_candidates",
+                               return_value=[{"ratio": 21.0, "score": 100000.0}]):
+            rc = CLI.main(["run", "--task", "invsqrt", "--mode", "curate", "--rounds", "2", "--dry-run"])
         self.assertEqual(rc, 0)
         kwargs = rl.call_args.kwargs
         self.assertEqual(kwargs["task"], "invsqrt")
         self.assertEqual(kwargs["mode"], "curate")
         self.assertEqual(kwargs["n_rounds"], 2)
         self.assertIsNone(kwargs["verify_fn"])  # dry-run
+        self.assertEqual(kwargs["candidates_path"], CU.CANDIDATES_RANKED)  # threaded, default dir
+
+    def test_autonomous_min_cost_floor(self):
+        with mock.patch.object(CLI, "run_loop") as rl, \
+             mock.patch.object(CLI, "resolve_endpoint",
+                               return_value={"base_url": "http://x/v1", "api_key": None, "model": "qwen3.8-27b"}), \
+             mock.patch.object(CLI.curate, "load_candidates",
+                               return_value=[{"ratio": 21.0, "score": 100000.0}]):
+            rl.return_value = {"kept": 0}
+            rc = CLI.main(["run", "--task", "invsqrt", "--mode", "curate", "--rounds", "1",
+                           "--autonomous", "--min-cost", "90000"])
+        self.assertEqual(rc, 0)
+        approve = rl.call_args.kwargs["approve_fn"]
+        # cost above floor -> auto-keep
+        self.assertTrue(approve({}, {"all_passed": True, "official_cost_if_identical_across_salts": 95000.0}))
+        # cost below floor -> refused unattended
+        self.assertFalse(approve({}, {"all_passed": True, "official_cost_if_identical_across_salts": 80000.0}))
+        # no usable cost -> refused
+        self.assertFalse(approve({}, {"all_passed": False}))

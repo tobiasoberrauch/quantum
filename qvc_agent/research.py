@@ -8,6 +8,14 @@ GPU-free-but-heavy) emitter, the emitter is INJECTED as a callable
 interface is confirmed later in Task 9 (Phase 0). This module only builds the
 injectable seam + the default edit-application convention.
 
+NOTE (KNOWN GAP — follow-up): the DEFAULT edit/emitter convention here
+(`apply_edit` writing ``overrides.json`` + ``cli._default_emit`` running the
+emitter under the current interpreter) does NOT match the real
+``work/constseed_build/build_constseed_circuit.py``, which takes argparse CLI
+args (``output``, ``--hybrid``) + hardcoded constants and runs under
+``.venv-chem``. Research mode is therefore NOT production-ready; curate mode
+is. See the SDD ledger KNOWN GAP ruling.
+
 This module is standalone: it imports stdlib only and does not import
 :mod:`qvc_discovery` or other :mod:`qvc_agent` modules.
 """

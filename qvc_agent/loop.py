@@ -11,7 +11,7 @@ curate) but NOT client or research — those are wired in by the CLI.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 import qvc_agent.curate as curate
 import qvc_agent.memory as memory
@@ -28,6 +28,18 @@ def _clean(value: Any) -> str:
     return value.strip()
 
 
+def _load_cands_safe(task: str, path: Path) -> List[Dict[str, Any]]:
+    """Load ranked candidates, falling back to [] on missing/malformed data.
+
+    A mid-round data problem (unknown task key, unreadable file, bad JSON) must
+    not crash the loop; it degrades to 'no candidates this round'.
+    """
+    try:
+        return curate.load_candidates(task, path=path)
+    except (KeyError, OSError, ValueError):
+        return []
+
+
 def run_loop(
     task: Any,
     mode: Any,
@@ -42,6 +54,7 @@ def run_loop(
     best_ratio: float,
     best_cost: float,
     memory_base: Optional[Path] = None,
+    candidates_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
     """Drive ``n_rounds`` of the agent loop with fully-injected collaborators.
 
@@ -55,6 +68,7 @@ def run_loop(
         raise ValueError("run_dir must be a non-empty path")
     rd = Path(run_dir)
     dry_run = verify_fn is None
+    cpath = candidates_path if candidates_path is not None else curate.CANDIDATES_RANKED
     kept = 0
     start_ratio = best_ratio
     t = _clean(task)
@@ -73,11 +87,15 @@ def run_loop(
             "mode": m,
             "best_ratio": best_ratio,
             "best_cost": best_cost,
-            "candidates": curate.load_candidates(t) if (m == "curate" and t) else [],
+            "candidates": _load_cands_safe(t, cpath) if (m == "curate" and t) else [],
             "memory": memory.load_memory(t, base=memory_base),
         }
 
-        raw = propose_fn(ctx)
+        try:
+            raw = propose_fn(ctx)
+        except Exception as e:  # noqa: BLE001 - one LLM error must not kill the run
+            memory.append_loop_log(rd, {"round": rnd, "verdict": "DISCARD_PROPOSE_ERROR", "error": type(e).__name__})
+            continue
         try:
             prop = proposal.parse_proposal(raw)
         except proposal.ProposalError:
