@@ -31,12 +31,12 @@ def _clean(value: Any) -> str:
 def _load_cands_safe(task: str, path: Path) -> List[Dict[str, Any]]:
     """Load ranked candidates, falling back to [] on missing/malformed data.
 
-    A mid-round data problem (unknown task key, unreadable file, bad JSON) must
-    not crash the loop; it degrades to 'no candidates this round'.
+    A mid-round data problem (unknown task key, unreadable file, bad or non-dict
+    JSON) must not crash the loop; it degrades to 'no candidates this round'.
     """
     try:
         return curate.load_candidates(task, path=path)
-    except (KeyError, OSError, ValueError):
+    except (KeyError, OSError, ValueError, TypeError):
         return []
 
 

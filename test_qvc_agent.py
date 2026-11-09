@@ -345,6 +345,22 @@ class TestLoop(unittest.TestCase):
             # the secret in the exception message must NOT leak into the public log
             self.assertNotIn("sk-topsecret", (rd / "loop.jsonl").read_text())
 
+    def test_malformed_candidates_file_degrades(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            bad = Path(tmp) / "bad_ranked.json"
+            bad.write_text("[1, 2, 3]")  # valid JSON but not a dict -> TypeError in load_candidates
+            s = L.run_loop("invsqrt", "curate", 1,
+                propose_fn=self._props([self._valid_prop()]),
+                materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                precheck_fn=lambda a: {"all_passed": True},
+                verify_fn=lambda a: {"all_passed": True, "official_cost_if_identical_across_salts": 95000.0},
+                approve_fn=lambda *a, **k: True,
+                run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem",
+                candidates_path=bad)
+            self.assertEqual(s["rounds"], 1)
+            self.assertEqual(s["kept"], 1)  # round proceeded despite empty candidates
+
 
 class TestCli(unittest.TestCase):
     def test_check_endpoint_calls_client_once(self):
