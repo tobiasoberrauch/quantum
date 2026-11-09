@@ -51,6 +51,8 @@ def run_loop(
     truthy. ``dry_run`` (``verify_fn is None``) never runs the full verifier and
     never keeps.
     """
+    if run_dir is None or not str(run_dir).strip():
+        raise ValueError("run_dir must be a non-empty path")
     rd = Path(run_dir)
     dry_run = verify_fn is None
     kept = 0

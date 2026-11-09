@@ -314,3 +314,15 @@ class TestLoop(unittest.TestCase):
                 approve_fn=lambda *a, **k: True,
                 run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
             self.assertEqual(s["kept"], 0)
+
+    def test_run_dir_blank_raises(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for bad in ("", None):
+                with self.assertRaises(ValueError):
+                    L.run_loop("invsqrt", "curate", 1,
+                        propose_fn=self._props([self._valid_prop()]),
+                        materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                        precheck_fn=lambda a: {"all_passed": True},
+                        verify_fn=None,
+                        approve_fn=lambda *a, **k: True,
+                        run_dir=bad, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
