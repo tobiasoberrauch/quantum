@@ -1,8 +1,10 @@
 import json, os, tempfile, unittest
+from datetime import date
 from pathlib import Path
 from unittest import mock
 
 import qvc_agent.client as C
+import qvc_agent.memory as M
 import qvc_agent.proposal as P
 
 def _fake_cfg(tmp, with_key=True, provider="audius-we"):
@@ -109,3 +111,33 @@ class TestProposal(unittest.TestCase):
                                     memory="NEG: lookup-hybrid worse")
         self.assertIn("invsqrt", s); self.assertIn("deadbeef", s)
         self.assertIn("lookup-hybrid worse", s)
+
+
+class TestMemory(unittest.TestCase):
+    def test_append_and_read_log(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            M.append_loop_log(rd, {"round": 1, "verdict": "DISCARD"})
+            M.append_loop_log(rd, {"round": 2, "verdict": "KEEP"})
+            rows = M.read_loop_log(rd)
+            self.assertEqual([r["round"] for r in rows], [1, 2])
+
+    def test_write_memory_note_creates_dated_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            p = M.write_memory_note("invsqrt", "adopted tip", base=base, date="2026-11-09")
+            self.assertTrue(p.name.endswith("agent-loop-invsqrt.md"))
+            self.assertIn("2026-11-09", p.name)
+            self.assertIn("adopted tip", p.read_text())
+
+    def test_load_memory_empty_when_none(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(M.load_memory("invsqrt", base=Path(tmp)), "")
+
+    def test_log_has_no_secret(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            rec = {"model": "qwen3.8-27b", "note": "ok"}
+            M.append_loop_log(rd, rec)
+            raw = (rd / "loop.jsonl").read_text()
+            self.assertNotIn("sk-", raw)
