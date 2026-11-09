@@ -3,6 +3,7 @@ from pathlib import Path
 from unittest import mock
 
 import qvc_agent.client as C
+import qvc_agent.proposal as P
 
 def _fake_cfg(tmp, with_key=True, provider="audius-we"):
     p = Path(tmp) / "opencode.json"
@@ -74,3 +75,37 @@ class TestClient(unittest.TestCase):
             with self.assertRaises(C.WeinstadtError) as cm:
                 cl.chat([{"role": "user", "content": "ping"}])
         self.assertNotIn("sk-topsecret", str(cm.exception))
+
+
+VALID = {"mode": "curate", "target_task": "invsqrt", "action": "adopt sha abc",
+         "rationale": "tip", "expected_delta": "+0.02 ratio", "artifact_ref": "abc123",
+         "precheck_plan": "stratified subset", "verify_plan": "official 64-shot",
+         "abort_condition": "cost up"}
+
+
+class TestProposal(unittest.TestCase):
+    def test_parse_valid(self):
+        d = P.parse_proposal(json.dumps(VALID))
+        self.assertEqual(d["mode"], "curate")
+
+    def test_parse_fenced(self):
+        d = P.parse_proposal("```json\n" + json.dumps(VALID) + "\n```")
+        self.assertEqual(d["target_task"], "invsqrt")
+
+    def test_parse_bad_mode(self):
+        bad = dict(VALID, mode="hack")
+        with self.assertRaises(P.ProposalError):
+            P.parse_proposal(json.dumps(bad))
+
+    def test_parse_missing_field(self):
+        bad = dict(VALID); del bad["abort_condition"]
+        with self.assertRaises(P.ProposalError):
+            P.parse_proposal(json.dumps(bad))
+
+    def test_build_prompt_contains_context(self):
+        s = P.build_proposal_prompt("invsqrt", mode="curate",
+                                    current_best={"ratio": 21.0},
+                                    candidates=[{"sha": "deadbeef", "ratio": 21.7}],
+                                    memory="NEG: lookup-hybrid worse")
+        self.assertIn("invsqrt", s); self.assertIn("deadbeef", s)
+        self.assertIn("lookup-hybrid worse", s)
