@@ -8,6 +8,7 @@ import qvc_agent.curate as CU
 import qvc_agent.memory as M
 import qvc_agent.oracle as O
 import qvc_agent.proposal as P
+import qvc_agent.research as R
 
 def _fake_cfg(tmp, with_key=True, provider="audius-we"):
     p = Path(tmp) / "opencode.json"
@@ -212,3 +213,27 @@ class TestCurate(unittest.TestCase):
             cand.write_text(json.dumps({"invsqrt": {"0" * 64: {"locs": [{"path": str(src), "inner": None, "xz": False}], "ext": "kmb"}}}))
             with self.assertRaises(RuntimeError):
                 CU.materialize({"artifact_ref": "0" * 64}, Path(tmp) / "o", comp="invsqrt", candidates_path=cand)
+
+
+class TestResearch(unittest.TestCase):
+    def test_materialize_calls_emit_and_returns_path(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wd, out = Path(tmp) / "wd", Path(tmp) / "out"
+            wd.mkdir(); out.mkdir()
+            def fake_emit(w):
+                p = w / "invsqrt.kmb"; p.write_bytes(b"NEW"); return p
+            art = R.materialize_research({"edit": {"params": {"n1_frac": 16}}}, wd, out, emit_fn=fake_emit)
+            self.assertEqual(art.read_bytes(), b"NEW")
+
+    def test_apply_edit_writes_overrides(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wd = Path(tmp) / "wd"; wd.mkdir()
+            R.apply_edit(wd, {"params": {"use_lookup": True}})
+            ov = json.loads((wd / "overrides.json").read_text())
+            self.assertEqual(ov, {"use_lookup": True})
+
+    def test_materialize_requires_edit(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wd, out = Path(tmp) / "wd", Path(tmp) / "out"; wd.mkdir(); out.mkdir()
+            with self.assertRaises(ValueError):
+                R.materialize_research({}, wd, out, emit_fn=lambda w: w)
