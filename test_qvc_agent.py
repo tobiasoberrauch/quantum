@@ -5,6 +5,7 @@ from unittest import mock
 
 import qvc_agent.client as C
 import qvc_agent.curate as CU
+import qvc_agent.loop as L
 import qvc_agent.memory as M
 import qvc_agent.oracle as O
 import qvc_agent.proposal as P
@@ -237,3 +238,79 @@ class TestResearch(unittest.TestCase):
             wd, out = Path(tmp) / "wd", Path(tmp) / "out"; wd.mkdir(); out.mkdir()
             with self.assertRaises(ValueError):
                 R.materialize_research({}, wd, out, emit_fn=lambda w: w)
+
+
+class TestLoop(unittest.TestCase):
+    def _props(self, raws):
+        it = iter(raws)
+        return lambda ctx: next(it)
+
+    @staticmethod
+    def _valid_prop():
+        return json.dumps({"mode": "curate", "target_task": "invsqrt", "action": "a",
+                           "rationale": "r", "expected_delta": "d", "artifact_ref": "abc",
+                           "precheck_plan": "p", "verify_plan": "v", "abort_condition": "x"})
+
+    def test_keep_updates_best(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            s = L.run_loop("invsqrt", "curate", 1,
+                propose_fn=self._props([self._valid_prop()]),
+                materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                precheck_fn=lambda a: {"all_passed": True},
+                verify_fn=lambda a: {"all_passed": True, "official_cost_if_identical_across_salts": 95000.0},
+                approve_fn=lambda *a, **k: True,
+                run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
+            self.assertEqual(s["kept"], 1)
+            self.assertGreater(s["best_ratio_end"], s["best_ratio_start"])
+
+    def test_discard_on_higher_cost(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            s = L.run_loop("invsqrt", "curate", 1,
+                propose_fn=self._props([self._valid_prop()]),
+                materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                precheck_fn=lambda a: {"all_passed": True},
+                verify_fn=lambda a: {"all_passed": True, "official_cost_if_identical_across_salts": 120000.0},
+                approve_fn=lambda *a, **k: True,
+                run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
+            self.assertEqual(s["kept"], 0)
+            self.assertEqual(s["best_ratio_end"], s["best_ratio_start"])
+
+    def test_discard_on_bad_json(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            s = L.run_loop("invsqrt", "curate", 1,
+                propose_fn=self._props(["this is not json"]),
+                materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                precheck_fn=lambda a: {"all_passed": True},
+                verify_fn=lambda a: {"all_passed": True, "official_cost_if_identical_across_salts": 1.0},
+                approve_fn=lambda *a, **k: True,
+                run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
+            self.assertEqual(s["kept"], 0)
+            self.assertTrue((rd / "loop.jsonl").exists())  # Runde wurde geloggt
+
+    def test_hitl_blocks_advance(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            s = L.run_loop("invsqrt", "curate", 1,
+                propose_fn=self._props([self._valid_prop()]),
+                materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                precheck_fn=lambda a: {"all_passed": True},
+                verify_fn=lambda a: {"all_passed": True, "official_cost_if_identical_across_salts": 95000.0},
+                approve_fn=lambda *a, **k: False,
+                run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
+            self.assertEqual(s["kept"], 0)
+            self.assertEqual(s["best_ratio_end"], s["best_ratio_start"])
+
+    def test_dry_run_skips_verify(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp)
+            s = L.run_loop("invsqrt", "curate", 1,
+                propose_fn=self._props([self._valid_prop()]),
+                materialize_fn=lambda p, *a, **k: Path(tmp) / "x.kmb",
+                precheck_fn=lambda a: {"all_passed": True},
+                verify_fn=None,  # dry_run
+                approve_fn=lambda *a, **k: True,
+                run_dir=rd, best_ratio=21.0, best_cost=100000.0, memory_base=Path(tmp) / "mem")
+            self.assertEqual(s["kept"], 0)
