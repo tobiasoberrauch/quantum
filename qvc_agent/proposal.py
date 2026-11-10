@@ -80,13 +80,22 @@ def parse_proposal(raw: Any) -> Dict[str, Any]:
     if missing:
         raise ProposalError(f"missing fields: {', '.join(missing)}")
 
+    # Normalize enum-like fields to lowercase so trivial model variation
+    # ("CURATE" vs "curate") does not discard an otherwise-valid proposal.
+    # The error message below reports the ORIGINAL value for debuggability.
     mode = data["mode"]
+    if isinstance(mode, str):
+        mode = mode.strip().lower()
     if mode not in _VALID_MODES:
-        raise ProposalError(f"bad mode: {mode!r} (expected one of {_VALID_MODES})")
+        raise ProposalError(f"bad mode: {data['mode']!r} (expected one of {_VALID_MODES})")
+    data["mode"] = mode
 
     target_task = data["target_task"]
+    if isinstance(target_task, str):
+        target_task = target_task.strip().lower()
     if target_task not in TASKS:
-        raise ProposalError(f"bad target_task: {target_task!r} (expected one of {TASKS})")
+        raise ProposalError(f"bad target_task: {data['target_task']!r} (expected one of {TASKS})")
+    data["target_task"] = target_task
 
     return data
 

@@ -116,6 +116,19 @@ class TestProposal(unittest.TestCase):
         self.assertIn("invsqrt", s); self.assertIn("deadbeef", s)
         self.assertIn("lookup-hybrid worse", s)
 
+    def test_parse_mode_case_insensitive(self):
+        # live finding: model emitted "CURATE"; parser must normalize, not reject
+        d = P.parse_proposal(json.dumps(dict(VALID, mode="CURATE")))
+        self.assertEqual(d["mode"], "curate")
+
+    def test_parse_target_task_case_insensitive(self):
+        d = P.parse_proposal(json.dumps(dict(VALID, target_task="INVSQRT")))
+        self.assertEqual(d["target_task"], "invsqrt")
+
+    def test_parse_mode_still_rejects_invalid(self):
+        with self.assertRaises(P.ProposalError):
+            P.parse_proposal(json.dumps(dict(VALID, mode="hack")))
+
 
 class TestMemory(unittest.TestCase):
     def test_append_and_read_log(self):
