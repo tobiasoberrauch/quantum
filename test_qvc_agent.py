@@ -623,9 +623,12 @@ class TestDriver(unittest.TestCase):
             s = driver.run_autonomous(frontier_dir=fd, task="invsqrt",
                 state_path=Path(tmp) / "state.json", out_dir=Path(tmp) / "out",
                 precheck_fn=pre, verify_fn=ver, materialize_fn=mat,
-                refresh=lambda d: 0, downloader=lambda d: 0, download=True, max_cycles=3)
+                refresh=lambda d: 0, downloader=lambda d: 2, download=True, max_cycles=3)
             # with downloads enabled and no new unseen, it loops all cycles
             self.assertEqual(len(s["cycles"]), 3)
+            # downloader count is reported per cycle and summed (observability)
+            self.assertEqual(s["downloaded"], 6)
+            self.assertTrue(all(c.get("downloaded") == 2 for c in s["cycles"]))
 
     def _frontier_with_downloads(self, tmp, slug_dirs):
         fd = Path(tmp) / "frontier"

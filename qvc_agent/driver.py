@@ -240,13 +240,16 @@ def run_autonomous(
     start = time.monotonic()
     cycles: List[Dict[str, Any]] = []
     total_kept = 0
+    total_downloaded = 0
     n_cycles = max(1, int(max_cycles))
 
     for cyc in range(1, n_cycles + 1):
         if total_wall_time_s is not None and (time.monotonic() - start) >= total_wall_time_s:
             break
+        n_dl = 0
         if download:
-            downloader(frontier_dir)
+            n_dl = int(downloader(frontier_dir) or 0)
+            total_downloaded += n_dl
         refresh(frontier_dir)
         seed_state_if_absent(frontier_dir, t, state_path)
         unseen = unseen_shas(frontier_dir, t, state_path)
@@ -254,7 +257,7 @@ def run_autonomous(
         rd.mkdir(parents=True, exist_ok=True)
 
         if not unseen:
-            cycles.append({"cycle": cyc, "unseen": 0, "kept": 0})
+            cycles.append({"cycle": cyc, "downloaded": n_dl, "unseen": 0, "kept": 0})
             if not download:
                 break  # nothing new locally; looping without downloads is pointless
             continue
@@ -270,13 +273,13 @@ def run_autonomous(
             dry_run=dry_run, memory_base=memory_base, stop_on_keep=stop_on_keep,
         )
         total_kept += s["kept"]
-        cycles.append({"cycle": cyc, "unseen": len(unseen), "scanned": s["scanned"],
-                       "verified": s["verified"], "kept": s["kept"],
+        cycles.append({"cycle": cyc, "downloaded": n_dl, "unseen": len(unseen),
+                       "scanned": s["scanned"], "verified": s["verified"], "kept": s["kept"],
                        "new_best_sha": s["new_best_sha"]})
         if stop_on_keep and s["kept"]:
             break
 
     return {
-        "task": t, "cycles": cycles, "kept": total_kept,
+        "task": t, "cycles": cycles, "kept": total_kept, "downloaded": total_downloaded,
         "best": watchdog.load_state(state_path), "state_path": str(state_path),
     }
