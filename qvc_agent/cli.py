@@ -31,6 +31,7 @@ import qvc_agent.oracle as oracle
 import qvc_agent.proposal as proposal
 import qvc_agent.research as research
 import qvc_agent.watchdog as watchdog
+import qvc_agent.driver as driver
 
 
 def _utc_timestamp() -> str:
@@ -223,6 +224,34 @@ def _cmd_watch(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_autonomous(args: argparse.Namespace) -> int:
+    """Bounded autonomous curate driver (refresh -> sweep unseen -> adopt)."""
+    run_dir = (Path(args.run_dir).expanduser() if args.run_dir
+               else Path("runs") / "agent" / "autonomous" / _utc_timestamp())
+    precheck_fn = lambda art: oracle.verify(art, "precheck", run_dir / "precheck")
+    verify_lambda = lambda art: oracle.verify(art, "official", run_dir / "verify")
+    verify_fn = None if args.dry_run else verify_lambda
+
+    summary = driver.run_autonomous(
+        frontier_dir=Path(args.frontier).expanduser(),
+        task=args.task,
+        state_path=Path(args.state).expanduser(),
+        out_dir=run_dir,
+        precheck_fn=precheck_fn,
+        verify_fn=verify_fn,
+        floor=float(args.min_cost) if args.min_cost else 0.0,
+        max_candidates=args.max_candidates,
+        max_cycles=args.cycles,
+        total_wall_time_s=args.wall_time,
+        stop_on_keep=bool(args.stop_on_keep),
+        dry_run=bool(args.dry_run),
+        download=bool(args.download),
+        memory_base=None,
+    )
+    print(json.dumps(summary))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Build the argparse parser with the ``run`` and ``check-endpoint`` subcommands."""
     parser = argparse.ArgumentParser(prog="qvc_agent", description="VQCC agent loop CLI")
@@ -260,6 +289,20 @@ def build_parser() -> argparse.ArgumentParser:
     watch_p.add_argument("--best-ratio", type=float, default=None)
     watch_p.add_argument("--best-cost", type=float, default=None)
     watch_p.add_argument("--best-sha", default=None)
+
+    auto_p = sub.add_parser(
+        "autonomous", help="Bounded autonomous curate driver (refresh -> sweep unseen -> adopt)")
+    auto_p.add_argument("--task", default="invsqrt")
+    auto_p.add_argument("--frontier", type=Path, default=driver.DEFAULT_FRONTIER)
+    auto_p.add_argument("--state", type=Path, default=watchdog.DEFAULT_STATE)
+    auto_p.add_argument("--run-dir", type=Path, default=None)
+    auto_p.add_argument("--max-candidates", type=int, default=None)
+    auto_p.add_argument("--cycles", type=int, default=1)
+    auto_p.add_argument("--wall-time", type=float, default=None)
+    auto_p.add_argument("--min-cost", type=float, default=0.0)
+    auto_p.add_argument("--stop-on-keep", action="store_true")
+    auto_p.add_argument("--download", action="store_true")
+    auto_p.add_argument("--dry-run", action="store_true")
     return parser
 
 
@@ -272,4 +315,6 @@ def main(argv: Optional[List[str]] = None) -> int:
         return _cmd_check_endpoint()
     if args.command == "watch":
         return _cmd_watch(args)
+    if args.command == "autonomous":
+        return _cmd_autonomous(args)
     return _cmd_run(args)

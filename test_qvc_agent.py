@@ -10,6 +10,7 @@ import qvc_agent.oracle as O
 import qvc_agent.proposal as P
 import qvc_agent.research as R
 import qvc_agent.watchdog as W
+import qvc_agent.driver as driver
 import qvc_agent.cli as CLI
 
 def _fake_cfg(tmp, with_key=True, provider="audius-we"):
@@ -553,3 +554,90 @@ class TestWatchCli(unittest.TestCase):
         self.assertEqual(kwargs["floor"], 50000.0)
         self.assertTrue(kwargs["dry_run"])
         self.assertIsNone(kwargs["verify_fn"])  # dry-run
+
+
+class TestDriver(unittest.TestCase):
+    A = "a" * 64
+    C = "c" * 64
+
+    def _frontier(self, tmp, ranked_rows, universe_shas):
+        fd = Path(tmp) / "frontier"
+        (fd / "scripts").mkdir(parents=True)
+        (fd / "downloads").mkdir()
+        (fd / "candidates_ranked.json").write_text(json.dumps({"invsqrt": ranked_rows}))
+        (fd / "candidates.json").write_text(json.dumps(
+            {"invsqrt": {s: {"size": 1, "ext": "kmb", "locs": [], "sources": ["x"]} for s in universe_shas}}))
+        return fd
+
+    def _fakes(self, tmp, verify_costs):
+        def mat(sha, dest):
+            p = Path(tmp) / f"{sha}.kmb"; p.write_bytes(b"x"); return p
+        def pre(art):
+            return {"all_passed": True}
+        def ver(art):
+            c = verify_costs.get(art.stem)
+            return {"all_passed": c is not None, "official_cost_if_identical_across_salts": c}
+        return mat, pre, ver
+
+    def test_seed_and_unseen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd = self._frontier(tmp, [{"sha": self.A, "ratio": 20.0, "score": 100000.0},
+                                      {"sha": "b" * 64, "ratio": 19.0, "score": 110000.0}],
+                                [self.A, "b" * 64, self.C])
+            st = Path(tmp) / "state.json"
+            driver.seed_state_if_absent(fd, "invsqrt", st)
+            state = W.load_state(st)
+            self.assertEqual(state["best_sha"], self.A)          # bar = ranked top
+            self.assertEqual(set(state["seen"]), {self.A, "b" * 64})  # all ranked marked seen
+            self.assertEqual(driver.unseen_shas(fd, "invsqrt", st), [self.C])
+
+    def test_run_autonomous_adopts_new_best(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd = self._frontier(tmp, [{"sha": self.A, "ratio": 20.0, "score": 100000.0}],
+                                [self.A, self.C])
+            mat, pre, ver = self._fakes(tmp, {self.A: 100000.0, self.C: 90000.0})
+            s = driver.run_autonomous(frontier_dir=fd, task="invsqrt",
+                state_path=Path(tmp) / "state.json", out_dir=Path(tmp) / "out",
+                precheck_fn=pre, verify_fn=ver, materialize_fn=mat,
+                refresh=lambda d: 0, downloader=lambda d: 0)
+            self.assertEqual(s["kept"], 1)
+            self.assertEqual(s["best"]["best_sha"], self.C)      # adopted the better circuit
+            self.assertTrue((Path(tmp) / "out" / "adopt" / "invsqrt.kmb").exists())
+
+    def test_run_autonomous_no_unseen_stops(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd = self._frontier(tmp, [{"sha": self.A, "ratio": 20.0, "score": 100000.0}], [self.A])
+            mat, pre, ver = self._fakes(tmp, {self.A: 100000.0})
+            s = driver.run_autonomous(frontier_dir=fd, task="invsqrt",
+                state_path=Path(tmp) / "state.json", out_dir=Path(tmp) / "out",
+                precheck_fn=pre, verify_fn=ver, materialize_fn=mat,
+                refresh=lambda d: 0, downloader=lambda d: 0)
+            self.assertEqual(s["kept"], 0)
+            self.assertEqual(len(s["cycles"]), 1)
+            self.assertEqual(s["cycles"][0]["unseen"], 0)
+
+    def test_run_autonomous_max_cycles_with_download(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd = self._frontier(tmp, [{"sha": self.A, "ratio": 20.0, "score": 100000.0}], [self.A])
+            mat, pre, ver = self._fakes(tmp, {self.A: 100000.0})
+            s = driver.run_autonomous(frontier_dir=fd, task="invsqrt",
+                state_path=Path(tmp) / "state.json", out_dir=Path(tmp) / "out",
+                precheck_fn=pre, verify_fn=ver, materialize_fn=mat,
+                refresh=lambda d: 0, downloader=lambda d: 0, download=True, max_cycles=3)
+            # with downloads enabled and no new unseen, it loops all cycles
+            self.assertEqual(len(s["cycles"]), 3)
+
+
+class TestAutonomousCli(unittest.TestCase):
+    def test_autonomous_calls_driver(self):
+        with mock.patch.object(CLI.driver, "run_autonomous", return_value={"kept": 0}) as ra:
+            rc = CLI.main(["autonomous", "--task", "invsqrt", "--cycles", "2",
+                           "--max-candidates", "4", "--min-cost", "50000", "--download"])
+        self.assertEqual(rc, 0)
+        k = ra.call_args.kwargs
+        self.assertEqual(k["task"], "invsqrt")
+        self.assertEqual(k["max_cycles"], 2)
+        self.assertEqual(k["max_candidates"], 4)
+        self.assertEqual(k["floor"], 50000.0)
+        self.assertTrue(k["download"])
+        self.assertFalse(k["dry_run"])
