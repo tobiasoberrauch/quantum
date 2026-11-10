@@ -1,0 +1,8 @@
+{
+  "_comment": "EXAMPLE input shape for `score`, derived from the local 2026-11-09 frontier snapshot (work/frontier_1109/build/verify_results.json). Illustrates the required fields; dqi needs shots=102400 and >=5 independent salts. Not a fresh verification.",
+  "invsqrt": {"source": "official_verifier", "passed": true, "cost": 95345.53400755058},
+  "dqi": {"source": "official_verifier", "passed": true, "cost": 374686757457.49225,
+          "shots": 102400,
+          "independent_salts": ["notebook-verification", "salt-check-1", "salt-check-2", "salt-check-3", "salt-check-4"]},
+  "dfthcsos": {"source": "official_verifier", "passed": true, "cost": 299654754.9479271}
+}

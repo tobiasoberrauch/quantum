@@ -97,3 +97,22 @@ work/outreach_somejoint_merge.md
 work/merger_dossier.md
 work/advisory_feedback_round3.md
 work/strategy3_dqi_overwrite/report_G.md
+work/frontier_1109/downloads/
+work/frontier_1109/intel/
+work/PLAN_30.md
+
+# --- QVC discovery engine + debug UI runtime -----------------
+.venv-qvc/
+.env
+.env.*
+!.env.example
+runs/
+qvc_web/frontend/node_modules/
+qvc_web/frontend/.next/
+qvc_web/frontend/tsconfig.tsbuildinfo
+qvc_web/frontend/out/
+qvc_web/frontend/next-env.d.ts.bak
+qvc_web/backend/team_models.json
+
+# SDD scratch workspace (briefs/reports/review packages)
+.superpowers/
