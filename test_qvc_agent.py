@@ -9,6 +9,7 @@ import qvc_agent.memory as M
 import qvc_agent.oracle as O
 import qvc_agent.proposal as P
 import qvc_agent.research as R
+import qvc_agent.watchdog as W
 import qvc_agent.cli as CLI
 
 def _fake_cfg(tmp, with_key=True, provider="audius-we"):
@@ -415,3 +416,140 @@ class TestCli(unittest.TestCase):
         self.assertFalse(approve({}, {"all_passed": True, "official_cost_if_identical_across_salts": 80000.0}))
         # no usable cost -> refused
         self.assertFalse(approve({}, {"all_passed": False}))
+
+
+class TestWatchdog(unittest.TestCase):
+    A = "a" * 64
+    B = "b" * 64
+
+    def _pool(self, tmp, entries):
+        p = Path(tmp) / "pool.json"
+        p.write_text(json.dumps({"invsqrt": entries}))
+        return p
+
+    def _run(self, tmp, entries, verify_costs, **kw):
+        pool = self._pool(tmp, entries)
+        state = Path(tmp) / "state.json"
+        out = Path(tmp) / "out"
+        rd = Path(tmp) / "rd"
+        mem = Path(tmp) / "mem"
+
+        def mat(sha, dest):
+            p = Path(tmp) / f"{sha}.kmb"; p.write_bytes(b"x"); return p
+
+        def pre(art):
+            return {"all_passed": True}
+
+        def ver(art):
+            c = verify_costs.get(art.stem)
+            if c is None:
+                return {"all_passed": False}
+            return {"all_passed": True, "official_cost_if_identical_across_salts": c}
+
+        s = W.sweep_pool(task="invsqrt", pool_path=pool, state_path=state, out_dir=out,
+                         precheck_fn=pre, verify_fn=ver, materialize_fn=mat,
+                         run_dir=rd, memory_base=mem, **kw)
+        return s, state, out, rd, mem
+
+    def test_adopt_beats_bar(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entries = [{"sha": self.A, "ratio": 20.0, "score": 100000.0},
+                       {"sha": self.B, "ratio": 23.0, "score": 90000.0}]
+            s, state, out, rd, mem = self._run(tmp, entries, {self.A: 100000.0, self.B: 90000.0})
+            self.assertEqual(s["kept"], 1)
+            self.assertEqual(s["new_best_sha"], self.B)
+            self.assertEqual(W.load_state(state)["best_sha"], self.B)
+            self.assertTrue((out / "invsqrt.kmb").exists())  # adopted artifact copied
+            self.assertTrue(any(mem.glob("*.md")))           # memory note written on keep
+
+    def test_discard_worse(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entries = [{"sha": self.A, "ratio": 23.0, "score": 90000.0},
+                       {"sha": self.B, "ratio": 20.0, "score": 100000.0}]
+            s, state, out, rd, mem = self._run(tmp, entries, {self.A: 90000.0, self.B: 100000.0})
+            self.assertEqual(s["kept"], 0)
+            self.assertEqual(W.load_state(state)["best_sha"], self.A)
+            self.assertFalse((out / "invsqrt.kmb").exists())
+
+    def test_skip_seen_on_second_run(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entries = [{"sha": self.A, "ratio": 20.0, "score": 100000.0},
+                       {"sha": self.B, "ratio": 23.0, "score": 90000.0}]
+            s1, state, *_ = self._run(tmp, entries, {self.A: 100000.0, self.B: 90000.0})
+            self.assertEqual(s1["verified"], 1)  # only B verified (A is the baseline)
+            s2, *_ = self._run(tmp, entries, {self.A: 100000.0, self.B: 90000.0})
+            self.assertEqual(s2["verified"], 0)   # both now seen -> skipped
+            self.assertEqual(s2["scanned"], 2)
+
+    def test_dry_run_no_verify(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entries = [{"sha": self.A, "ratio": 20.0, "score": 100000.0},
+                       {"sha": self.B, "ratio": 23.0, "score": 90000.0}]
+            calls = {"n": 0}
+
+            def ver(art):
+                calls["n"] += 1
+                return {"all_passed": True, "official_cost_if_identical_across_salts": 1.0}
+
+            def mat(sha, dest):
+                p = Path(tmp) / f"{sha}.kmb"; p.write_bytes(b"x"); return p
+
+            s = W.sweep_pool(task="invsqrt", pool_path=self._pool(tmp, entries),
+                             state_path=Path(tmp) / "s.json", out_dir=Path(tmp) / "o",
+                             precheck_fn=lambda a: {"all_passed": True}, verify_fn=ver,
+                             materialize_fn=mat,
+                             run_dir=Path(tmp) / "rd", memory_base=Path(tmp) / "m", dry_run=True)
+            self.assertEqual(calls["n"], 0)
+            self.assertEqual(s["kept"], 0)
+            rows = M.read_loop_log(Path(tmp) / "rd")
+            self.assertTrue(any(r.get("verdict") == "DRY_RUN" for r in rows))
+
+    def test_floor_refuses_subfloor(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entries = [{"sha": self.A, "ratio": 20.0, "score": 100000.0},
+                       {"sha": self.B, "ratio": 23.0, "score": 90000.0}]
+            # B beats the bar (90000 < 100000) but is below the floor (95000) -> refused
+            s, state, *_ = self._run(tmp, entries, {self.A: 100000.0, self.B: 90000.0}, floor=95000.0)
+            self.assertEqual(s["kept"], 0)
+            self.assertEqual(W.load_state(state)["best_sha"], self.A)
+
+    def test_max_candidates_bound(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entries = [{"sha": self.A, "ratio": 20.0, "score": 100000.0},
+                       {"sha": self.B, "ratio": 23.0, "score": 90000.0},
+                       {"sha": "c" * 64, "ratio": 24.0, "score": 80000.0}]
+            s, *_ = self._run(tmp, entries, {self.A: 100000.0, self.B: 90000.0, "c" * 64: 80000.0},
+                              max_candidates=1)
+            self.assertEqual(s["scanned"], 1)
+
+    def test_wall_time_zero_stops_immediately(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entries = [{"sha": self.A, "ratio": 20.0, "score": 100000.0},
+                       {"sha": self.B, "ratio": 23.0, "score": 90000.0}]
+            s, *_ = self._run(tmp, entries, {self.A: 100000.0, self.B: 90000.0}, wall_time_s=0.0)
+            self.assertEqual(s["scanned"], 0)
+
+    def test_state_roundtrip_and_missing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "st.json"
+            W.save_state(p, {"best_ratio": 21.0, "best_cost": 95000.0, "best_sha": "x", "seen": ["a", "b"]})
+            st = W.load_state(p)
+            self.assertEqual(st["best_cost"], 95000.0)
+            self.assertEqual(st["seen"], ["a", "b"])
+            missing = W.load_state(Path(tmp) / "nope.json")
+            self.assertIsNone(missing["best_cost"])
+            self.assertEqual(missing["seen"], [])
+
+
+class TestWatchCli(unittest.TestCase):
+    def test_watch_calls_sweep_with_kwargs(self):
+        with mock.patch.object(CLI.watchdog, "sweep_pool", return_value={"kept": 0}) as sw:
+            rc = CLI.main(["watch", "--task", "invsqrt", "--max-candidates", "3",
+                           "--min-cost", "50000", "--dry-run"])
+        self.assertEqual(rc, 0)
+        kwargs = sw.call_args.kwargs
+        self.assertEqual(kwargs["task"], "invsqrt")
+        self.assertEqual(kwargs["max_candidates"], 3)
+        self.assertEqual(kwargs["floor"], 50000.0)
+        self.assertTrue(kwargs["dry_run"])
+        self.assertIsNone(kwargs["verify_fn"])  # dry-run

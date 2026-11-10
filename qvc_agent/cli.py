@@ -2,10 +2,12 @@
 
 Wires the real collaborators — :class:`WeinstadtClient`, :mod:`qvc_agent.oracle`,
 :mod:`qvc_agent.curate`, and :mod:`qvc_agent.research` — into
-:func:`qvc_agent.loop.run_loop`. Two subcommands:
+:func:`qvc_agent.loop.run_loop`. Three subcommands:
 
 * ``check-endpoint`` — resolve the LLM endpoint and send a single ping.
 * ``run`` — drive ``n_rounds`` of the agent loop.
+* ``watch`` — bounded curate watchdog sweep (verify new pool candidates, adopt
+  genuine improvements; deterministic, no LLM required).
 
 The API key is never printed, logged, or written anywhere; every error message is
 redacted before it reaches stdout.
@@ -28,6 +30,7 @@ import qvc_agent.curate as curate
 import qvc_agent.oracle as oracle
 import qvc_agent.proposal as proposal
 import qvc_agent.research as research
+import qvc_agent.watchdog as watchdog
 
 
 def _utc_timestamp() -> str:
@@ -189,6 +192,37 @@ def _cmd_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_watch(args: argparse.Namespace) -> int:
+    """Bounded curate watchdog sweep (deterministic; no LLM required)."""
+    run_dir = (Path(args.run_dir).expanduser() if args.run_dir
+               else Path("runs") / "agent" / "watchdog" / _utc_timestamp())
+    precheck_fn = lambda art: oracle.verify(art, "precheck", run_dir / "precheck")
+    verify_lambda = lambda art: oracle.verify(art, "official", run_dir / "verify")
+    verify_fn = None if args.dry_run else verify_lambda
+
+    summary = watchdog.sweep_pool(
+        task=args.task,
+        pool_path=Path(args.pool).expanduser(),
+        state_path=Path(args.state).expanduser(),
+        out_dir=Path(args.out_dir).expanduser(),
+        precheck_fn=precheck_fn,
+        verify_fn=verify_fn,
+        run_dir=run_dir,
+        candidates_path=Path(args.candidates).expanduser(),
+        floor=float(args.min_cost) if args.min_cost else 0.0,
+        max_candidates=args.max_candidates,
+        wall_time_s=args.wall_time,
+        stop_on_keep=bool(args.stop_on_keep),
+        dry_run=bool(args.dry_run),
+        memory_base=None,
+        seed_best_ratio=args.best_ratio,
+        seed_best_cost=args.best_cost,
+        seed_best_sha=args.best_sha,
+    )
+    print(json.dumps(summary))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Build the argparse parser with the ``run`` and ``check-endpoint`` subcommands."""
     parser = argparse.ArgumentParser(prog="qvc_agent", description="VQCC agent loop CLI")
@@ -207,6 +241,25 @@ def build_parser() -> argparse.ArgumentParser:
     run_p.add_argument("--frontier-dir", type=Path, default=None)
     run_p.add_argument("--workdir", type=Path, default=None)
     run_p.add_argument("--run-dir", type=Path, default=None)
+
+    watch_p = sub.add_parser(
+        "watch",
+        help="Bounded curate watchdog: verify new pool candidates, adopt improvements",
+    )
+    watch_p.add_argument("--task", default="invsqrt")
+    watch_p.add_argument("--pool", type=Path, default=curate.CANDIDATES_RANKED)
+    watch_p.add_argument("--candidates", type=Path, default=curate.CANDIDATES)
+    watch_p.add_argument("--state", type=Path, default=watchdog.DEFAULT_STATE)
+    watch_p.add_argument("--out-dir", type=Path, default=Path("runs") / "agent" / "watchdog-adopt")
+    watch_p.add_argument("--run-dir", type=Path, default=None)
+    watch_p.add_argument("--max-candidates", type=int, default=None)
+    watch_p.add_argument("--wall-time", type=float, default=None)
+    watch_p.add_argument("--min-cost", type=float, default=0.0)
+    watch_p.add_argument("--stop-on-keep", action="store_true")
+    watch_p.add_argument("--dry-run", action="store_true")
+    watch_p.add_argument("--best-ratio", type=float, default=None)
+    watch_p.add_argument("--best-cost", type=float, default=None)
+    watch_p.add_argument("--best-sha", default=None)
     return parser
 
 
@@ -217,4 +270,6 @@ def main(argv: Optional[List[str]] = None) -> int:
     args = parser.parse_args(argv)
     if args.command == "check-endpoint":
         return _cmd_check_endpoint()
+    if args.command == "watch":
+        return _cmd_watch(args)
     return _cmd_run(args)
