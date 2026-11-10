@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  com.tobias.qvc-watchdog — bounded autonomous curate re-harvest, every 6h.
+
+  Install (machine-local; the plist itself is committed for review/repro):
+    cp qvc_agent/schedule/com.tobias.qvc-watchdog.plist ~/Library/LaunchAgents/
+    launchctl load -w ~/Library/LaunchAgents/com.tobias.qvc-watchdog.plist
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.tobias.qvc-watchdog.plist
+    rm   ~/Library/LaunchAgents/com.tobias.qvc-watchdog.plist
+  Run once now (e.g. to test):
+    launchctl kickstart -k gui/$(id -u)/com.tobias.qvc-watchdog
+
+  Cadence: StartInterval is seconds (21600 = 6h). Use 86400 for a lower-bandwidth
+  daily pass. launchd will not start a new instance while one is still running, so
+  the 2h wall-time cap can never overlap the next scheduled slot.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.tobias.qvc-watchdog</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/qvc_agent/schedule/qvc_watchdog.sh</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum</string>
+    <key>StartInterval</key>
+    <integer>21600</integer>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/runs/agent/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/runs/agent/launchd.err.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>/Users/tobiasoberrauch</string>
+        <key>PATH</key>
+        <string>/Users/tobiasoberrauch/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>
