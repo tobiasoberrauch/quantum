@@ -3,8 +3,9 @@
 Turns the one-shot :func:`qvc_agent.watchdog.sweep_pool` into a self-running
 "catch a new public best" operation. Per cycle (up to ``max_cycles``):
 
-1. (optional ``--download``) best-effort re-fetch of existing public source slugs
-   via ``kg.sh`` (non-fatal; catches in-place updates such as the "live" dataset).
+1. (optional ``--download``) best-effort FORCE re-fetch of existing public DATASET
+   slugs via ``kg.sh`` (non-fatal; catches in-place updates such as the "live"
+   dataset). Kernels are frozen + large, so they are not re-fetched by default.
 2. ``refresh_local``: re-run ``index_frontier.py`` over ``downloads/`` (idempotent,
    local, treats circuit data as data — nothing executed).
 3. Plan: seed state if absent (bar = ranked top, seen = all ranked SHAs) then
@@ -67,38 +68,109 @@ def refresh_local(frontier_dir: Path) -> int:
         return 1
 
 
-def download_sources(frontier_dir: Path) -> int:
-    """Best-effort re-fetch of existing public source slugs via ``kg.sh``.
+# Kernel output file-pattern, verbatim from work/frontier_1109/scripts/dl.sh (PAT).
+_KERNEL_FILE_PATTERN = r'^(submission\.zip|[^/]*\.json|[^/]*\.sha256|[^/]*\.md|[^/]*\.txt)$'
 
-    Opt-in and non-fatal: any failure (no network, rate limit, missing token) is
-    swallowed and the driver proceeds with whatever is already local. Re-fetching
-    existing slugs catches in-place updates (e.g. the ``qcc-circuits-live``
-    dataset); discovering brand-new slugs is a separate, heavier step.
+# Pause between per-slug downloads (mirrors dl.sh `sleep 4`) so an unattended
+# re-fetch does not burst the Kaggle API into 429s. Patchable in tests.
+_DOWNLOAD_DELAY_S = 4.0
+
+
+def _slug_ref(name: Any) -> Optional[str]:
+    """Recover ``'<owner>/<slug>'`` from a downloads dir name ``'<kind>__<owner>__<slug>'``.
+
+    Returns ``None`` when the name carries no usable owner/slug. Kaggle owners and
+    slugs never contain ``__``, so splitting on the first two delimiters is safe.
     """
+    if not isinstance(name, str):
+        return None
+    kind, sep, rest = name.partition("__")
+    if not sep or not kind:
+        return None
+    owner, sep2, slug = rest.partition("__")
+    if not sep2 or not owner.strip() or not slug.strip():
+        return None
+    return f"{owner}/{slug}"
+
+
+def download_sources(frontier_dir: Path, kinds: Any = ("d",)) -> int:
+    """Best-effort FORCE re-fetch of existing public source slugs via ``kg.sh``.
+
+    Mirrors ``work/frontier_1109/scripts/dl.sh`` exactly (proven commands + layout),
+    landing each source in ``downloads/<kind>__<owner>__<slug>/`` and touching a
+    ``.done`` marker on success:
+
+      * dataset -> ``datasets download -d <owner/slug> -p <dir> -q -o --force``
+      * kernel  -> ``kernels output <owner/slug> -p <dir> --page-size 200
+                    --file-pattern <PAT> -q -o --force``
+
+    Re-fetching with ``--force`` is what catches in-place updates (e.g. the
+    ``qcc-circuits-live`` dataset): a fresh download changes the file mtime, so the
+    incremental indexer (``shacache.json`` keyed on path|size|mtime) re-scans it and
+    surfaces any newly added circuits. Opt-in and non-fatal: any failure (no network,
+    rate limit, missing token, bad slug) is swallowed and the driver proceeds with
+    whatever is already local.
+
+    Defaults to datasets only (the "live" sources, ~700 MB total). Kernels are frozen
+    outputs and large (~GB), so they are re-fetched only when explicitly requested via
+    ``kinds``. Returns the number of sources successfully re-fetched (0 when nothing
+    succeeded or there was nothing to do).
+    """
+    # Guard nullable/empty inputs before use.
+    if frontier_dir is None or not str(frontier_dir).strip():
+        return 0
+    if kinds is None:
+        kinds = ("d",)
+    try:
+        wanted = {str(k).strip().lower() for k in kinds}
+    except TypeError:
+        wanted = set()
+    wanted.discard("")
+
     fd, cands, ranked, cache, dl, idx, kg = _paths(frontier_dir)
     if not (kg.is_file() and dl.is_dir()):
-        return 1
+        return 0
     token = Path.home() / ".kaggle" / "access_token"
     if not token.is_file():
-        return 1
+        return 0
+
+    try:
+        names = sorted(os.listdir(dl))
+    except OSError:
+        return 0
+
     ok = 0
-    for name in sorted(os.listdir(dl)):
-        if not name.startswith(("k__", "d__", "f__")):
+    for name in names:
+        kind, _, _rest = name.partition("__")
+        if kind not in wanted:
             continue
-        kind, _, rest = name.partition("__")
-        if not rest:
+        ref = _slug_ref(name)
+        if ref is None:
             continue
-        api = "kernels" if kind == "k" else "datasets"
+        d = dl / name
+        if not d.is_dir():
+            continue
+        if kind == "k":
+            cmd = ["bash", str(kg), "kernels", "output", ref, "-p", str(d),
+                   "--page-size", "200", "--file-pattern", _KERNEL_FILE_PATTERN,
+                   "-q", "-o", "--force"]
+            timeout = 1800
+        else:
+            cmd = ["bash", str(kg), "datasets", "download", "-d", ref, "-p", str(d),
+                   "-q", "-o", "--force"]
+            timeout = 2400
         try:
-            r = subprocess.run(
-                ["bash", str(kg), api, "download", "--force", rest],
-                capture_output=True, text=True, timeout=3600,
-                cwd=str(dl.parent),
-            )
-            ok += 1 if r.returncode == 0 else 0
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
         except (OSError, subprocess.SubprocessError):
             continue
-    return 0 if ok else 1
+        if r.returncode == 0:
+            try:
+                (d / ".done").touch()
+            except OSError:
+                pass
+            ok += 1
+        time.sleep(_DOWNLOAD_DELAY_S)
+    return ok
 
 
 def seed_state_if_absent(frontier_dir: Path, task: str, state_path: Path) -> Dict[str, Any]:

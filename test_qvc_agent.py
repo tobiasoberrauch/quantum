@@ -627,6 +627,97 @@ class TestDriver(unittest.TestCase):
             # with downloads enabled and no new unseen, it loops all cycles
             self.assertEqual(len(s["cycles"]), 3)
 
+    def _frontier_with_downloads(self, tmp, slug_dirs):
+        fd = Path(tmp) / "frontier"
+        (fd / "scripts").mkdir(parents=True)
+        (fd / "downloads").mkdir()
+        (fd / "scripts" / "kg.sh").write_text("#!/bin/bash\necho ok\n")
+        for sd in slug_dirs:
+            (fd / "downloads" / sd).mkdir(parents=True)
+        home = Path(tmp) / "home"
+        (home / ".kaggle").mkdir(parents=True)
+        (home / ".kaggle" / "access_token").write_text("tok")
+        return fd, home
+
+    def test_slug_ref(self):
+        self.assertEqual(driver._slug_ref("d__heliosli__qcc-circuits-live"),
+                         "heliosli/qcc-circuits-live")
+        self.assertEqual(
+            driver._slug_ref("k__prvsiyan__verifier-guided-quantum-circuit-optimization"),
+            "prvsiyan/verifier-guided-quantum-circuit-optimization")
+        self.assertIsNone(driver._slug_ref("own__qvc009"))   # no owner/slug split
+        self.assertIsNone(driver._slug_ref("d__onlyowner"))  # missing slug
+        self.assertIsNone(driver._slug_ref(""))              # empty
+        self.assertIsNone(driver._slug_ref(None))            # non-str
+
+    def test_download_sources_dataset_command(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd, home = self._frontier_with_downloads(tmp, ["d__heliosli__qcc-circuits-live"])
+            with mock.patch.object(driver.Path, "home", return_value=home), \
+                    mock.patch.object(driver.subprocess, "run") as run, \
+                    mock.patch.object(driver.time, "sleep"):
+                run.return_value = mock.Mock(returncode=0)
+                n = driver.download_sources(fd)
+            self.assertEqual(n, 1)
+            args = run.call_args.args[0]
+            self.assertEqual(args[:3], ["bash", str(fd / "scripts" / "kg.sh"), "datasets"])
+            self.assertIn("download", args)
+            self.assertIn("-d", args)
+            self.assertIn("heliosli/qcc-circuits-live", args)
+            self.assertIn("--force", args)
+            self.assertTrue((fd / "downloads" / "d__heliosli__qcc-circuits-live" / ".done").exists())
+
+    def test_download_sources_kernel_command(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd, home = self._frontier_with_downloads(
+                tmp, ["k__prvsiyan__verifier-guided-quantum-circuit-optimization"])
+            with mock.patch.object(driver.Path, "home", return_value=home), \
+                    mock.patch.object(driver.subprocess, "run") as run, \
+                    mock.patch.object(driver.time, "sleep"):
+                run.return_value = mock.Mock(returncode=0)
+                n = driver.download_sources(fd, kinds=("k",))
+            self.assertEqual(n, 1)
+            args = run.call_args.args[0]
+            self.assertEqual(args[2], "kernels")
+            self.assertIn("output", args)
+            self.assertIn("prvsiyan/verifier-guided-quantum-circuit-optimization", args)
+            self.assertIn("--file-pattern", args)
+            self.assertIn("--force", args)
+
+    def test_download_sources_default_skips_kernels(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd, home = self._frontier_with_downloads(tmp, ["d__a__b", "k__c__d"])
+            with mock.patch.object(driver.Path, "home", return_value=home), \
+                    mock.patch.object(driver.subprocess, "run") as run, \
+                    mock.patch.object(driver.time, "sleep"):
+                run.return_value = mock.Mock(returncode=0)
+                n = driver.download_sources(fd)   # default kinds=("d",)
+            self.assertEqual(n, 1)                # only the dataset re-fetched
+            self.assertEqual(run.call_count, 1)
+
+    def test_download_sources_failure_not_counted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd, home = self._frontier_with_downloads(tmp, ["d__a__b"])
+            with mock.patch.object(driver.Path, "home", return_value=home), \
+                    mock.patch.object(driver.subprocess, "run") as run, \
+                    mock.patch.object(driver.time, "sleep"):
+                run.return_value = mock.Mock(returncode=1)
+                n = driver.download_sources(fd)
+            self.assertEqual(n, 0)
+            self.assertFalse((fd / "downloads" / "d__a__b" / ".done").exists())
+
+    def test_download_sources_guards_bad_inputs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fd, home = self._frontier_with_downloads(tmp, ["d__a__b"])
+            with mock.patch.object(driver.subprocess, "run") as run:
+                self.assertEqual(driver.download_sources(None), 0)
+                self.assertEqual(driver.download_sources(""), 0)
+                self.assertEqual(driver.download_sources("   "), 0)
+                self.assertEqual(run.call_count, 0)
+            # kinds=None falls back to datasets; missing token -> 0
+            with mock.patch.object(driver.Path, "home", return_value=Path(tmp) / "nohome"):
+                self.assertEqual(driver.download_sources(fd, kinds=None), 0)
+
 
 class TestAutonomousCli(unittest.TestCase):
     def test_autonomous_calls_driver(self):
