@@ -82,6 +82,12 @@ def _preset_models() -> List[Dict[str, Any]]:
     ft_base = _env_str("FREETOKEN_BASE_URL", "http://127.0.0.1:1919/v1").rstrip("/")
     ft_model = _env_str("FREETOKEN_MODEL", "Qwen3.6-35B-A3B")
     ft_host = ft_base.split("//", 1)[-1].split("/", 1)[0]
+    # Ollama (Apple Silicon / local): OpenAI-compatible at :11434/v1, keyless.
+    # FreeToken needs NVIDIA+Linux, so Ollama is the Mac-native way to run local
+    # models as team colleagues. Point OLLAMA_BASE_URL/OLLAMA_MODEL at any Ollama model.
+    ol_base = _env_str("OLLAMA_BASE_URL", "http://127.0.0.1:11434/v1").rstrip("/")
+    ol_model = _env_str("OLLAMA_MODEL", "qwen3.5:27b")
+    ol_host = ol_base.split("//", 1)[-1].split("/", 1)[0]
     return [
         {"id": "local-qwen", "label": f"Qwen · lokal ({local_model})", "kind": "local",
          "base_url": local_base, "model": local_model, "api_key_env": "",
@@ -91,6 +97,12 @@ def _preset_models() -> List[Dict[str, Any]]:
          "extra_body": {"chat_template_kwargs": {"enable_thinking": False}}},
         {"id": "freetoken", "label": f"FreeToken · {ft_model} @ {ft_host}", "kind": "local",
          "base_url": ft_base, "model": ft_model, "api_key_env": ""},
+        {"id": "ollama", "label": f"Ollama · {ol_model} @ {ol_host}", "kind": "local",
+         "base_url": ol_base, "model": ol_model, "api_key_env": "",
+         # Ollama's Qwen3.x are thinking models: they emit `content` only after burning
+         # reasoning tokens, so give a large budget (harmless for non-thinking models,
+         # which stop early). Ollama ignores options.think via its OpenAI endpoint.
+         "max_tokens": 16000},
         {"id": "cloud-opus", "label": "Claude Opus · Cloud", "kind": "cloud",
          "base_url": or_base, "model": q.OPUS, "api_key_env": "OPENROUTER_API_KEY"},
         {"id": "cloud-gpt", "label": "GPT-5.5 · Cloud", "kind": "cloud",

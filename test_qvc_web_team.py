@@ -140,6 +140,32 @@ class TestRegistry(unittest.TestCase):
             with self.assertRaises(ValueError):
                 team.add_model({"id": "x", "base_url": "file:///etc/passwd", "model": "m"})
 
+    def test_ollama_preset_env_driven(self):
+        saved = {k: os.environ.get(k) for k in ("OLLAMA_BASE_URL", "OLLAMA_MODEL")}
+        try:
+            os.environ.pop("OLLAMA_BASE_URL", None)
+            os.environ.pop("OLLAMA_MODEL", None)
+            m = {x["id"]: x for x in team.list_models()}["ollama"]
+            self.assertEqual(m["base_url"], "http://127.0.0.1:11434/v1")
+            self.assertEqual(m["model"], "qwen3.5:27b")
+            os.environ["OLLAMA_BASE_URL"] = "http://127.0.0.1:11434/v1/"
+            os.environ["OLLAMA_MODEL"] = "qwen3:30b-a3b"
+            m = {x["id"]: x for x in team.list_models()}["ollama"]
+            self.assertEqual(m["base_url"], "http://127.0.0.1:11434/v1")
+            self.assertEqual(m["model"], "qwen3:30b-a3b")
+            self.assertIn("qwen3:30b-a3b", m["label"])
+            os.environ["OLLAMA_BASE_URL"] = "   "
+            os.environ["OLLAMA_MODEL"] = ""
+            m = {x["id"]: x for x in team.list_models()}["ollama"]
+            self.assertEqual(m["base_url"], "http://127.0.0.1:11434/v1")
+            self.assertEqual(m["model"], "qwen3.5:27b")
+        finally:
+            for k, v in saved.items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+
     def test_custom_roundtrip_and_get(self):
         with tempfile.TemporaryDirectory() as tmp:
             team.TEAM_MODELS_FILE = Path(tmp) / "team_models.json"
