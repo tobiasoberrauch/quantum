@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<script>
+  /* Theme vor dem ersten Zeichnen setzen (kein Aufblitzen) / set theme before first paint */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("kmx-doc-theme"); } catch (e) {}
+    if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>kmx – Anleitung für Einsteiger / Beginner's guide</title>
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --ink: #1d1f24;
+    --muted: #5d6170;
+    --rule: #d9d3c5;
+    --accent: #0b5d4b;
+    --accent-soft: #dcebe5;
+    --warn: #8a4b00;
+    --warn-soft: #f7e7cf;
+    --code-bg: #1e2229;
+    --code-ink: #e6e3da;
+    --surface: #ffffff;
+    --inline-code: #ebe6da;
+    --body-ink: #33363e;
+    --header-bg: rgba(246, 243, 236, .94);
+    color-scheme: light;
+    --mono: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --paper: #15171b;
+    --ink: #e8e4da;
+    --muted: #9a9eab;
+    --rule: #2e3138;
+    --accent: #5cc8a4;
+    --accent-soft: #17302a;
+    --warn: #e8a65a;
+    --warn-soft: #33261a;
+    --code-bg: #0d0f12;
+    --code-ink: #e6e3da;
+    --surface: #1e2127;
+    --inline-code: #262a31;
+    --body-ink: #c9c6bd;
+    --header-bg: rgba(21, 23, 27, .92);
+    color-scheme: dark;
+  }
+  :root[data-theme="dark"] pre { border: 1px solid var(--rule); }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 17px/1.65 var(--sans);
+  }
+  /* language switch: show only the active language */
+  body.de [lang="en"], body.en [lang="de"] { display: none !important; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--header-bg); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .6rem clamp(1rem, 4vw, 3rem);
+  }
+  .brand { font: 600 1rem var(--mono); letter-spacing: .02em; }
+  .brand b { color: var(--accent); }
+  .tools { display: flex; gap: .6rem; align-items: center; }
+  .theme {
+    border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    border-radius: 999px; width: 2.1rem; height: 2.1rem; font-size: 1rem; line-height: 1;
+  }
+  .theme:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .switch { display: flex; border: 1px solid var(--ink); border-radius: 999px; overflow: hidden; }
+  .switch button {
+    border: 0; background: transparent; color: var(--ink); cursor: pointer;
+    font: 600 .85rem var(--sans); padding: .35rem .9rem;
+  }
+  .switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .switch button:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+
+  .layout {
+    display: grid; grid-template-columns: 15rem minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    max-width: 78rem; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem);
+  }
+  nav.toc { position: sticky; top: 4rem; align-self: start; padding: 2.5rem 0; font-size: .9rem; }
+  nav.toc ol { list-style: none; padding: 0; margin: 0; counter-reset: toc; }
+  nav.toc li { counter-increment: toc; margin: .15rem 0; }
+  nav.toc a {
+    color: var(--muted); text-decoration: none; display: block;
+    padding: .2rem .5rem; border-left: 2px solid transparent;
+  }
+  nav.toc a::before { content: counter(toc, decimal-leading-zero) "  "; font-family: var(--mono); font-size: .8em; }
+  nav.toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+
+  main { padding: 2.5rem 0 6rem; max-width: 46rem; }
+  .hero { padding: 2rem 0 2.5rem; border-bottom: 3px double var(--ink); margin-bottom: 2rem; }
+  .hero .kicker { font: 600 .8rem var(--mono); color: var(--accent); letter-spacing: .08em; }
+  .hero h1 {
+    font: 600 clamp(2.2rem, 5vw, 3.4rem)/1.08 var(--serif);
+    margin: .4rem 0 1rem; letter-spacing: -.01em;
+  }
+  .hero p.lead { font-size: 1.15rem; color: var(--muted); margin: 0; }
+
+  section { padding-top: 1.5rem; scroll-margin-top: 4rem; }
+  h2 {
+    font: 600 1.7rem/1.2 var(--serif); margin: 2.2rem 0 .8rem;
+    display: flex; gap: .7rem; align-items: baseline;
+  }
+  h2 .no { font: 600 .9rem var(--mono); color: var(--accent); }
+  h3 { font: 600 1.1rem var(--sans); margin: 1.6rem 0 .4rem; }
+  p, li { max-width: 68ch; }
+  a { color: var(--accent); }
+
+  code { font: .88em var(--mono); background: var(--inline-code); padding: .08em .3em; border-radius: 3px; }
+  pre {
+    background: var(--code-bg); color: var(--code-ink);
+    font: .84rem/1.55 var(--mono); padding: 1rem 1.2rem; border-radius: 6px;
+    overflow-x: auto; margin: .8rem 0 1.2rem;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+  pre .c { color: #8c9a7c; }      /* comment */
+  pre .g { color: #9fd8b8; }      /* good */
+  pre .h { color: #f0c27b; }      /* highlight */
+  pre .r { color: #f29c8f; }      /* removed */
+
+  .note, .warn {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    padding: .8rem 1rem; margin: 1.2rem 0; border-radius: 0 6px 6px 0;
+  }
+  .warn { border-color: var(--warn); background: var(--warn-soft); }
+  .note > :first-child, .warn > :first-child { margin-top: 0; }
+  .note > :last-child, .warn > :last-child { margin-bottom: 0; }
+
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0 1.4rem; font-size: .92rem; }
+  th, td { text-align: left; vertical-align: top; padding: .5rem .6rem; border-bottom: 1px solid var(--rule); }
+  th { font: 600 .78rem var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  td code { white-space: nowrap; }
+
+  .steps { counter-reset: s; list-style: none; padding: 0; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 2.8rem; margin: 1.2rem 0; }
+  .steps > li::before {
+    content: counter(s); position: absolute; left: 0; top: .05rem;
+    width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    background: var(--ink); color: var(--paper);
+    font: 600 .9rem/1.9rem var(--mono); text-align: center;
+  }
+
+  .pipeline { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin: 1rem 0 1.4rem; font-size: .85rem; }
+  .pipeline span { border: 1.5px solid var(--ink); padding: .3rem .6rem; border-radius: 4px; background: var(--surface); }
+  .pipeline span.gate { background: var(--ink); color: var(--paper); }
+  .pipeline i { color: var(--muted); font-style: normal; }
+
+  .formula {
+    font: 1.2rem var(--serif); text-align: center; padding: 1rem;
+    border: 1px solid var(--rule); background: var(--surface); border-radius: 6px; margin: 1rem 0;
+  }
+  dl.glossary dt { font-weight: 600; margin-top: .9rem; }
+  dl.glossary dd { margin: .1rem 0 0 0; color: var(--body-ink); }
+
+  footer { border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; padding: 1.5rem 0; margin-top: 3rem; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.toc { position: static; padding: 1rem 0 0; }
+  }
+  @media print {
+    header.top, nav.toc { display: none; }
+    .layout { display: block; }
+    pre { white-space: pre-wrap; }
+  }
+</style>
+</head>
+<body class="de">
+
+<header class="top">
+  <div class="brand"><b>kmx</b> · kickmix optimizer</div>
+  <div class="tools">
+  <button type="button" class="theme" id="theme" aria-label="Hell/Dunkel · Light/Dark">◐</button>
+  <div class="switch" role="group" aria-label="Sprache / Language">
+    <button type="button" data-lang="de" aria-pressed="true">Deutsch</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+  </div>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc" aria-label="Inhalt">
+  <ol>
+    <li><a href="#was"><span lang="de">Worum geht es?</span><span lang="en">What is this?</span></a></li>
+    <li><a href="#begriffe"><span lang="de">Grundbegriffe</span><span lang="en">Key ideas</span></a></li>
+    <li><a href="#start"><span lang="de">Vorbereitung</span><span lang="en">Setup</span></a></li>
+    <li><a href="#erster"><span lang="de">Erster Lauf</span><span lang="en">First run</span></a></li>
+    <li><a href="#befehle"><span lang="de">Die Befehle</span><span lang="en">Commands</span></a></li>
+    <li><a href="#optionen"><span lang="de">Wichtige Optionen</span><span lang="en">Useful options</span></a></li>
+    <li><a href="#ki"><span lang="de">KI-Agent</span><span lang="en">AI agent</span></a></li>
+    <li><a href="#sicher"><span lang="de">Warum es sicher ist</span><span lang="en">Why it is safe</span></a></li>
+    <li><a href="#rezepte"><span lang="de">Rezepte</span><span lang="en">Recipes</span></a></li>
+    <li><a href="#python"><span lang="de">Aus Python nutzen</span><span lang="en">Use from Python</span></a></li>
+    <li><a href="#aufbau"><span lang="de">Aufbau des Pakets</span><span lang="en">Package layout</span></a></li>
+    <li><a href="#faq"><span lang="de">Probleme &amp; Lösungen</span><span lang="en">Troubleshooting</span></a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="hero">
+  <div class="kicker">QUANTUM / VQCC · kmx/</div>
+  <h1 lang="de">Quantenschaltkreise kleiner machen – ohne sie kaputt zu machen.</h1>
+  <h1 lang="en">Make quantum circuits smaller – without breaking them.</h1>
+  <p class="lead" lang="de">Eine Anleitung für Einsteiger: was <code>kmx</code> tut, wie du es startest, wie du die Ausgabe liest und wie du den KI-Agenten dazuschaltest.</p>
+  <p class="lead" lang="en">A beginner's guide: what <code>kmx</code> does, how to run it, how to read its output and how to switch on the AI agent.</p>
+</div>
+
+<!-- 01 -->
+<section id="was">
+<h2><span class="no">01</span><span lang="de">Worum geht es?</span><span lang="en">What is this?</span></h2>
+<div lang="de">
+  <p>Im Kaggle-Wettbewerb <em>Verifiable Quantum Circuit Compilation</em> reicht man Quantenschaltkreise ein. Ein Schaltkreis ist eine lange Liste von Befehlen („Gattern“), gespeichert als Textdatei mit der Endung <code>.kmx</code>. Je <strong>weniger teure Gatter</strong> und je <strong>weniger Qubits</strong> er braucht, desto besser die Wertung.</p>
+  <p><code>kmx</code> ist ein Werkzeug, das einen solchen Schaltkreis einliest, ihn automatisch verkleinert und dabei <strong>beweist bzw. vollständig nachprüft</strong>, dass er noch exakt dasselbe berechnet. Nur dann wird das Ergebnis gespeichert.</p>
+  <p>Ein Vergleich: Stell dir ein Kochrezept mit 36&nbsp;000 Schritten vor. Manche Schritte heben sich auf („Salz hinzufügen – Salz wieder entfernen“). <code>kmx</code> findet solche Stellen, streicht sie und kocht das Rezept danach für <em>jede</em> erlaubte Zutatenkombination nach, um sicherzugehen, dass dasselbe Gericht herauskommt.</p>
+</div>
+<div lang="en">
+  <p>In the Kaggle competition <em>Verifiable Quantum Circuit Compilation</em> you submit quantum circuits. A circuit is a long list of instructions (“gates”), stored as a text file ending in <code>.kmx</code>. The <strong>fewer expensive gates</strong> and the <strong>fewer qubits</strong> it needs, the better the score.</p>
+  <p><code>kmx</code> is a tool that reads such a circuit, shrinks it automatically and <strong>proves or exhaustively re-checks</strong> that it still computes exactly the same thing. Only then is the result saved.</p>
+  <p>An analogy: imagine a recipe with 36,000 steps. Some steps cancel out (“add salt – remove the salt again”). <code>kmx</code> finds such spots, deletes them, and then re-cooks the recipe for <em>every</em> allowed combination of ingredients to make sure the same dish comes out.</p>
+</div>
+<div class="pipeline" aria-label="Ablauf / flow">
+  <span>.kmx</span><i>→</i><span lang="de">einlesen</span><span lang="en">parse</span><i>→</i>
+  <span lang="de">simulieren</span><span lang="en">simulate</span><i>→</i>
+  <span lang="de">Pässe</span><span lang="en">passes</span><i>→</i>
+  <span lang="de">(KI-Agent)</span><span lang="en">(AI agent)</span><i>→</i>
+  <span class="gate" lang="de">Prüfung</span><span class="gate" lang="en">check</span><i>→</i>
+  <span>out.kmx</span>
+</div>
+</section>
+
+<!-- 02 -->
+<section id="begriffe">
+<h2><span class="no">02</span><span lang="de">Grundbegriffe</span><span lang="en">Key ideas</span></h2>
+<dl class="glossary" lang="de">
+  <dt>Qubit (<code>q0</code>, <code>q1</code>, …)</dt>
+  <dd>Ein Quanten-Bit, die „Speicherzelle“. Hier verhalten sich die meisten Gatter wie klassische Bit-Operationen, deshalb kann <code>kmx</code> sie auf einem normalen Rechner simulieren.</dd>
+  <dt>Register</dt>
+  <dd>Eine Gruppe von Qubits, die zusammen eine Zahl bilden – z. B. die Eingabe <code>x</code>. Alle anderen Qubits sind <em>Scratch</em> (Schmierpapier) und müssen am Ende wieder auf 0 stehen.</dd>
+  <dt>Gatter</dt>
+  <dd>Ein Befehl pro Zeile. <code>X q3</code> kippt ein Bit. <code>CX q0 q1</code> kippt q1, wenn q0 = 1. <code>CCX q0 q1 q4</code> (Toffoli) kippt q4, wenn q0 <em>und</em> q1 = 1. <code>CZ</code>, <code>Z_POW</code> ändern nur die Phase (eine Art unsichtbares Vorzeichen). <code>HMR q4 b0</code> misst ein Qubit und legt das Ergebnis in Bit <code>b0</code>.</dd>
+  <dt>Toffoli</dt>
+  <dd>Das <strong>teure</strong> Gatter (<code>CCX</code>, <code>CCZ</code>, <code>CSWAP</code>). Genau diese will man loswerden. <code>X</code>, <code>CX</code>, <code>CZ</code> sind praktisch kostenlos.</dd>
+  <dt>Domäne</dt>
+  <dd>Die Menge aller erlaubten Eingaben. Bei <code>invsqrt</code> sind das alle x von 1 bis 3&nbsp;133&nbsp;452. <code>kmx</code> rechnet sie <em>alle gleichzeitig</em> durch (jede Eingabe ist ein Bit in einer riesigen Ganzzahl).</dd>
+  <dt>Pass</dt>
+  <dd>Ein automatischer Optimierungsschritt, z. B. „lösche Paare, die sich aufheben“. Pässe laufen, bis sich nichts mehr ändert.</dd>
+  <dt>Verifier</dt>
+  <dd>Der Prüfer. Er vergleicht Original und Ergebnis. Fällt er durch, wird nichts geschrieben.</dd>
+</dl>
+<dl class="glossary" lang="en">
+  <dt>Qubit (<code>q0</code>, <code>q1</code>, …)</dt>
+  <dd>A quantum bit, the “memory cell”. Here most gates behave like classical bit operations, which is why <code>kmx</code> can simulate them on a normal computer.</dd>
+  <dt>Register</dt>
+  <dd>A group of qubits that together form a number – e.g. the input <code>x</code>. All other qubits are <em>scratch</em> and must be back at 0 at the end.</dd>
+  <dt>Gate</dt>
+  <dd>One instruction per line. <code>X q3</code> flips a bit. <code>CX q0 q1</code> flips q1 if q0 = 1. <code>CCX q0 q1 q4</code> (Toffoli) flips q4 if q0 <em>and</em> q1 = 1. <code>CZ</code>, <code>Z_POW</code> only change the phase (a kind of invisible sign). <code>HMR q4 b0</code> measures a qubit and stores the outcome in bit <code>b0</code>.</dd>
+  <dt>Toffoli</dt>
+  <dd>The <strong>expensive</strong> gate (<code>CCX</code>, <code>CCZ</code>, <code>CSWAP</code>). These are what you want to get rid of. <code>X</code>, <code>CX</code>, <code>CZ</code> are practically free.</dd>
+  <dt>Domain</dt>
+  <dd>The set of all allowed inputs. For <code>invsqrt</code> that is every x from 1 to 3,133,452. <code>kmx</code> runs <em>all of them at once</em> (each input is one bit in a huge integer).</dd>
+  <dt>Pass</dt>
+  <dd>An automatic optimisation step, e.g. “delete pairs that cancel”. Passes repeat until nothing changes any more.</dd>
+  <dt>Verifier</dt>
+  <dd>The checker. It compares original and result. If it fails, nothing is written.</dd>
+</dl>
+
+<h3 lang="de">Wie die Wertung funktioniert</h3>
+<h3 lang="en">How scoring works</h3>
+<div class="formula">Score = Q × ( Toffoli + T/4 + <span lang="de">Rotationskosten</span><span lang="en">rotation cost</span> )</div>
+<p lang="de"><strong>Q</strong> ist der größte benutzte Qubit-Index + 1. Kleiner ist besser. Zwei Hebel also: weniger Toffolis <em>oder</em> weniger Qubits.</p>
+<p lang="en"><strong>Q</strong> is the highest qubit index used + 1. Lower is better. So there are two levers: fewer Toffolis <em>or</em> fewer qubits.</p>
+</section>
+
+<!-- 03 -->
+<section id="start">
+<h2><span class="no">03</span><span lang="de">Vorbereitung</span><span lang="en">Setup</span></h2>
+<div lang="de">
+  <p>Alles läuft im Repo-Ordner <code>quantum/</code>. Du brauchst nichts zu installieren: Die Umgebung <code>.venv-chem</code> enthält Python, <code>numpy</code> (für den exakten Score) und <code>kickmix</code> (die offizielle Bibliothek zur Gegenprüfung).</p>
+</div>
+<div lang="en">
+  <p>Everything runs inside the repo folder <code>quantum/</code>. There is nothing to install: the environment <code>.venv-chem</code> already contains Python, <code>numpy</code> (for the exact score) and <code>kickmix</code> (the official library used for cross-checking).</p>
+</div>
+<pre><code><span class="c"># 1) <span lang="de">in den Ordner wechseln</span><span lang="en">go to the folder</span></span>
+cd ~/Repositories/tobiasoberrauch/quantum
+
+<span class="c"># 2) <span lang="de">Selbsttest – sollte überall OK zeigen</span><span lang="en">self test – should print OK everywhere</span></span>
+.venv-chem/bin/python main.py --selftest
+
+<span class="c"># 3) <span lang="de">Hilfe anzeigen</span><span lang="en">show help</span></span>
+.venv-chem/bin/python main.py --help</code></pre>
+<div class="note">
+  <p lang="de"><strong>Tipp:</strong> Damit du nicht jedes Mal den langen Pfad tippst, kannst du einmal pro Terminal <code>alias kmx=".venv-chem/bin/python main.py"</code> setzen. Danach reicht <code>kmx info datei.kmx</code>. In dieser Anleitung steht trotzdem immer die lange Form.</p>
+  <p lang="en"><strong>Tip:</strong> To avoid typing the long path each time, set <code>alias kmx=".venv-chem/bin/python main.py"</code> once per terminal. After that <code>kmx info file.kmx</code> is enough. This guide still uses the long form everywhere.</p>
+</div>
+<p lang="de"><code>python -m kmx …</code> funktioniert genauso wie <code>python main.py …</code>.</p>
+<p lang="en"><code>python -m kmx …</code> works exactly like <code>python main.py …</code>.</p>
+</section>
+
+<!-- 04 -->
+<section id="erster">
+<h2><span class="no">04</span><span lang="de">Dein erster Lauf (5 Minuten)</span><span lang="en">Your first run (5 minutes)</span></h2>
+<p lang="de">Im Ordner liegt ein winziges Beispiel: <code>docs/kmx/beispiel.kmx</code>. Es hat absichtlich Verschwendung eingebaut.</p>
+<p lang="en">There is a tiny example next to this page: <code>docs/kmx/beispiel.kmx</code>. It contains deliberate waste.</p>
+<pre><code>APPEND_TO_REGISTER q0 r0     <span class="c">← q0..q3 <span lang="de">bilden das Register</span><span lang="en">form the register</span> r0</span>
+APPEND_TO_REGISTER q1 r0
+APPEND_TO_REGISTER q2 r0
+APPEND_TO_REGISTER q3 r0
+REGISTER r0 "x"              <span class="c">← <span lang="de">… und es heißt „x“</span><span lang="en">… and it is called “x”</span></span>
+CCX q0 q1 q4                 <span class="c">← Toffoli</span>
+CZ q4 q2
+CCX q0 q1 q4                 <span class="c">← Toffoli (<span lang="de">räumt q4 wieder auf</span><span lang="en">cleans q4 up again</span>)</span>
+X q3
+X q3                         <span class="c">← <span lang="de">hebt das vorige X auf</span><span lang="en">cancels the previous X</span></span>
+CCX q2 q3 q5
+CCX q2 q3 q5                 <span class="c">← <span lang="de">hebt das vorige CCX auf</span><span lang="en">cancels the previous CCX</span></span></code></pre>
+
+<ol class="steps">
+<li>
+  <p lang="de"><strong>Anschauen</strong> – <code>info</code> zeigt Kennzahlen, ohne etwas zu ändern:</p>
+  <p lang="en"><strong>Inspect</strong> – <code>info</code> shows the numbers without changing anything:</p>
+<pre><code>.venv-chem/bin/python main.py info docs/kmx/beispiel.kmx --range 0:15
+
+Domäne: alle 16 Eingaben x in [0, 15]
+Basislauf in 0.0s: Kontrakt erfüllt (Scratch sauber, Register erhalten, Phase deterministisch)
+Q=6 (6 benutzt) | <span class="h">Toffoli-artig=4</span> (CCX 4, CCZ 0, CSWAP 0) | … | <span class="h">Score≈24</span></code></pre>
+  <p lang="de"><code>--range 0:15</code> sagt: Das Register x darf alle Werte von 0 bis 15 annehmen. Bei echten <code>invsqrt</code>-Dateien (22-Bit-Register) erkennt <code>kmx</code> den Bereich automatisch.</p>
+  <p lang="en"><code>--range 0:15</code> means: register x may take every value from 0 to 15. For real <code>invsqrt</code> files (22-bit register) <code>kmx</code> detects the range automatically.</p>
+</li>
+<li>
+  <p lang="de"><strong>Optimieren</strong> – <code>optimize</code> schreibt das Ergebnis nach <code>-o</code> und einen Unterschied nach <code>--diff</code>:</p>
+  <p lang="en"><strong>Optimise</strong> – <code>optimize</code> writes the result to <code>-o</code> and a diff to <code>--diff</code>:</p>
+<pre><code>.venv-chem/bin/python main.py optimize docs/kmx/beispiel.kmx --range 0:15 \
+    -o /tmp/klein.kmx --diff /tmp/klein.diff
+
+  <span class="g">[OK]</span> Auslöschung: 2 Paare gelöscht …                | identisch auf alle 16 Eingaben
+  <span class="g">[OK]</span> Measurement-Based Uncomputation: {"chains": 1, "toffoli_saved": 1} | identisch …
+End-to-End-Prüfung gegen das Original: <span class="g">BESTANDEN</span>
+VORHER :  Q=6 | Toffoli-artig=4 | … | Score≈24
+NACHHER:  Q=5 | Toffoli-artig=1 | … | Score≈5
+<span class="h">Kosten-Delta: -19.00 (-79.17 %)</span>
+kickmix-Gegenprüfung bestanden …
+Geschrieben: /tmp/klein.kmx | Diff: /tmp/klein.diff</code></pre>
+</li>
+<li>
+  <p lang="de"><strong>Verstehen, was passiert ist</strong> – der Diff:</p>
+  <p lang="en"><strong>Understand what happened</strong> – the diff:</p>
+<pre><code> CCX q0 q1 q4
+ CZ q4 q2
+<span class="r">-CCX q0 q1 q4</span>
+<span class="r">-X q3</span>
+<span class="r">-X q3</span>
+<span class="r">-CCX q2 q3 q5</span>
+<span class="r">-CCX q2 q3 q5</span>
+<span class="g">+HMR q4 b0</span>
+<span class="g">+CZ q0 q1 if b0</span></code></pre>
+  <p lang="de">Zwei Paare haben sich einfach aufgehoben. Spannender: Das zweite <code>CCX</code> diente nur zum Aufräumen von q4. <code>kmx</code> ersetzt es durch eine <strong>Messung</strong> (<code>HMR</code>) und eine billige, bedingte Phasenkorrektur (<code>CZ … if b0</code>). Das nennt sich <em>Measurement-Based Uncomputation</em>. Und weil q5 nicht mehr gebraucht wird, sinkt Q von 6 auf 5. Ergebnis: 24 → 5.</p>
+  <p lang="en">Two pairs simply cancelled. More interesting: the second <code>CCX</code> only served to clean up q4. <code>kmx</code> replaces it with a <strong>measurement</strong> (<code>HMR</code>) and a cheap conditional phase fix (<code>CZ … if b0</code>). This is called <em>measurement-based uncomputation</em>. And because q5 is no longer used, Q drops from 6 to 5. Result: 24 → 5.</p>
+</li>
+<li>
+  <p lang="de"><strong>Zur Sicherheit noch einmal vergleichen</strong> – <code>check</code> vergleicht zwei beliebige Dateien:</p>
+  <p lang="en"><strong>Double-check</strong> – <code>check</code> compares any two files:</p>
+<pre><code>.venv-chem/bin/python main.py check docs/kmx/beispiel.kmx /tmp/klein.kmx --range 0:15
+…
+<span class="g">ÄQUIVALENT</span>: identisch auf alle 16 Eingaben x in [0, 15] x 4 Messrunde(n)</code></pre>
+</li>
+</ol>
+<div class="note">
+  <p lang="de">Die Programmausgabe ist auf Deutsch – auch wenn du diese Seite auf Englisch liest. Wichtige Wörter: <strong>BESTANDEN</strong> = passed, <strong>ÄQUIVALENT</strong> = equivalent, <strong>VORHER/NACHHER</strong> = before/after, <strong>Geschrieben</strong> = written.</p>
+  <p lang="en">The program output is in German. Key words: <strong>BESTANDEN</strong> = passed, <strong>ÄQUIVALENT</strong> = equivalent, <strong>NICHT ÄQUIVALENT</strong> = not equivalent, <strong>VORHER/NACHHER</strong> = before/after, <strong>Geschrieben</strong> = written, <strong>Kosten-Delta</strong> = cost change, <strong>keine Senkung</strong> = no reduction.</p>
+</div>
+</section>
+
+<!-- 05 -->
+<section id="befehle">
+<h2><span class="no">05</span><span lang="de">Die Befehle</span><span lang="en">Commands</span></h2>
+<p lang="de">Form: <code>.venv-chem/bin/python main.py BEFEHL EINGABE [Optionen]</code></p>
+<p lang="en">Form: <code>.venv-chem/bin/python main.py COMMAND INPUT [options]</code></p>
+<table>
+  <thead><tr><th lang="de">Befehl</th><th lang="en">Command</th><th lang="de">Was er tut</th><th lang="en">What it does</th><th lang="de">Beispiel</th><th lang="en">Example</th></tr></thead>
+  <tbody>
+  <tr><td><code>info</code></td>
+      <td><span lang="de">Kennzahlen, Score und wo die Toffolis sitzen (Liste der „heißesten“ Abschnitte). Ändert nichts.</span><span lang="en">Metrics, score and where the Toffolis sit (list of the “hottest” segments). Changes nothing.</span></td>
+      <td><code>info a.kmx</code></td></tr>
+  <tr><td><code>optimize</code></td>
+      <td><span lang="de">Nur die automatischen, deterministischen Pässe. Schnell, ohne KI. <strong>Der Standard-Befehl.</strong></span><span lang="en">Only the automatic, deterministic passes. Fast, no AI. <strong>The default command.</strong></span></td>
+      <td><code>optimize a.kmx -o b.kmx</code></td></tr>
+  <tr><td><code>agent</code></td>
+      <td><span lang="de">Pässe + KI-Agent, der selbst Umformungen vorschlägt. Jeder Vorschlag wird bewiesen, bevor er zählt.</span><span lang="en">Passes + an AI agent that proposes rewrites itself. Every proposal is proven before it counts.</span></td>
+      <td><code>agent a.kmx -o b.kmx</code></td></tr>
+  <tr><td><code>check</code></td>
+      <td><span lang="de">Vergleicht Original und Kandidat über die ganze Domäne.</span><span lang="en">Compares original and candidate over the whole domain.</span></td>
+      <td><code>check a.kmx b.kmx</code></td></tr>
+  <tr><td><code>research</code></td>
+      <td><span lang="de">Schreibt einen „Research-Brief“ (Markdown) zum Schaltkreis – als Futter für ein Deep-Research-Werkzeug. Das Ergebnis kann später mit <code>--playbook</code> an den Agenten gehen.</span><span lang="en">Writes a “research brief” (Markdown) about the circuit – food for a deep-research tool. The result can later be handed to the agent with <code>--playbook</code>.</span></td>
+      <td><code>research a.kmx --out brief.md</code></td></tr>
+  <tr><td><code>selftest</code></td>
+      <td><span lang="de">Eingebaute Tests (auch <code>--selftest</code>).</span><span lang="en">Built-in tests (also <code>--selftest</code>).</span></td>
+      <td><code>--selftest</code></td></tr>
+  <tr><td><span lang="de">alte Form</span><span lang="en">legacy form</span></td>
+      <td><span lang="de">Ohne Befehl: Pässe + KI-Stufe + Gate, Ausgabe und Diff als Positionsargumente.</span><span lang="en">No command: passes + AI stage + gate, output and diff as positional arguments.</span></td>
+      <td><code>a.kmx out.kmx out.diff</code></td></tr>
+  </tbody>
+</table>
+
+<h3 lang="de">Was die Exit-Codes bedeuten</h3>
+<h3 lang="en">What the exit codes mean</h3>
+<p lang="de">Nützlich in Skripten (<code>echo $?</code> direkt nach dem Aufruf):</p>
+<p lang="en">Useful in scripts (<code>echo $?</code> right after the call):</p>
+<table>
+  <thead><tr><th>Code</th><th lang="de">Bedeutung</th><th lang="en">Meaning</th></tr></thead>
+  <tbody>
+  <tr><td><code>0</code></td><td><span lang="de">alles gut (bei <code>optimize</code>: Ergebnis geschrieben)</span><span lang="en">all good (for <code>optimize</code>: result written)</span></td></tr>
+  <tr><td><code>1</code></td><td><span lang="de">Datei fehlt, Formatfehler oder Selbsttest fehlgeschlagen</span><span lang="en">file missing, format error or self test failed</span></td></tr>
+  <tr><td><code>2</code></td><td><span lang="de">Prüfung fehlgeschlagen oder Kosten gestiegen – <strong>nichts geschrieben</strong></span><span lang="en">check failed or cost went up – <strong>nothing written</strong></span></td></tr>
+  <tr><td><code>3</code></td><td><span lang="de">offizieller Verifier fehlt (obwohl verlangt) oder lehnt ab</span><span lang="en">official verifier missing (although required) or it rejected</span></td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- 06 -->
+<section id="optionen">
+<h2><span class="no">06</span><span lang="de">Wichtige Optionen</span><span lang="en">Useful options</span></h2>
+<p lang="de">Es gibt viele Schalter (<code>main.py optimize --help</code>). Für den Anfang reichen diese:</p>
+<p lang="en">There are many switches (<code>main.py optimize --help</code>). These are enough to start:</p>
+<table>
+  <thead><tr><th>Option</th><th lang="de">Wofür</th><th lang="en">What for</th></tr></thead>
+  <tbody>
+  <tr><td><code>-o OUT</code>, <code>--diff D</code></td><td><span lang="de">wohin Ergebnis und Unterschied geschrieben werden</span><span lang="en">where result and diff are written</span></td></tr>
+  <tr><td><code>--range LO:HI</code></td><td><span lang="de">erlaubter Wertebereich des Eingaberegisters. Ohne vollständige Domäne laufen nur die rein syntaktischen Pässe.</span><span lang="en">allowed value range of the input register. Without a complete domain only the purely syntactic passes run.</span></td></tr>
+  <tr><td><code>--input-register NAME</code></td><td><span lang="de">Name des Eingaberegisters (Standard <code>x</code>)</span><span lang="en">name of the input register (default <code>x</code>)</span></td></tr>
+  <tr><td><code>--no-kickmix</code></td><td><span lang="de">Gegenprüfung mit kickmix überspringen (schneller)</span><span lang="en">skip the kickmix cross-check (faster)</span></td></tr>
+  <tr><td><code>--kickmix-full</code></td><td><span lang="de">kickmix-Prüfung über die ganze Domäne statt 4096 Stichproben (ca. 1 min)</span><span lang="en">kickmix check over the whole domain instead of 4096 samples (about 1 min)</span></td></tr>
+  <tr><td><code>--no-deep</code>, <code>--no-mbu</code>, <code>--no-repack</code></td><td><span lang="de">einzelne Pässe abschalten (zum Eingrenzen oder für Tempo)</span><span lang="en">turn off individual passes (to narrow things down or for speed)</span></td></tr>
+  <tr><td><code>--trim-rotations</code></td><td><span lang="de">nur <code>invsqrt</code>: feine Drehungen streichen, wenn der exakte Score dadurch sinkt und die Genauigkeit in der Toleranz bleibt</span><span lang="en"><code>invsqrt</code> only: drop fine rotations if the exact score improves and accuracy stays within tolerance</span></td></tr>
+  <tr><td><code>--verify-cmd "CMD {out}"</code></td><td><span lang="de">offiziellen Verifier <em>vor</em> dem Schreiben laufen lassen; lehnt er ab, wird nichts geschrieben</span><span lang="en">run the official verifier <em>before</em> writing; if it rejects, nothing is written</span></td></tr>
+  <tr><td><code>--allow-sampled-facts</code></td><td><span lang="de">Simulationspässe auch auf einer Stichprobe erlauben (statistisch, nicht bewiesen – mit Vorsicht)</span><span lang="en">allow simulation passes on a sample domain too (statistical, not proven – use with care)</span></td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- 07 -->
+<section id="ki">
+<h2><span class="no">07</span><span lang="de">Den KI-Agenten nutzen</span><span lang="en">Using the AI agent</span></h2>
+<div lang="de">
+  <p>Mit <code>agent</code> bekommt ein Sprachmodell eine „Werkbank“ aus Werkzeugen: Zeilen lesen, Hotspots finden, ein Fenster analysieren, eine Umformung vorschlagen, alles prüfen, rückgängig machen. Das Modell <strong>darf nichts direkt ändern</strong> – jeder Vorschlag läuft durch denselben Verifier wie die Pässe.</p>
+  <p>Ohne Angabe wird die lokale Weinstadt-KI (Modell <code>qwen3.8-27b</code>) benutzt. Ist sie nicht erreichbar, wird die Stufe einfach übersprungen.</p>
+</div>
+<div lang="en">
+  <p>With <code>agent</code>, a language model gets a “workbench” of tools: read lines, find hotspots, analyse a window, propose a rewrite, run a full check, undo. The model <strong>cannot change anything directly</strong> – every proposal goes through the same verifier as the passes.</p>
+  <p>By default the local Weinstadt AI (model <code>qwen3.8-27b</code>) is used. If it is unreachable, the stage is simply skipped.</p>
+</div>
+<pre><code><span class="c"># <span lang="de">lokales Modell (Standard)</span><span lang="en">local model (default)</span></span>
+.venv-chem/bin/python main.py agent invsqrt.kmx -o out.kmx
+
+<span class="c"># <span lang="de">anderer OpenAI-kompatibler Endpunkt, zwei Modelle im Staffellauf</span><span lang="en">another OpenAI-compatible endpoint, two models taking turns</span></span>
+LLM_API_KEY=… .venv-chem/bin/python main.py agent invsqrt.kmx -o out.kmx \
+    --api-url https://…/v1/chat/completions --models modell-a,modell-b
+
+<span class="c"># <span lang="de">nur Umformungen annehmen, die über ALLE Belegungen bewiesen sind</span><span lang="en">accept only rewrites proven over ALL assignments</span></span>
+.venv-chem/bin/python main.py agent invsqrt.kmx -o out.kmx --exact-only</code></pre>
+
+<h3 lang="de">Zuschauen, was die KI tut (Trace-Viewer)</h3>
+<h3 lang="en">Watch what the AI does (trace viewer)</h3>
+<p lang="de">Im Repo gibt es einen kleinen Proxy, der jeden KI-Aufruf mitschreibt und im Browser anzeigt – ähnlich wie LiteLLM-Logging:</p>
+<p lang="en">The repo contains a small proxy that records every AI call and shows it in the browser – similar to LiteLLM logging:</p>
+<pre><code><span class="c"># <span lang="de">1) Proxy starten (Fenster offen lassen)</span><span lang="en">1) start the proxy (keep this window open)</span></span>
+python3 qvc_ui/llm_trace_proxy.py
+
+<span class="c"># <span lang="de">2) in einem zweiten Terminal den Agenten über den Proxy schicken</span><span lang="en">2) in a second terminal, route the agent through the proxy</span></span>
+LLM_API_URL=http://127.0.0.1:8787/v1/chat/completions \
+LLM_EXTRA_BODY='{"chat_template_kwargs":{"enable_thinking":false}}' \
+LLM_TEMPERATURE=0.1 LLM_TIMEOUT=120 \
+.venv-chem/bin/python main.py agent invsqrt.kmx -o out.kmx
+
+<span class="c"># <span lang="de">3) im Browser öffnen</span><span lang="en">3) open in the browser</span></span>
+http://127.0.0.1:8787/</code></pre>
+<p lang="de">Die Logs landen in <code>runs/llm_trace/</code>. Der API-Schlüssel wird weitergereicht, aber nie gespeichert.</p>
+<p lang="en">Logs are stored in <code>runs/llm_trace/</code>. The API key is forwarded but never stored.</p>
+<div class="warn">
+  <p lang="de"><strong>Ehrliche Erwartung:</strong> In unseren Messungen auf einem echten invsqrt-Schaltkreis hat der lokale Agent (63 Aufrufe, 2,3 Mio. Tokens) <strong>keine</strong> zusätzliche Verbesserung gefunden. Für den Alltag ist <code>optimize</code> der richtige Befehl; <code>agent</code> ist ein Experimentierfeld.</p>
+  <p lang="en"><strong>Honest expectation:</strong> In our measurements on a real invsqrt circuit, the local agent (63 calls, 2.3 M tokens) found <strong>no</strong> extra improvement. For everyday use <code>optimize</code> is the right command; <code>agent</code> is a playground.</p>
+</div>
+
+<h3 lang="de">Umgebungsvariablen (Auswahl)</h3>
+<h3 lang="en">Environment variables (selection)</h3>
+<table>
+  <thead><tr><th lang="de">Variable</th><th lang="en">Variable</th><th lang="de">Bedeutung</th><th lang="en">Meaning</th></tr></thead>
+  <tbody>
+  <tr><td><code>LLM_API_URL</code></td><td><span lang="de">Endpunkt (wie <code>--api-url</code>)</span><span lang="en">endpoint (like <code>--api-url</code>)</span></td></tr>
+  <tr><td><code>LLM_MODEL</code></td><td><span lang="de">Modell-IDs, kommagetrennt (wie <code>--models</code>)</span><span lang="en">model IDs, comma-separated (like <code>--models</code>)</span></td></tr>
+  <tr><td><code>LLM_API_KEY</code></td><td><span lang="de">API-Schlüssel (sonst <code>OPENROUTER_API_KEY</code>, dann <code>OPENAI_API_KEY</code>)</span><span lang="en">API key (else <code>OPENROUTER_API_KEY</code>, then <code>OPENAI_API_KEY</code>)</span></td></tr>
+  <tr><td><code>LLM_MAX_CALLS</code></td><td><span lang="de">Aufrufbudget; <code>0</code> = KI aus</span><span lang="en">call budget; <code>0</code> = AI off</span></td></tr>
+  <tr><td><code>LLM_MODE</code></td><td><code>auto</code> | <code>tools</code> | <code>json</code></td></tr>
+  <tr><td><code>OFFICIAL_VERIFY_CMD</code></td><td><span lang="de">offizieller Verifier als Gate (wie <code>--verify-cmd</code>)</span><span lang="en">official verifier as gate (like <code>--verify-cmd</code>)</span></td></tr>
+  <tr><td><code>REQUIRE_OFFICIAL_VERIFY=1</code></td><td><span lang="de">ohne offiziellen Verifier nichts schreiben</span><span lang="en">write nothing without an official verifier</span></td></tr>
+  </tbody>
+</table>
+<p lang="de">Die vollständige Liste steht in <code>main.py --help</code> (sie wird aus <code>kmx/config.py</code> erzeugt). Die Kommandozeile hat immer Vorrang.</p>
+<p lang="en">The full list is in <code>main.py --help</code> (generated from <code>kmx/config.py</code>). Command-line options always win.</p>
+</section>
+
+<!-- 08 -->
+<section id="sicher">
+<h2><span class="no">08</span><span lang="de">Warum das Ergebnis vertrauenswürdig ist</span><span lang="en">Why you can trust the result</span></h2>
+<p lang="de">Jede Änderung muss an mehreren Stellen vorbei:</p>
+<p lang="en">Every change has to get past several checks:</p>
+<table>
+  <thead><tr><th lang="de">Stufe</th><th lang="en">Level</th><th lang="de">Was geprüft wird</th><th lang="en">What is checked</th></tr></thead>
+  <tbody>
+  <tr><td><strong>L1</strong> <span lang="de">exakt</span><span lang="en">exact</span></td><td><span lang="de">Ein kleines Fenster wird über <em>alle</em> möglichen Belegungen seiner Bits verglichen (Wahrheitstabelle, bis 20 Variablen, inkl. Messergebnisse). Das ist ein echter Beweis.</span><span lang="en">A small window is compared over <em>all</em> possible assignments of its bits (truth table, up to 20 variables, including measurement outcomes). This is a real proof.</span></td></tr>
+  <tr><td><strong>L2</strong> <span lang="de">kontextuell</span><span lang="en">contextual</span></td><td><span lang="de">Das Fenster wird nur auf den Zuständen verglichen, die im echten Schaltkreis an dieser Stelle tatsächlich vorkommen.</span><span lang="en">The window is compared only on the states that actually occur at that point in the real circuit.</span></td></tr>
+  <tr><td><strong>L3</strong> End-to-End</td><td><span lang="de">Original gegen Ergebnis auf der ganzen Domäne: Register, Scratch und Phase (128 Bit genau).</span><span lang="en">Original vs. result over the whole domain: registers, scratch and phase (128-bit precise).</span></td></tr>
+  <tr><td>kickmix</td><td><span lang="de">Unabhängige Gegenprüfung mit der offiziellen Bibliothek (4096 Stichproben oder ganz).</span><span lang="en">Independent cross-check with the official library (4096 samples or full).</span></td></tr>
+  <tr><td>Gate</td><td><span lang="de">Optional der offizielle Verifier. Außerdem: Steigen die Kosten, wird nichts geschrieben. Geschrieben wird atomar (keine halben Dateien).</span><span lang="en">Optionally the official verifier. Also: if the cost goes up, nothing is written. Writing is atomic (no half-written files).</span></td></tr>
+  </tbody>
+</table>
+<p lang="de">Wenn eine Datei <em>nicht</em> äquivalent ist, sagt <code>check</code> das deutlich, z. B. <code>NICHT ÄQUIVALENT: Phase weicht ab (z. B. x=1, …)</code>, und nennt ein konkretes Gegenbeispiel.</p>
+<p lang="en">If a file is <em>not</em> equivalent, <code>check</code> says so clearly, e.g. <code>NICHT ÄQUIVALENT: Phase weicht ab (z. B. x=1, …)</code> (“phase differs, e.g. at x=1”), and gives a concrete counterexample.</p>
+</section>
+
+<!-- 09 -->
+<section id="rezepte">
+<h2><span class="no">09</span><span lang="de">Rezepte für den Alltag</span><span lang="en">Everyday recipes</span></h2>
+<h3 lang="de">Einen invsqrt-Kandidaten verbessern und offiziell absichern</h3>
+<h3 lang="en">Improve an invsqrt candidate and secure it officially</h3>
+<pre><code>.venv-chem/bin/python main.py optimize invsqrt.kmx -o invsqrt_opt.kmx --diff invsqrt.diff \
+    --trim-rotations \
+    --verify-cmd ".venv-chem/bin/python data/verifiers/invsqrt/verify_submission_invsqrt.py {out} --max-workers 8"</code></pre>
+<p lang="de"><code>{out}</code> wird durch die temporäre Ausgabedatei ersetzt. Ein Lauf über die volle Domäne dauert je nach Schaltkreis einige Sekunden bis Minuten.</p>
+<p lang="en"><code>{out}</code> is replaced by the temporary output file. A run over the full domain takes seconds to minutes depending on the circuit.</p>
+
+<h3 lang="de">Schnell schauen, wo sich Arbeit lohnt</h3>
+<h3 lang="en">Quickly see where work pays off</h3>
+<pre><code>.venv-chem/bin/python main.py info invsqrt.kmx --no-kickmix
+<span class="c">#      234 Toffoli     1840 Instr.  idx 14720..16559   ← <span lang="de">hier sitzen die meisten Toffolis</span><span lang="en">most Toffolis sit here</span></span></code></pre>
+
+<h3 lang="de">Eine fremde oder handgebaute Lösung prüfen</h3>
+<h3 lang="en">Check someone else's or a hand-made solution</h3>
+<pre><code>.venv-chem/bin/python main.py check original.kmx kandidat.kmx</code></pre>
+
+<h3 lang="de">Viele Dateien auf einmal</h3>
+<h3 lang="en">Many files at once</h3>
+<pre><code>for f in work/kandidaten/*.kmx; do
+  .venv-chem/bin/python main.py optimize "$f" -o "${f%.kmx}_opt.kmx" --no-kickmix \
+    || echo "<span lang="de">abgelehnt</span><span lang="en">rejected</span>: $f"
+done</code></pre>
+</section>
+
+<!-- 10 -->
+<section id="python">
+<h2><span class="no">10</span><span lang="de">Aus Python nutzen</span><span lang="en">Use from Python</span></h2>
+<p lang="de">Alles, was die Kommandozeile kann, steckt im Paket <code>kmx</code>. Für eigene Analysen (z. B. in einem Notebook) reichen ein paar Funktionen. Starte Python im Ordner <code>quantum/</code> mit <code>.venv-chem/bin/python</code>:</p>
+<p lang="en">Everything the command line can do lives in the <code>kmx</code> package. For your own analyses (e.g. in a notebook) a few functions are enough. Start Python inside <code>quantum/</code> with <code>.venv-chem/bin/python</code>:</p>
+<pre><code>from kmx import read_circuit, compute_metrics, circuit_cost, pass_cancel, write_circuit
+
+ops = read_circuit("docs/kmx/beispiel.kmx")   <span class="c"># <span lang="de">Liste von Op-Objekten</span><span lang="en">list of Op objects</span></span>
+print(compute_metrics(ops).toffoli)           <span class="c"># 4</span>
+print(circuit_cost(ops))                      <span class="c"># 24.0  (Q × Toffoli …)</span>
+
+new_ops, pairs, _ = pass_cancel(ops)     <span class="c"># <span lang="de">ein einzelner Pass</span><span lang="en">a single pass</span></span>
+print(pairs)                                  <span class="c"># 2</span>
+write_circuit("/tmp/nur_cancel.kmx", new_ops)</code></pre>
+<div class="warn">
+  <p lang="de">Einzelne Pässe aus Python prüfen <strong>nicht</strong> automatisch End-to-End. Prüfe das Ergebnis danach mit <code>main.py check original.kmx /tmp/nur_cancel.kmx</code>.</p>
+  <p lang="en">Individual passes called from Python are <strong>not</strong> verified end-to-end automatically. Check the result afterwards with <code>main.py check original.kmx /tmp/nur_cancel.kmx</code>.</p>
+</div>
+</section>
+
+<!-- 11 -->
+<section id="aufbau">
+<h2><span class="no">11</span><span lang="de">Aufbau des Pakets</span><span lang="en">Package layout</span></h2>
+<p lang="de">Nur relevant, wenn du am Code etwas ändern willst. Die Schichten bauen von unten nach oben aufeinander auf; jede Schicht importiert nur aus tieferen.</p>
+<p lang="en">Only relevant if you want to change the code. Layers build from bottom to top; each layer imports only from lower ones.</p>
+<pre><code>main.py                     <span class="c"><span lang="de">12 Zeilen, ruft nur kmx.cli.main auf</span><span lang="en">12 lines, just calls kmx.cli.main</span></span>
+kmx/
+  ops.py  layout.py  domains.py  config.py     <span class="c"><span lang="de">Format, Register, Eingabedomänen, Einstellungen</span><span lang="en">format, registers, input domains, settings</span></span>
+  cost.py  simulator.py  taint.py  profile.py  <span class="c"><span lang="de">Kostenmodell, Simulator, Toffoli-Profil</span><span lang="en">cost model, simulator, Toffoli profile</span></span>
+  verify/   oracle.py (L3)  window.py (L1, L2)  compat.py
+  passes/   cancel  sim_reduce  reduce_*  xor_basis  mbu  repack
+  score.py  session.py  crosscheck.py          <span class="c"><span lang="de">exakter Score, Pipeline, kickmix-Prüfung</span><span lang="en">exact score, pipeline, kickmix check</span></span>
+  agent/    workbench  tools  hotspots  rewrite  relay  json_mode  client  stage
+  output.py  research.py  selftest.py          <span class="c"><span lang="de">Gate + Schreiben, Research-Brief, Selbsttest</span><span lang="en">gate + writing, research brief, self test</span></span>
+  commands.py  cli.py  cli_help.py             <span class="c"><span lang="de">Kommandozeile</span><span lang="en">command line</span></span>
+  prompts/  <span class="c"><span lang="de">Texte für die KI (als Dateien)</span><span lang="en">texts for the AI (as files)</span></span>
+tests/kmx/  <span class="c"><span lang="de">166 Tests, eine Datei je Modul</span><span lang="en">166 tests, one file per module</span></span></code></pre>
+<h3 lang="de">Nach einer Änderung</h3>
+<h3 lang="en">After a change</h3>
+<pre><code>.venv-chem/bin/python -m tests.kmx           <span class="c"># 166 Tests, ~4 s</span>
+.venv-chem/bin/python main.py --selftest
+<span class="c"># <span lang="de">Verhaltensvergleich mit der Referenz (~4 min, Ende: GOLDEN OK)</span><span lang="en">behaviour comparison with the reference (~4 min, ends with GOLDEN OK)</span></span>
+bash work/kmx_verify/golden.sh main.py /tmp/golden_neu work/kmx_verify/golden_ref</code></pre>
+<p lang="de">Beachte: Der Golden-Vergleich erwartet byte-identische Ausgaben. Wenn du das Verhalten absichtlich änderst (z. B. einen neuen Pass), weicht er ab – das ist dann gewollt.</p>
+<p lang="en">Note: the golden comparison expects byte-identical output. If you change behaviour on purpose (e.g. a new pass), it will differ – which is then intended.</p>
+</section>
+
+<!-- 12 -->
+<section id="faq">
+<h2><span class="no">12</span><span lang="de">Probleme &amp; Lösungen</span><span lang="en">Troubleshooting</span></h2>
+<table>
+  <thead><tr><th lang="de">Du siehst …</th><th lang="en">You see …</th><th lang="de">Das bedeutet / tu das</th><th lang="en">It means / do this</th></tr></thead>
+  <tbody>
+  <tr><td><code>Domäne: … Stichproben-Eingaben</code></td>
+      <td><span lang="de"><code>kmx</code> kennt den erlaubten Eingabebereich nicht und probiert nur Stichproben. Gib <code>--range LO:HI</code> an, dann wird vollständig geprüft und alle Pässe laufen.</span><span lang="en"><code>kmx</code> does not know the allowed input range and only tries samples. Pass <code>--range LO:HI</code>; then everything is checked fully and all passes run.</span></td></tr>
+  <tr><td><code>ACHTUNG: Register werden nicht wiederhergestellt</code></td>
+      <td><span lang="de">Der Schaltkreis verändert das Eingaberegister. Das ist kein Fehler von <code>kmx</code>, schränkt aber manche Pässe ein.</span><span lang="en">(“registers are not restored”) The circuit modifies the input register. Not a <code>kmx</code> bug, but it limits some passes.</span></td></tr>
+  <tr><td><code>Kosten-Delta: +0.00 … keine Senkung</code></td>
+      <td><span lang="de">Die Pässe haben nichts Teures gefunden (evtl. nur kostenlose Gatter entfernt). Bei schon stark optimierten Schaltkreisen normal.</span><span lang="en">(“no reduction”) The passes found nothing expensive to remove (maybe only free gates). Normal for circuits that are already well optimised.</span></td></tr>
+  <tr><td><span lang="de">Exit-Code 2, keine Ausgabedatei</span><span lang="en">exit code 2, no output file</span></td>
+      <td><span lang="de">Eine Prüfung ist durchgefallen oder die Kosten wären gestiegen. Das ist der Schutzmechanismus – deine Originaldatei bleibt unberührt.</span><span lang="en">A check failed or cost would have increased. That is the safety mechanism – your original file is untouched.</span></td></tr>
+  <tr><td><code>ModuleNotFoundError: kmx</code></td>
+      <td><span lang="de">Du bist nicht im Ordner <code>quantum/</code>. Erst <code>cd</code> dorthin.</span><span lang="en">You are not inside the <code>quantum/</code> folder. <code>cd</code> there first.</span></td></tr>
+  <tr><td><span lang="de">kickmix / numpy fehlt</span><span lang="en">kickmix / numpy missing</span></td>
+      <td><span lang="de">Du benutzt ein anderes Python. Nimm <code>.venv-chem/bin/python</code>. Ohne die beiden läuft <code>kmx</code> trotzdem, nur ohne exakten Score und Gegenprüfung.</span><span lang="en">You are using a different Python. Use <code>.venv-chem/bin/python</code>. Without them <code>kmx</code> still runs, just without exact score and cross-check.</span></td></tr>
+  <tr><td><span lang="de">KI-Stufe wird übersprungen</span><span lang="en">AI stage is skipped</span></td>
+      <td><span lang="de">Der Endpunkt ist nicht erreichbar (z. B. nicht im Weinstadt-Netz) oder <code>LLM_MAX_CALLS=0</code> ist gesetzt.</span><span lang="en">The endpoint is unreachable (e.g. not on the Weinstadt network) or <code>LLM_MAX_CALLS=0</code> is set.</span></td></tr>
+  <tr><td><span lang="de">Trace-Proxy startet nicht</span><span lang="en">trace proxy does not start</span></td>
+      <td><span lang="de">Port 8787 ist belegt – vermutlich läuft der Proxy schon. Einfach <a href="http://127.0.0.1:8787/">http://127.0.0.1:8787/</a> öffnen, oder <code>LLM_TRACE_PORT=8788</code> setzen.</span><span lang="en">Port 8787 is taken – the proxy is probably already running. Just open <a href="http://127.0.0.1:8787/">http://127.0.0.1:8787/</a>, or set <code>LLM_TRACE_PORT=8788</code>.</span></td></tr>
+  </tbody>
+</table>
+</section>
+
+<footer>
+  <span lang="de">Stand: 11.11.2026 · Quelle: <code>quantum/kmx/</code> · Beispieldatei: <code>docs/kmx/beispiel.kmx</code> · alle Beispielausgaben aus echten Läufen.</span>
+  <span lang="en">As of 11 Nov 2026 · source: <code>quantum/kmx/</code> · example file: <code>docs/kmx/beispiel.kmx</code> · all sample outputs come from real runs.</span>
+</footer>
+</main>
+</div>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll(".switch button");
+    function setLang(lang) {
+      document.body.className = lang;
+      document.documentElement.lang = lang;
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+      try { localStorage.setItem("kmx-doc-lang", lang); } catch (e) {}
+    }
+    buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+    var saved = null;
+    try { saved = localStorage.getItem("kmx-doc-lang"); } catch (e) {}
+    setLang(saved || "de");
+
+    var root = document.documentElement;
+    document.getElementById("theme").addEventListener("click", function () {
+      var t = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = t;
+      try { localStorage.setItem("kmx-doc-theme", t); } catch (e) {}
+    });
+    /* folgt dem System, solange man nicht selbst umgeschaltet hat / follow the OS until toggled manually */
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem("kmx-doc-theme"); } catch (err) {}
+      if (!saved) root.dataset.theme = e.matches ? "dark" : "light";
+    });
+  })();
+</script>
+</body>
+</html>

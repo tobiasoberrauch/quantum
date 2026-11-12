@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QVC Discovery — Debug UI</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2b3444;
+    --fg:#e6edf3; --muted:#8b98a9; --accent:#f0a832; --accent2:#4ea1ff;
+    --ok:#3fb950; --warn:#d29922; --err:#f85149; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{display:flex;align-items:center;gap:14px;padding:12px 18px;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5}
+  header h1{font-size:16px;margin:0;font-weight:600}
+  header .sub{color:var(--muted);font-size:12px}
+  .pill{font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid var(--border);color:var(--muted)}
+  .pill.ok{color:var(--ok);border-color:var(--ok)} .pill.err{color:var(--err);border-color:var(--err)}
+  nav{display:flex;gap:4px;padding:10px 18px 0;background:var(--panel);border-bottom:1px solid var(--border)}
+  nav button{background:none;border:none;color:var(--muted);padding:8px 14px;cursor:pointer;font-size:13px;border-bottom:2px solid transparent}
+  nav button.active{color:var(--fg);border-bottom-color:var(--accent)}
+  main{padding:18px;max-width:1200px;margin:0 auto}
+  .tab{display:none} .tab.active{display:block}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:14px}
+  .card h2{font-size:14px;margin:0 0 10px;color:var(--accent)}
+  .card h3{font-size:13px;margin:14px 0 6px;color:var(--accent2)}
+  label{display:block;font-size:12px;color:var(--muted);margin:8px 0 3px}
+  input,select,textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--fg);border-radius:6px;padding:7px 9px;font-size:13px;font-family:inherit}
+  textarea{font-family:var(--mono);min-height:120px;resize:vertical}
+  .row{display:flex;gap:12px;flex-wrap:wrap} .row>div{flex:1;min-width:140px}
+  button.btn{background:var(--accent);color:#1a1205;border:none;border-radius:6px;padding:9px 16px;font-weight:600;cursor:pointer;font-size:13px;margin-top:12px}
+  button.btn.sec{background:var(--panel2);color:var(--fg);border:1px solid var(--border);font-weight:400}
+  button.btn:disabled{opacity:.5;cursor:not-allowed}
+  button.mini{background:var(--panel2);border:1px solid var(--border);color:var(--fg);border-radius:5px;padding:3px 8px;cursor:pointer;font-size:11px}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--muted);font-weight:600;position:sticky;top:0;background:var(--panel)}
+  code,pre{font-family:var(--mono)}
+  pre{background:#0a0e14;border:1px solid var(--border);border-radius:6px;padding:10px;overflow:auto;font-size:12px;white-space:pre-wrap;word-break:break-word;max-height:420px}
+  .badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700;letter-spacing:.3px}
+  .b-hyp{background:#3a2c10;color:var(--accent)} .b-ok{background:#12261a;color:var(--ok)}
+  .b-err{background:#2a1210;color:var(--err)} .b-warn{background:#2a2410;color:var(--warn)}
+  .b-info{background:#10233a;color:var(--accent2)} .b-muted{background:#20262f;color:var(--muted)}
+  .kv{display:grid;grid-template-columns:180px 1fr;gap:4px 12px;font-size:12px}
+  .kv span.k{color:var(--muted)}
+  .log{background:#0a0e14;border:1px solid var(--border);border-radius:6px;padding:10px;height:260px;overflow:auto;font-family:var(--mono);font-size:12px}
+  .log div{white-space:pre-wrap;word-break:break-word}
+  .lv-INFO{color:#cdd6e0} .lv-WARNING,.lv-WARN{color:var(--warn)} .lv-ERROR{color:var(--err)} .lv-DEBUG{color:var(--muted)}
+  .tr{border:1px solid var(--border);border-radius:6px;margin-bottom:8px;overflow:hidden}
+  .tr .hd{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--panel2);cursor:pointer;font-size:12px}
+  .tr .bd{padding:10px;display:none} .tr.open .bd{display:block}
+  .tr.ok .hd{border-left:3px solid var(--ok)} .tr.bad .hd{border-left:3px solid var(--err)}
+  .dots{display:inline-flex;gap:2px} .dot{width:9px;height:9px;border-radius:50%;background:#2a313c} .dot.on{background:var(--accent)}
+  .md h1{font-size:18px}.md h2{font-size:16px;border-bottom:1px solid var(--border);padding-bottom:4px}.md h3{font-size:14px}
+  .md ul{margin:6px 0;padding-left:20px}.md p{margin:6px 0}
+  .muted{color:var(--muted)} .small{font-size:11px}
+  .filetree{font-family:var(--mono);font-size:12px}
+  .filetree div{padding:3px 8px;cursor:pointer;border-radius:4px} .filetree div:hover{background:var(--panel2)}
+  .filetree .sel{background:#243044}
+  .banner{padding:10px 14px;border-radius:6px;margin-bottom:12px;font-size:13px}
+  .banner.warn{background:#2a2410;border:1px solid var(--warn)} .banner.info{background:#10233a;border:1px solid var(--accent2)}
+  .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header>
+  <h1>QVC Discovery</h1>
+  <span class="sub">debug surface for <code>qvc_discovery.py</code> · Verifiable Quantum Circuit Compilation</span>
+  <span style="flex:1"></span>
+  <span class="pill" id="pill-key">key: …</span>
+  <span class="pill" id="pill-sdk">sdk: …</span>
+  <span class="pill" id="pill-base">baseline: …</span>
+</header>
+<nav>
+  <button data-tab="runs" class="active">Runs</button>
+  <button data-tab="live">Live</button>
+  <button data-tab="results">Results</button>
+  <button data-tab="artifacts">Artifacts</button>
+  <button data-tab="config">Config</button>
+</nav>
+<main>
+  <!-- RUNS -->
+  <section id="tab-runs" class="tab active">
+    <div class="card">
+      <h2>Discover — LLM-Hypothesen + dialektische Review</h2>
+      <div class="row">
+        <div><label>Task</label><select id="d-task"><option value="all">all</option><option value="invsqrt">invsqrt</option><option value="dqi">dqi</option><option value="dfthcsos">dfthcsos</option></select></div>
+        <div><label>Top (Slots)</label><input id="d-top" type="number" value="3" min="1" max="9"></div>
+        <div><label>Workers</label><input id="d-workers" type="number" value="3" min="1" max="9"></div>
+        <div><label>Retries</label><input id="d-retries" type="number" value="2" min="1" max="4"></div>
+      </div>
+      <div class="row">
+        <div><label>Memory-Datei (optional, Pfad)</label><input id="d-memory" placeholder="z.B. ~/.agent-memory/kaggle-qvc/… (absoluter Pfad)"></div>
+        <div><label>Brief-Datei (optional, Pfad)</label><input id="d-brief" placeholder="competition_brief.md"></div>
+      </div>
+      <p class="small muted">Erzeugt HYPOTHESEN (nie verifizierte Verbesserungen). Benötigt <code>OPENROUTER_API_KEY</code> in <code>.env</code>.</p>
+      <button class="btn" onclick="submitJob('discover')">▶ Discover starten</button>
+    </div>
+
+    <div class="card">
+      <h2>Score — aus importierten Verifier-Kosten</h2>
+      <div class="row">
+        <div style="flex:3"><label>Kosten-JSON (source=official_verifier, passed=true; dqi: shots=102400 + ≥5 Salts)</label>
+          <textarea id="s-costs" placeholder='{"invsqrt":{...},"dqi":{...},"dfthcsos":{...}}'></textarea></div>
+        <div style="flex:1"><label>&nbsp;</label>
+          <button class="btn sec" onclick="loadExample('costs')">Beispiel laden</button></div>
+      </div>
+      <button class="btn" onclick="submitJob('score')">▶ Score berechnen</button>
+    </div>
+
+    <div class="card">
+      <h2>Verify — vertrauenswürdiger Adapter (offizieller Verifier)</h2>
+      <div class="row">
+        <div><label>Task</label><select id="v-task"><option value="invsqrt">invsqrt</option><option value="dqi">dqi</option><option value="dfthcsos">dfthcsos</option></select></div>
+        <div><label>Modus (setzt Adapter)</label><select id="v-mode" onchange="onMode()"><option value="precheck">PRE-CHECK (~1 s, Stratified-Subset)</option><option value="official">OFFIZIELL (64 Shots, ~10 Min)</option></select></div>
+        <div style="flex:2"><label>Adapter-Konfig (Pfad, editierbar)</label><input id="v-adapter" value="qvc_ui/adapters/adapter_invsqrt_precheck.json"></div>
+      </div>
+      <div class="row">
+        <div style="flex:2"><label>Kandidat (.kmb, absoluter oder repo-relativer Pfad)</label><input id="v-candidate" value="work/frontier_1104/invsqrt/best/invsqrt.kmb"></div>
+        <div><label>Pre-Check Samples</label><input id="v-preN" type="number" value="512" min="64" max="8192"></div>
+        <div><label>Workers</label><input id="v-workers" type="number" value="2" min="1" max="16"></div>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;margin-top:10px"><input type="checkbox" id="v-execute" style="width:auto"> Ausführung starten (ohne Haken nur sichere Kommando-Vorschau / DRY-RUN)</label>
+      <p class="small muted">Führt ausschließlich den konfigurierten Adapter aus — nie LLM-Code. PRE-CHECK prüft ein x-Subset in Sekunden (Kostenschätzung, <b>kein</b> offizieller Claim); OFFIZIELL läuft der unveränderte Verifier mit 64 Shots/x (~10&nbsp;Min). Nur invsqrt-Adapter sind mitgeliefert.</p>
+      <button class="btn" onclick="submitJob('verify')">▶ Verify</button>
+    </div>
+  </section>
+
+  <!-- LIVE -->
+  <section id="tab-live" class="tab">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span id="live-status"><span class="muted">Kein aktiver Job.</span></span>
+        <span style="flex:1"></span>
+        <button class="btn sec" onclick="stopPoll()">Stopp</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card" style="flex:1">
+        <h2>Model-Call Trace <span class="small muted">(welches Modell, Fallbacks, Fehler)</span></h2>
+        <div id="trace-list"><p class="muted small">Noch keine Modellaufrufe.</p></div>
+      </div>
+      <div class="card" style="flex:1">
+        <h2>Logs</h2>
+        <div class="log" id="log-box"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="tab-results" class="tab">
+    <div id="results-body"><div class="card"><p class="muted">Noch kein Ergebnis. Starte einen Run oder wähle einen Job unten.</p>
+      <h3>Recent jobs</h3><div id="jobs-list"></div></div></div>
+  </section>
+
+  <!-- ARTIFACTS -->
+  <section id="tab-artifacts" class="tab">
+    <div class="row">
+      <div class="card" style="flex:1;min-width:280px"><h2>runs/ <button class="mini" onclick="refreshArtifacts()">↻</button></h2>
+        <div class="filetree" id="file-tree"><p class="muted small">leer</p></div></div>
+      <div class="card" style="flex:2"><h2>Inhalt</h2><div id="artifact-view"><p class="muted small">Datei links wählen.</p></div></div>
+    </div>
+  </section>
+
+  <!-- CONFIG -->
+  <section id="tab-config" class="tab">
+    <div class="card"><h2>Umgebung</h2><div class="kv" id="cfg-env"></div></div>
+    <div class="card"><h2>Referenzkosten &amp; Baseline</h2><div class="kv" id="cfg-ref"></div></div>
+    <div class="card"><h2>Modell-Chain je Rolle</h2><div id="cfg-chains"></div></div>
+  </section>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(path,opt){const r=await fetch(path,opt);if(!r.ok){let m;try{m=(await r.json()).detail||r.statusText}catch(e){m=r.statusText}throw new Error(m)}return r.json()}
+function setTab(name){document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id==='tab-'+name))}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+
+// ---- markdown-lite ----
+function md(src){
+  const lines=String(src??"").split("\n");let out="",inCode=false,inList=false;
+  for(let ln of lines){
+    if(ln.trim().startsWith("```")){if(inList){out+="</ul>";inList=false}out+=inCode?"</pre>":"<pre>";inCode=!inCode;continue}
+    if(inCode){out+=esc(ln)+"\n";continue}
+    let t=ln;
+    const h=t.match(/^(#{1,6})\s+(.*)$/);
+    if(h){if(inList){out+="</ul>";inList=false}out+=`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`;continue}
+    if(/^\s*[-*]\s+/.test(t)){if(!inList){out+="<ul>";inList=true}out+="<li>"+inline(t.replace(/^\s*[-*]\s+/,""))+"</li>";continue}
+    if(inList){out+="</ul>";inList=false}
+    if(t.trim()==="")continue;
+    out+="<p>"+inline(t)+"</p>";
+  }
+  if(inList)out+="</ul>";if(inCode)out+="</pre>";return out;
+}
+function inline(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`([^`]+?)`/g,"<code>$1</code>").replace(/\*(.+?)\*/g,"<i>$1</i>")}
+
+// ---- status ----
+async function loadStatus(){
+  try{const s=await api("/api/status");
+    $("#pill-key").textContent=s.key_present?"key: ✓ gesetzt":"key: ✗ fehlt";$("#pill-key").className="pill "+(s.key_present?"ok":"err");
+    $("#pill-sdk").textContent=s.openrouter_installed?"sdk: ✓":"sdk: ✗";$("#pill-sdk").className="pill "+(s.openrouter_installed?"ok":"err");
+    $("#pill-base").textContent="baseline: "+s.baseline_score.toFixed(3);
+    $("#cfg-env").innerHTML=kv([["key_present",s.key_present],["openrouter_installed",s.openrouter_installed],["jsonschema_installed",s.jsonschema_installed],["venv_qvc",s.venv_qvc],["venv_chem",s.venv_chem],["runs_dir",s.runs_dir],["adapters_dir",s.adapters_dir]]);
+    $("#cfg-ref").innerHTML=kv([["reference_costs",JSON.stringify(s.reference_costs)],["baseline_ratios",JSON.stringify(s.baseline_ratios)],["baseline_score",s.baseline_score.toFixed(4)]]);
+    $("#cfg-chains").innerHTML=Object.entries(s.chains).map(([k,v])=>`<div class="kv" style="margin-bottom:6px"><span class="k">${esc(k)}</span><span>${v.map(esc).join(" → ")}</span></div>`).join("");
+  }catch(e){$("#pill-sdk").textContent="status: ✗";$("#pill-sdk").className="pill err"}
+}
+function kv(pairs){return pairs.map(([k,v])=>`<span class="k">${esc(k)}</span><span>${typeof v==="boolean"?`<span class="badge ${v?'b-ok':'b-err'}">${v}</span>`:esc(v)}</span>`).join("")}
+
+// ---- examples ----
+let EXAMPLES={};
+async function loadExample(kind){
+  if(!Object.keys(EXAMPLES).length){try{const r=await api("/api/examples");EXAMPLES=r.examples}catch(e){}}
+  if(kind==="costs"){const c=EXAMPLES["verified_costs_example.json"];if(c)$("#s-costs").value=JSON.stringify(c,null,2)}
+}
+
+// ---- jobs ----
+function onMode(){const m=$("#v-mode").value;$("#v-adapter").value=m==="official"?"qvc_ui/adapters/adapter_invsqrt.json":"qvc_ui/adapters/adapter_invsqrt_precheck.json"}
+function paramsFor(kind){
+  if(kind==="discover")return{task:$("#d-task").value,top:+$("#d-top").value,workers:+$("#d-workers").value,retries:+$("#d-retries").value,memory:$("#d-memory").value.trim()||null,brief:$("#d-brief").value.trim()||null};
+  if(kind==="score"){let c;try{c=JSON.parse($("#s-costs").value)}catch(e){throw new Error("Kosten-JSON ist kein gültiges Objekt")}return{costs:c}}
+  if(kind==="verify")return{adapter_file:$("#v-adapter").value.trim(),task:$("#v-task").value,candidate:$("#v-candidate").value.trim(),execute:$("#v-execute").checked,workers:+$("#v-workers").value,shots:64,preN:+($("#v-preN").value||512)};
+}
+async function submitJob(kind){
+  let params;try{params=paramsFor(kind)}catch(e){alert(e.message);return}
+  try{
+    const r=await api("/api/jobs",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({kind,params})});
+    startPoll(r.job_id,kind);setTab("live");
+  }catch(e){alert("Submit fehlgeschlagen: "+e.message)}
+}
+
+// ---- live polling ----
+let pollTimer=null,activeId=null,activeKind=null;
+function startPoll(id,kind){stopPoll();activeId=id;activeKind=kind;pollTimer=setInterval(tick,1500);tick()}
+function stopPoll(){if(pollTimer){clearInterval(pollTimer);pollTimer=null}}
+async function tick(){
+  if(!activeId)return;
+  try{
+    const job=await api("/api/jobs/"+activeId);
+    const el=job.finished?job.finished:job.started||job.created;
+    const secs=((Date.now()/1000)-el).toFixed(0);
+    const st=$("#live-status");
+    if(job.status==="done")st.innerHTML=`<span class="badge b-ok">DONE</span> ${esc(job.kind)} ${esc(activeId)} · ${secs}s`;
+    else if(job.status==="error")st.innerHTML=`<span class="badge b-err">ERROR</span> ${esc(job.kind)} ${esc(activeId)} · ${esc(job.error||"")}`;
+    else st.innerHTML=`<span class="spin"></span> <span class="badge b-info">${esc(job.status).toUpperCase()}</span> ${esc(job.kind)} ${esc(activeId)} · ${secs}s`;
+    renderTrace((await api("/api/trace")).trace);
+    renderLogs((await api("/api/logs")).logs);
+    if(job.status==="done"||job.status==="error"){stopPoll();await refreshJobs();if(job.status==="done")showResult(job)}
+  }catch(e){/* transient */}
+}
+function renderTrace(trace){
+  if(!trace.length){$("#trace-list").innerHTML='<p class="muted small">Noch keine Modellaufrufe (verify/score nutzen kein LLM).</p>';return}
+  $("#trace-list").innerHTML=trace.slice(-60).map((t,i)=>{
+    const cls=t.ok?"ok":"bad";
+    const head=`<div class="hd" onclick="this.parentNode.classList.toggle('open')">
+      <span class="badge ${t.ok?'b-ok':'b-err'}">${t.ok?"OK":"FAIL"}</span>
+      <b>${esc(t.schema)}</b>
+      <span class="muted">→ ${esc(t.served_model||"n/a")}</span>
+      ${t.response_mode?`<span class="badge b-muted">${esc(t.response_mode)}</span>`:""}
+      <span class="muted small">${t.elapsed!=null?t.elapsed+"s":""}</span>
+      ${t.attempts&&t.attempts.length?`<span class="badge b-warn">${t.attempts.length} Fallback(s)</span>`:""}
+    </div>`;
+    const body=`<div class="bd">
+      <div class="kv" style="margin-bottom:8px"><span class="k">chain</span><span>${(t.chain||[]).map(esc).join(" → ")}</span>
+      <span class="k">requested</span><span>${esc(t.requested_model||"")}</span></div>
+      ${t.error?`<div class="banner warn" style="margin:6px 0">${esc(t.error)}</div>`:""}
+      ${t.attempts&&t.attempts.length?`<h3>Fallback-Versuche</h3><pre>${t.attempts.map(esc).join("\n")}</pre>`:""}
+      <h3>Prompt</h3><details><summary class="mini">anzeigen</summary><pre>${esc(t.prompt||"")}</pre></details>
+    </div>`;
+    return `<div class="tr ${cls}">${head}${body}</div>`;
+  }).join("");
+}
+function renderLogs(logs){
+  const box=$("#log-box");const last=logs.slice(-400);
+  box.innerHTML=last.map(l=>`<div class="lv-${esc(l.level)}">${esc(l.msg)}</div>`).join("");
+  box.scrollTop=box.scrollHeight;
+}
+
+// ---- results ----
+function showResult(job){
+  setTab("results");renderResult(job.result,job.kind);
+}
+function renderResult(res,kind){
+  const body=$("#results-body");
+  if(kind==="discover")body.innerHTML=viewDiscover(res.data,res.files);
+  else if(kind==="score")body.innerHTML=viewScore(res.result);
+  else if(kind==="verify")body.innerHTML=viewVerify(res.result,res.files);
+  else body.innerHTML=`<pre>${esc(JSON.stringify(res,null,2))}</pre>`;
+}
+function viewDiscover(d,files){
+  const byId={};(d.proposals||[]).forEach(p=>byId[p.id]=p);
+  const crit={};(d.reviews||[]).forEach(r=>crit[r.proposal_id]=r);
+  const sel=d.selection||{};
+  let html=`<div class="banner warn">⚠ <b>HYPOTHESEN NUR</b> — keine Idee wurde kompiliert oder offiziell verifiziert. ${esc(d.experiment_status||"")}</div>`;
+  html+=`<div class="card"><h2>Strategie</h2><p>${esc(sel.research_strategy||"")}</p>
+    <div class="kv"><span class="k">Baseline (Plan)</span><span>${(d.baseline_score_approx??0).toFixed(4)}</span>
+    <span class="k">Ziel</span><span>${d.target_score}</span>
+    <span class="k">Novelty-Status</span><span><span class="badge b-hyp">${esc(d.novelty_status||"UNVERIFIED")}</span></span></div></div>`;
+  html+=`<div class="card"><h2>Prioritäts-Backlog</h2><table><tr><th>#</th><th>Idee</th><th>Task</th><th>Erster Schritt</th><th>Erfolg (offiziell)</th><th>Abbruch</th><th>Assets</th></tr>`;
+  (sel.priority_queue||[]).forEach((e,i)=>{const p=byId[e.proposal_id]||{};
+    html+=`<tr><td>${i+1}</td><td><b>${esc(e.proposal_id)}</b> ${esc(p.title||"")}</td><td>${esc(e.proposal_id? (p.task||""):"")}</td><td>${esc(e.first_implementation_step||"")}</td><td>${esc(e.success_threshold||"")}</td><td>${esc(e.abort_condition||"")}</td><td class="small muted">${(e.required_assets||[]).map(esc).join(", ")}</td></tr>`});
+  html+=`</table></div>`;
+  html+=`<div class="card"><h2>Alle Vorschläge &amp; Reviews</h2>`;
+  (d.proposals||[]).forEach(p=>{const r=crit[p.id]||{};
+    html+=`<div class="tr open" style="margin-bottom:10px"><div class="hd" onclick="this.parentNode.classList.toggle('open')">
+      <span class="badge b-info">${esc(p.task)}</span><b>${esc(p.id)}</b> ${esc(p.title||"")}
+      <span class="muted small">· ${esc(p.origin_model||"")} (${esc(p.origin_role||"")})</span>
+      <span class="badge b-hyp">HYPOTHESIS ONLY</span></div><div class="bd">
+      <h3>Mechanismus</h3><p>${esc(p.novel_mechanism||"")}</p>
+      <div class="kv"><span class="k">Analogie</span><span>${esc((p.analogy||{}).source_domain||"")}</span>
+      <span class="k">Mapping</span><span>${esc((p.analogy||{}).formal_mapping||"")}</span>
+      <span class="k">Grenze</span><span>${esc((p.analogy||{}).breakdown_conditions||"")}</span>
+      <span class="k">Tradeoff</span><span>${esc(p.predicted_resource_tradeoff||"")}</span>
+      <span class="k">Falsifikation</span><span>${esc(p.falsification_condition||"")}</span></div>
+      ${(p.mathematical_invariants||[]).length?`<h3>Invarianten</h3><ul>${p.mathematical_invariants.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
+      ${(p.implementation_plan||[]).length?`<h3>Plan</h3><ol>${p.implementation_plan.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
+      ${r.thesis?`<h3>Review (${esc(r.reviewer_model||"")})</h3>
+        <div class="kv"><span class="k">Thesis</span><span>${esc(r.thesis)}</span>
+        <span class="k">Antithesis</span><span>${esc(r.antithesis)}</span>
+        <span class="k">Synthesis</span><span>${esc(r.synthesis)}</span>
+        <span class="k">Feasibility</span><span>${dots(r.feasibility)}</span>
+        <span class="k">Impact</span><span>${dots(r.potential_impact)}</span>
+        <span class="k">Novelty</span><span><span class="badge b-hyp">${esc(r.novelty_status||"")}</span></span></div>`:""}
+    </div></div>`});
+  html+=`</div>`;
+  if(files&&files.report_md)html+=`<div class="card"><h2>report.md</h2><button class="btn sec" onclick="viewReport('${esc(files.report_md)}')">Bericht öffnen</button></div>`;
+  return html;
+}
+function dots(n){n=Math.max(0,Math.min(5,n|0));let s='<span class="dots">';for(let i=0;i<5;i++)s+=`<span class="dot ${i<n?"on":""}"></span>`;return s+"</span> "+(n||0)}
+function viewScore(r){
+  return `<div class="card"><h2>Score aus verifizierten Kosten</h2>
+   <div class="banner ${r.above_target?"info":"warn"}">Score <b>${r.score.toFixed(4)}</b> · Ziel ${r.target} · ${r.above_target?"<span class='badge b-ok'>≥ Ziel</span>":"<span class='badge b-warn'>unter Ziel</span>"}</div>
+   <table><tr><th>Task</th><th>Ratio</th></tr>${Object.entries(r.ratios).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${(+v).toFixed(4)}</td></tr>`).join("")}</table></div>`;
+}
+function viewVerify(r,files){
+  const st=r.status;const bc=st==="ALL_CHECKS_PASS"?"b-ok":st==="DRY_RUN_ONLY"?"b-info":"b-err";
+  const mode=r._precheck?"PRE-CHECK":"OFFIZIELL";
+  let html=`<div class="card"><h2>Verify — ${esc(r.task)} <span class="badge ${r._precheck?'b-warn':'b-info'}">${mode}</span></h2>
+   <div class="banner ${st==="NOT_VERIFIED"?"warn":"info"}"><span class="badge ${bc}">${esc(st)}</span>
+   ${r.all_passed==null?"":` · all_passed=${r.all_passed}`}</div>
+   <div class="kv"><span class="k">Kandidat</span><span class="small">${esc(r.candidate||"")}</span>
+   <span class="k">SHA-256</span><span class="small mono">${esc(r.sha256||"")}</span>
+   <span class="k">Quelle</span><span>${esc(r.source||"")}</span>
+   <span class="k">Executed</span><span>${r.executed}</span></div>`;
+  if(r._precheck)html+=`<div class="banner warn" style="margin-top:8px">⚠ PRE-CHECK: Stratified-x-Subset, Kosten = <b>Schätzung</b> (statische Gatterzählung). <b>Kein</b> offizieller Claim — für den Claim Modus OFFIZIELL (64 Shots) nutzen.</div>`;
+  if(r.command_preview)html+=`<h3>Kommando-Vorschau</h3><pre>${r.command_preview.map(c=>esc(c.join(" "))).join("\n")}</pre>`;
+  if(r.runs&&r.runs.length){html+=`<h3>Runs je Salt</h3><table><tr><th>Salt</th><th>Status</th><th>${r._precheck?"Cost (Est.)":"Cost"}</th><th>Shots</th><th>Cached</th><th>Fehler / Detail</th></tr>`;
+    r.runs.forEach(x=>{const det=[];if(x.num_qubits!=null)det.push("Q="+x.num_qubits);if(x.worst_error_over_tolerance!=null)det.push("worst/tol="+(+x.worst_error_over_tolerance).toFixed(4));if(x.estimated_ratio!=null)det.push("est.ratio="+(+x.estimated_ratio).toFixed(4));
+      html+=`<tr><td>${esc(x.salt)}</td><td><span class="badge ${x.status==="PASS"?"b-ok":"b-err"}">${esc(x.status)}</span></td><td>${x.cost!=null?(+x.cost).toExponential(4):"—"}</td><td>${x.shots??"—"}</td><td>${x.cached?"✓":""}</td><td class="small muted">${esc((x.error||x.stderr_tail||det.join(" · ")||""))}</td></tr>`});
+    html+=`</table>`;}
+  if(r.official_cost_if_identical_across_salts!=null)html+=`<p class="small">Offizieller Cost (identisch über alle Salts): <b>${(+r.official_cost_if_identical_across_salts).toExponential(4)}</b></p>`;
+  if(r.warning)html+=`<p class="small muted">${esc(r.warning)}</p>`;
+  html+=`</div>`;
+  return html;
+}
+async function viewReport(mdPath){
+  // report.md lives under runs/ -> relative path
+  const rel=mdPath.split("/runs/")[1];
+  try{const a=await api("/api/artifact?path="+encodeURIComponent(rel));
+    setTab("results");$("#results-body").innerHTML=`<div class="card"><h2>report.md</h2><div class="md">${md(a.text)}</div></div>`;
+  }catch(e){alert("Bericht nicht lesbar: "+e.message)}
+}
+
+// ---- artifacts ----
+async function refreshArtifacts(){
+  try{const a=await api("/api/artifacts");
+    $("#file-tree").innerHTML=a.files.length?a.files.map(f=>`<div data-p="${esc(f.path)}" onclick="pickFile(this,'${esc(f.path)}')">${esc(f.path)} <span class="muted small">(${f.size})</span></div>`).join(""):'<p class="muted small">leer</p>';
+  }catch(e){$("#file-tree").innerHTML=`<p class="muted small">Fehler: ${esc(e.message)}</p>`}
+}
+async function pickFile(el,path){
+  document.querySelectorAll("#file-tree .sel").forEach(x=>x.classList.remove("sel"));el.classList.add("sel");
+  try{const a=await api("/api/artifact?path="+encodeURIComponent(path));
+    let inner="";
+    if(a.json!==null&&a.json!==undefined)inner=`<div class="small muted">JSON</div><pre>${esc(JSON.stringify(a.json,null,2))}</pre>`;
+    else if(path.endsWith(".md"))inner=`<div class="md">${md(a.text)}</div>`;
+    else inner=`<pre>${esc(a.text)}</pre>`;
+    $("#artifact-view").innerHTML=`<div class="small muted" style="margin-bottom:6px">${esc(a.path)} · ${a.size} B${a.truncated?" · (gekürzt)":""}</div>${inner}`;
+  }catch(e){$("#artifact-view").innerHTML=`<p class="muted small">Fehler: ${esc(e.message)}</p>`}
+}
+
+// ---- recent jobs ----
+async function refreshJobs(){
+  try{const r=await api("/api/jobs");
+    $("#jobs-list").innerHTML=r.jobs.length?`<table><tr><th>ID</th><th>Kind</th><th>Status</th><th>Geschaffen (UTC)</th><th></th></tr>`+
+      r.jobs.map(j=>`<tr><td class="mono small">${esc(j.id)}</td><td>${esc(j.kind)}</td><td><span class="badge ${j.status==='done'?'b-ok':j.status==='error'?'b-err':'b-info'}">${esc(j.status)}</span></td><td class="small muted">${j.created?new Date(j.created*1000).toISOString().slice(11,19):""}</td><td><button class="mini" onclick="loadJob('${esc(j.id)}')">öffnen</button></td></tr>`).join("")+"</table>":'<p class="muted small">keine Jobs in dieser Session</p>';
+  }catch(e){}
+}
+async function loadJob(id){try{const j=await api("/api/jobs/"+id);if(j.status==="done")showResult(j);else alert("Job noch nicht fertig: "+j.status)}catch(e){alert(e.message)}}
+
+// ---- init ----
+loadStatus();refreshJobs();refreshArtifacts();
+</script>
+</body>
+</html>

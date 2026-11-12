@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Die drei Aufgaben verstehen — Verifiable Quantum Circuit Compilation</title>
+<style>
+:root{
+  --paper:#faf8f3; --ink:#1d2330; --mute:#5d6472; --rule:#d9d4c7; --card:#ffffff;
+  --acc:#b4441f;      /* Signal / Hebel */
+  --cliff:#3d7a52;    /* gratis (Clifford) */
+  --tgate:#c58a12;    /* T */
+  --rot:#b4441f;      /* feine Rotation, teuer */
+  --blue:#2f5d8a;
+  --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans: -apple-system,"Helvetica Neue","Segoe UI",Roboto,sans-serif;
+  --mono: "SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--serif)}
+.wrap{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:48px;padding:0 28px}
+nav{position:sticky;top:0;align-self:start;padding:40px 0;font:14px/1.5 var(--sans)}
+nav b{display:block;font-size:11px;letter-spacing:.06em;color:var(--mute);margin:18px 0 6px}
+nav a{display:block;color:var(--ink);text-decoration:none;padding:3px 0 3px 10px;border-left:2px solid transparent}
+nav a:hover{border-left-color:var(--acc);color:var(--acc)}
+main{padding:40px 0 120px;min-width:0}
+header.hero{border-bottom:1px solid var(--ink);padding-bottom:22px;margin-bottom:10px}
+.kicker{font:600 13px var(--sans);color:var(--acc);letter-spacing:.04em}
+h1{font-size:46px;line-height:1.08;margin:8px 0 14px;font-weight:600;letter-spacing:-.01em}
+.lede{font-size:20px;color:var(--mute);max-width:46em;margin:0}
+section{padding-top:56px}
+h2{font-size:32px;margin:0 0 4px;font-weight:600;letter-spacing:-.005em}
+h2 .num{font:600 15px var(--sans);color:var(--acc);display:block;margin-bottom:6px}
+h3{font:600 19px var(--sans);margin:34px 0 8px}
+p,li{max-width:44em}
+.sub{color:var(--mute);margin-top:0}
+code,.mono{font-family:var(--mono);font-size:.88em}
+pre{background:var(--card);border:1px solid var(--rule);padding:14px 16px;overflow:auto;font:14px/1.5 var(--mono);border-radius:3px}
+.fig{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:18px 18px 12px;margin:20px 0}
+.fig svg{width:100%;height:auto;display:block}
+.cap{font:13px/1.45 var(--sans);color:var(--mute);margin-top:8px}
+.cap b{color:var(--ink)}
+table{border-collapse:collapse;font:15px/1.45 var(--sans);margin:16px 0;width:100%}
+th,td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+th{font-weight:600;border-bottom:1.5px solid var(--ink);font-size:13px}
+td.n{font-family:var(--mono);text-align:right}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.callout{border-left:3px solid var(--acc);background:#f4ece4;padding:12px 16px;margin:20px 0;font:15.5px/1.55 var(--sans)}
+.callout.analog{border-left-color:var(--blue);background:#e9eef4}
+.callout b.t{display:block;font-size:12px;letter-spacing:.05em;margin-bottom:2px;color:var(--mute)}
+.formula{font:20px var(--serif);text-align:center;padding:14px;background:var(--card);border:1px solid var(--rule);margin:16px 0;border-radius:3px}
+.formula small{display:block;font:13px var(--sans);color:var(--mute);margin-top:6px}
+.chip{display:inline-block;font:600 12px var(--sans);padding:1px 8px;border-radius:10px;color:#fff;vertical-align:1px}
+.c-cl{background:var(--cliff)}.c-t{background:var(--tgate)}.c-rot{background:var(--rot)}
+details{border:1px solid var(--rule);background:var(--card);border-radius:3px;padding:10px 16px;margin:14px 0;font-family:var(--sans);font-size:15px}
+details summary{cursor:pointer;font-weight:600}
+/* SVG-Stil */
+svg text{font-family:var(--sans);fill:var(--ink)}
+svg .tk{font-size:12px;fill:var(--mute)}
+svg .lab{font-size:13px}
+svg .acc{fill:var(--acc);font-weight:600}
+svg .ax{stroke:var(--ink);stroke-width:1}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .box{fill:#fff;stroke:var(--ink);stroke-width:1.3}
+svg .boxs{fill:#f1ede3;stroke:var(--ink);stroke-width:1.3}
+svg .arr{stroke:var(--ink);stroke-width:1.4;fill:none;marker-end:url(#ah)}
+/* Rechner */
+.calc{display:grid;grid-template-columns:repeat(3,1fr) 1.2fr;gap:14px;align-items:end;font-family:var(--sans)}
+.calc label{font-size:13px;color:var(--mute);display:block}
+.calc input{width:100%;font:18px var(--mono);padding:8px;border:1px solid var(--ink);background:#fff;border-radius:2px}
+.calc .out{font:600 30px var(--mono);color:var(--acc)}
+.calc .out small{display:block;font:13px var(--sans);color:var(--mute)}
+.sens{font:14px var(--sans);color:var(--mute);margin-top:10px}
+footer{margin-top:70px;padding-top:16px;border-top:1px solid var(--rule);font:13px var(--sans);color:var(--mute)}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}nav{display:none}.two,.calc{grid-template-columns:1fr}h1{font-size:34px}}
+@media print{nav{display:none}.wrap{display:block;max-width:none}body{font-size:12pt;background:#fff}section{break-inside:avoid-page}.fig{break-inside:avoid}details{display:block}details>*{display:block}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d2330"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b4441f"/></marker>
+</defs></svg>
+
+<div class="wrap">
+<nav aria-label="Inhalt">
+  <b>GRUNDLAGEN</b>
+  <a href="#t0">0 · Warum komprimieren</a>
+  <a href="#t1">1 · Reversible Logik &amp; kickmix</a>
+  <b>DIE DREI AUFGABEN</b>
+  <a href="#t2">2 · invsqrt · Fusion</a>
+  <a href="#t3">3 · DQI · Optimierung</a>
+  <a href="#t4">4 · Chemie · FeMoCo</a>
+  <b>ZUSAMMENFÜHRUNG</b>
+  <a href="#t5">5 · Score &amp; Rechner</a>
+  <a href="#cheat">Spickzettel</a>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="kicker">Google Quantum AI · Kaggle · Verifiable Quantum Circuit Compilation</div>
+  <h1>Die drei Aufgaben verstehen</h1>
+  <p class="lede">Fusionsenergie, ein Kandidat für Quantenvorteil und der Katalysator hinter dem Dünger der Welt. Die drei Aufgaben haben denselben Kern: Ein reversibler Schaltkreis soll so wenig Qubits und Toffoli-Gatter wie möglich verbrauchen und trotzdem nachweisbar exakt bleiben.</p>
+</header>
+
+<!-- ================= 0 ================= -->
+<section id="t0">
+<h2><span class="num">Teil 0</span>Warum man Quantenschaltkreise komprimiert</h2>
+<p class="sub">Fehlerkorrektur macht jedes Qubit und jedes nicht-triviale Gatter teuer.</p>
+
+<p>Echte Qubits sind verrauscht. Lange Algorithmen brauchen deshalb <b>Quantenfehlerkorrektur</b>, typischerweise den <i>Surface Code</i>. Ein logisches Qubit besteht dabei aus <b>rund 1.000 physikalischen Qubits</b>. Gatter wie X, CNOT oder CZ (die Clifford-Gatter) sind darin fast gratis. <b>Toffoli- und T-Gatter</b> brauchen dagegen „Magic States“ aus eigenen Fabriken, die viel Platz und Zeit kosten.</p>
+
+<div class="fig">
+<svg viewBox="0 0 760 250" role="img" aria-label="Raum-Zeit-Volumen">
+  <line x1="80" y1="210" x2="720" y2="210" class="arr"/>
+  <line x1="80" y1="210" x2="80" y2="20" class="arr"/>
+  <text x="720" y="232" text-anchor="end" class="lab">Zeit ∝ Toffolis (T)</text>
+  <text x="20" y="115" class="lab" transform="rotate(-90 20 115)" text-anchor="middle">Raum = Qubits (Q)</text>
+  <rect x="81" y="40" width="560" height="169" fill="#f1ede3" stroke="#1d2330"/>
+  <text x="361" y="120" text-anchor="middle" font-size="16">naiver Schaltkreis · Q × T</text>
+  <rect x="81" y="135" width="300" height="74" fill="#fff" stroke="#b4441f" stroke-width="2"/>
+  <text x="231" y="170" text-anchor="middle" class="acc" font-size="15">optimiert</text>
+  <text x="231" y="190" text-anchor="middle" class="tk">weniger Qubits UND weniger Toffolis</text>
+</svg>
+<div class="cap"><b>Raum-Zeit-Volumen.</b> Qubits × Toffolis entspricht grob dem Ressourcenbedarf auf echter Hardware (Fläche × Laufzeit). Alle drei Aufgaben messen im Kern diese Fläche, jeweils mit eigener Gewichtung.</div>
+</div>
+
+<table>
+<tr><th>Ressource</th><th>Warum teuer</th><th>Symbol im Wettbewerb</th></tr>
+<tr><td><b>Qubits</b> (Breite)</td><td>~1.000 physikalische Qubits pro logischem Qubit</td><td class="mono">Q</td></tr>
+<tr><td><b>Toffoli- bzw. T-Gatter</b> (Zeit)</td><td>Magic-State-Fabriken, nicht direkt im Surface Code</td><td class="mono">T, C</td></tr>
+<tr><td>Clifford (X, CNOT, CZ, S)</td><td>praktisch gratis</td><td>wird nicht gezählt</td></tr>
+</table>
+<div class="callout analog"><b class="t">ANALOGIE</b>Ein Chipdesigner optimiert Fläche × Taktzyklen. Hier ist es dasselbe, nur sind die „Transistoren“ extrem teuer.</div>
+</section>
+
+<!-- ================= 1 ================= -->
+<section id="t1">
+<h2><span class="num">Teil 1</span>Das Werkzeug: reversible Logik und kickmix</h2>
+<p class="sub">Fünf Ideen, die alle drei Aufgaben tragen.</p>
+
+<h3>1.1 Das Toffoli-Gatter: ein umkehrbares AND</h3>
+<div class="two">
+<div>
+<p>Aus einem <code>AND</code> lässt sich die Eingabe nicht zurückgewinnen, aus einem Toffoli schon:</p>
+<pre>CCX: |a, b, c⟩ → |a, b, c ⊕ (a·b)⟩</pre>
+<p>Ist <code>c = 0</code>, steht danach <code>a AND b</code> im dritten Bit. Mit X, CNOT und Toffoli lässt sich jede klassische Rechnung bauen: Addierer, Multiplizierer, Tabellen. <b>Jedes AND kostet ein Toffoli.</b></p>
+</div>
+<table aria-label="Toffoli-Wahrheitstabelle">
+<tr><th>a</th><th>b</th><th>c (vorher)</th><th>c (nachher)</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td><b>1</b></td><td><b>1</b></td><td>0</td><td><b style="color:var(--acc)">1</b></td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td colspan="4" class="cap">a und b bleiben unverändert. c kippt genau dann, wenn a = b = 1.</td></tr>
+</table>
+</div>
+
+<h3>1.2 Das Müll-Problem: Compute → Use → Uncompute</h3>
+<p>Zwischenergebnisse in Scratch-Qubits müssen am Ende wieder auf <code>|0⟩</code> stehen. Sonst bleiben sie mit der Eingabe verschränkt und zerstören die Interferenz, von der der Gesamtalgorithmus lebt.</p>
+<div class="fig">
+<svg viewBox="0 0 760 150" role="img" aria-label="Compute Use Uncompute">
+  <text x="20" y="48" class="lab mono">x</text><text x="20" y="108" class="lab mono">Scratch = 0</text>
+  <line x1="45" y1="44" x2="700" y2="44" stroke="#1d2330"/>
+  <line x1="110" y1="104" x2="700" y2="104" stroke="#1d2330"/>
+  <rect x="170" y="25" width="150" height="100" class="box"/><text x="245" y="72" text-anchor="middle" font-size="15">Compute</text><text x="245" y="92" text-anchor="middle" class="tk">f(x) → Scratch</text>
+  <rect x="345" y="25" width="120" height="100" class="boxs"/><text x="405" y="72" text-anchor="middle" font-size="15">Use</text><text x="405" y="92" text-anchor="middle" class="tk">Phase / Kopie</text>
+  <rect x="490" y="25" width="150" height="100" class="box" stroke="#b4441f" stroke-width="2"/><text x="565" y="72" text-anchor="middle" font-size="15" class="acc">Uncompute</text><text x="565" y="92" text-anchor="middle" class="tk">f(x) rückwärts löschen</text>
+  <text x="745" y="108" text-anchor="end" class="tk">= 0 ✓</text>
+</svg>
+<div class="cap"><b>Naiv kostet das zweimal die Toffolis.</b> In unserem DQI-Schaltkreis machen die <code>un*</code>-Blöcke (unextract, unconvert …) fast die Hälfte der Kosten aus.</div>
+</div>
+
+<h3>1.3 Der Trick: messbasierte Uncomputation (HMR, „Hammer“)</h3>
+<p>Ein AND-Ergebnis muss man nicht rückwärts wegrechnen. Man kann das Hilfsqubit <b>in der X-Basis messen und zurücksetzen</b> (HMR). Dabei entsteht zufällig ein Phasenfehler, und den repariert ein <b>klassisch gesteuertes CZ</b>. CZ ist gratis.</p>
+<div class="fig">
+<svg viewBox="0 0 760 170" role="img" aria-label="HMR gegen Rückwärtsrechnen">
+  <text x="20" y="40" class="lab" font-weight="600">Rückwärts rechnen</text>
+  <rect x="200" y="22" width="260" height="28" fill="#f1ede3" stroke="#1d2330"/><text x="330" y="41" text-anchor="middle" class="lab">CCX (Compute) · 1 Toffoli</text>
+  <rect x="460" y="22" width="260" height="28" fill="#b4441f"/><text x="590" y="41" text-anchor="middle" class="lab" style="fill:#fff">CCX (Uncompute) · 1 Toffoli</text>
+  <text x="20" y="100" class="lab" font-weight="600">HMR + CZ</text>
+  <rect x="200" y="82" width="260" height="28" fill="#f1ede3" stroke="#1d2330"/><text x="330" y="101" text-anchor="middle" class="lab">CCX (Compute) · 1 Toffoli</text>
+  <rect x="460" y="82" width="60" height="28" fill="#3d7a52"/><text x="490" y="101" text-anchor="middle" class="lab" style="fill:#fff">HMR</text>
+  <rect x="524" y="82" width="70" height="28" fill="#3d7a52"/><text x="559" y="101" text-anchor="middle" class="lab" style="fill:#fff">CZ if b</text>
+  <text x="604" y="101" class="lab acc">0 Toffolis</text>
+  <text x="200" y="150" class="tk">kickmix: init_and → R q; CCX · del_and → HMR q b; CZ c1 c2 if b</text>
+</svg>
+<div class="cap"><b>Die Uncomputation eines AND kostet damit 0 statt 1 Toffoli.</b> Einer der wichtigsten Hebel in allen drei Aufgaben. Er funktioniert nur, wenn die Phasenkorrektur billig ist.</div>
+</div>
+
+<h3>1.4 Phase statt Ausgabe: Phase Kickback</h3>
+<p>Oft soll der Schaltkreis kein Ergebnis ausgeben, sondern eine Phase auflegen: <code>|x⟩ → e<sup>2πi·f(x)</sup>|x⟩</code>. Man berechnet <code>y = f(x)</code> binär und setzt auf Bit <code>y<sub>k</sub></code> eine Z-Rotation um <code>2<sup>−k</sup></code> Umdrehungen. Danach rechnet man <code>y</code> wieder weg.</p>
+<div class="fig">
+<svg viewBox="0 0 760 175" role="img" aria-label="Phase Kickback Gewichte">
+  <g font-size="13">
+  <rect x="30"  y="30" width="80" height="44" fill="#3d7a52"/><text x="70"  y="50" text-anchor="middle" style="fill:#fff">y₁</text><text x="70"  y="67" text-anchor="middle" style="fill:#fff">½ · Z</text>
+  <rect x="120" y="30" width="80" height="44" fill="#3d7a52"/><text x="160" y="50" text-anchor="middle" style="fill:#fff">y₂</text><text x="160" y="67" text-anchor="middle" style="fill:#fff">¼ · S</text>
+  <rect x="210" y="30" width="80" height="44" fill="#c58a12"/><text x="250" y="50" text-anchor="middle" style="fill:#fff">y₃</text><text x="250" y="67" text-anchor="middle" style="fill:#fff">⅛ · T</text>
+  <rect x="300" y="30" width="80" height="44" fill="#b4441f"/><text x="340" y="50" text-anchor="middle" style="fill:#fff">y₄</text><text x="340" y="67" text-anchor="middle" style="fill:#fff">1/16</text>
+  <rect x="390" y="30" width="80" height="44" fill="#b4441f"/><text x="430" y="50" text-anchor="middle" style="fill:#fff">y₅</text><text x="430" y="67" text-anchor="middle" style="fill:#fff">1/32</text>
+  <rect x="480" y="30" width="80" height="44" fill="#b4441f"/><text x="520" y="50" text-anchor="middle" style="fill:#fff">y₆</text><text x="520" y="67" text-anchor="middle" style="fill:#fff">1/64</text>
+  <text x="590" y="57" font-size="18">…</text>
+  <rect x="620" y="30" width="110" height="44" fill="#b4441f"/><text x="675" y="50" text-anchor="middle" style="fill:#fff">y_k</text><text x="675" y="67" text-anchor="middle" style="fill:#fff">2⁻ᵏ Umdr.</text>
+  </g>
+  <text x="30" y="108" class="lab"><tspan font-weight="600">Kosten pro Bit:</tspan></text>
+  <rect x="30" y="122" width="14" height="14" fill="#3d7a52"/><text x="50" y="134" class="lab">Clifford, gratis</text>
+  <rect x="190" y="122" width="14" height="14" fill="#c58a12"/><text x="210" y="134" class="lab">T-Gatter, zählt ¼ Toffoli</text>
+  <rect x="410" y="122" width="14" height="14" fill="#b4441f"/><text x="430" y="134" class="lab">feine Rotation: viele T, umso mehr, je genauer</text>
+  <text x="30" y="162" class="tk">invsqrt bepreist jede feine Rotation mit 0,56·log₂(1/ε) + 5,3 T-Gattern. Das ist der „n_rot-Hebel“.</text>
+</svg>
+</div>
+
+<h3>1.5 Warum kickmix klassisch prüfbar ist</h3>
+<p>Allgemeine Quantenschaltkreise kann kein klassischer Rechner effizient simulieren. kickmix-Schaltkreise bestehen nur aus reversibler Logik, diagonalen Phasen, HMR/Reset und klassisch gesteuerten Korrekturen. Damit wird jeder Basiszustand <code>|x⟩</code> auf <b>genau einen</b> Basiszustand mal eine Phase abgebildet, und man kann Eingabe für Eingabe durchsimulieren.</p>
+<div class="callout"><b class="t">BEWERTUNG = FUZZ-TEST</b>Millionen Eingaben, jeweils mit zufälligen Messergebnissen. Der Zufall wird aus dem SHA-256 der Schaltkreisdatei geseedet. Deshalb ist der Zufallszug auf dem Leaderboard vorab lokal berechenbar. Man braucht dafür keine Quantenphysik: Es ist <b>reversibles Hardware-Design mit Phasen-Buchhaltung</b>.</div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section id="t2">
+<h2><span class="num">Teil 2 · Benchmark I</span>invsqrt: 1/√x für Fusionsenergie</h2>
+<p class="sub">Eine Unterroutine, die Milliarden Male läuft.</p>
+
+<h3>Die reale Anwendung</h3>
+<p><b>Trägheitsfusion</b>: Ein Laser komprimiert eine Brennstoffkapsel zu „warm dense matter“. Ob die Zündung gelingt, hängt von der <b>Stopping Power</b> ab, also davon, wie viel Energie die Alpha-Teilchen im Plasma abgeben. Diese Größe ist experimentell schwer messbar. Ein Quantencomputer soll die Dynamik simulieren: η Elektronen auf einem Gitter, Coulomb-Wechselwirkung <code>V ∝ Σ 1/|rᵢ − rⱼ|</code>. In jedem Zeitschritt braucht <b>jedes Teilchenpaar</b> die Phase aus <code>1/√x</code> mit <code>x = |rᵢ − rⱼ|²</code>.</p>
+
+<div class="formula">|x⟩|0…0⟩ &nbsp;→&nbsp; e<sup>2πi/√x</sup>|x⟩|0…0⟩ &nbsp;&nbsp; für alle x ∈ [1, 3.133.452]
+<small>22-Bit-Register „x“ · 64 Shots pro x = 200.540.928 Tests · jeder muss innerhalb tol(x) = 2⁻²⁴/√x Umdrehungen liegen</small></div>
+
+<h3>Die Referenz-Pipeline</h3>
+<div class="fig">
+<svg viewBox="0 0 780 230" role="img" aria-label="invsqrt Pipeline">
+  <g font-size="13">
+  <rect x="10"  y="40" width="110" height="70" class="box"/><text x="65"  y="68" text-anchor="middle" font-weight="600">1 · Normalisieren</text><text x="65" y="88" text-anchor="middle" class="tk">x ≪ 2s → [1,4)</text>
+  <rect x="140" y="40" width="120" height="70" class="box"/><text x="200" y="68" text-anchor="middle" font-weight="600">2 · Seed</text><text x="200" y="88" text-anchor="middle" class="tk">QROM + kub. Poly</text>
+  <rect x="280" y="40" width="130" height="70" class="box"/><text x="345" y="68" text-anchor="middle" font-weight="600">3 · Newton</text><text x="345" y="88" text-anchor="middle" class="tk">½y₀(3 − x·y₀²)</text>
+  <rect x="430" y="40" width="100" height="70" class="box"/><text x="480" y="68" text-anchor="middle" font-weight="600">4 · Shift</text><text x="480" y="88" text-anchor="middle" class="tk">y₁ = p ≪ s</text>
+  <rect x="550" y="40" width="100" height="70" class="boxs" stroke="#b4441f" stroke-width="2"/><text x="600" y="68" text-anchor="middle" font-weight="600" class="acc">5 · Phase</text><text x="600" y="88" text-anchor="middle" class="tk">Z_POW / Bit</text>
+  <rect x="670" y="40" width="100" height="70" class="box"/><text x="720" y="68" text-anchor="middle" font-weight="600">6 · Uncompute</text><text x="720" y="88" text-anchor="middle" class="tk">1–4 rückwärts</text>
+  </g>
+  <line x1="120" y1="75" x2="138" y2="75" class="arr"/><line x1="260" y1="75" x2="278" y2="75" class="arr"/><line x1="410" y1="75" x2="428" y2="75" class="arr"/><line x1="530" y1="75" x2="548" y2="75" class="arr"/><line x1="650" y1="75" x2="668" y2="75" class="arr"/>
+  <path d="M720,112 C720,175 65,175 65,114" fill="none" stroke="#b4441f" stroke-dasharray="5 4" marker-end="url(#aha)"/>
+  <text x="392" y="195" text-anchor="middle" class="tk">Scratch-Qubits zurück auf |0⟩, x bleibt unverändert</text>
+  <text x="200" y="28" text-anchor="middle" class="tk">≈ 2⁻⁸ genau</text><text x="345" y="28" text-anchor="middle" class="tk">verdoppelt die korrekten Bits</text>
+</svg>
+<div class="cap"><b>Normalisieren mit geraden Shifts (2s)</b>, damit √ sich sauber als 2<sup>s</sup> herausziehen lässt. Das Schieben erst <i>nach</i> der Multiplikation hält den Multiplizierer schmal.</div>
+</div>
+<div class="callout analog"><b class="t">ANALOGIE</b>Der <i>Fast Inverse Square Root</i> aus Quake III (<code>0x5f3759df</code>) arbeitet genauso: ein billiger Startwert per Bit-Trick, dann ein Newton-Schritt. Jede GPU normalisiert Vektoren auf diese Art. Der Wettbewerb ist dieselbe Idee als reversibler Quantenschaltkreis.</div>
+
+<h3>Kosten und Stand</h3>
+<div class="formula">Kosten = Q × C, &nbsp;&nbsp; C = Toffolis + T/4 + Rotationskosten
+<small>Jede der n_rot feinen Rotationen kostet 0,56·log₂(1/ε) + 5,3 T, mit ε = π·(min tol − |Fehler|)/n_rot</small></div>
+<div class="fig">
+<svg viewBox="0 0 760 170" role="img" aria-label="Referenz gegen Spitzenwert">
+  <text x="20" y="34" class="lab" font-weight="600">Referenz</text>
+  <rect x="160" y="18" width="560" height="26" fill="#f1ede3" stroke="#1d2330"/><text x="170" y="36" class="lab">260 Qubits × C 7.988 = 2,08 Mio.  (7.735 Toffolis, 37 Rotationen)</text>
+  <text x="20" y="84" class="lab" font-weight="600">Spitzenwert heute</text>
+  <rect x="160" y="68" width="28" height="26" fill="#b4441f"/><text x="198" y="86" class="lab acc">~62 Qubits · etwa 20–21× billiger</text>
+  <text x="20" y="130" class="tk">Balkenlänge ∝ Kosten Q × C (linear). Hebel des Spitzenwerts: Scratch-Wiederverwendung (Pebbling), HMR-Uncomputation, schmale Register.</text>
+  <text x="20" y="150" class="tk">Unsere Komponente: 21,0768× (Kirill Tymchishin, e4ed188b).</text>
+</svg>
+</div>
+<ul>
+<li><b>Produkt Q × C:</b> 1 % weniger Qubits ist genauso viel wert wie 1 % weniger Toffolis.</li>
+<li><b>Die Toleranz ist ein Budget:</b> Je mehr feine Rotationen, desto genauer (und teurer) muss jede einzelne sein. Darum versuchen wir, die 41 Rotationen loszuwerden (Experiment P-A, „pure dyadic kickback“).</li>
+</ul>
+</section>
+
+<!-- ================= 3 ================= -->
+<section id="t3">
+<h2><span class="num">Teil 3 · Benchmark II</span>DQI: Optimieren durch Decodieren</h2>
+<p class="sub">Die abstrakteste Aufgabe, in vier Schichten.</p>
+
+<h3>Schicht 1: Das Problem (Optimal Polynomial Intersection)</h3>
+<p>Über einem endlichen Körper mit 4.096 Elementen gibt es an jeder von 4.095 Stellen <code>i</code> eine Menge erlaubter Werte <code>Fᵢ</code>. Gesucht ist ein Polynom von begrenztem Grad, das an <b>möglichst vielen</b> Stellen einen erlaubten Wert trifft. Bildlich: eine Kurve mit wenigen Freiheitsgraden, die durch möglichst viele von 4.095 Fenstern verläuft. Für so gute Lösungen, wie DQI sie liefert, kennt man keinen klassischen Algorithmus. OPI ist damit ein <b>Kandidat für nachweisbaren Quantenvorteil</b> (Nature 2025).</p>
+
+<h3>Schicht 2: Die DQI-Idee</h3>
+<div class="fig">
+<svg viewBox="0 0 780 200" role="img" aria-label="DQI Ablauf">
+  <g font-size="13">
+  <rect x="10"  y="50" width="160" height="80" class="box"/><text x="90" y="80" text-anchor="middle" font-weight="600">1 · Fehlermuster e</text><text x="90" y="100" text-anchor="middle" class="tk">Überlagerung, ≤ 35 Fehler</text>
+  <rect x="200" y="50" width="160" height="80" class="box"/><text x="280" y="80" text-anchor="middle" font-weight="600">2 · Syndrom</text><text x="280" y="100" text-anchor="middle" class="tk">s = Bᵀe</text>
+  <rect x="390" y="40" width="190" height="100" class="boxs" stroke="#b4441f" stroke-width="2.4"/><text x="485" y="78" text-anchor="middle" font-weight="600" class="acc">3 · e aus s decodieren</text><text x="485" y="98" text-anchor="middle" class="tk">e löschen, kohärent</text><text x="485" y="118" text-anchor="middle" class="acc" font-size="12">← UNSERE AUFGABE</text>
+  <rect x="610" y="50" width="160" height="80" class="box"/><text x="690" y="80" text-anchor="middle" font-weight="600">4 · inverse QFT</text><text x="690" y="100" text-anchor="middle" class="tk">→ gute Polynome</text>
+  </g>
+  <line x1="170" y1="90" x2="198" y2="90" class="arr"/><line x1="360" y1="90" x2="388" y2="90" class="arr"/><line x1="580" y1="90" x2="608" y2="90" class="arr"/>
+  <text x="390" y="180" text-anchor="middle" class="tk">Die Quanten-Fouriertransformation macht aus der Optimierungsaufgabe eine Decodier-Aufgabe.</text>
+</svg>
+<div class="cap">e muss gelöscht werden, <b>ohne dass man erfährt, welches e es war</b>. Das geht nur, indem man e aus s zurückrechnet: Syndrom-Decodierung als reversibler Schaltkreis.</div>
+</div>
+
+<h3>Schicht 3: Reed-Solomon-Codes</h3>
+<div class="two">
+<div>
+<p>Die Daten sind Koeffizienten eines Polynoms. Gesendet werden mehr Auswertungspunkte als nötig. Treten Fehler auf, verraten das die <b>Syndrome</b>: Prüfsummen, die nur bei Fehlern ungleich null sind.</p>
+<p><b>Im Wettbewerb:</b> ein [4095, 4025, 71]-Code über GF(2¹²), der bis zu 35 Symbolfehler korrigiert. In GF(2¹²) ist Addition XOR und damit <b>gratis</b>. Teuer ist die <b>Multiplikation</b>, denn sie besteht aus Toffolis.</p>
+</div>
+<table>
+<tr><th>Wo Reed-Solomon steckt</th><th>Wofür</th></tr>
+<tr><td>QR-Codes</td><td>lesbar trotz Kratzern und Logos (bis 30 %)</td></tr>
+<tr><td>CD · DVD · Blu-ray</td><td>Kratzer korrigieren</td></tr>
+<tr><td>Voyager-Sonden</td><td>Bilder aus dem äußeren Sonnensystem</td></tr>
+<tr><td>DVB · DSL · RAID-6</td><td>Übertragungs- bzw. Plattenfehler</td></tr>
+</table>
+</div>
+
+<div class="fig">
+<svg viewBox="0 0 780 120" role="img" aria-label="Decoder-Schritte">
+  <g font-size="13">
+  <rect x="10"  y="20" width="180" height="70" class="box"/><text x="100" y="46" text-anchor="middle" font-weight="600">Schlüsselgleichung</text><text x="100" y="66" text-anchor="middle" class="tk">EEA / Berlekamp-Massey → σ(z)</text>
+  <rect x="205" y="20" width="180" height="70" class="box"/><text x="295" y="46" text-anchor="middle" font-weight="600">Chien-Suche</text><text x="295" y="66" text-anchor="middle" class="tk">Nullstellen = Fehlerorte</text>
+  <rect x="400" y="20" width="180" height="70" class="box"/><text x="490" y="46" text-anchor="middle" font-weight="600">Forney</text><text x="490" y="66" text-anchor="middle" class="tk">Fehlerwerte</text>
+  <rect x="595" y="20" width="175" height="70" class="boxs" stroke="#b4441f" stroke-width="2"/><text x="682" y="46" text-anchor="middle" font-weight="600" class="acc">Uncompute</text><text x="682" y="66" text-anchor="middle" class="tk">Syndrom &amp; Workspace</text>
+  </g>
+  <line x1="190" y1="55" x2="203" y2="55" class="arr"/><line x1="385" y1="55" x2="398" y2="55" class="arr"/><line x1="580" y1="55" x2="593" y2="55" class="arr"/>
+  <text x="10" y="112" class="tk">Unsere Builder-Blöcke (extract · convert · scan · synthesis + un*-Gegenstücke) gehören grob zu diesen Schritten. Die exakte Zuordnung kennen wir nicht, der Builder ist privat.</text>
+</svg>
+</div>
+
+<div class="fig">
+<svg viewBox="0 0 780 110" role="img" aria-label="Qubit-Budget 892">
+  <rect x="20" y="30" width="660" height="34" fill="#f1ede3" stroke="#1d2330"/>
+  <text x="350" y="52" text-anchor="middle" class="lab">Syndrom-Eingabe: 70 Symbole × 12 Bit = <b>840 Qubits</b> (Untergrenze)</text>
+  <rect x="680" y="30" width="80" height="34" fill="#b4441f"/>
+  <text x="720" y="52" text-anchor="middle" class="lab" style="fill:#fff">+52</text>
+  <text x="760" y="88" text-anchor="end" class="lab acc">= 892 Qubits</text>
+  <text x="20" y="88" class="tk">52 Arbeitsqubits: am Peak gleichzeitig belegt. Weniger als 892 ist durch Umnummerieren nachweislich nicht möglich.</text>
+</svg>
+</div>
+
+<h3>Schicht 4: Die Kosten</h3>
+<div class="formula">Kosten = R(ε₊) × Q² × T, &nbsp;&nbsp; R(ε) = ln 2 / −ln(½ + 2√ε)
+<small>Q² heißt: Breite wird quadratisch bestraft. Bei 892 Qubits spart ein Qubit weniger ~0,22 % statt ~0,11 %.</small></div>
+<div class="fig">
+{{RCURVE}}
+<div class="cap"><b>R(ε₊) exakt berechnet.</b> ε₊ ist eine <i>obere Konfidenzgrenze</i> aus endlich vielen Tests. Selbst mit null beobachteten Fehlern bleibt R ≈ 1,191. Ein Decoder darf seltene Fälle absichtlich falsch machen, um Toffolis zu sparen. Er zahlt dann über die steigende Kurve: Bei ε₊ = 0,002 müsste er etwa 9,2 % Gatter einsparen, nur um gleichzuziehen.</div>
+</div>
+<p><b>Stand:</b> Unsere Komponente liegt bei 65,11× (891 Qubits, mittlere T = 396.921,5, R = 1,19126). Die größte Asymmetrie: Die <code>un*</code>-Blöcke kosten zusammen etwa 12,3 % mehr als die Vorwärtsblöcke. Das ist der einzige Hebel über 10 %, aber er steckt im privaten Builder.</p>
+</section>
+
+<!-- ================= 4 ================= -->
+<section id="t4">
+<h2><span class="num">Teil 4 · Benchmark III</span>Chemie: FeMoCo und die Energie des Düngers</h2>
+<p class="sub">Klassische Numerik und Schaltkreisdesign in einer Aufgabe.</p>
+
+<h3>Die reale Anwendung</h3>
+<p>Pflanzen brauchen Stickstoff in Form von Ammoniak. Die Industrie stellt Ammoniak per <b>Haber-Bosch-Verfahren</b> her, bei hoher Temperatur und hohem Druck. Das verbraucht <b>~2 % der Weltenergie</b>. Bakterien schaffen dasselbe bei Raumtemperatur mit dem Enzym Nitrogenase, und dessen aktives Zentrum heißt <b>FeMoCo</b>. Dort sind die Elektronen stark korreliert, und klassische Methoden versagen. Ziel ist die <b>Grundzustandsenergie</b>: Sie hilft, Reaktionswege zu verstehen und vielleicht bessere Katalysatoren zu entwerfen.</p>
+
+<h3>Wie ein Quantencomputer Energie misst</h3>
+<div class="fig">
+<svg viewBox="0 0 780 190" role="img" aria-label="LCU Block-Encoding Phasenschätzung">
+  <g font-size="13">
+  <rect x="10" y="40" width="220" height="90" class="box"/><text x="120" y="68" text-anchor="middle" font-weight="600">LCU</text><text x="120" y="90" text-anchor="middle" class="mono" font-size="13">H = Σ wᵢ Uᵢ</text><text x="120" y="112" text-anchor="middle" class="tk">λ = Σ |wᵢ| (Normierung)</text>
+  <rect x="280" y="40" width="220" height="90" class="boxs" stroke="#b4441f" stroke-width="2"/><text x="390" y="68" text-anchor="middle" font-weight="600" class="acc">Block-Encoding</text><text x="390" y="90" text-anchor="middle" class="tk">H/λ in einem Unitären</text><text x="390" y="112" text-anchor="middle" class="tk">Kosten: T Toffolis, Q Qubits</text>
+  <rect x="550" y="40" width="220" height="90" class="box"/><text x="660" y="68" text-anchor="middle" font-weight="600">Phasenschätzung</text><text x="660" y="90" text-anchor="middle" class="tk">≈ λ/ε Wiederholungen</text><text x="660" y="112" text-anchor="middle" class="tk">→ Energie auf ε genau</text>
+  </g>
+  <line x1="230" y1="85" x2="278" y2="85" class="arr"/><line x1="500" y1="85" x2="548" y2="85" class="arr"/>
+  <text x="390" y="170" text-anchor="middle" class="lab">Gesamtkosten ≈ <tspan class="acc">λ × T × Q</tspan>, die Wettbewerbsformel</text>
+</svg>
+</div>
+
+<h3>Das Datenproblem: Tensorfaktorisierung</h3>
+<div class="fig">
+<svg viewBox="0 0 780 170" role="img" aria-label="N hoch 4 Tensor wird low-rank">
+  <rect x="30" y="30" width="110" height="110" fill="#f1ede3" stroke="#1d2330"/>
+  <text x="85" y="80" text-anchor="middle" class="mono" font-size="14">h_pqrs</text><text x="85" y="100" text-anchor="middle" class="tk">N⁴ Einträge</text>
+  <line x1="155" y1="85" x2="245" y2="85" class="arr"/><text x="200" y="74" text-anchor="middle" class="tk">DF / THC</text>
+  <rect x="260" y="30" width="22" height="110" class="box"/><rect x="292" y="30" width="22" height="110" class="box"/>
+  <rect x="324" y="74" width="110" height="22" class="box"/><rect x="444" y="30" width="22" height="110" class="box"/>
+  <text x="363" y="160" text-anchor="middle" class="tk">wenige kleine Faktoren (Rang R, B, C wählbar)</text>
+  <text x="510" y="58" class="lab"><tspan font-weight="600">Zielkonflikt:</tspan></text>
+  <text x="510" y="80" class="lab">kleiner Rang → weniger Daten laden</text>
+  <text x="510" y="100" class="lab">aber größerer Fehler, oft größeres λ</text>
+  <text x="510" y="126" class="lab acc">Grenze: ≤ 20 mHa Frobenius-Fehler</text>
+</svg>
+<div class="cap"><b>Wie JPEG:</b> Man wirft Information weg, die „nicht stört“, nur mit harter Fehlergrenze.</div>
+</div>
+
+<h3>Die Bauteile, die wir optimieren</h3>
+<div class="two">
+<div class="fig">
+<svg viewBox="0 0 360 200" role="img" aria-label="Givens-Baum">
+  <g stroke="#1d2330" stroke-width="1.3">
+  <line x1="180" y1="30" x2="100" y2="85"/><line x1="180" y1="30" x2="260" y2="85"/>
+  <line x1="100" y1="85" x2="55" y2="145"/><line x1="100" y1="85" x2="140" y2="145"/>
+  <line x1="260" y1="85" x2="220" y2="145"/><line x1="260" y1="85" x2="305" y2="145"/>
+  </g>
+  <g fill="#fff" stroke="#1d2330" stroke-width="1.3">
+  <circle cx="180" cy="30" r="13"/><circle cx="100" cy="85" r="13"/><circle cx="260" cy="85" r="13"/>
+  <circle cx="55" cy="145" r="13"/><circle cx="140" cy="145" r="13"/><circle cx="220" cy="145" r="13"/><circle cx="305" cy="145" r="13"/>
+  </g>
+  <text x="180" y="190" text-anchor="middle" class="tk">Orbitale = Knoten · Kante = eine Givens-Drehung (N−1 Stück)</text>
+</svg>
+<div class="cap"><b>Givens-Baum (tree_edges).</b> Jeder Faktor ist eine Basisdrehung der Orbitale, zerlegt in Zwei-Orbital-Drehungen. Die Form des Baums ist frei wählbar.</div>
+</div>
+<div class="fig">
+<svg viewBox="0 0 360 200" role="img" aria-label="QROM Angle Loader">
+  <rect x="20" y="40" width="90" height="60" class="box"/><text x="65" y="66" text-anchor="middle" class="lab">|Adresse⟩</text><text x="65" y="86" text-anchor="middle" class="tk">welcher Faktor</text>
+  <line x1="110" y1="70" x2="148" y2="70" class="arr"/>
+  <rect x="150" y="30" width="90" height="80" class="boxs" stroke="#b4441f" stroke-width="2"/><text x="195" y="66" text-anchor="middle" class="lab acc">QROM</text><text x="195" y="86" text-anchor="middle" class="tk">Lookup-Tabelle</text>
+  <line x1="240" y1="70" x2="278" y2="70" class="arr"/>
+  <rect x="280" y="40" width="70" height="60" class="box"/><text x="315" y="66" text-anchor="middle" class="lab">|Winkel⟩</text><text x="315" y="86" text-anchor="middle" class="tk">Bits</text>
+  <text x="180" y="140" text-anchor="middle" class="lab">angle_k_0 … angle_k_n</text>
+  <text x="180" y="162" text-anchor="middle" class="lab acc">jeder Loader ≤ 128 Qubits</text>
+  <text x="180" y="186" text-anchor="middle" class="tk">≈ 1 Toffoli pro Tabelleneintrag, mit Platz-Zeit-Tricks</text>
+</svg>
+<div class="cap"><b>Angle-Loader.</b> Die Drehwinkel muss der Quantencomputer nachschlagen, je nachdem, welcher Faktor gerade dran ist.</div>
+</div>
+</div>
+
+<h3>Der Sum-of-Squares-Shift</h3>
+<p>Man zieht eine Konstante von H ab. Die Physik ändert sich dadurch nicht, aber die <b>effektive Normierung</b> sinkt:</p>
+<div class="formula">Kosten = λ<sub>eff</sub> × T<sub>tot</sub> × Q<sub>tot</sub>, &nbsp;&nbsp; λ<sub>eff</sub> = √( E<sub>gap</sub> · (2Λ − E<sub>gap</sub>) )
+<small>Harte Untergrenzen gegen Tricksen: Λ &gt; 49,0 Ha · E<sub>gap</sub> &gt; 3,914898 Ha · Faktorisierungsfehler ≤ 20 mHa · jeder Angle-Loader ≤ 128 Qubits</small></div>
+<div class="callout"><b class="t">UNSERE LAGE</b>Unsere Chemie-Komponente liegt bei ~10,7×. Die Margen sind hier am dünnsten: <code>error_2</code> liegt nur ~0,0000002 mHa unter der Grenze. Die Permutations-Symmetrie der Gewichte ist exakt, aber alle 25 getesteten Umordnungen waren schlechter. Die veröffentlichte Anordnung ist bereits auf den Planner abgestimmt.</div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section id="t5">
+<h2><span class="num">Teil 5</span>Wie alles zum Score wird</h2>
+<div class="formula">Score = ( Π<sub>b=1..3</sub> Kosten<sub>ref</sub> / Kosten<sub>du</sub> )<sup>1/3</sup>
+<small>geometrisches Mittel der drei Verbesserungsfaktoren</small></div>
+<ul>
+<li>Jede Aufgabe zählt <b>gleich viel</b>, egal wie teuer sie absolut ist.</li>
+<li>10 % billiger in <i>irgendeiner</i> Aufgabe → Score × 1,10<sup>1/3</sup> = <b>+3,2 %</b>.</li>
+</ul>
+
+<h3>Rechner</h3>
+<div class="fig">
+<div class="calc">
+  <div><label for="f1">invsqrt-Faktor</label><input id="f1" type="number" step="0.01" value="21.08"></div>
+  <div><label for="f2">DQI-Faktor</label><input id="f2" type="number" step="0.01" value="65.11"></div>
+  <div><label for="f3">Chemie-Faktor</label><input id="f3" type="number" step="0.01" value="10.70"></div>
+  <div class="out" id="gm" aria-live="polite">–<small>geometrisches Mittel</small></div>
+</div>
+<div class="sens" id="sens"></div>
+<div class="cap">Voreinstellung = unsere Komponenten (qvc-007, LB 24,48523). Faktor = Referenzkosten / eigene Kosten.</div>
+</div>
+</section>
+
+<section id="cheat">
+<h2><span class="num">Spickzettel</span>Die drei Aufgaben auf einen Blick</h2>
+<table>
+<tr><th></th><th>invsqrt</th><th>DQI</th><th>Chemie</th></tr>
+<tr><td><b>Reale Welt</b></td><td>Fusionsreaktor-Design</td><td>Quantenvorteil bei Optimierung</td><td>Dünger / Katalysatoren (FeMoCo)</td></tr>
+<tr><td><b>Klassisches Gegenstück</b></td><td>Fast-InvSqrt, GPU-Normalisierung</td><td>Reed-Solomon (QR, CD)</td><td>Low-Rank-Kompression + Lookup</td></tr>
+<tr><td><b>Kernoperation</b></td><td>Newton-Raphson + Phase Kickback</td><td>GF(2¹²)-Multiplikation, EEA</td><td>QROM + Givens-Rotationen</td></tr>
+<tr><td><b>Kosten</b></td><td class="mono">Q × C</td><td class="mono">R · Q² · T</td><td class="mono">λ_eff · T · Q</td></tr>
+<tr><td><b>Referenz → heute</b></td><td>260 Q → ~62 Q, ~21×</td><td>65,1× bei 891 Q</td><td>~10,7×</td></tr>
+<tr><td><b>Größter Hebel</b></td><td>Qubits &amp; feine Rotationen</td><td>Toffolis (Breite am Limit)</td><td>Faktorisierung × Loader-Design</td></tr>
+<tr><td><b>Harte Grenze</b></td><td>tol(x) = 2⁻²⁴/√x, 0 Fehler</td><td>840-Qubit-Syndrom</td><td>≤ 20 mHa, ≤ 128 Q pro Loader</td></tr>
+</table>
+<details><summary>Glossar</summary>
+<p><b>Toffoli (CCX)</b>: umkehrbares AND, die Kostenwährung. · <b>T-Gatter</b>: ⅛-Umdrehung, zählt ¼ Toffoli. · <b>Clifford</b>: gratis Gatter (X, CNOT, CZ, S). · <b>HMR</b>: X-Messung + Reset, Uncompute ohne Toffoli. · <b>Z_POW</b>: Z-Rotation, fein = teuer. · <b>QROM</b>: Quanten-Lookup-Tabelle. · <b>Syndrom</b>: Prüfsumme, die Fehler verrät. · <b>LCU</b>: H als gewichtete Summe von Unitären. · <b>λ</b>: Summe der LCU-Gewichte. · <b>Pebbling</b>: Scratch-Qubits geschickt wiederverwenden. · <b>GM</b>: geometrisches Mittel.</p>
+</details>
+<footer>Quellen: Wettbewerbs-Overview und Paper „Verifiable quantum circuit compilation“ (docs/research/overview.txt, docs/research/paper.txt), eigene Analysen in ~/.agent-memory/kaggle-qvc/. Stand 03.11.2026.</footer>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  var ids=["f1","f2","f3"], names=["invsqrt","DQI","Chemie"];
+  function v(i){var x=parseFloat(document.getElementById(ids[i]).value);return x>0?x:NaN;}
+  function fmt(x){return x.toLocaleString("de-DE",{minimumFractionDigits:3,maximumFractionDigits:3});}
+  function upd(){
+    var a=[v(0),v(1),v(2)], gm=Math.cbrt(a[0]*a[1]*a[2]);
+    var o=document.getElementById("gm");
+    if(!isFinite(gm)){o.firstChild.nodeValue="–";document.getElementById("sens").textContent="Bitte positive Faktoren eingeben.";return;}
+    o.firstChild.nodeValue=fmt(gm);
+    document.getElementById("sens").textContent="+10 % in einer Aufgabe → "+fmt(gm*Math.cbrt(1.1))+" (gleich für "+names.join(", ")+")";
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener("input",upd);});
+  upd();
+})();
+</script>
+</body>
+</html>

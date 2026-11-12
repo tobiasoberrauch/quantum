@@ -1,0 +1,14 @@
+{
+  "tasks": {
+    "invsqrt": {
+      "command": [
+        "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/.venv-chem/bin/python",
+        "/Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/qvc_ui/adapters/invsqrt_official.py",
+        "{candidate}",
+        "{salt}"
+      ],
+      "salts": ["notebook-verification"],
+      "timeout_seconds": 3600
+    }
+  }
+}

@@ -1,0 +1,1494 @@
+--- /Users/tobiasoberrauch/Repositories/tobiasoberrauch/quantum/runs/agent/autonomous/20261110T145822Z/cycle1/artifacts/a15b0d73f720/invsqrt.kmx
++++ a15.kmx
+@@ -42,5 +42,4 @@
+ X q18
+ X q19
+-X q20
+ X q21
+ X q23
+@@ -63,5 +62,4 @@
+ CCX q39 q3 q40
+ CCX q40 q2 q41
+-CX q42 q46
+ CX q40 q46
+ CX q38 q46
+@@ -74,5 +72,4 @@
+ CX q24 q46
+ CX q21 q46
+-CX q43 q42
+ CX q39 q42
+ CX q35 q42
+@@ -123,5 +120,4 @@
+ X q18
+ X q19
+-X q20
+ X q21
+ X q50
+@@ -152,5 +148,4 @@
+ CX q49 q13
+ HMR q49 b65001
+-CZ q48 q13 if b65001
+ CZ q48 q20 if b65001
+ CX q47 q48
+@@ -343,5 +338,4 @@
+ CX q52 q15
+ HMR q52 b65004
+-CZ q37 q15 if b65004
+ CZ q37 q21 if b65004
+ CX q20 q16
+@@ -3770,7 +3764,5 @@
+ CX q19 q16
+ CX q17 q16
+-CX q16 q54
+-CX q54 q16
+-CX q16 q54
++SWAP q16 q54
+ SWAP q14 q54
+ CX q50 q26
+@@ -8457,5 +8449,4 @@
+ CCX q21 q4 q28
+ CX q28 q4
+-CX q23 q21
+ Z_POW q28 0.000007629395892507352498757011716179476934485137462615966796875
+ HMR q28 b388
+@@ -8467,9 +8458,7 @@
+ CCX q20 q3 q28
+ CX q28 q3
+-CX q23 q21
+ CX q28 q5
+ CCX q21 q5 q28
+ CX q28 q5
+-CX q23 q21
+ Z_POW q28 0.000015258787729483728849710910679959852132014930248260498046875
+ HMR q28 b389
+@@ -8481,9 +8470,7 @@
+ CCX q20 q28 q2
+ CX q2 q28
+-CX q23 q21
+ CX q28 q6
+ CCX q21 q6 q28
+ CX q28 q6
+-CX q23 q21
+ Z_POW q28 0.000030517574903903325021781167691869995906017720699310302734375
+ HMR q28 b390
+@@ -8495,5 +8482,4 @@
+ CCX q20 q28 q3
+ CX q3 q28
+-CX q23 q21
+ CX q28 q7
+ CCX q21 q7 q28
+@@ -9270,5 +9256,4 @@
+ Z q28 if b401
+ HMR q50 b1
+-CX q50 q28
+ SWAP q28 q50
+ CCX q20 q21 q28
+@@ -9586,5 +9571,4 @@
+ CX q22 q17
+ CX q58 q14
+-CX q54 q14
+ CX q60 q58
+ CX q19 q51
+@@ -9606,5 +9590,4 @@
+ CX q61 q21
+ CX q58 q14
+-CX q54 q14
+ CX q53 q14
+ CX q49 q14
+@@ -9687,6 +9670,4 @@
+ CCX q46 q14 q20
+ CX q14 q46
+-CX q48 q14
+-CX q38 q14
+ CX q32 q14
+ CX q31 q14
+@@ -9732,5 +9713,4 @@
+ CX q34 q15
+ CX q26 q15
+-CX q24 q15
+ CX q22 q15
+ CX q18 q15
+@@ -9846,5 +9826,4 @@
+ CX q29 q15
+ CX q27 q15
+-CX q24 q15
+ CX q22 q15
+ CX q20 q15
+@@ -9854,9 +9833,7 @@
+ CX q53 q14
+ CX q50 q14
+-CX q48 q14
+ CX q45 q14
+ CX q43 q14
+ CX q40 q14
+-CX q38 q14
+ CX q35 q14
+ CX q32 q14
+@@ -10016,5 +9993,4 @@
+ CX q53 q16
+ CX q49 q16
+-CX q39 q16
+ CX q38 q16
+ CX q29 q16
+@@ -10024,5 +10000,4 @@
+ CX q14 q16
+ CX q54 q14
+-CX q35 q14
+ CX q26 q14
+ CX q20 q14
+@@ -10042,5 +10017,4 @@
+ CX q36 q15
+ CX q60 q38
+-CX q59 q36
+ CX q55 q29
+ CX q46 q29
+@@ -10060,5 +10034,4 @@
+ CX q33 q16
+ CX q34 q16
+-CX q39 q16
+ CX q47 q16
+ CX q60 q14
+@@ -10074,5 +10047,4 @@
+ CX q41 q14
+ CX q39 q14
+-CX q35 q14
+ CX q34 q14
+ CX q31 q14
+@@ -10103,5 +10075,4 @@
+ CX q25 q16
+ CX q22 q16
+-CX q59 q36
+ CX q51 q36
+ CX q47 q36
+@@ -10253,5 +10224,4 @@
+ CX q36 q14
+ CX q29 q14
+-CX q28 q14
+ CX q27 q14
+ CX q17 q14
+@@ -10290,5 +10260,4 @@
+ CX q35 q14
+ CX q34 q14
+-CX q28 q14
+ CX q24 q14
+ CX q17 q14
+@@ -10447,8 +10416,6 @@
+ CX q19 q27
+ CX q18 q15
+-CX q58 q18
+ CX q57 q18
+ CX q56 q18
+-CX q50 q18
+ CX q22 q18
+ CX q21 q18
+@@ -10458,5 +10425,4 @@
+ CX q25 q14
+ CX q21 q14
+-CX q20 q14
+ CX q17 q14
+ CX q16 q14
+@@ -10496,5 +10462,4 @@
+ CX q27 q14
+ CX q21 q14
+-CX q20 q14
+ CX q15 q14
+ CX q44 q32
+@@ -10515,8 +10480,6 @@
+ CX q22 q19
+ CX q61 q18
+-CX q58 q18
+ CX q55 q18
+ CX q53 q18
+-CX q50 q18
+ CX q48 q18
+ CX q46 q18
+@@ -10719,5 +10682,4 @@
+ CX q43 q40
+ CX q26 q27
+-X q16
+ X q21
+ CCX q21 q25 q50
+@@ -10738,5 +10700,4 @@
+ CX q25 q26
+ CX q20 q25
+-X q16
+ X q21
+ X q44
+@@ -12697,5 +12658,4 @@
+ CX q21 q11
+ CCX q11 q27 q17
+-CX q16 q27
+ CX q16 q17
+ CX q21 q11
+@@ -12760,5 +12720,4 @@
+ CX q11 q32
+ CX q17 q14
+-CX q16 q27
+ CX q16 q17
+ CX q21 q11
+@@ -12773,5 +12732,4 @@
+ CCX q10 q14 q16
+ CX q27 q16
+-CX q27 q14
+ CX q21 q10
+ CX q10 q53
+@@ -12832,5 +12790,4 @@
+ CX q10 q32
+ CX q27 q16
+-CX q27 q14
+ CX q21 q10
+ CX q41 q49
+@@ -12840,5 +12797,4 @@
+ HMR q27 b14
+ CX q11 q36
+-CX q16 q17
+ CX q21 q10
+ CX q11 q10
+@@ -12861,5 +12817,4 @@
+ CX q21 q9
+ CCX q9 q41 q18
+-CX q14 q41
+ CX q14 q18
+ CX q21 q9
+@@ -12893,5 +12848,4 @@
+ CX q9 q33
+ CX q9 q32
+-CX q14 q41
+ CX q14 q18
+ CX q21 q9
+@@ -12905,5 +12859,4 @@
+ CX q21 q8
+ CCX q8 q51 q14
+-CX q41 q51
+ CX q41 q14
+ CX q21 q8
+@@ -12937,5 +12890,4 @@
+ CX q8 q33
+ CX q8 q32
+-CX q41 q51
+ CX q41 q14
+ CX q21 q8
+@@ -12992,5 +12944,4 @@
+ CCX q7 q50 q18
+ CX q7 q49
+-CX q51 q50
+ CX q51 q18
+ CX q21 q7
+@@ -13016,5 +12967,4 @@
+ CZ q21 q49 if b8370
+ CX q18 q21
+-CX q51 q50
+ CX q7 q33
+ CX q7 q32
+@@ -13107,5 +13057,4 @@
+ CX q17 q37
+ CX q16 q37
+-CX q40 q61
+ CX q40 q39
+ CX q40 q38
+@@ -13117,5 +13066,4 @@
+ HMR q41 b8373
+ CZ q20 q38 if b8373
+-CX q40 q61
+ CX q40 q39
+ CX q40 q38
+@@ -14274,5 +14222,4 @@
+ CX q13 q29
+ CX q13 q26
+-CX q13 q25
+ CX q13 q22
+ CX q13 q20
+@@ -14441,5 +14388,4 @@
+ CX q13 q29
+ CX q13 q26
+-CX q13 q25
+ CX q13 q22
+ CX q13 q20
+@@ -14481,5 +14427,4 @@
+ CX q27 q28
+ CX q12 q26
+-CX q12 q25
+ CX q12 q22
+ CX q12 q20
+@@ -14630,5 +14575,4 @@
+ CX q12 q29
+ CX q12 q26
+-CX q12 q25
+ CX q12 q22
+ CX q12 q20
+@@ -14650,10 +14594,8 @@
+ CX q11 q46
+ CX q11 q45
+-CX q49 q32
+ CX q11 q31
+ CX q11 q30
+ CX q11 q29
+ CX q11 q26
+-CX q11 q25
+ CX q11 q22
+ CX q11 q20
+@@ -14814,10 +14756,8 @@
+ CX q11 q46
+ CX q11 q45
+-CX q49 q32
+ CX q11 q31
+ CX q11 q30
+ CX q11 q29
+ CX q11 q26
+-CX q11 q25
+ CX q11 q22
+ CX q11 q20
+@@ -14841,5 +14781,4 @@
+ CX q10 q46
+ CX q10 q45
+-CX q32 q33
+ CX q10 q31
+ CX q10 q30
+@@ -14949,5 +14888,4 @@
+ CX q27 q51
+ CCX q51 q16 q57
+-CX q10 q61
+ X q61
+ CX q57 q61
+@@ -14978,5 +14916,4 @@
+ CX q36 q52
+ HMR q28 b213
+-CX q10 q61
+ CX q10 q58
+ CX q10 q56
+@@ -14988,5 +14925,4 @@
+ CX q10 q46
+ CX q10 q45
+-CX q32 q33
+ CX q10 q31
+ CX q10 q30
+@@ -15001,5 +14937,4 @@
+ CX q33 q34
+ CCX q9 q34 q18
+-CX q9 q61
+ CX q9 q58
+ CX q9 q56
+@@ -15011,5 +14946,4 @@
+ CX q9 q46
+ CX q9 q45
+-CX q33 q34
+ CX q9 q31
+ CX q9 q30
+@@ -15139,5 +15073,4 @@
+ CX q37 q52
+ HMR q28 b214
+-CX q9 q61
+ CX q9 q58
+ CX q9 q56
+@@ -15149,5 +15082,4 @@
+ CX q9 q46
+ CX q9 q45
+-CX q33 q34
+ CX q9 q31
+ CX q9 q30
+@@ -15162,10 +15094,8 @@
+ CX q34 q53
+ CCX q8 q53 q18
+-CX q8 q61
+ CX q8 q58
+ CX q8 q56
+ CX q8 q55
+ CX q8 q54
+-CX q34 q53
+ CX q8 q52
+ CX q8 q48
+@@ -15295,5 +15225,4 @@
+ CX q38 q52
+ HMR q28 b215
+-CX q8 q61
+ CX q8 q58
+ CX q8 q56
+@@ -15311,5 +15240,4 @@
+ CX q8 q16
+ CX q8 q14
+-CX q34 q53
+ CX q34 q18
+ HMR q18 b0
+@@ -15325,5 +15253,4 @@
+ CX q7 q46
+ CX q7 q45
+-CX q53 q35
+ CX q7 q31
+ CX q7 q30
+@@ -15408,5 +15335,4 @@
+ CX q28 q40
+ CCX q40 q47 q51
+-CX q7 q57
+ X q57
+ CX q51 q57
+@@ -15435,5 +15361,4 @@
+ HMR q27 b216
+ CX q7 q58
+-CX q7 q57
+ CX q7 q55
+ CX q7 q54
+@@ -15442,5 +15367,4 @@
+ CX q7 q46
+ CX q7 q45
+-CX q53 q35
+ CX q7 q31
+ CX q7 q30
+@@ -15455,5 +15379,4 @@
+ CCX q6 q36 q18
+ CX q6 q58
+-CX q6 q57
+ CX q6 q55
+ CX q6 q54
+@@ -15462,5 +15385,4 @@
+ CX q6 q46
+ CX q6 q45
+-CX q35 q36
+ CX q6 q31
+ CX q6 q30
+@@ -15563,5 +15485,4 @@
+ HMR q27 b217
+ CX q6 q58
+-CX q6 q57
+ CX q6 q55
+ CX q6 q54
+@@ -15570,5 +15491,4 @@
+ CX q6 q46
+ CX q6 q45
+-CX q35 q36
+ CX q6 q31
+ CX q6 q30
+@@ -15583,5 +15503,4 @@
+ CCX q5 q37 q18
+ CX q5 q58
+-CX q5 q57
+ CX q5 q55
+ CX q5 q54
+@@ -15590,5 +15509,4 @@
+ CX q5 q46
+ CX q5 q45
+-CX q36 q37
+ CX q5 q31
+ CX q5 q30
+@@ -15686,5 +15604,4 @@
+ HMR q27 b218
+ CX q5 q58
+-CX q5 q57
+ CX q5 q55
+ CX q5 q54
+@@ -15698,5 +15615,4 @@
+ CX q5 q22
+ CX q5 q14
+-CX q36 q37
+ CX q36 q18
+ HMR q18 b0
+@@ -15710,5 +15626,4 @@
+ CX q4 q46
+ CX q4 q45
+-CX q37 q38
+ CX q4 q30
+ CX q4 q29
+@@ -15759,5 +15674,4 @@
+ CX q41 q15
+ CCX q15 q46 q50
+-CX q4 q51
+ CX q41 q50
+ X q51
+@@ -15793,8 +15707,6 @@
+ CX q4 q54
+ CX q4 q52
+-CX q4 q51
+ CX q4 q46
+ CX q4 q45
+-CX q37 q38
+ CX q4 q30
+ CX q4 q29
+@@ -15814,8 +15726,6 @@
+ CX q3 q54
+ CX q3 q52
+-CX q3 q51
+ CX q3 q46
+ CX q3 q45
+-CX q38 q39
+ CX q3 q30
+ CX q3 q29
+@@ -15848,5 +15758,4 @@
+ CX q40 q43
+ CX q21 q42
+-CX q38 q39
+ CX q38 q21
+ HMR q21 b341
+@@ -15896,5 +15805,4 @@
+ CX q3 q54
+ CX q3 q52
+-CX q3 q51
+ CX q3 q46
+ CX q3 q45
+@@ -15925,8 +15833,6 @@
+ CX q2 q54
+ CX q2 q52
+-CX q2 q51
+ CX q2 q46
+ CX q2 q45
+-CX q39 q42
+ CX q2 q30
+ CX q2 q29
+@@ -15972,5 +15878,4 @@
+ CX q50 q60
+ CX q50 q22
+-CX q39 q42
+ CX q39 q23
+ HMR q23 b341
+@@ -16006,5 +15911,4 @@
+ CX q2 q54
+ CX q2 q52
+-CX q2 q51
+ CX q2 q46
+ CX q2 q45
+@@ -16020,5 +15924,4 @@
+ CX q1 q54
+ CX q1 q52
+-CX q42 q24
+ CX q42 q23
+ CX q1 q14
+@@ -16065,12 +15968,9 @@
+ HMR q23 b8292
+ Z q42 if b8292
+-CX q42 q24
+ CZ q1 q24 if b8292
+ CX q42 q24
+-CX q23 q21
+ CX q24 q59
+ SWAP q21 q23
+ CCX q0 q59 q21
+-CX q24 q59
+ CX q0 q55
+ CX q0 q54
+@@ -16097,5 +15997,4 @@
+ HMR q21 b8296
+ Z q24 if b8296
+-CX q24 q59
+ CZ q0 q59 if b8296
+ CX q24 q59
+@@ -16160,5 +16059,4 @@
+ CZ q41 q0 if b8298
+ HMR q41 b435
+-CX q21 q51
+ CX q21 q46
+ CX q21 q45
+@@ -16173,5 +16071,4 @@
+ HMR q28 b8300
+ CZ q40 q45 if b8300
+-CX q21 q51
+ CX q21 q46
+ CX q40 q45
+@@ -16283,5 +16180,4 @@
+ CCX q21 q4 q28
+ CX q28 q4
+-CX q23 q21
+ CX q27 q18
+ CCX q54 q18 q28
+@@ -16298,5 +16194,4 @@
+ CCX q27 q3 q28
+ CX q28 q3
+-CX q23 q21
+ CX q28 q5
+ CCX q21 q5 q28
+@@ -16373,5 +16268,4 @@
+ CCX q21 q6 q28
+ CX q28 q6
+-CX q23 q21
+ Z_POW q28 0.000000001863280830300372004071363107868819497525691986083984375
+ HMR q28 b356
+@@ -16383,9 +16277,7 @@
+ CCX q27 q28 q3
+ CX q3 q28
+-CX q23 q21
+ CX q28 q7
+ CCX q21 q7 q28
+ CX q28 q7
+-CX q23 q21
+ Z_POW q28 0.000000003725324944359176271291289594955742359161376953125
+ HMR q28 b357
+@@ -16397,9 +16289,7 @@
+ CCX q27 q28 q2
+ CX q2 q28
+-CX q23 q21
+ CX q28 q4
+ CCX q21 q4 q28
+ CX q28 q4
+-CX q23 q21
+ Z_POW q28 0.00000000744970610742391736724954398596310056746006011962890625
+ HMR q28 b358
+@@ -16411,5 +16301,4 @@
+ CCX q27 q28 q3
+ CX q3 q28
+-CX q23 q21
+ CX q28 q5
+ CCX q21 q5 q28
+@@ -16489,5 +16378,4 @@
+ CCX q21 q6 q28
+ CX q28 q6
+-CX q23 q21
+ Z_POW q28 0.000000476836546697595627108956506390313734300434589385986328125
+ HMR q28 b364
+@@ -16499,9 +16387,7 @@
+ CCX q27 q28 q3
+ CX q3 q28
+-CX q23 q21
+ CX q28 q7
+ CCX q21 q7 q28
+ CX q28 q7
+-CX q23 q21
+ Z_POW q28 0.000000953674674433768222725493757252479554153978824615478515625
+ HMR q28 b365
+@@ -16513,9 +16399,7 @@
+ CCX q27 q28 q2
+ CX q2 q28
+-CX q23 q21
+ CX q28 q4
+ CCX q21 q4 q28
+ CX q28 q4
+-CX q23 q21
+ Z_POW q28 0.00000190735156659180456195645803063598577864468097686767578125
+ HMR q28 b366
+@@ -16527,5 +16411,4 @@
+ CCX q27 q28 q3
+ CX q3 q28
+-CX q23 q21
+ CX q28 q5
+ CCX q21 q5 q28
+@@ -17169,5 +17052,4 @@
+ BIT_INVERT b24146 if b364
+ BIT_STORE0 b24166
+-CZ q18 q23 if b24166
+ PUSH_CONDITION if b24128
+ CX q16 q14 if b24129
+@@ -17737,5 +17619,4 @@
+ BIT_INVERT b24210 if b365
+ BIT_STORE0 b24230
+-CZ q27 q23 if b24230
+ PUSH_CONDITION if b24192
+ CX q16 q14 if b24193
+@@ -18698,5 +18579,4 @@
+ X q25
+ X q26
+-X q30
+ X q31
+ X q47
+@@ -18721,5 +18601,4 @@
+ X q22
+ X q29
+-X q30
+ X q45
+ X q46
+@@ -18818,13 +18697,4 @@
+ Z q43 if b0
+ Z q21 if b0
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q24 q59
+ CX q0 q55
+@@ -18856,13 +18726,4 @@
+ CX q1 q22
+ CX q1 q14
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q23 q59
+ CX q23 q54
+@@ -18958,13 +18819,4 @@
+ Z q59 if b0
+ Z q23 if b0
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q1 q55
+ CX q1 q54
+@@ -19000,5 +18852,4 @@
+ CX q2 q46
+ CX q2 q45
+-CX q39 q42
+ CX q2 q30
+ CX q2 q29
+@@ -19006,13 +18857,4 @@
+ CX q2 q22
+ CX q2 q14
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q23 q54
+ CX q23 q24
+@@ -19094,13 +18936,4 @@
+ Z q24 if b0
+ Z q23 if b0
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q2 q55
+ CX q2 q54
+@@ -19108,5 +18941,4 @@
+ CX q2 q46
+ CX q2 q45
+-CX q39 q42
+ CX q2 q30
+ CX q2 q29
+@@ -19136,13 +18968,4 @@
+ CX q38 q21
+ CX q3 q14
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q21 q54
+ CX q21 q42
+@@ -19245,13 +19068,4 @@
+ Z q42 if b0
+ Z q21 if b0
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q3 q55
+ CX q3 q54
+@@ -19286,13 +19100,4 @@
+ CX q37 q18
+ CX q4 q14
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ BIT_STORE1 b63041
+ BIT_INVERT b63041 if b414
+@@ -19456,13 +19261,4 @@
+ Z q18 if b0
+ POP_CONDITION
+-X q14
+-X q22
+-X q29
+-X q30
+-X q45
+-X q46
+-X q52
+-X q54
+-X q55
+ CX q4 q55
+ CX q4 q54
+@@ -19498,15 +19294,6 @@
+ CX q5 q22
+ CX q5 q14
+-X q14
+-X q22
+-X q29
+-X q30
+ X q31
+-X q45
+-X q46
+ X q47
+-X q52
+-X q54
+-X q55
+ X q58
+ CCX q38 q54 q51
+@@ -19675,16 +19462,4 @@
+ CX q5 q14
+ CX q38 q54
+-X q14
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q52
+-X q54
+-X q55
+-X q58
+ HMR q18 b0
+ CZ q5 q37 if b0
+@@ -19708,16 +19483,4 @@
+ CX q18 q54
+ CX q18 q37
+-X q14
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q52
+-X q54
+-X q55
+-X q58
+ CCX q37 q54 q51
+ CX q18 q51
+@@ -19892,16 +19655,4 @@
+ CX q6 q14
+ CX q37 q54
+-X q14
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q52
+-X q54
+-X q55
+-X q58
+ HMR q18 b0
+ CZ q6 q36 if b0
+@@ -19923,16 +19674,4 @@
+ CX q53 q18
+ CX q7 q14
+-X q14
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q52
+-X q54
+-X q55
+-X q58
+ NEG if b308
+ BIT_STORE1 b63031
+@@ -20215,22 +19954,8 @@
+ CX q53 q18
+ CX q7 q14
+-X q14
+-X q21
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q52
+-X q54
+-X q55
+-X q58
+ HMR q18 b0
+ CZ q7 q35 if b0
+ CX q53 q35
+ CX q34 q53
+-X q21
+ CCX q8 q53 q18
+ CX q34 q53
+@@ -20253,19 +19978,7 @@
+ CX q8 q16
+ CX q8 q14
+-X q14
+ X q16
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+ X q48
+-X q52
+-X q54
+-X q55
+ X q56
+-X q58
+ CCX q35 q54 q21
+ CX q18 q21
+@@ -20516,19 +20229,4 @@
+ CX q8 q16
+ CX q8 q14
+-X q14
+-X q16
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ HMR q18 b0
+ CZ q8 q53 if b0
+@@ -20555,19 +20253,4 @@
+ CX q18 q54
+ CX q18 q53
+-X q14
+-X q16
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ CCX q53 q54 q21
+ CX q18 q21
+@@ -20825,19 +20508,4 @@
+ CX q9 q16
+ CX q9 q14
+-X q14
+-X q16
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ HMR q18 b0
+ CZ q9 q34 if b0
+@@ -20862,19 +20530,4 @@
+ CX q10 q16
+ CX q10 q14
+-X q14
+-X q16
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ NEG if b70003
+ CX q18 q54
+@@ -21165,25 +20818,8 @@
+ CX q10 q16
+ CX q10 q14
+-X q14
+-X q16
+-X q21
+-X q22
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ HMR q18 b0
+ CZ q10 q33 if b0
+ CX q32 q33
+ CX q49 q32
+-X q21
+ CCX q11 q32 q18
+ CX q11 q58
+@@ -21211,24 +20847,9 @@
+ CX q11 q16
+ CX q11 q14
+-X q14
+-X q16
+ X q17
+ X q19
+ X q20
+-X q22
+ X q25
+ X q26
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ CCX q54 q18 q21
+ CX q21 q33
+@@ -21514,24 +21135,4 @@
+ CX q11 q16
+ CX q11 q14
+-X q14
+-X q16
+-X q17
+-X q19
+-X q20
+-X q22
+-X q25
+-X q26
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ HMR q18 b0
+ CZ q11 q32 if b0
+@@ -21560,24 +21161,4 @@
+ CX q12 q16
+ CX q12 q14
+-X q14
+-X q16
+-X q17
+-X q19
+-X q20
+-X q22
+-X q25
+-X q26
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ CCX q54 q18 q21
+ CX q21 q32
+@@ -21867,24 +21448,4 @@
+ CX q12 q16
+ CX q12 q14
+-X q14
+-X q16
+-X q17
+-X q19
+-X q20
+-X q22
+-X q25
+-X q26
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ CZ q12 q49 if b0
+ CX q13 q58
+@@ -21908,24 +21469,4 @@
+ CX q13 q16
+ CX q13 q14
+-X q14
+-X q16
+-X q17
+-X q19
+-X q20
+-X q22
+-X q25
+-X q26
+-X q29
+-X q30
+-X q31
+-X q45
+-X q46
+-X q47
+-X q48
+-X q52
+-X q54
+-X q55
+-X q56
+-X q58
+ CCX q49 q54 q18
+ CX q18 q32
+@@ -22342,9 +21883,4 @@
+ CX q21 q61
+ CX q18 q61
+-CX q28 q60 if b61021
+-Z q28 if b61024
+-CX q15 q60 if b61021
+-Z q15 if b61024
+-CX q28 q51
+ CX q18 q51
+ CX q55 q29
+@@ -22985,5 +22521,4 @@
+ CX q56 q18
+ CX q29 q18
+-CX q20 q18
+ CX q19 q18
+ CX q17 q18
+@@ -23005,5 +22540,4 @@
+ CX q58 q31
+ CX q52 q18
+-CX q20 q18
+ CX q52 q14
+ CX q20 q14
+@@ -23716,12 +23250,8 @@
+ CX q61 q40
+ CX q61 q41
+-CX q28 q51
+-CX q51 q28
+-CX q28 q51
++SWAP q28 q51
+ CX q51 q27
+ CX q51 q61
+-CX q41 q28
+-CX q28 q41
+-CX q41 q28
++SWAP q41 q28
+ CX q28 q57
+ CX q28 q51
+@@ -23931,5 +23461,4 @@
+ CCX q61 q48 q42
+ CX q51 q48
+-CX q46 q48
+ CX q45 q48
+ CX q40 q48
+@@ -24005,8 +23534,6 @@
+ CX q21 q15
+ CX q14 q15
+-X q15
+ CX q52 q15
+ CX q46 q15
+-X q15
+ CCX q61 q15 q26
+ CX q54 q15
+@@ -24106,5 +23633,4 @@
+ CX q14 q59
+ CX q56 q48
+-CX q46 q48
+ CX q41 q48
+ CX q29 q48
+@@ -24223,5 +23749,4 @@
+ CX q20 q56
+ CCX q16 q56 q18
+-CX q20 q48
+ CX q58 q27
+ CX q19 q27
+@@ -24245,5 +23770,4 @@
+ CX q20 q59
+ CX q20 q56
+-CX q20 q48
+ HMR q20 b25020
+ Z q27 if b25020
+@@ -24316,5 +23840,4 @@
+ Z q47 if b208
+ CX q6 q34
+-CX q17 q18
+ CX q7 q18
+ CX q7 q6
+@@ -24333,9 +23856,7 @@
+ CX q20 q6
+ CX q6 q34
+-CX q6 q7
+ X q34
+ Z q17 if b8312
+ X q18
+-CX q6 q7
+ CX q18 q53
+ CX q18 q35
+@@ -24468,7 +23989,4 @@
+ CX q48 q7
+ CX q7 q49
+-X q32
+-X q33
+-X q49
+ HMR q24 b0
+ CZ q7 q56 if b0
+@@ -24478,5 +23996,4 @@
+ CX q48 q7
+ CCX q8 q59 q15
+-CX q58 q59
+ CX q58 q15
+ CX q48 q8
+@@ -24487,8 +24004,5 @@
+ CX q8 q33
+ CX q8 q32
+-X q32
+-X q33
+ X q34
+-X q49
+ CCX q56 q49 q16
+ CX q15 q16
+@@ -24507,5 +24021,4 @@
+ CZ q17 q8 if b8325
+ CX q15 q56
+-CX q58 q59
+ CX q16 q48
+ CX q20 q34
+@@ -24549,5 +24062,4 @@
+ CX q8 q53
+ CX q47 q60
+-CX q15 q18
+ CX q9 q18
+ CX q9 q8
+@@ -24566,9 +24078,7 @@
+ CX q17 q8
+ CX q8 q53
+-CX q8 q9
+ X q53
+ Z q15 if b8324
+ X q18
+-CX q8 q9
+ CX q18 q35
+ CX q18 q36
+@@ -24724,8 +24234,4 @@
+ CX q48 q9
+ CX q59 q49
+-X q32
+-X q33
+-X q34
+-X q49
+ HMR q24 b0
+ CZ q9 q58 if b0
+@@ -24748,7 +24254,4 @@
+ CX q10 q33
+ CX q10 q32
+-X q32
+-X q33
+-X q34
+ X q35
+ X q36
+@@ -24756,5 +24259,4 @@
+ X q38
+ X q39
+-X q49
+ X q53
+ CX q15 q58
+@@ -24833,5 +24335,4 @@
+ CX q16 q17
+ CX q15 q17
+-X q32
+ X q33
+ X q49
+@@ -24847,5 +24348,4 @@
+ CX q15 q58
+ CX q15 q49
+-X q32
+ X q33
+ X q49
+@@ -24863,14 +24363,4 @@
+ CZ q15 q49 if b467
+ CZ q58 q49 if b467
+-X q32
+-X q33
+-X q34
+-X q35
+-X q36
+-X q37
+-X q38
+-X q39
+-X q49
+-X q53
+ CX q10 q53
+ CX q10 q49
+@@ -24906,14 +24396,4 @@
+ CX q11 q33
+ CX q11 q32
+-X q32
+-X q33
+-X q34
+-X q35
+-X q36
+-X q37
+-X q38
+-X q39
+-X q49
+-X q53
+ CX q15 q49
+ CX q15 q44
+@@ -24993,5 +24473,4 @@
+ CX q16 q17
+ CX q15 q17
+-X q32
+ X q33
+ X q49
+@@ -25007,5 +24486,4 @@
+ CX q15 q49
+ CX q15 q44
+-X q32
+ X q33
+ X q49
+@@ -25023,14 +24501,4 @@
+ CZ q15 q49 if b468
+ CZ q44 q49 if b468
+-X q32
+-X q33
+-X q34
+-X q35
+-X q36
+-X q37
+-X q38
+-X q39
+-X q49
+-X q53
+ CX q11 q53
+ CX q11 q49
+@@ -25063,14 +24531,4 @@
+ CX q12 q33
+ CX q12 q32
+-X q32
+-X q33
+-X q34
+-X q35
+-X q36
+-X q37
+-X q38
+-X q39
+-X q49
+-X q53
+ CX q15 q49
+ CX q15 q43
+@@ -25153,5 +24611,4 @@
+ CX q16 q17
+ CX q15 q17
+-X q32
+ X q33
+ X q49
+@@ -25167,5 +24624,4 @@
+ CX q15 q49
+ CX q15 q43
+-X q32
+ X q33
+ X q49
+@@ -25184,14 +24640,4 @@
+ CZ q43 q49 if b469
+ HMR q15 b0
+-X q32
+-X q33
+-X q34
+-X q35
+-X q36
+-X q37
+-X q38
+-X q39
+-X q49
+-X q53
+ CX q12 q53
+ CX q12 q49
+@@ -25217,14 +24663,4 @@
+ CX q13 q32
+ CX q48 q12
+-X q32
+-X q33
+-X q34
+-X q35
+-X q36
+-X q37
+-X q38
+-X q39
+-X q49
+-X q53
+ CCX q42 q49 q15
+ CX q15 q16
+@@ -25308,5 +24744,4 @@
+ HMR q44 b27
+ X q32 if b224
+-X q49 if b224
+ CZ q43 q32 if b224
+ CX q32 q43 if b224
+@@ -25314,5 +24749,4 @@
+ CX q32 q43 if b224
+ X q32 if b224
+-X q49 if b224
+ HMR q15 b470
+ Z q42 if b470
+@@ -36757,6 +36191,4 @@
+ X q41
+ POP_CONDITION
+-SWAP q22 q33
+-SWAP q22 q29
+ SWAP q22 q27
+ SWAP q39 q41
+@@ -36764,5 +36196,4 @@
+ SWAP q18 q61
+ SWAP q18 q36
+-SWAP q18 q32
+ SWAP q18 q51
+ SWAP q17 q36
+@@ -36772,9 +36203,4 @@
+ SWAP q14 q50
+ SWAP q42 q43
+-SWAP q37 q38
+-SWAP q31 q35
+-SWAP q30 q34
+-SWAP q25 q26
+-SWAP q23 q24
+ SWAP q20 q40
+ SWAP q19 q28

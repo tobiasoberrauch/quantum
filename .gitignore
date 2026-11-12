@@ -34,11 +34,18 @@ sota_mrmeows
 sota_yoyobar
 
 # --- Our actual competition submission payloads -------------
+# (now under work/archive/submissions/; pattern kept as a safety net)
 submissions/
 
+# --- Archived local scratch (untracked by design) -----------
+# kmx_agent*.py, rom_*.npy, submissions/ — must never be committed
+work/archive/
+
 # --- Nested upstream / reference git repos (own homes) ------
+external/
+# qualtran/ stays in the root for now: .venv-chem/.../kickmix-path.pth
+# points at <repo>/qualtran/kickmix (move it to external/ after fixing that .pth)
 qualtran/
-refs/
 
 # --- Large binaries / circuit artifacts / downloads ---------
 *.kmb

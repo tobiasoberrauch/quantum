@@ -1,0 +1,153 @@
+# Public portfolio · invsqrt 62Q · DQI 892Q · Chemistry 427Q
+
+> **Lernziel:** Den **62-Qubit-InvSqrt-Circuit** als Referenz verstehen: Cost `95,345.55`, Ratio **21.78×** gegenüber dem 260-Qubit-Reference, plus die komplette Credit-/Lineage-Struktur eines SOTA-Portfolios.
+> **Dauer:** ~8 Minuten lesen
+> **Quelle:** yoyobar | Votes: – (im lokalen Kernel-Dump nicht enthalten)
+> **Technik:** QROM + Conditional Phase Fusion (der 62Q-Circuit)
+> **Level:** Mittel
+
+---
+
+# Public portfolio · invsqrt 62Q · DQI 892Q · Chemistry 427Q
+
+Latest checked scored public baseline: [Maoxin v1](https://www.kaggle.com/code/maoxin123/lb-25-1498-combined-invsqrt-refit-chem?scriptVersionId=367139607), **25.14981**. We also checked [Kirill v4](https://www.kaggle.com/code/kirilltym/quantum-circuits-conditional-uncompute-audit?scriptVersionId=367159320) and [Helios v29](https://www.kaggle.com/code/heliosli/the-dataset-is-public-now-enjoy?scriptVersionId=367160225), including their completed outputs before those exact runs had a public score. Our previous v39 actually scored **25.09052**.
+
+This release combines **Maoxin's latest combined inverse and Chemistry lineage, retaining the scored public DQI `4432ec5f`**, with **our existing source-bound 19-bit conditional phase-fusion method and a new fixed-word Chemistry column-scale polish**. Earlier local research files were compared by full cost and evidence; older, more expensive or incompatible circuits were not substituted. Contributions remain separately credited.
+
+**Local estimate: about 25.14982**, approximately **+0.05930** versus our v39. This is a projection, **not this Notebook's measured leaderboard score**. In particular, DQI's inherited rare-branch approximation makes the sampled error penalty depend on the verifier draw.
+
+| Task | Qubits | Current cost | Reference / cost | Cost change vs our v39 |
+|---|---:|---:|---:|---:|
+| **Invsqrt** | **62** | **95,345.55428** | **21.78155×** | -0.702292% |
+| DQI | 892 | 374,735,446,628.53 | 65.21791× | -0.000828% |
+| Chemistry | 427 | 299,654,755.40512 | 11.19822× | -0.002565% |
+
+> **🔥 Key Learning Point (InvSqrt):** 62 Qubits bei Cost **95,345.55** → Ratio **21.78×**. Das ist der *Frontier*-Wert des ganzen Tracks. Der Reference-Circuit braucht 260 Qubits / Cost 7988; das Verhältnis Qubits×(Toffolis+T/4) ist hier der Maßstab.
+
+**Evidence:** the inverse baseline `034c7c2a` has an upstream original-verifier PASS receipt for **200,540,928 shots**, Q62 and cost95,345.55433569. Our new `46743f7f` is separately checked by source-bound local phase algebra and a **32,768-shot paired SDK** test (exact phases and input/scratch/tolerance checks); a deliberately wrong phase negative control is detected. No new official inverse full64 run was performed. Its table cost is the upstream sampled baseline less the analytically expected local saving **0.00005913**; it is not a new full64 measured cost.
+
+DQI `4432ec5f` passes original **102,400-shot** default-salt and shared-seed checks with **0 value / 0 phase errors**. Kirill `e1354c89` has lower mean gate cost in the shared-seed comparison, but an independent salt and the default salt each produce **1 phase error**; Helios `f277b054` has **1 value error** at default salt. Both still report PASS, but their larger repetition penalties make those measured complete costs worse. We retain the scored 4432 file rather than selecting only by gate count or hiding the errors.
+
+Our Chemistry `3f72cbe5` passes two full original **78,080-shot** salts, T14966/Q427; only W/H2_I change and all 15 loaders are byte-identical. Cost falls from **299,654,755.4367362** to **299,654,755.4051211**, just **0.0316151**. Error1/error2 remain very close to20mHa. These two new local savings are too small to promise a five-decimal LB increase over Maoxin; the substantial gain over our v39 comes from the credited public advances.
+
+The optional GPU model check could not start because CUDA driver initialization failed; **zero GPU profiles completed**. It supplies no acceptance evidence. The inverse qualification above relies on the pinned-source local phase proof, global condition-stack check, original SDK pairing and detected negative control, not a GPU/full64 claim.
+
+The table compares descriptive reported costs across versions; it is not a matched causal experiment for every old/new component. A separately controlled same-seed DQI comparison is recorded in the release notes. These cells check identities and package the selected artifacts. Fixed-sample PASS, a local algebraic proof, an upstream receipt and a Kaggle score are different evidence levels; we do not claim a new all-input/HMR-history proof of the complete portfolio.
+
+```python
+# Lädt das gepinnte öffentliche Dataset (qcc-local-sota-20261031), prüft den
+# Manifest-Pfad und zeigt ein Memes-Bild. Rein setup-/display-natur.
+from pathlib import Path
+import os
+from IPython.display import Image, display
+
+roots = [Path(os.environ["QCC_DATASET_DIR"])] if "QCC_DATASET_DIR" in os.environ else [
+    Path("/kaggle/input/qcc-local-sota-20261031"),
+    Path("/kaggle/input/datasets/yoyobar/qcc-local-sota-20261031"),
+]
+DATASET = next((p for p in roots if (p / "portfolio-manifest.json").is_file()), None)
+if DATASET is None:
+    raise FileNotFoundError("Attach the public yoyobar/qcc-local-sota-20261031 dataset.")
+display(Image(filename=str(DATASET / "submission-meme.png"), width=680))
+```
+
+## Text timeline
+
+- **Original invsqrt:** mrmeows/team selenium → busyaprime → **yoyobar with GPT-6 Astra's 62Q work**, based on the credited public lineage including manwithacat's Voodoo/Friends → Syed V5 → our earlier source-bound conditional phase fusion. The original 62Q work remains credited as the circuit evolves.
+- **Latest inverse:** Syed V11 → Hosen42's measure-first rewrites → Maoxin/Kirill/Atakan and Özer's public `13b5bf7a` composition → **Hosen42's V6 q25 merge + Maoxin's conditional-uncompute splits**, `034c7c2a`. This release rebinds our 19-bit conditional phase fusion to that exact source, producing46743f7f; the expected saving is only1/1,048,576 Toffoli per execution. The old7-bit/M13/rolling/norm4 receipts are not treated as transferable.
+- **DQI:** Syed/SomeJoint/Ali Haydar Özdağ → Atakan/MAIDANG retained-product work → our earlier source-bound cache releases → Özer's composition → Kirill's measurement-order identities → Isabe/Helios refinements → **Maoxin/Isabe4432 retained after testing the newer Kirill e135 and Helios f277 complete costs, including error penalties**. Earlier 56CCX/888Q/F3 work remains historical and is not newly counted.
+- **Chemistry:** Lera/marculera, Ahmed Berat Özer and Atakan → Syed C44 table/v9 loaders → Isabe/Helios/Maoxin weight refits using manwithacat's tools → **Maoxin's new d994 weight refit**. Our saved column-scale tool now polishes the exact new weights; a new7-key NPZ3f72cbe5 is double-salt verified, with the table/words/loaders unchanged.
+- **Our public scores:** v15 23.94687 → v16 23.94701 → v17 24.17131 → v18 24.17643 → v20/v21 24.17647 → v22 24.49362 → v23 24.50464 → v24 24.53788 → v25 24.54649 → v26 24.50907 → v27 24.56851; v28 quota-blocked; v29 24.72065 → v30 24.72074 → v31 24.79786 → v32 24.79796 → v33 24.87124 → v34 24.94087 → v35 24.94093 → v36 24.94111 → v37 24.94145 → v38 24.94149 → **v39 25.09052**. This version: **estimated 25.14982; actual result pending its own grading**.
+- **This local audit:** all three canonical local SOTA identities and paused/off-main work were reviewed. Existing product-cache tools found no additional qualified gap in the three latest DQI files; these bounded negative results are saved rather than claimed as new gate savings. The source-bound inverse adapter and the Chemistry input-metadata adaptation, commands, proofs, negative control and new qualification receipts are saved. Larger old local candidates did not beat the selected costs or lack a compatible proof on the new source.
+
+Full earlier timelines, credits, notices and source context remain in the public dataset's PREVIOUS/UPSTREAM files and historical Notebook versions.
+
+## Sources and licence
+
+- [Maoxin v1](https://www.kaggle.com/code/maoxin123/lb-25-1498-combined-invsqrt-refit-chem?scriptVersionId=367139607): latest combined inverse `034c7c2a` and Chemistry `d994cd72` weights; actual scored baseline25.14981. Their Hosen42 V6 q25 merge and conditional-uncompute work, and weight refit, are credited to the named authors.
+- [Kirill v4](https://www.kaggle.com/code/kirilltym/quantum-circuits-conditional-uncompute-audit?scriptVersionId=367159320): conditional-uncompute audit, exact inverse original-verifier receipt, and DQI SWAP-cache composition. [Helios v29](https://www.kaggle.com/code/heliosli/the-dataset-is-public-now-enjoy?scriptVersionId=367160225): latest checked DQI/weight integration and full upstream notices; [Isabe11aM00re](https://www.kaggle.com/code/isabe11am00re/qcc-v66s33w-submission) and [Özer](https://www.kaggle.com/code/ozertuu/25-137-starter-notebook) for the public source compositions. Selected components are identified in the manifest; a source citation does not mean every artifact from that source was selected.
+- **Inverse lineage:** [Hosen42](https://www.kaggle.com/code/hosen42/vqcc-our-submission), [Syed Asad Ali](https://www.kaggle.com/code/syed3000/vqcc-own-circuit-portfolio-notebook), [Atakan](https://www.kaggle.com/code/atakanaldemir/qcc-early-measurement-and-domain-aware-inverse), Kirill, Özer, mrmeows/team selenium, busyaprime/Akmal Xodarev and yoyobar.
+- **DQI lineage:** Syed, SomeJoint/Agniv Banerjee, Ali Haydar Özdağ, James Day/jday96314, Ahmed Berat Özer, Atakan's [scanner/emitter](https://www.kaggle.com/code/atakanaldemir/qcc-17-product-dqi-reuse-at-892-qubits), [MAIDANG/daifanhao](https://www.kaggle.com/code/daifanhao/lb-24-94096-c44-and-exact-dqi-product-reuse), Busya PRIME and Gidney, with Kirill, Isabe and Helios. Alex Chilton's [portfolio](https://www.kaggle.com/code/alexchilton/24-94-lb-verified-three-task-portfolio) and Pablo Diego Pereira's prior gauge polish remain credited in our history.
+- **Chemistry:** Syed's C44 table/v9 loaders; [Lera/marculera](https://www.kaggle.com/code/marculera/df-thc-10x-compact-groups-from-the-hamiltonian), [Ahmed Berat Özer](https://www.kaggle.com/code/ahmedberatozer/quantum-ai-df-thc-group-compression), Atakan's pi-gauge, Isabe, Helios, Maoxin, and [James Barlow/manwithacat](https://www.kaggle.com/code/manwithacat/the-real-150k-was-the-friends-we-made)'s dfthc_refit. All inherited notices remain attached.
+- **Our contribution this release:** rebind and independently review our 19-bit phase fusion on the new inverse source; polish only the Chemistry W/H2_I arrays with the saved native column-scale tool; verify complete selected components, compare errors as well as gate costs, preserve provenance and publish the exact manifest. Original **62Q invsqrt work was done with GPT-6 Astra** on the mrmeows → busyaprime → yoyobar line; [Quantum Voodoo](https://www.kaggle.com/code/manwithacat/vqcc-quantum-voodoo) and [The Real $150K](https://www.kaggle.com/code/manwithacat/the-real-150k-was-the-friends-we-made) remain foundations. Historical work is not counted again as a new gain.
+- Google Quantum AI / Qualtran: tasks, official verifiers and Kickmix. Preserved notices include the full upstream author chains and terms.
+
+Original Notebook code/prose: **Apache-2.0**. Imported artifacts keep their original terms; mixed dataset **Other**; the supplied image is outside the code licence.
+
+## Submission file
+
+The next cell packages the 18 pinned dataset files and checks each member's SHA-256 before and after writing `/kaggle/working/submission.zip`. It does not submit the entry or rerun scientific verification.
+
+```python
+# Copyright 2026 yoyobar
+# SPDX-License-Identifier: Apache-2.0
+# Packt die 18 gepinnten Dateien deterministisch (fixe Timestamps, ZIP64) und
+# verifiziert SHA-256 jedes Mitglieds vor UND nach dem Schreiben. Kein Verifier,
+# kein Competition-Submit.
+from pathlib import Path
+from zipfile import ZipFile, ZIP_DEFLATED, ZipInfo
+import hashlib, json, os, shutil
+
+manifest_path = DATASET / "portfolio-manifest.json"
+with manifest_path.open("rb") as f:
+    if hashlib.file_digest(f, "sha256").hexdigest() != "dd121b1e55668c37a0b5eda92b7ea01b8e659a657698619790b0df481958d8b1":
+        raise ValueError("Unexpected portfolio manifest identity")
+manifest = json.loads(manifest_path.read_text())
+expected = {name: row["sha256"] for name, row in manifest["entries"].items()}
+names = {"invsqrt.kmb", "dqi.kmb", "dfthcsos/submission.npz"} | {f"dfthcsos/angle_k_{i}.kmb" for i in range(15)}
+if set(expected) != names:
+    raise ValueError("Unexpected manifest member set")
+
+source = DATASET / "submission"
+working = Path(os.environ.get("QCC_WORKING_DIR", "/kaggle/working"))
+working.mkdir(parents=True, exist_ok=True)
+temporary = working / "submission.tmp"
+archive_path = working / "submission.zip"
+try:
+    with ZipFile(temporary, "w", compression=ZIP_DEFLATED, compresslevel=6) as archive:
+        for name in sorted(names):
+            path = source / name
+            info = ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
+            info.compress_type = ZIP_DEFLATED
+            info.create_system = 3
+            info.external_attr = 0o100644 << 16
+            info.file_size = path.stat().st_size
+            digest = hashlib.sha256()
+            with path.open("rb") as input_file, archive.open(info, "w", force_zip64=True) as output_file:
+                for chunk in iter(lambda: input_file.read(8 * 1024 * 1024), b""):
+                    digest.update(chunk)
+                    output_file.write(chunk)
+            if digest.hexdigest() != expected[name]:
+                raise ValueError(f"Unexpected circuit identity: {name}")
+    with ZipFile(temporary) as z:
+        if len(z.namelist()) != 18 or set(z.namelist()) != names:
+            raise ValueError("Unexpected submission ZIP members")
+        for name in sorted(names):
+            with z.open(name) as f:
+                if hashlib.file_digest(f, "sha256").hexdigest() != expected[name]:
+                    raise ValueError(f"Packaged identity changed: {name}")
+    temporary.replace(archive_path)
+except Exception:
+    temporary.unlink(missing_ok=True)
+    raise
+with archive_path.open("rb") as f:
+    output_sha = hashlib.file_digest(f, "sha256").hexdigest()
+(working / "submission-provenance.json").write_text(json.dumps({"submission_sha256": output_sha, "files": expected}, indent=2))
+print("Ready:", archive_path)
+print("18 circuit identities verified. ZIP SHA-256:", output_sha)
+print("Packaging only; no verifier or competition submission was run by this cell.")
+```
+
+---
+
+## 🔑 Kern-Technik in 3 Sätzen
+
+Das 62-Qubit-InvSqrt (`034c7c2a` → neu `46743f7f`) erreicht Cost **95,345.55** bei Ratio **21.78×** — der Frontier-Wert des Tracks, erreicht über eine *Conditional Phase Fusion* auf 19 Bit, die auf der mrmeows→busyaprime→yoyobar→Syed→Hosen42-Linie aufbaut. Die Evidenz-Hierarchie ist der eigentliche Lernpunkt: ein 200,540,928-Shot-Originalverifier-Receipt, ein 32,768-Shot-paired-SDK-Test mit negativem Control, und ein analytisch erwartetes Local-Saving von nur `1/1,048,576` Toffoli pro Execution werden strikt getrennt von einem echten Leaderboard-Score. Jede Credit-Zuordnung bleibt separat — „historical work is not counted again as a new gain“.
+
+## 📝 Lern-Notizen (füll das selbst aus)
+
+- [ ] Technik verstanden: Conditional Phase Fusion (19-bit) auf der 62Q-Linie
+- [ ] Cost-Delta nachvollziehbar: 95,345.55 @ 21.78×; Saving vs v39 nur −0.70 % (analytisch 1/1,048,576 Toffoli)
+- [ ] Könnte ich das selbst bauen?: nein/weil… (Fusion ist source-bound an exakte Hashes; Generator nicht veröffentlicht)
+- [ ] Verbindung zu anderen Notebooks: 03/06 bauen auf `034c7c2a` auf; 04/05 zeigen die Carry-/Quadratic-Optimierungen davor
+- [ ] Frage die ich noch habe: Was genau spart die 19-bit Conditional Phase Fusion gegenüber 7-bit/M13?
