@@ -22,6 +22,7 @@ from kmx.config import LLM_DEFAULT_MAX_TOKENS, LOCAL_LLM_MODEL, env_flag
 from kmx.cost import ROT_WEIGHT
 from kmx.crosscheck import KICKMIX_DEFAULT_SHOTS
 from kmx.exit_codes import CLI_EXIT_ERROR
+from kmx.lab.commands import add_lab_subcommand
 from kmx.ops import KmxError
 from kmx.score import TRIM_DEFAULT_MAX_RATIO
 from kmx.session import Options
@@ -267,6 +268,7 @@ def _build_parser(
     sub = parser.add_subparsers(dest="command")
     _add_optimize_subcommands(sub, common)
     _add_analysis_subcommands(sub, common)
+    add_lab_subcommand(sub)
     _add_legacy_subcommand(sub, common)
     return parser, frozenset(sub.choices)
 

@@ -49,3 +49,42 @@ def tool_call(name, raw=None, **args):
             }
         ],
     }
+
+
+class RoutingFakeClient:
+    """Ersatz fuer LLMClient bei parallelen Aufrufen: waehlt die Antwort nach der
+    Rolle (erstes Wort-Merkmal im Systemprompt), nicht nach der Reihenfolge.
+
+    `routes` bildet einen Textausschnitt des Systemprompts auf eine Liste von
+    Antworten ab (Text, dict mit "content" oder Exception); die letzte wiederholt
+    sich. Threadsicher genug fuer die Tests (Listen werden nur gelesen)."""
+
+    def __init__(self, routes, reachable=True):
+        import threading
+
+        self.routes, self._reachable = routes, reachable
+        self.calls, self.seen, self.dead = 0, [], False
+        self.api_url = "http://stub.invalid/v1/chat/completions"
+        self._lock, self._count = threading.Lock(), {}
+
+    def reachable(self):
+        return self._reachable
+
+    def default_models(self):
+        return ["stub-model"]
+
+    def chat(self, model, messages, tools=None):
+        system = messages[0]["content"]
+        key = next((k for k in self.routes if k in system), None)
+        if key is None:
+            raise AssertionError("keine Route fuer Systemprompt: " + system[:80])
+        with self._lock:
+            self.calls += 1
+            self.seen.append((key, [dict(m) for m in messages]))
+            i = self._count.get(key, 0)
+            self._count[key] = i + 1
+        replies = self.routes[key]
+        reply = replies[min(i, len(replies) - 1)]
+        if isinstance(reply, Exception):
+            raise reply
+        return reply if isinstance(reply, dict) else {"content": reply}

@@ -20,7 +20,13 @@ Schichten, von unten nach oben (jede importiert nur aus tieferen):
                                    rewrite, facts, hotspots, tools, relay
                                    (Tool-Calling), json_mode, client, stage
   output, research, selftest       Abschluss mit Gate, Research-Brief, Selbsttest
-  commands, cli, cli_help          Kommandozeile
+  lab/                             Forschungslabor (oberste Fachschicht, darf alles
+                                   darunter importieren): claims, seeds, spec,
+                                   untrusted, watchdog, registry, sandbox,
+                                   counterexample, official,
+                                   judge, llm_json, teams, report, rounds, commands
+  commands, cli, cli_help          Kommandozeile (cli importiert aus lab nur
+                                   add_lab_subcommand)
   prompts/                         Prompt- und Vorlagentexte als Paketdaten
 
 Optional: numpy (exakter invsqrt-Score) und kickmix (Gegenprüfung, .kmb), siehe

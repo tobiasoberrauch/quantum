@@ -44,7 +44,15 @@ class KmxError(ValueError):
 
 def is_id(tok: str, prefix: str) -> bool:
     """Ist `tok` ein Bezeichner der Form <prefix><Dezimalzahl> (q7, b3, r0)?"""
-    return len(tok) > 1 and tok[0] == prefix and tok[1:].isdigit()
+    digits = tok[1:]
+    # Nur ASCII-Ziffern, höchstens 7 Stellen: Unicode-Ziffern oder
+    # Riesenindizes sind keine Bezeichner.
+    return (
+        tok[:1] == prefix
+        and 0 < len(digits) <= 7
+        and digits.isascii()
+        and digits.isdigit()
+    )
 
 
 def qubit_token(q: int) -> str:

@@ -51,6 +51,13 @@ Was das Paket tut
      steigen die Kosten, wird nichts geschrieben.
   8. Research-Brief für Deep-Research-Werkzeuge; das Ergebnis geht per --playbook an
      den Agenten.
+  9. Forschungslabor (lab): LLM-Teams mit eigener Weltsicht schlagen Behauptungen und
+     Kandidaten vor, ein Kritiker kommentiert (Veto nur beratend), ein
+     deterministischer Richter prüft JEDEN Kandidaten über die ganze Domäne und
+     liefert ein konkretes Gegenbeispiel. Status (hypothesis | experimental |
+     verified | refuted) entsteht nur aus Prüfer-Ereignissen; verified verlangt das
+     Urteil PASS des offiziellen Verifiers. Generatoren laufen nur in der
+     macOS-Sandbox (alles verboten außer Python, kmx/ und Temp-Ordner).
 
 Aufruf
   python main.py invsqrt.kmx [OUT] [DIFF]          alte Form: Pässe + LLM-Stufe + Gate
@@ -59,7 +66,11 @@ Aufruf
   python main.py research invsqrt.kmx --out research_brief.md
   python main.py check original.kmx kandidat.kmx   zwei Dateien End-to-End vergleichen
   python main.py info invsqrt.kmx                  Kennzahlen, Score, Toffoli-Profil
-  python main.py --selftest"""
+  python main.py --selftest
+  python main.py lab init --lab-dir runs/lab/invsqrt --baseline invsqrt.kmx
+  python main.py lab run --lab-dir runs/lab/invsqrt --rounds 2   LLM-Teams + Richter
+  python main.py lab status --lab-dir runs/lab/invsqrt
+  python main.py lab eval --lab-dir runs/lab/invsqrt kandidat.kmx  nur der Richter"""
 
 
 def env_help_section() -> str:

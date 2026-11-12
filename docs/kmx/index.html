@@ -205,6 +205,7 @@
     <li><a href="#rezepte"><span lang="de">Rezepte</span><span lang="en">Recipes</span></a></li>
     <li><a href="#python"><span lang="de">Aus Python nutzen</span><span lang="en">Use from Python</span></a></li>
     <li><a href="#aufbau"><span lang="de">Aufbau des Pakets</span><span lang="en">Package layout</span></a></li>
+    <li><a href="#lab"><span lang="de">Forschungslabor</span><span lang="en">Research lab</span></a></li>
     <li><a href="#faq"><span lang="de">Probleme &amp; Lösungen</span><span lang="en">Troubleshooting</span></a></li>
   </ol>
 </nav>
@@ -593,12 +594,13 @@ kmx/
   score.py  session.py  crosscheck.py          <span class="c"><span lang="de">exakter Score, Pipeline, kickmix-Prüfung</span><span lang="en">exact score, pipeline, kickmix check</span></span>
   agent/    workbench  tools  hotspots  rewrite  relay  json_mode  client  stage
   output.py  research.py  selftest.py          <span class="c"><span lang="de">Gate + Schreiben, Research-Brief, Selbsttest</span><span lang="en">gate + writing, research brief, self test</span></span>
+  lab/      claims  registry  judge  sandbox  teams  rounds  …  <span class="c"><span lang="de">Forschungslabor</span><span lang="en">research lab</span></span>
   commands.py  cli.py  cli_help.py             <span class="c"><span lang="de">Kommandozeile</span><span lang="en">command line</span></span>
   prompts/  <span class="c"><span lang="de">Texte für die KI (als Dateien)</span><span lang="en">texts for the AI (as files)</span></span>
-tests/kmx/  <span class="c"><span lang="de">166 Tests, eine Datei je Modul</span><span lang="en">166 tests, one file per module</span></span></code></pre>
+tests/kmx/  <span class="c"><span lang="de">205 Tests, eine Datei je Modul</span><span lang="en">205 tests, one file per module</span></span></code></pre>
 <h3 lang="de">Nach einer Änderung</h3>
 <h3 lang="en">After a change</h3>
-<pre><code>.venv-chem/bin/python -m tests.kmx           <span class="c"># 166 Tests, ~4 s</span>
+<pre><code>.venv-chem/bin/python -m tests.kmx           <span class="c"># 205 Tests, ~8 s</span>
 .venv-chem/bin/python main.py --selftest
 <span class="c"># <span lang="de">Verhaltensvergleich mit der Referenz (~4 min, Ende: GOLDEN OK)</span><span lang="en">behaviour comparison with the reference (~4 min, ends with GOLDEN OK)</span></span>
 bash work/kmx_verify/golden.sh main.py /tmp/golden_neu work/kmx_verify/golden_ref</code></pre>
@@ -607,8 +609,86 @@ bash work/kmx_verify/golden.sh main.py /tmp/golden_neu work/kmx_verify/golden_re
 </section>
 
 <!-- 12 -->
+<section id="lab">
+<h2><span class="no">12</span><span lang="de">Forschungslabor</span><span lang="en">Research lab</span></h2>
+<div lang="de">
+  <p>Der Befehl <code>lab</code> baut ein kleines, automatisches <strong>Forschungslabor</strong> um <code>kmx</code> herum. Mehrere KI-„Teams“ mit unterschiedlicher Denkweise schlagen Ideen und fertige Kandidaten vor; ein <strong>Richter</strong> ohne KI entscheidet, was davon stimmt. Alles landet in einem Gedächtnis, damit gescheiterte Ideen nicht wieder und wieder probiert werden.</p>
+  <p>Die wichtigste Regel: <strong>Forscher und Richter sind getrennt.</strong> Die KI darf vorschlagen, aber nie selbst etwas für „bewiesen“ erklären. Entscheiden dürfen nur die deterministische Prüfung (alle Eingaben x, Register, Scratch, Phase) und der offizielle Verifier.</p>
+</div>
+<div lang="en">
+  <p>The <code>lab</code> command builds a small, automatic <strong>research lab</strong> around <code>kmx</code>. Several AI “teams” with different ways of thinking propose ideas and finished candidates; a <strong>judge</strong> without AI decides which of them hold up. Everything goes into a memory so that failed ideas are not tried again and again.</p>
+  <p>The key rule: <strong>researchers and judges are separate.</strong> The AI may propose, but can never declare anything “proven” by itself. Only the deterministic check (every input x, registers, scratch, phase) and the official verifier decide.</p>
+</div>
+<div class="pipeline" aria-label="Runde / round">
+  <span lang="de">Direktor</span><span lang="en">director</span><i>→</i>
+  <span lang="de">Teams (parallel)</span><span lang="en">teams (parallel)</span><i>→</i>
+  <span lang="de">Kritiker</span><span lang="en">critic</span><i>→</i>
+  <span class="gate" lang="de">Richter</span><span class="gate" lang="en">judge</span><i>→</i>
+  <span lang="de">Gedächtnis</span><span lang="en">memory</span><i>→</i>
+  <span lang="de">Konferenz</span><span lang="en">conference</span>
+</div>
+<p lang="de">Die Teams: <em>numerical</em> (Näherungsverfahren, Segmente, Fixkomma-Fehler), <em>reversible</em> (Rechnen/Zurückrechnen, Hilfsqubits, Q gegen Toffoli), <em>phase</em> (Phase direkt erzeugen statt 1/√x auszurechnen) und <em>architecture</em> (ignoriert den alten Schaltkreis, startet bei der Aufgabe). Der <em>Kritiker</em> sucht konkrete Gegenbeispiele und darf nur <em>mit konkretem Grund</em> ein Veto einlegen – das Veto ist aber nur ein Kommentar: Der Richter prüft trotzdem jeden Kandidaten, so fallen falsche Gegenbeispiele des Kritikers auf. Fällt ein Kandidat beim Richter durch, bekommt das Team das Gegenbeispiel (z. B. <code>[phase] x=1</code>) in der nächsten Runde zurück.</p>
+<p lang="en">The teams: <em>numerical</em> (approximation, segments, fixed-point error), <em>reversible</em> (compute/uncompute, ancillas, Q versus Toffoli), <em>phase</em> (produce the phase directly instead of computing 1/√x) and <em>architecture</em> (ignores the old circuit, starts from the task). The <em>critic</em> looks for concrete counterexamples and may veto only <em>with a concrete reason</em> – but the veto is just a comment: the judge still checks every candidate, so wrong counterexamples from the critic are exposed. If a candidate fails the judge, the team gets the counterexample (e.g. <code>[phase] x=1</code>) back in the next round.</p>
+
+<h3 lang="de">Die vier Status einer Behauptung</h3>
+<h3 lang="en">The four statuses of a claim</h3>
+<table>
+  <thead><tr><th lang="de">Status</th><th lang="en">Status</th><th lang="de">Bedeutung</th><th lang="en">Meaning</th></tr></thead>
+  <tbody>
+  <tr><td><code>hypothesis</code></td><td><span lang="de">Eine Idee. Alles, was eine KI schreibt, startet (und bleibt) hier.</span><span lang="en">An idea. Everything an AI writes starts (and stays) here.</span></td></tr>
+  <tr><td><code>experimental</code></td><td><span lang="de">Der Richter hat den Kandidaten über <em>alle</em> Eingaben geprüft: Register erhalten, Scratch sauber, Phase gleich oder innerhalb der Toleranz.</span><span lang="en">The judge checked the candidate over <em>all</em> inputs: registers restored, scratch clean, phase equal or within tolerance.</span></td></tr>
+  <tr><td><code>verified</code></td><td><span lang="de">Zusätzlich hat der <strong>offizielle Verifier</strong> bestanden – mit gespeichertem Befehl, Exit-Code, Prüfsummen von Kandidat und Ausgabe und Werkzeugversionen.</span><span lang="en">In addition the <strong>official verifier</strong> passed – with stored command, exit code, checksums of candidate and output, and tool versions.</span></td></tr>
+  <tr><td><code>refuted</code></td><td><span lang="de">Widerlegt, mit konkretem Gegenbeispiel (oder offiziellem FAIL). Bleibt gespeichert, damit niemand es erneut probiert.</span><span lang="en">Refuted, with a concrete counterexample (or an official FAIL). Stays stored so nobody tries it again.</span></td></tr>
+  </tbody>
+</table>
+<p lang="de">Der Status wird nie „gesetzt“, sondern jedes Mal aus den Prüfprotokollen <em>abgeleitet</em>. Ein neues Labor startet mit sechs echten Befunden früherer Läufe (z. B. „Magnitude-Abkürzung“ = <code>refuted</code>).</p>
+<p lang="en">The status is never “set”; it is <em>derived</em> from the check records every time. A new lab starts with six real findings from earlier runs (e.g. “magnitude shortcut” = <code>refuted</code>).</p>
+
+<h3 lang="de">Benutzen</h3>
+<h3 lang="en">Usage</h3>
+<pre><code><span class="c"># <span lang="de">1) Labor anlegen (prüft die Basis, ~15 s bei invsqrt)</span><span lang="en">1) create a lab (checks the baseline, ~15 s for invsqrt)</span></span>
+.venv-chem/bin/python main.py lab init --lab-dir runs/lab/invsqrt --baseline invsqrt.kmx
+
+<span class="c"># <span lang="de">2) Forschungsrunden mit dem lokalen Modell (Standard)</span><span lang="en">2) research rounds with the local model (default)</span></span>
+LLM_EXTRA_BODY='{"chat_template_kwargs":{"enable_thinking":false}}' LLM_MAX_CALLS=30 \
+.venv-chem/bin/python main.py lab run --lab-dir runs/lab/invsqrt --rounds 2
+
+<span class="c"># <span lang="de">… oder mit einem stärkeren Modell</span><span lang="en">… or with a stronger model</span></span>
+LLM_API_URL=https://…/v1/chat/completions LLM_MODEL=modell-a,modell-b LLM_API_KEY=… \
+.venv-chem/bin/python main.py lab run --lab-dir runs/lab/invsqrt --rounds 2 --teams phase,architecture
+
+<span class="c"># <span lang="de">Verifier beim Anlegen pinnen (Prüfsummen von Interpreter und Skript in lab.json)</span><span lang="en">pin the verifier when creating the lab (checksums of interpreter and script in lab.json)</span></span>
+.venv-chem/bin/python main.py lab init --lab-dir runs/lab/invsqrt --baseline invsqrt.kmx \
+    --verify-cmd ".venv-chem/bin/python data/verifiers/invsqrt/verify_submission_invsqrt.py {out} --max-workers 8"
+
+<span class="c"># <span lang="de">mit offiziellem Verifier: nur so wird etwas „verified“</span><span lang="en">with the official verifier: the only way to reach “verified”</span></span>
+.venv-chem/bin/python main.py lab run --lab-dir runs/lab/invsqrt \
+    --verify-cmd ".venv-chem/bin/python data/verifiers/invsqrt/verify_submission_invsqrt.py {out} --max-workers 8"
+
+<span class="c"># <span lang="de">3) Stand ansehen: Behauptungen je Status, beste Scores, letzte Gegenbeispiele</span><span lang="en">3) look at the state: claims by status, best scores, recent counterexamples</span></span>
+.venv-chem/bin/python main.py lab status --lab-dir runs/lab/invsqrt
+
+<span class="c"># <span lang="de">4) eigenen Kandidaten nur vom Richter prüfen lassen (ohne KI)</span><span lang="en">4) have your own candidate checked by the judge only (no AI)</span></span>
+.venv-chem/bin/python main.py lab eval --lab-dir runs/lab/invsqrt kandidat.kmx</code></pre>
+<p lang="de">Das Labor ist ein Ordner: <code>events.jsonl</code> (Protokoll, wird nur angehängt), <code>lab.json</code>, <code>baseline.kmx</code> und <code>candidates/</code> (jeder geprüfte Kandidat unter seiner SHA-256-Prüfsumme). Kandidaten sind entweder eine <code>.kmx</code>-Datei oder ein Python-<em>Generator</em>, der einen Schaltkreis schreibt. Generatoren laufen nur in einer macOS-Sandbox nach dem Prinzip „alles verboten, nur das Nötige erlaubt“ (nur Python starten, nur System, Python, <code>kmx/</code> und den Temp-Ordner lesen, nur dort schreiben; kein Netzwerk, keine anderen Programme, keine API-Schlüssel, Zeitlimit); gibt es keine Sandbox, werden sie gar nicht ausgeführt.</p>
+<p lang="en">A lab is a folder: <code>events.jsonl</code> (log, append-only), <code>lab.json</code>, <code>baseline.kmx</code> and <code>candidates/</code> (every checked candidate under its SHA-256 checksum). Candidates are either a <code>.kmx</code> file or a Python <em>generator</em> that writes a circuit. Generators run only inside a macOS sandbox built as “deny everything, allow only what is needed” (start only Python, read only system, Python, <code>kmx/</code> and the temp folder, write only there; no network, no other programs, no API keys, time limit); without a sandbox they are not run at all.</p>
+<p lang="de"><strong>Zuschauen:</strong> Der Trace-Proxy aus Kapitel 07 funktioniert auch hier – <code>LLM_API_URL=http://127.0.0.1:8787/v1/chat/completions</code> setzen und <a href="http://127.0.0.1:8787/">http://127.0.0.1:8787/</a> öffnen. Dann siehst du jeden Prompt von Direktor, Teams und Kritiker.</p>
+<p lang="en"><strong>Watching:</strong> the trace proxy from chapter 07 works here too – set <code>LLM_API_URL=http://127.0.0.1:8787/v1/chat/completions</code> and open <a href="http://127.0.0.1:8787/">http://127.0.0.1:8787/</a>. You then see every prompt of director, teams and critic.</p>
+<p lang="de"><strong>Verifier-Pin:</strong> <code>lab init --verify-cmd …</code> (oder <code>OFFICIAL_VERIFY_CMD</code>) speichert die Prüfsummen der Werkzeugdateien in <code>lab.json</code>. <code>verified</code> gibt es nur, wenn ein offizielles PASS genau mit diesen Dateien lief <em>und</em> der Befehl den Kandidaten nennt. Ein Labor ohne Pin (auch ältere Labore) zählt ein PASS nur als <code>experimental</code>; <code>lab status</code> markiert das mit „(Verifier nicht gepinnt)“ und zeigt bei <code>verified</code> die Prüfsummen-Präfixe.</p>
+<p lang="en"><strong>Verifier pin:</strong> <code>lab init --verify-cmd …</code> (or <code>OFFICIAL_VERIFY_CMD</code>) stores the checksums of the tool files in <code>lab.json</code>. <code>verified</code> requires an official PASS run with exactly these files <em>and</em> a command that names the candidate. A lab without a pin (including older labs) counts a PASS only as <code>experimental</code>; <code>lab status</code> marks this “(Verifier nicht gepinnt)” and shows the checksum prefixes for <code>verified</code>.</p>
+<p lang="de"><strong>Parametersuche:</strong> Ein Generator-Kandidat darf ein Raster <code>"params": {"k": [1, 2, 3]}</code> mitbringen (höchstens 4 Namen, 8 Werte je Name, 16 Kombinationen). Jede Kombination läuft ohne weiteren KI-Aufruf in der Sandbox und liest sie aus <code>params.json</code>. Eine grobe Kostenschätzung bestimmt nur die Reihenfolge; voll geprüft werden die 3 besten verschiedenen Ausgaben (je eine eigene Behauptung), der Rest bekommt nur die Notiz „nicht voll geprüft (Budget)“ und keinen Status.</p>
+<p lang="en"><strong>Parameter search:</strong> a generator candidate may bring a grid <code>"params": {"k": [1, 2, 3]}</code> (at most 4 names, 8 values per name, 16 combinations). Each combination runs in the sandbox without another AI call and reads it from <code>params.json</code>. A rough cost estimate only sets the order; the 3 best distinct outputs are fully judged (one claim each), the rest only gets the note “nicht voll geprüft (Budget)” and no status.</p>
+<p lang="de"><strong>Dossier und Pareto-Front:</strong> Die Teams sehen zusätzlich ein kurzes Dossier (Q, Toffoli-Mittel, C = Score/Q und Score der Basis, die fünf teuersten Toffoli-Stellen der Basis, bester Kandidat mit Q und C). <code>lab status</code> listet Q, C und Score bestandener Kandidaten und die Pareto-Front über (Q, C) mit markierter Basis.</p>
+<p lang="en"><strong>Dossier and Pareto front:</strong> teams additionally see a short dossier (Q, Toffoli mean, C = score/Q and score of the baseline, the five most expensive Toffoli spots of the baseline, best candidate with Q and C). <code>lab status</code> lists Q, C and score of passed candidates and the Pareto front over (Q, C) with the baseline marked.</p>
+<div class="warn">
+  <p lang="de"><strong>Ehrliche Erwartung:</strong> Das lokale 27B-Modell wird sehr wahrscheinlich <em>keine</em> neue Konstruktion finden, die den Score schlägt – in einem Testlauf schlug es nur Platzhalter vor. Der Wert des Labors liegt in der <strong>Infrastruktur und dem Gedächtnis</strong>: jeder Vorschlag wird hart geprüft, jedes Gegenbeispiel bleibt gespeichert, und ein stärkeres Modell kann jederzeit am selben Labor weitermachen.</p>
+  <p lang="en"><strong>Honest expectation:</strong> the local 27B model will very likely <em>not</em> find a new construction that beats the score – in a test run it proposed only placeholders. The value of the lab is the <strong>infrastructure and the memory</strong>: every proposal is checked hard, every counterexample is kept, and a stronger model can continue on the same lab at any time.</p>
+</div>
+</section>
+
+<!-- 13 -->
 <section id="faq">
-<h2><span class="no">12</span><span lang="de">Probleme &amp; Lösungen</span><span lang="en">Troubleshooting</span></h2>
+<h2><span class="no">13</span><span lang="de">Probleme &amp; Lösungen</span><span lang="en">Troubleshooting</span></h2>
 <table>
   <thead><tr><th lang="de">Du siehst …</th><th lang="en">You see …</th><th lang="de">Das bedeutet / tu das</th><th lang="en">It means / do this</th></tr></thead>
   <tbody>

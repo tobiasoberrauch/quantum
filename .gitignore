@@ -123,3 +123,4 @@ qvc_web/backend/team_models.json
 
 # SDD scratch workspace (briefs/reports/review packages)
 .superpowers/
+.archify/

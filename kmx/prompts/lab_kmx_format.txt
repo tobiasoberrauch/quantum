@@ -1,0 +1,56 @@
+
+KMX FORMAT CHEAT-SHEET (kickmix text format v2: one instruction per line, '#' starts a comment)
+  Tokens: qubits q0 q1 ..., classical bits b0 b1 ..., registers r0 r1 ...
+  The input register x is declared exactly as in the baseline, e.g.
+    APPEND_TO_REGISTER q0 r0   (one line per register qubit, q0..q21 for invsqrt)
+    REGISTER r0 "x"
+  Keep that declaration unchanged: the judge rejects any change of the register schema.
+  Gates: X q | CX c t | CCX c1 c2 t | Z q | CZ a b | CCZ a b c | SWAP a b | CSWAP c a b | NEG
+  Z_POW q <exponent>: applies Z^e, i.e. phase exp(i*pi*e) on |1>; the exponent is in
+    HALF turns and must contain a decimal point ("Z_POW q4 1.5", "Z_POW q28 0.0000076293945").
+  HMR q bN: Hadamard-measure-reset of q into bit bN; q ends in |0>. If q held a value v,
+    the phase (-1)^(bN*v) kicks back and MUST be corrected under "if bN" (e.g. "Z q0 if bN").
+  R q: reset q (only use it on qubits that are provably |0>).
+  Conditions: append "if bN" to one gate ("CZ q48 q13 if b7"), or wrap a block in
+    PUSH_CONDITION if bN ... POP_CONDITION. The final phase must not depend on any outcome.
+  Cost classes: CCX/CCZ/CSWAP = Toffoli; Z_POW with a non-Clifford exponent = rotation;
+    X, CX, SWAP, Z, CZ, NEG and HMR are free.
+
+PYTHON API FOR GENERATORS (read-only package kmx; no network; write ONLY to sys.argv[1])
+  from kmx.ops import Op, parse_text, format_ops
+  Op(name, args, cond=None) takes TOKEN STRINGS, never ints:
+    Op("CCX", ["q18", "q19", "q22"]), Op("Z_POW", ["q2", "0.25"]),
+    Op("CZ", ["q48", "q13"], cond=7)  ->  "CZ q48 q13 if b7"
+  parse_text(text) -> list[Op];  format_ops(ops) -> .kmx text (trailing newline).
+  The baseline circuit is available read-only as "baseline.kmx" in the working directory.
+
+MINIMAL VALID GENERATOR (reproduces the baseline; transform `ops` to make a real change)
+<<<GENERATOR
+import sys
+from kmx.ops import format_ops, parse_text
+
+with open("baseline.kmx", encoding="utf-8") as f:
+    ops = parse_text(f.read())
+# transform ops here, e.g. replace a sub-circuit by a cheaper equivalent one
+with open(sys.argv[1], "w", encoding="utf-8") as f:
+    f.write(format_ops(ops))
+GENERATOR>>>
+
+PARAMETER SEARCH (generator only, no extra LLM call): add "params" to the candidate, a
+  grid {"name": [value, ...]} with at most 4 names, at most 8 JSON scalar values each
+  (number, string up to 64 chars, true/false) and at most 16 combinations in total;
+  otherwise the grid is dropped. The generator then runs once per combination; the
+  combination is a read-only file "params.json" in the working directory (next to
+  "baseline.kmx"):  p = json.load(open("params.json"))  ->  {"name": value, ...}.
+  Without "params" there is no params.json. Combinations are ranked by a cheap static
+  cost ESTIMATE of their output; only the 3 best distinct outputs are fully judged
+  (each gets its own claim), byte-identical outputs are judged once, the rest is only
+  noted as "not fully checked (budget)" and gets no status.
+
+A candidate whose ops are identical to the baseline is NOT judged ("no change"); the
+example below only shows the I/O, your generator must actually change `ops`.
+Generator stdout/stderr are never shown back to you; on a crash you only get the exit
+code, the built-in exception name and the line number in generator.py.
+
+Prefer "generator" candidates: a full .kmx text does not fit into one answer (the invsqrt
+baseline has ~37,000 lines); use kind "kmx" only for tiny circuits.

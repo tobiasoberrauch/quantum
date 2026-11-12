@@ -1,0 +1,58 @@
+{
+  "task": "invsqrt",
+  "summary": "Phase by beta/sqrt(x): for every x in [1, max_x], |x>|0...0> -> exp(2 pi i beta/sqrt(x)) |x>|0...0> (Benchmark I, arXiv:2308.12352).",
+  "register": {
+    "name": "x",
+    "width": 22,
+    "bit_order": "little-endian",
+    "qubits_only": true,
+    "only_register": true,
+    "must_be_restored": true
+  },
+  "domain": {
+    "min_x": 1,
+    "max_x": 3133452,
+    "derivation": "n_p = 10 bits per momentum component; max_x = 3*(2^n_p - 2)^2; width = 2*n_p + 2"
+  },
+  "contract": [
+    "register x is restored for every x in the domain",
+    "every scratch qubit (any qubit not in x) returns to |0> for every x and every measurement outcome",
+    "the final phase does not depend on measurement outcomes (HMR/R)",
+    "|phase(x) - beta/sqrt(x) mod 1| <= tol(x) turns for every x"
+  ],
+  "phase": {
+    "beta": 1,
+    "target_turns": "beta/sqrt(x) mod 1",
+    "precision_bits": 24,
+    "tolerance_turns": "2^-24 * beta / sqrt(x)",
+    "fixed_point_bits": 64,
+    "note": "tol(x) falls with x: large x need the finest precision"
+  },
+  "cost": {
+    "Q": "circuit.num_qubits = largest qubit index + 1",
+    "toffoli_like": ["CCX", "CCZ", "CSWAP"],
+    "toffoli": "mean Toffoli-like gates executed per shot",
+    "t_per_toffoli": 4,
+    "clifford_angles": "free",
+    "t_angles": "1 T each",
+    "rotation_t": "0.56 * log2(1/eps) + 5.3 T per fine Z_POW rotation",
+    "rotation_t_per_log2_inv_eps": 0.56,
+    "rotation_t_offset": 5.3,
+    "eps": "pi * min_x(tol(x) - |error(x)|) / n_rot (tolerance margin split evenly over rotations)",
+    "C": "Toffoli + (T + n_rot * rotation_t) / 4",
+    "score": "Q * C (lower is better)"
+  },
+  "official_verifier": {
+    "script": "data/verifiers/invsqrt/verify_submission_invsqrt.py",
+    "template": ".venv-chem/bin/python data/verifiers/invsqrt/verify_submission_invsqrt.py {out} --max-workers 8",
+    "env": "OFFICIAL_VERIFY_CMD",
+    "pass": "exit code 0 and JSON with \"status\": \"PASS\"; on failure exit code 1 and \"status\": \"FAIL\"",
+    "shots_per_x_default": 64
+  },
+  "sources": [
+    "kmx/layout.py: INVSQRT_WIDTH, INVSQRT_MIN_X, INVSQRT_MAX_X",
+    "kmx/score.py: tolerance 2^40/sqrt(x) in units of 2^-64 turns, _score_terms",
+    "kmx/cost.py: T_PER_TOFFOLI, ROT_T_PER_LOG2_INV_EPS, ROT_T_OFFSET, VERIFIER_PHASE_BITS",
+    "data/verifiers/invsqrt/verify_submission_invsqrt.py: module docstring, verify(), main()"
+  ]
+}

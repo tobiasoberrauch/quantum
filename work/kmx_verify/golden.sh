@@ -27,7 +27,9 @@ echo "laufzeit=$(( $(date +%s) - S ))s" > timing.txt
 fail=0
 for f in "$REF"/*.log "$REF"/*.kmx "$REF"/*.diff; do
   b=$(basename "$f")
-  if ! cmp -s "$f" "$b"; then echo "ABWEICHUNG: $b"; diff "$f" "$b" | head -6; fail=1; fi
+  # Diff-Kopfzeilen enthalten absolute Eingabepfade -> vor dem Vergleich entfernen
+  hdr() { case "$1" in *.diff) sed -E '1,2s#^(---|\+\+\+) .*#\1#' "$1";; *) cat "$1";; esac; }
+  if ! cmp -s <(hdr "$f") <(hdr "$b"); then echo "ABWEICHUNG: $b"; diff <(hdr "$f") <(hdr "$b") | head -6; fail=1; fi
 done
 echo "ref $(cat "$REF/timing.txt") | neu $(cat timing.txt)"
 [ $fail = 0 ] && echo "GOLDEN OK" || echo "GOLDEN FAIL"

@@ -13,7 +13,10 @@ from kmx.prompts import PROMPT_DIR, load_prompt
 from tests.kmx.helpers import DATA_DIR, PROJECT_DIR, run_main
 
 HELP_REFERENCE = DATA_DIR / "cli_help.txt"
-HELP_COMMANDS = ("optimize", "agent", "research", "check", "info", "selftest")
+HELP_COMMANDS = ("optimize", "agent", "research", "check", "info", "selftest", "lab")
+# Prompts des Forschungslabors sind neu (keine Einzeldatei-Fassung); test_lab_rounds
+# prüft sie inhaltlich.
+LAB_PROMPT_PREFIX = "lab_"
 # SHA-256 der Prompt-Texte, ermittelt aus der Einzeldatei-Fassung (v7/base/main.py)
 # vor der Auslagerung; tools_verify/prompt_identity.py vergleicht direkt mit ihr.
 PROMPT_DIGESTS = {
@@ -56,7 +59,9 @@ def test_main_py_help_matches_reference():
 
 def test_prompt_files_are_byte_identical_to_the_single_file_version():
     assert sorted(PROMPT_DIGESTS) == sorted(
-        p.name for p in PROMPT_DIR.iterdir() if p.suffix in (".txt", ".md")
+        p.name
+        for p in PROMPT_DIR.iterdir()
+        if p.suffix in (".txt", ".md") and not p.name.startswith(LAB_PROMPT_PREFIX)
     )
     for name, digest in PROMPT_DIGESTS.items():
         assert hashlib.sha256(load_prompt(name).encode()).hexdigest() == digest, name
