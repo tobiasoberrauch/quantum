@@ -9,7 +9,7 @@ Discovery-Agenten, Debug-UIs und Notizen.
   die Logik steht im Paket `kmx/` (Parser, Simulator, Pässe, Verifier, LLM-Stufe).
   Tests: `.venv-chem/bin/python -m tests.kmx`
   Forschungslabor: `main.py lab init|run|status|eval` (KI-Teams schlagen vor, Prüfer entscheidet; `kmx/lab/`).
-  Doku: `docs/kmx/index.html`, Status: `docs/kmx/status-archify.html`
+  Doku: `docs/kmx/index.html`, Architektur: `docs/kmx/kmx-architektur.html`, Status: `docs/kmx/status-archify.html`
 - **`qvc_agent/`** — autonomer Discovery-/Curate-Agent (`.venv-qvc/bin/python -m qvc_agent …`);
   launchd-Watchdog unter `qvc_agent/schedule/`.
 - **`qvc_web/`** — Web-Oberfläche (FastAPI-Backend + Next.js-Frontend), inkl. Multi-Agent-Team.
